@@ -1,0 +1,366 @@
+fileFormatVersion: 2
+guid: 17547ebb2edb18544aa5100a48e8c4a2
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: gestures_0
+    21300002: gestures_1
+    21300004: gestures_2
+    21300006: gestures_3
+    21300008: gestures_4
+    21300010: gestures_5
+    21300012: gestures_6
+    21300014: gestures_7
+    21300016: gestures_8
+    21300018: gestures_9
+    21300020: gestures_10
+    21300022: gestures_11
+    21300024: gestures_12
+    21300026: gestures_13
+    21300028: gestures_14
+    21300030: gestures_15
+    21300032: gestures_16
+    21300034: gestures_17
+    21300036: gestures_18
+    21300038: gestures_19
+    21300040: gestures_20
+    21300042: gestures_21
+    21300044: gestures_22
+    21300046: gestures_23
+    21300048: gestures_25
+    21300050: gestures_26
+    21300052: gestures_28
+    21300054: gestures_27
+    21300056: gestures_24
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: gestures_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 324
+        width: 36
+        height: 55
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_1
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 324
+        width: 35
+        height: 76
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_2
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 324
+        width: 37
+        height: 76
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_3
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 318
+        width: 40
+        height: 82
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_4
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 324
+        width: 46
+        height: 76
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_5
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 324
+        width: 50
+        height: 76
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_6
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 322
+        width: 56
+        height: 78
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_7
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 324
+        width: 44
+        height: 76
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_8
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 234
+        width: 48
+        height: 81
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_9
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 234
+        width: 45
+        height: 76
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_10
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 234
+        width: 29
+        height: 76
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_11
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 234
+        width: 40
+        height: 75
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_12
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 229
+        width: 59
+        height: 80
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_13
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 234
+        width: 60
+        height: 71
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_14
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 234
+        width: 36
+        height: 81
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_15
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 180
+        width: 84
+        height: 25
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_16
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 171
+        width: 78
+        height: 47
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_17
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 158
+        width: 60
+        height: 59
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_18
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 163
+        width: 64
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_19
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 176
+        width: 73
+        height: 35
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_20
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 101
+        width: 79
+        height: 33
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_21
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 70
+        width: 76
+        height: 85
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_22
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 81
+        width: 69
+        height: 72
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_23
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 86
+        width: 77
+        height: 53
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 79
+        height: 75
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_26
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 4
+        width: 110
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_28
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 4
+        width: 135
+        height: 55
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_27
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: gestures_24
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 76
+        width: 71
+        height: 73
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
