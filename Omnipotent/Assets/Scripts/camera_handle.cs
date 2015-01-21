@@ -84,11 +84,15 @@ public class camera_handle : MonoBehaviour {
 		if (!Input.GetMouseButton(2))  isZooming = false;
 
 		// Get the mouse scroll
-		if (Input.mouseScrollDelta.magnitude == 0)
+		Debug.Log(Input.mouseScrollDelta.ToString());
+		if (Input.mouseScrollDelta.magnitude == 0 || ((transform.position.y <= 5.0f && Input.mouseScrollDelta.y >= 0) || (transform.position.y >= 45.0f && Input.mouseScrollDelta.y <= 0)))
 						isZooming = false;
 				else
 						isZooming = true;
-		
+
+		Vector3 cameraPosition = transform.position;
+		cameraPosition.y = Mathf.Clamp (transform.position.y, 5.0f, 45.0f);
+		transform.position = cameraPosition;
 	}
 	
 	//
@@ -144,6 +148,8 @@ public class camera_handle : MonoBehaviour {
 			/* TODO: 
 			 * Closer the camera, more the pan speed.
 			 */
+			if ((Camera.main.transform.position.y < 5.0f && Input.mouseScrollDelta.y >= 0) || (Camera.main.transform.position.y > 45.0f && Input.mouseScrollDelta.y <= 0))
+				return;
 
 			// Get mouse displacement vector from original to current position
 			// Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
