@@ -36,6 +36,7 @@ public class NavAgentMovement : MonoBehaviour {
 				//Debug.Log("Stopped2");
 				if (agent.velocity.sqrMagnitude == 0f)
 				{
+					//comments
 					Debug.Log("Stopped");
 					targetReached = true;
 				}

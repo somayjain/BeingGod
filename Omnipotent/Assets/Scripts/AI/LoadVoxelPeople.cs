@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class LoadVoxelPeople : MonoBehaviour {
 
+
 	GameObject personManager;
 	public List<Vector3> sources = new List<Vector3>();
 	public int nos_sources=4; 
@@ -13,7 +14,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 		personManager = new GameObject ();
 		personManager.name = "personManager";
 		PeopleStats ps = personManager.AddComponent<PeopleStats> ();
-
+		// comment
 		for (int i=0; i<nos_sources; i++) {
 			GameObject obj = GameObject.FindGameObjectWithTag("source"+i);
 			Vector3 objLoc = obj.transform.position;
