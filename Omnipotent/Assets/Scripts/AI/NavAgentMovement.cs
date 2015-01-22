@@ -4,16 +4,29 @@ using System.Collections;
 public class NavAgentMovement : MonoBehaviour {
 
 	public Vector3 target;
-	NavMeshAgent agent;
+	public NavMeshAgent agent;
+	private bool switchLoc = false;
+	public bool targetReached = false;
+	public float lastTimeUpdate = 0.0f;
+	public Vector3 lastLocUpdate;
+
 	// Use this for initialization
 	void Start () {
 		agent = GetComponent<NavMeshAgent> ();
-		target = new Vector3 (0, 0, 0);
 		agent.SetDestination(target);
+		lastLocUpdate = agent.transform.position;
 	}
-	
+
+	public void setNewPath(Vector3 targetLoc){
+		agent.SetDestination(targetLoc);
+		targetReached = false;
+	}
+
 	// Update is called once per frame
 	void Update () {
+
+		lastTimeUpdate += Time.fixedDeltaTime;
+
 
 		if (!agent.pathPending)
 		{
@@ -23,11 +36,12 @@ public class NavAgentMovement : MonoBehaviour {
 				//Debug.Log("Stopped2");
 				if (agent.velocity.sqrMagnitude == 0f)
 				{
-					Debug.Log("Stopped3");
-					target = new Vector3(Random.Range(-5,5),0.5f,Random.Range(-5,5));
-					agent.SetDestination(target);
+					Debug.Log("Stopped");
+					targetReached = true;
 				}
 			}
 		}
+
+
 	}
 }

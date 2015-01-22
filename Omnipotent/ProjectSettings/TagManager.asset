@@ -4,6 +4,12 @@
 TagManager:
   tags:
   - 
+  - RainParticles
+  - source1
+  - source0
+  - source2
+  - source3
+  - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
   Builtin Layer 2: Ignore Raycast
