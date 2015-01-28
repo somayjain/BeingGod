@@ -13,13 +13,13 @@ public class Power_ThunderClap : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (cursor.mode == 1)
-						GetComponent<Button> ().interactable = false;
-				else if (cursor.mode == 0)
-						GetComponent<Button> ().interactable = true;
+		if (cursor.mode == cursor_handle.MODE.BUILD)
+			GetComponent<Button> ().interactable = false;
+		else if (cursor.mode == cursor_handle.MODE.DEFAULT)
+			GetComponent<Button> ().interactable = true;
 	}
 
 	public void OnClick () {
-		cursor.setMode (2);
+		cursor.setMode (cursor_handle.MODE.THUNDER_CLAP);
 	}
 }

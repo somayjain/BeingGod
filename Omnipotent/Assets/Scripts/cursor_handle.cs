@@ -13,7 +13,16 @@ public class cursor_handle : MonoBehaviour {
 	public GameObject sphere;
 
 	private bool onShelf = false;
-	private int build = 0;
+
+	public enum BUILD {
+		NONE,
+		HOUSE,
+		HOSPITAL,
+		BUSSTOP
+	};
+
+//	private int build = 0;
+	private BUILD build = BUILD.NONE;
 
 	/* Modes:
 	 * 0 - Default (Pan/Rotate/Zoom)
@@ -24,7 +33,17 @@ public class cursor_handle : MonoBehaviour {
 	 * 5 - 
 	 * 6 - 
 	 */
-	public int mode = 0;
+	public enum MODE {
+		DEFAULT,
+		BUILD,
+		THUNDER_CLAP,
+		WINDY,
+		GMBC,
+		MJOLNIR,
+		FIREBALL,
+		TORNADO
+	}
+	public MODE mode = MODE.DEFAULT;
 
 	// Use this for initialization
 	void Start () {
@@ -40,25 +59,34 @@ public class cursor_handle : MonoBehaviour {
 		}
 //		Instantiate (object, mousePo, Quaternion.identity);
 
-
 		switch (mode) {
-		case 0:
+		case MODE.DEFAULT:
 			if (Input.GetMouseButtonDown (0) || Input.GetMouseButtonDown (1) || Input.GetMouseButtonDown (2))
 				Cursor.SetCursor (closed, Vector2.zero, CursorMode.Auto);
 			else if (Input.GetMouseButtonUp (0) || Input.GetMouseButtonUp (1) || Input.GetMouseButtonUp (2))
 				Cursor.SetCursor (normal, Vector2.zero, CursorMode.Auto);
 			break;
 
-		case 1:
+		case MODE.BUILD:
+			if (Input.GetMouseButtonDown (0))
+				// create object and place at mouse posisition
+			{}
+			Debug.Log (build.ToString ());
+			if (Input.GetMouseButtonUp (0) && build != BUILD.NONE)
+			{
+				Debug.Log ("Build done");
+				// Place the object;
+			}
 
+			break;
 
-		case 6:
+		case MODE.FIREBALL:
 			Cursor.SetCursor (fireball_cursor, Vector2.zero, CursorMode.Auto);
 			if (Input.GetMouseButtonUp(2))
 			{
 				// Get position
 				// place animation at position
-				setMode(0);
+				setMode(MODE.DEFAULT);
 				Cursor.SetCursor (normal, Vector2.zero, CursorMode.Auto);
 			}
 			break;
@@ -75,11 +103,11 @@ public class cursor_handle : MonoBehaviour {
 		return onShelf;
 	}
 
-	public void Build(int build_id) {
-		build = build_id;
+	public void Build(BUILD build_mode) {
+		build = build_mode;
 	}
 
-	public void setMode(int _mode) {
+	public void setMode(MODE _mode) {
 			mode = _mode;
 	}
 

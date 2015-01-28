@@ -30,4 +30,8 @@ public class Shelf_handle : MonoBehaviour {
 		cursor.Build (0);
 		Debug.Log ("Clicked");
 	}
+
+	public void OnMouseUp () {
+		cursor.Build (cursor_handle.BUILD.NONE);
+	}
 }

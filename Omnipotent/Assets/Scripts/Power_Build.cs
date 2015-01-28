@@ -24,10 +24,10 @@ public class Power_Build : MonoBehaviour {
 		shelves.SetActive(buildmode);
 
 		if (buildmode) {
-			cursor.setMode(1);
+			cursor.setMode(cursor_handle.MODE.BUILD);
 //			this.GetComponent<Button> ().colors.normalColor = Color.white;
 		} else {
-			cursor.setMode(0);
+			cursor.setMode(cursor_handle.MODE.DEFAULT);
 //			this.GetComponent<Button> ().colors.normalColor = new Color(0.7f, 0.7f, 0.7f, 1.0f);
 		}
 	}
