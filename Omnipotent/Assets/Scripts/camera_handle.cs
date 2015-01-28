@@ -84,7 +84,7 @@ public class camera_handle : MonoBehaviour {
 		if (!Input.GetMouseButton(2))  isZooming = false;
 
 		// Get the mouse scroll
-		Debug.Log(Input.mouseScrollDelta.ToString());
+		// Debug.Log(Input.mouseScrollDelta.ToString());
 		if (Input.mouseScrollDelta.magnitude == 0 || ((transform.position.y <= 5.0f && Input.mouseScrollDelta.y >= 0) || (transform.position.y >= 45.0f && Input.mouseScrollDelta.y <= 0)))
 						isZooming = false;
 				else
@@ -129,7 +129,10 @@ public class camera_handle : MonoBehaviour {
 		{
 			// Get mouse displacement vector from original to current position
 			Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
-			Vector3 move = new Vector3(-pos.x * panSpeed, 0, -pos.y * panSpeed);
+//			Vector3 move = new Vector3(-pos.x * panSpeed, 0, -pos.y * panSpeed);
+
+			Vector3 move = ( -pos.x * panSpeed * Vector3.ProjectOnPlane(transform.right, Vector3.up) ) + 
+							(-pos.y * panSpeed * Vector3.ProjectOnPlane(transform.forward, Vector3.up)) ;
 			
 			// Apply the pan's move vector in the orientation of the camera's front
 			// Quaternion forwardRotation = Quaternion.LookRotation(transform.forward, transform.up);

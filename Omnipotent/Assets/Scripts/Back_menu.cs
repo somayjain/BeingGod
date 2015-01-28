@@ -2,13 +2,11 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class Build_building : MonoBehaviour {
-
-	public cursor_handle cursor;
+public class Back_menu : MonoBehaviour {
 
 	public GameObject Shelf;
 	public GameObject Menu;
-	public GameObject Buildings;
+	public GameObject Current;
 
 	// Use this for initialization
 	void Start () {
@@ -25,9 +23,8 @@ public class Build_building : MonoBehaviour {
 	public void OnMouseExit () {
 	}
 	public void OnMouseClick () {
-		/* Create Object */
-		Shelf.GetComponent<RectTransform> ().sizeDelta = new Vector2 (Shelf.GetComponent<RectTransform> ().sizeDelta.x, 600);
-		Menu.SetActive (false);
-		Buildings.SetActive (true);
+		Current.SetActive (false);
+		Menu.SetActive (true);
+		Shelf.GetComponent<RectTransform> ().sizeDelta = new Vector2 (Shelf.GetComponent<RectTransform> ().sizeDelta.x, 400);
 	}
 }
