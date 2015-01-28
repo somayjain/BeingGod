@@ -366,6 +366,7 @@ void  Start (){
 	// Generate the clouds for first time, never well be destroyed during the scene.
 	// Using a cubic shape to bounds the limits of coords. creation
 	SideAux =  Side/2;
+	//Debug.Log(MaximunClouds.ToString());
 	for(i = 0; i < MaximunClouds; i++){
 		MyPos = MyPosition;
 		MyPos.x = Random.Range (MyPos.x-SideAux.x, MyPos.x+SideAux.x);
@@ -373,9 +374,9 @@ void  Start (){
 		MyPos.z = Random.Range (MyPos.z-SideAux.z, MyPos.z+SideAux.z);
 		MyCloudParticle = new CloudParticle(MyPos, Quaternion.identity);
 		MyCloudParticle.SetCloudParent(MyTransform);
-		Debug.Log("Adding a cloud\n");
+		//Debug.Log("Adding a cloud\n");
 		MyCloudsParticles.Add(MyCloudParticle);
-		Debug.Log(MyCloudsParticles.Count.ToString());
+		//Debug.Log(MyCloudsParticles.Count.ToString());
 		
 		// Define some main particle properties
 		if( TypeClouds == Type.Nimbus1 || TypeClouds == Type.Nimbus2 || 
@@ -651,7 +652,7 @@ void  Update (){
 	
 	if(IsAnimate)
 		for(i = 0; i < NumberClouds; i++){
-			Debug.Log(MyCloudsParticles.Count.ToString());
+			//Debug.Log(i.ToString());
 			MyCloudParticle = (CloudParticle)MyCloudsParticles[i];
 			MyCloudParticle.AnimateCloud (AnimationVelocity);
 		}

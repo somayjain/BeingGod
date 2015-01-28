@@ -3,12 +3,20 @@
 --- !u!78 &1
 TagManager:
   tags:
-  - 
+  - Tornado
   - RainParticles
   - source1
   - source0
   - source2
   - source3
+  - Clouds
+  - PLANE
+  - FireBALL
+  - Explosion
+  - Snow
+  - Lightning
+  - TUP
+  - TDOWN
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

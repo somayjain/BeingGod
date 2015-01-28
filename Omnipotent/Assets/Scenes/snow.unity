@@ -232,7 +232,7 @@ GameObject:
   - 82: {fileID: 138947121}
   m_Layer: 0
   m_Name: Twister_Prefab
-  m_TagString: Untagged
+  m_TagString: Tornado
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -248,7 +248,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 3c3036c545c9a47d7b4d9ff1ec1a50cf, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: .25
+  m_Volume: .0529999994
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -426,10 +426,9 @@ GameObject:
   - 15: {fileID: 645178492}
   - 12: {fileID: 645178491}
   - 26: {fileID: 645178490}
-  - 114: {fileID: 645178493}
   m_Layer: 0
   m_Name: TwisterUP
-  m_TagString: Untagged
+  m_TagString: TUP
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -536,18 +535,6 @@ EllipsoidParticleEmitter:
   m_OneShot: 0
   m_Ellipsoid: {x: 1, y: 0, z: 1}
   m_MinEmitterRange: 0
---- !u!114 &645178493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 645178488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74e20f22b246dcf449fed56a516d19ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  status: 1
 --- !u!1 &790083860
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,10 +666,9 @@ GameObject:
   - 15: {fileID: 865423842}
   - 12: {fileID: 865423841}
   - 26: {fileID: 865423840}
-  - 114: {fileID: 865423843}
   m_Layer: 0
   m_Name: Twisterdown
-  m_TagString: Untagged
+  m_TagString: TDOWN
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -789,18 +775,6 @@ EllipsoidParticleEmitter:
   m_OneShot: 0
   m_Ellipsoid: {x: 1, y: 1, z: 1}
   m_MinEmitterRange: 1
---- !u!114 &865423843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 865423838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 102bc2094ce2b414686426d96cbe4957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  status: 1
 --- !u!1 &905290566
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,8 +786,8 @@ GameObject:
   - 114: {fileID: 905290567}
   - 82: {fileID: 905290569}
   m_Layer: 0
-  m_Name: Clouds2
-  m_TagString: Untagged
+  m_Name: Clouds
+  m_TagString: Clouds
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -841,9 +815,9 @@ MonoBehaviour:
   SoftClouds: 0
   SpreadDir: {x: -1, y: 0, z: 0}
   LengthSpread: 1
-  NumberClouds: 100
-  Side: {x: 100, y: 300, z: 100}
-  MaximunVelocity: {x: 0, y: 0, z: 10}
+  NumberClouds: 30
+  Side: {x: 10, y: 20, z: 10}
+  MaximunVelocity: {x: 3, y: 0, z: 0}
   VelocityMultipier: 1.10000002
   DisappearMultiplier: 2
   PaintType: 1
@@ -852,9 +826,9 @@ MonoBehaviour:
   SecondColor: {r: .310000002, g: .310000002, b: .310000002, a: 1}
   TintStrength: 80
   offset: .800000012
-  MaxWithCloud: 50
-  MaxTallCloud: 50
-  MaxDepthCloud: 50
+  MaxWithCloud: 20
+  MaxTallCloud: 10
+  MaxDepthCloud: 20
   FixedSize: 0
   NumberOfShadows: 3
   CloudsTextAdd:
@@ -902,8 +876,8 @@ Transform:
   m_PrefabParentObject: {fileID: 400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
   m_PrefabInternal: {fileID: 1598165950}
   m_GameObject: {fileID: 905290566}
-  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106829}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -918,7 +892,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 23748adaafe52ab4d8cc68e884652032, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: .474000007
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -978,7 +952,6 @@ GameObject:
   - 12: {fileID: 906082740}
   - 26: {fileID: 906082739}
   - 76: {fileID: 906082738}
-  - 114: {fileID: 906082743}
   m_Layer: 0
   m_Name: RainFall
   m_TagString: RainParticles
@@ -1102,19 +1075,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
---- !u!114 &906082743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 906082737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ed297ff5b6c85c44a41dc1a5cc9b7dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  str: Hello
-  status: 0
 --- !u!1 &938291145
 GameObject:
   m_ObjectHideFlags: 0
@@ -1285,6 +1245,10 @@ Prefab:
     - target: {fileID: 1500000, guid: 144b203f383094d16b1f336c74c47326, type: 2}
       propertyPath: m_Emit
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 144b203f383094d16b1f336c74c47326, type: 2}
+      propertyPath: m_TagString
+      value: Snow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 144b203f383094d16b1f336c74c47326, type: 2}
@@ -1530,6 +1494,10 @@ Prefab:
       propertyPath: m_CastShadows
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: bf5c5a77b9da1ff4f99f5ae86fdc9828, type: 2}
+      propertyPath: m_TagString
+      value: Lightning
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf5c5a77b9da1ff4f99f5ae86fdc9828, type: 2}
   m_RootGameObject: {fileID: 1231398328}
@@ -1550,7 +1518,7 @@ GameObject:
   - 82: {fileID: 1231398334}
   m_Layer: 0
   m_Name: lightning
-  m_TagString: Untagged
+  m_TagString: Lightning
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1867,7 +1835,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 8200000, guid: 5010e30d9776040ca8476dcdca8775ca, type: 2}
       propertyPath: m_Volume
-      value: .25
+      value: .0529999994
       objectReference: {fileID: 0}
     - target: {fileID: 2600006, guid: 5010e30d9776040ca8476dcdca8775ca, type: 2}
       propertyPath: m_Materials.Array.data[0]
@@ -2013,6 +1981,18 @@ Prefab:
       propertyPath: maxEmission
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 5010e30d9776040ca8476dcdca8775ca, type: 2}
+      propertyPath: m_TagString
+      value: Tornado
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5010e30d9776040ca8476dcdca8775ca, type: 2}
+      propertyPath: m_TagString
+      value: TUP
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 5010e30d9776040ca8476dcdca8775ca, type: 2}
+      propertyPath: m_TagString
+      value: TDOWN
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5010e30d9776040ca8476dcdca8775ca, type: 2}
   m_RootGameObject: {fileID: 138947120}
@@ -2129,6 +2109,7 @@ GameObject:
   - 92: {fileID: 1258573642}
   - 124: {fileID: 1258573641}
   - 81: {fileID: 1258573640}
+  - 114: {fileID: 1258573645}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2201,6 +2182,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!114 &1258573645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1258573639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e8410b5028a4f84cb1d30b095704ae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rainStatus: 1
+  snowStatus: 1
+  lightningStatus: 1
+  fireballStatus: 1
+  twisterStatus: 1
+  tUpStatus: 1
+  tDownStatus: 1
+  cloudStatus: 1
+  rain: {fileID: 0}
+  light: {fileID: 0}
+  snow: {fileID: 0}
+  fire: {fileID: 0}
+  tor: {fileID: 0}
+  tup: {fileID: 0}
+  tdown: {fileID: 0}
+  clouds: {fileID: 0}
 --- !u!1001 &1293258994
 Prefab:
   m_ObjectHideFlags: 0
@@ -2518,7 +2526,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2530,11 +2538,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
       propertyPath: m_LocalRotation.y
-      value: .707106829
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: .707106829
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
       propertyPath: m_LocalRotation.w
@@ -2566,7 +2574,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
       propertyPath: NumberClouds
-      value: 100
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
       propertyPath: VelocityMultipier
@@ -2602,7 +2610,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
       propertyPath: m_Name
-      value: Clouds2
+      value: Clouds
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
       propertyPath: CloudRender
@@ -2610,11 +2618,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
       propertyPath: Side.x
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
       propertyPath: Side.z
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
       propertyPath: SizeFactorPart
@@ -2630,19 +2638,35 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
       propertyPath: MaximunVelocity.x
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
       propertyPath: MaximunVelocity.z
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
       propertyPath: MaxWithCloud
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
       propertyPath: MaxDepthCloud
-      value: 50
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
+      propertyPath: Side.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
+      propertyPath: MaxTallCloud
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
+      propertyPath: MaximunVelocity.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
+      propertyPath: m_TagString
+      value: Clouds
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a8338ce94cb0e254397003134b48966c, type: 2}
@@ -2660,10 +2684,9 @@ GameObject:
   - 15: {fileID: 1691983586}
   - 12: {fileID: 1691983585}
   - 26: {fileID: 1691983584}
-  - 114: {fileID: 1691983588}
   m_Layer: 0
   m_Name: Snow
-  m_TagString: Untagged
+  m_TagString: Snow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2770,15 +2793,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
---- !u!114 &1691983588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1691983583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b98c7bcac9a9ee4596e5dc7bd52af4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  status: 0

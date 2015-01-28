@@ -12,9 +12,6 @@ function Update () {
 	offset -= Vector3 (0.5, 0.5, 0.5);
 	offset = Vector3.Scale(moveSize, offset);
 	transform.localPosition = offset + basePosition;
-	if(Input.GetKeyUp("t"))
-		status = !status;
-	renderer.enabled = status;
 }
 
 @script AddComponentMenu("Noise/Transform Position")
