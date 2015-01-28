@@ -296,7 +296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15629b984106843c1bd7bd26e3be9f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  status: 1
 --- !u!26 &29591964
 ParticleRenderer:
   m_ObjectHideFlags: 0
@@ -1035,6 +1034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 1721188146}
+  cursor_mode: 6
 --- !u!1 &115830372
 GameObject:
   m_ObjectHideFlags: 0
@@ -1921,7 +1921,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &457152704
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1951,7 +1951,7 @@ GameObject:
   - 4: {fileID: 465669051}
   m_Layer: 0
   m_Name: source2
-  m_TagString: source1
+  m_TagString: source2
   m_Icon: {fileID: -1203168336, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2150,8 +2150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 755fcfe28143e44fb8c4184d4803251f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  str: Hello
-  status: 1
 --- !u!76 &590593361
 WorldParticleCollider:
   m_ObjectHideFlags: 0
@@ -2946,6 +2944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1274c2e027fc48045ae15722e392ee67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursor: {fileID: 0}
   Shelf: {fileID: 61909807}
   Menu: {fileID: 457152703}
   Current: {fileID: 1263114445}
@@ -3121,9 +3120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 1721188146}
-  Shelf: {fileID: 0}
-  Menu: {fileID: 0}
-  Buildings: {fileID: 0}
+  build_mode: 0
 --- !u!114 &1012672432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3506,7 +3503,7 @@ GameObject:
   - 4: {fileID: 1146836744}
   m_Layer: 0
   m_Name: source3
-  m_TagString: source1
+  m_TagString: source3
   m_Icon: {fileID: -1203168336, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3572,12 +3569,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delegates:
-  - eventID: 4
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1174646070}
-          m_MethodName: OnMouseClick
+          m_MethodName: OnMouseDown
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+              Culture=neutral, PublicKeyToken=null
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1174646070}
+          m_MethodName: OnMouseUp
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3602,9 +3617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 1721188146}
-  Shelf: {fileID: 0}
-  Menu: {fileID: 0}
-  Buildings: {fileID: 0}
+  build_mode: 1
 --- !u!114 &1174646071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3831,7 +3844,7 @@ GameObject:
   - 4: {fileID: 1302777713}
   m_Layer: 0
   m_Name: source0
-  m_TagString: source1
+  m_TagString: source0
   m_Icon: {fileID: -1203168336, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5194,7 +5207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1771452442
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5860,9 +5873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 1721188146}
-  Shelf: {fileID: 0}
-  Menu: {fileID: 0}
-  Buildings: {fileID: 0}
+  build_mode: 0
 --- !u!114 &2111341924
 MonoBehaviour:
   m_ObjectHideFlags: 0

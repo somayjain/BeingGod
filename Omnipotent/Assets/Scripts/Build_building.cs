@@ -5,11 +5,8 @@ using UnityEngine.UI;
 public class Build_building : MonoBehaviour {
 
 	public cursor_handle cursor;
-
-	public GameObject Shelf;
-	public GameObject Menu;
-	public GameObject Buildings;
-
+	public cursor_handle.BUILD build_mode = cursor_handle.BUILD.NONE;
+	
 	// Use this for initialization
 	void Start () {
 	
@@ -24,10 +21,11 @@ public class Build_building : MonoBehaviour {
 	}
 	public void OnMouseExit () {
 	}
-	public void OnMouseClick () {
+	public void OnMouseDown () {
 		/* Create Object */
-		Shelf.GetComponent<RectTransform> ().sizeDelta = new Vector2 (Shelf.GetComponent<RectTransform> ().sizeDelta.x, 600);
-		Menu.SetActive (false);
-		Buildings.SetActive (true);
+		cursor.Build (build_mode);
+	}
+	public void OnMouseUp() {
+		cursor.Build (cursor_handle.BUILD.NONE);
 	}
 }
