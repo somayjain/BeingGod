@@ -44,14 +44,14 @@ function Start() {
 	//Destroy(gameObject, timeOut);
 }
 function FixedUpdate(){
-	if(Input.GetKeyUp("l")) {
-		status = !status;
-		renderer.enabled = status;
-		sparks = status;
-		glow = status;
-		audio.PlayOneShot(audioc);
-		// enabled = status;
-	}
+//	if(Input.GetKeyUp("l")) {
+//		status = !status;
+//		renderer.enabled = status;
+//		sparks = status;
+//		glow = status;
+//		audio.PlayOneShot(audioc);
+//		// enabled = status;
+//	}
 	/*if(status)
 		ctrTime += Time.deltaTime;
 	if(ctrTime >= timeOut)
