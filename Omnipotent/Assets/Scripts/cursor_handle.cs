@@ -5,14 +5,19 @@ public class cursor_handle : MonoBehaviour {
 
 	public Camera camera;
 
+	private Vector3 cursor3d;
 	[Header("Cursors")]
 	public Texture2D normal;
 	public Texture2D closed;
+	public Texture2D mjolnir_cursor;
 	public Texture2D fireball_cursor;
+	public Texture2D tornado_cursor;
 
+	[Header("")]
 	public GameObject sphere;
 
 	private bool onShelf = false;
+	private bool onHUD = false;
 
 	public enum BUILD {
 		NONE,
@@ -45,6 +50,11 @@ public class cursor_handle : MonoBehaviour {
 	}
 	public MODE mode = MODE.DEFAULT;
 
+	[Header("Powers")]
+	public Power_Mjolnir PowerMjolnir;
+	public Power_Fireball PowerFireball;
+	public Power_Tornado PowerTornado;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -56,6 +66,7 @@ public class cursor_handle : MonoBehaviour {
 		RaycastHit hit;
 		if(Physics.Raycast(ray, out hit)) {
 			sphere.transform.position = new Vector3(hit.point.x, hit.point.y + 1.0f, hit.point.z);
+			cursor3d = hit.point;
 		}
 //		Instantiate (object, mousePo, Quaternion.identity);
 
@@ -79,28 +90,65 @@ public class cursor_handle : MonoBehaviour {
 			}
 
 			break;
-
+		case MODE.THUNDER_CLAP:
+			break;
+		case MODE.WINDY:
+			break;
+		case MODE.GMBC:
+			break;
+		case MODE.MJOLNIR:
+			Cursor.SetCursor (mjolnir_cursor, Vector2.zero, CursorMode.Auto);
+			if ( !isOnHUD() && !isOnShelf() ) {
+				if (Input.GetMouseButtonUp(0)) {
+					// Trigger Mjolnir at cursor3d
+					PowerMjolnir.Trigger( cursor3d );
+					setMode (MODE.DEFAULT);
+				}
+			}
+			break;
+		
 		case MODE.FIREBALL:
 			Cursor.SetCursor (fireball_cursor, Vector2.zero, CursorMode.Auto);
-			if (Input.GetMouseButtonUp(2))
-			{
-				// Get position
-				// place animation at position
-				setMode(MODE.DEFAULT);
-				Cursor.SetCursor (normal, Vector2.zero, CursorMode.Auto);
+			if ( !isOnHUD() && !isOnShelf() ) {
+				if (Input.GetMouseButtonUp(0)) {
+					// Trigger Mjolnir at cursor3d
+					PowerFireball.Trigger( cursor3d );
+					setMode (MODE.DEFAULT);
+				}
+			}
+			break;
+
+		case MODE.TORNADO:
+			Cursor.SetCursor (tornado_cursor, Vector2.zero, CursorMode.Auto);
+			if ( !isOnHUD() && !isOnShelf() ) {
+				if (Input.GetMouseButtonUp(0)) {
+					// Trigger Mjolnir at cursor3d
+					PowerTornado.Trigger( cursor3d );
+					setMode (MODE.DEFAULT);
+				}
 			}
 			break;
 		}
 	}
 
-	public void EnterShelf () {
+	public void OnShelf () {
 		onShelf = true;
 	}
-	public void ExitShelf () {
+	public void OffShelf () {
 		onShelf = false;
 	}
 	public bool isOnShelf () {
 		return onShelf;
+	}
+
+	public void OnHUD () {
+		onHUD = true;
+	}
+	public void OffHUD () {
+		onHUD = false;
+	}
+	public bool isOnHUD () {
+		return onHUD;
 	}
 
 	public void Build(BUILD build_mode) {
@@ -108,7 +156,9 @@ public class cursor_handle : MonoBehaviour {
 	}
 
 	public void setMode(MODE _mode) {
-			mode = _mode;
+		mode = _mode;
+		if(mode == MODE.DEFAULT)
+			Cursor.SetCursor (normal, Vector2.zero, CursorMode.Auto);
 	}
 
 	public void OnPress () {

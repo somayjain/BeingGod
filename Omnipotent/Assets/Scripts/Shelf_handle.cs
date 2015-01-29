@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -17,12 +17,12 @@ public class Shelf_handle : MonoBehaviour {
 	}
 
 	public void OnMouseOver () {
-		cursor.EnterShelf();
+		cursor.OnShelf();
 		GetComponent<Image> ().CrossFadeAlpha(1.8f, 0.4f, true);
 	}
 
 	public void OnMouseExit () {
-		cursor.ExitShelf ();
+		cursor.OffShelf ();
 		GetComponent<Image> ().CrossFadeAlpha(1.0f, 0.4f, true);
 	}
 
