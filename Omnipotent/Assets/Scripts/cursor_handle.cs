@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using RSUnityToolkit;
 
 public class cursor_handle : MonoBehaviour {
 
@@ -166,5 +167,18 @@ public class cursor_handle : MonoBehaviour {
 	}
 	public void OnRelease () {
 		Cursor.SetCursor (normal, Vector2.zero, CursorMode.Auto);
+	}
+	public void TriggerPower (Trigger trgr){
+		Debug.Log ("Hand Closed, message received");
+		switch (mode) {
+				case MODE.MJOLNIR:
+						PowerMjolnir.Trigger (cursor3d);
+						setMode (MODE.DEFAULT);
+						break;
+				}
+	}
+	public void soundFire(Trigger trgr){
+		setMode (MODE.MJOLNIR);
+		Debug.Log ("I heard Fire");
 	}
 }

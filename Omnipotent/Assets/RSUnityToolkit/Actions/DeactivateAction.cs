@@ -96,6 +96,9 @@ public class DeactivateAction : BaseAction {
 			{
 				foreach (GameObject go in GameObjects)
 				{
+					//if(go == null)
+					//	Debug.Log("oops");
+					//Debug.Log("blah");//go.name.ToString());
 					go.SetActive(false);
 				}	
 				break;
