@@ -7,15 +7,18 @@ public class Power_Fireball : MonoBehaviour {
 	public cursor_handle cursor;
 	public GameObject Fireball;
 	
-	public float time = 3.0f;
-	private float time_left;
+	public float time = 10.0f;
+	private float time_left = 0.0f;
 	private bool active = false;
+	private bool emit = false;
+
+	public float Fireball_height = 30.0f;
 
 	public cursor_handle.MODE cursor_mode = cursor_handle.MODE.FIREBALL;
 	
 	// Use this for initialization
 	void Start () {
-		
+		time_left = time;
 	}
 	
 	// Update is called once per frame
@@ -24,13 +27,13 @@ public class Power_Fireball : MonoBehaviour {
 			GetComponent<Button> ().interactable = false;
 		else if (cursor.mode == cursor_handle.MODE.DEFAULT)
 			GetComponent<Button> ().interactable = true;
-		
+		Debug.Log(time_left.ToString());
 		if (time_left <= 0.0f) {
 			time_left = time;
 			active = false;
+//			DestroyObject(Fireball.transform.GetChild(0).gameObject);// Explosion);
 			Fireball.SetActive (active);
-		}
-		else if (active)
+		} else if (active)
 			time_left -= Time.deltaTime;
 	}
 	
@@ -40,8 +43,14 @@ public class Power_Fireball : MonoBehaviour {
 		} else if (!active) {
 			active = true;
 			time_left = time;
+
 			Fireball.transform.position = loc;
 			Fireball.SetActive (active);
+
+			GameObject trail = (GameObject)Instantiate(Resources.Load("FireBall"), loc + new Vector3(0,Fireball_height,0), Quaternion.identity) as GameObject;
+			trail.name = "Trail";
+			trail.transform.parent = Fireball.transform;
+			trail.SetActive (true);
 		}
 	}
 	

@@ -31,6 +31,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 		int rand_chr = Random.Range(0,prefabNameList.Count);
 		GameObject obs = (GameObject)Instantiate (Resources.Load ("prefabs/"+prefabNameList[rand_chr]), sourceLoc,Quaternion.AngleAxis(270,Vector3.right)) as GameObject;
 		obs.name = prefabNameList[rand_chr];
+		obs.transform.parent = transform;
 		NavMeshAgent agent = (NavMeshAgent)obs.AddComponent("NavMeshAgent");
 		NavAgentMovement agentMovement =  obs.AddComponent<NavAgentMovement> ();
 		agentMovement.target = targetLoc;

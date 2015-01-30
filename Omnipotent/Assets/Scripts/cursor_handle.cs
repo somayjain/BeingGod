@@ -10,6 +10,7 @@ public class cursor_handle : MonoBehaviour {
 	[Header("Cursors")]
 	public Texture2D normal;
 	public Texture2D closed;
+	public Texture2D thunderclap_cursor;
 	public Texture2D mjolnir_cursor;
 	public Texture2D fireball_cursor;
 	public Texture2D tornado_cursor;
@@ -52,6 +53,7 @@ public class cursor_handle : MonoBehaviour {
 	public MODE mode = MODE.DEFAULT;
 
 	[Header("Powers")]
+	public Power_ThunderClap PowerThunderClap;
 	public Power_Mjolnir PowerMjolnir;
 	public Power_Fireball PowerFireball;
 	public Power_Tornado PowerTornado;
@@ -91,8 +93,18 @@ public class cursor_handle : MonoBehaviour {
 			}
 
 			break;
+
 		case MODE.THUNDER_CLAP:
+			Cursor.SetCursor (thunderclap_cursor, Vector2.zero, CursorMode.Auto);
+			if ( !isOnHUD() && !isOnShelf() ) {
+				if (Input.GetMouseButtonUp(0)) {
+					// Trigger Thunder Clap
+					PowerThunderClap.Trigger( cursor3d );
+					setMode (MODE.DEFAULT);
+				}
+			}
 			break;
+
 		case MODE.WINDY:
 			break;
 		case MODE.GMBC:
@@ -112,7 +124,7 @@ public class cursor_handle : MonoBehaviour {
 			Cursor.SetCursor (fireball_cursor, Vector2.zero, CursorMode.Auto);
 			if ( !isOnHUD() && !isOnShelf() ) {
 				if (Input.GetMouseButtonUp(0)) {
-					// Trigger Mjolnir at cursor3d
+					// Trigger Fireball at cursor3d
 					PowerFireball.Trigger( cursor3d );
 					setMode (MODE.DEFAULT);
 				}
@@ -123,7 +135,7 @@ public class cursor_handle : MonoBehaviour {
 			Cursor.SetCursor (tornado_cursor, Vector2.zero, CursorMode.Auto);
 			if ( !isOnHUD() && !isOnShelf() ) {
 				if (Input.GetMouseButtonUp(0)) {
-					// Trigger Mjolnir at cursor3d
+					// Trigger Tornado at cursor3d
 					PowerTornado.Trigger( cursor3d );
 					setMode (MODE.DEFAULT);
 				}

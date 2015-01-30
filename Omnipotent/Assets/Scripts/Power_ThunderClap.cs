@@ -5,6 +5,11 @@ using UnityEngine.UI;
 public class Power_ThunderClap : MonoBehaviour {
 
 	public cursor_handle cursor;
+	public GameObject ThunderClap;
+
+	public float time = 8.0f;
+	private float time_left = 0;
+	private bool active = false;
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +22,24 @@ public class Power_ThunderClap : MonoBehaviour {
 			GetComponent<Button> ().interactable = false;
 		else if (cursor.mode == cursor_handle.MODE.DEFAULT)
 			GetComponent<Button> ().interactable = true;
+	
+		if (time_left <= 0.0f) {
+			time_left = time;
+			active = false;
+			ThunderClap.SetActive (active);
+		}
+		else if (active)
+			time_left -= Time.deltaTime;
+	}
+
+	public void Trigger (Vector3 loc) {
+		if (time_left <= 0.0f) {
+			time_left = time;
+		} else if (!active) {
+			active = true;
+			time_left = time;
+			ThunderClap.SetActive (active);
+		}
 	}
 
 	public void OnClick () {

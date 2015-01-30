@@ -8,7 +8,7 @@ public class Power_Mjolnir : MonoBehaviour {
 	public GameObject Mjolnir;
 
 	public float time = 3.0f;
-	private float time_left;
+	private float time_left = 0;
 	private bool active = false;
 	
 	// Use this for initialization

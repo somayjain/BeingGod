@@ -113,15 +113,28 @@ public class camera_handle : MonoBehaviour {
 			 * Rotate about a point instead of rotate about camera position
 			 */
 
+			Vector3 screenCenter = new Vector3(Screen.width/2,Screen.height/2);
+			
+			Ray ray = Camera.main.ScreenPointToRay(screenCenter);
+			
+			RaycastHit hit;
+			
+			if(Physics.Raycast(ray, out hit)) {
+				Debug.DrawLine(ray.origin, hit.point);
+				
+				Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
+				rigidbody.transform.RotateAround(hit.point, Vector3.up, pos.x*turnSpeed);
+			}
+
 			// Get mouse displacement vector from original to current position
-			Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
-			
-			// Set Drag
-			rigidbody.angularDrag = turnDrag;
-			
-			// Two rotations are required, one for x-mouse movement and one for y-mouse movement
-			rigidbody.AddTorque(-pos.y * turnSpeed * transform.right, ForceMode.Acceleration);
-			rigidbody.AddTorque(pos.x * turnSpeed * transform.up, ForceMode.Acceleration);
+//			Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
+//			
+//			// Set Drag
+//			rigidbody.angularDrag = turnDrag;
+//			
+//			// Two rotations are required, one for x-mouse movement and one for y-mouse movement
+//			rigidbody.AddTorque(-pos.y * turnSpeed * transform.right, ForceMode.Acceleration);
+//			rigidbody.AddTorque(pos.x * turnSpeed * transform.up, ForceMode.Acceleration);
 		}
 		
 		// Move (pan) the camera on it's XY plane
