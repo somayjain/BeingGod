@@ -1826,6 +1826,7 @@ GameObject:
   - 4: {fileID: 378625642}
   - 33: {fileID: 378625641}
   - 23: {fileID: 378625640}
+  - 208: {fileID: 378625643}
   m_Layer: 0
   m_Name: obj_house1
   m_TagString: Untagged
@@ -1869,11 +1870,22 @@ Transform:
   m_PrefabInternal: {fileID: 1190351133}
   m_GameObject: {fileID: 378625639}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 95.0699997, y: 0, z: 71.2399979}
+  m_LocalPosition: {x: 88.0400009, y: .379999995, z: 51.5299988}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 680412880}
   m_RootOrder: 6
+--- !u!208 &378625643
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 378625639}
+  m_Enabled: 1
+  m_Radius: 5.01000023
+  m_Height: 6.30000162
+  m_MoveThreshold: 0
+  m_Carve: 0
 --- !u!1 &394622296
 GameObject:
   m_ObjectHideFlags: 0
@@ -2256,6 +2268,7 @@ GameObject:
   - 4: {fileID: 572029726}
   - 33: {fileID: 572029725}
   - 23: {fileID: 572029724}
+  - 208: {fileID: 572029727}
   m_Layer: 0
   m_Name: obj_house5b
   m_TagString: Untagged
@@ -2304,6 +2317,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 680412880}
   m_RootOrder: 2
+--- !u!208 &572029727
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 572029723}
+  m_Enabled: 1
+  m_Radius: 4.01000023
+  m_Height: 7.70000219
+  m_MoveThreshold: 0
+  m_Carve: 0
 --- !u!1 &590593359
 GameObject:
   m_ObjectHideFlags: 0
@@ -2462,6 +2486,7 @@ GameObject:
   - 15: {fileID: 596505033}
   - 12: {fileID: 596505032}
   - 26: {fileID: 596505031}
+  - 114: {fileID: 596505034}
   - 114: {fileID: 596505030}
   m_Layer: 0
   m_Name: Small explosion
@@ -2585,6 +2610,20 @@ EllipsoidParticleEmitter:
   m_OneShot: 0
   m_Ellipsoid: {x: .5, y: .5, z: .5}
   m_MinEmitterRange: 10
+--- !u!114 &596505034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11415676, guid: bd943c792514675e464dfc7a8c26d3e0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1429493316}
+  m_GameObject: {fileID: 596505028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a09dad89d11389ed000e82b8d76c639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeOut: 100000
+  detachChildren: 0
 --- !u!1 &596865536
 GameObject:
   m_ObjectHideFlags: 0
@@ -3661,6 +3700,7 @@ GameObject:
   - 4: {fileID: 1099499969}
   - 33: {fileID: 1099499968}
   - 23: {fileID: 1099499967}
+  - 208: {fileID: 1099499970}
   m_Layer: 0
   m_Name: obj_house5b
   m_TagString: Untagged
@@ -3709,6 +3749,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 680412880}
   m_RootOrder: 4
+--- !u!208 &1099499970
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1099499966}
+  m_Enabled: 1
+  m_Radius: 3.8499999
+  m_Height: 7.70000219
+  m_MoveThreshold: 0
+  m_Carve: 0
 --- !u!1 &1104261774
 GameObject:
   m_ObjectHideFlags: 0
@@ -4217,15 +4268,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 6c3c01acf921b41c9aae16c91e42ca1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 95.0699997
+      value: 88.0400009
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6c3c01acf921b41c9aae16c91e42ca1f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: .379999995
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6c3c01acf921b41c9aae16c91e42ca1f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 71.2399979
+      value: 51.5299988
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6c3c01acf921b41c9aae16c91e42ca1f, type: 3}
       propertyPath: m_LocalRotation.x
@@ -4551,7 +4602,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1302777712}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 84.8000031, y: .200000003, z: 74}
+  m_LocalPosition: {x: 80.7300034, y: .800000012, z: 52.8199997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 689991570}
@@ -6065,6 +6116,7 @@ GameObject:
   - 4: {fileID: 1625754368}
   - 33: {fileID: 1625754367}
   - 23: {fileID: 1625754366}
+  - 208: {fileID: 1625754369}
   m_Layer: 0
   m_Name: obj_house5b
   m_TagString: Untagged
@@ -6113,6 +6165,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 680412880}
   m_RootOrder: 0
+--- !u!208 &1625754369
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1625754365}
+  m_Enabled: 1
+  m_Radius: 4.13999987
+  m_Height: 7.70000219
+  m_MoveThreshold: 0
+  m_Carve: 0
 --- !u!1 &1638414357
 GameObject:
   m_ObjectHideFlags: 0
@@ -7000,6 +7063,7 @@ GameObject:
   - 4: {fileID: 1952689245}
   - 33: {fileID: 1952689244}
   - 23: {fileID: 1952689243}
+  - 208: {fileID: 1952689246}
   m_Layer: 0
   m_Name: obj_house3
   m_TagString: Untagged
@@ -7048,6 +7112,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 680412880}
   m_RootOrder: 5
+--- !u!208 &1952689246
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1952689242}
+  m_Enabled: 1
+  m_Radius: 5.21999979
+  m_Height: 6.70000172
+  m_MoveThreshold: 0
+  m_Carve: 0
 --- !u!1 &1983434033
 GameObject:
   m_ObjectHideFlags: 0
@@ -7086,6 +7161,7 @@ GameObject:
   - 4: {fileID: 1999650576}
   - 33: {fileID: 1999650575}
   - 23: {fileID: 1999650574}
+  - 208: {fileID: 1999650577}
   m_Layer: 0
   m_Name: obj_house1c
   m_TagString: Untagged
@@ -7134,6 +7210,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 680412880}
   m_RootOrder: 7
+--- !u!208 &1999650577
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1999650573}
+  m_Enabled: 1
+  m_Radius: 4.80000019
+  m_Height: 6.30000162
+  m_MoveThreshold: 0
+  m_Carve: 0
 --- !u!1 &2111341920
 GameObject:
   m_ObjectHideFlags: 0
@@ -7251,6 +7338,7 @@ GameObject:
   - 4: {fileID: 2115668620}
   - 33: {fileID: 2115668619}
   - 23: {fileID: 2115668618}
+  - 208: {fileID: 2115668621}
   m_Layer: 0
   m_Name: obj_house5b
   m_TagString: Untagged
@@ -7299,6 +7387,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 680412880}
   m_RootOrder: 1
+--- !u!208 &2115668621
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2115668617}
+  m_Enabled: 1
+  m_Radius: 4.36000013
+  m_Height: 7.70000219
+  m_MoveThreshold: 0
+  m_Carve: 0
 --- !u!1 &2126491132
 GameObject:
   m_ObjectHideFlags: 0
@@ -7309,6 +7408,7 @@ GameObject:
   - 4: {fileID: 2126491135}
   - 33: {fileID: 2126491134}
   - 23: {fileID: 2126491133}
+  - 208: {fileID: 2126491136}
   m_Layer: 0
   m_Name: obj_house5b
   m_TagString: Untagged
@@ -7357,6 +7457,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 680412880}
   m_RootOrder: 3
+--- !u!208 &2126491136
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2126491132}
+  m_Enabled: 1
+  m_Radius: 4.25
+  m_Height: 7.70000219
+  m_MoveThreshold: 0
+  m_Carve: 0
 --- !u!1 &2136349405
 GameObject:
   m_ObjectHideFlags: 0

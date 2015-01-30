@@ -7,14 +7,12 @@ public class NavAgentMovement : MonoBehaviour {
 	public NavMeshAgent agent;
 	private bool switchLoc = false;
 	public bool targetReached = false;
-	public float lastTimeUpdate = 0.0f;
-	public Vector3 lastLocUpdate;
 
 	// Use this for initialization
 	void Start () {
 		agent = GetComponent<NavMeshAgent> ();
 		agent.SetDestination(target);
-		lastLocUpdate = agent.transform.position;
+		agent.stoppingDistance = Random.Range (0, 10);
 	}
 
 	public void setNewPath(Vector3 targetLoc){
@@ -25,7 +23,6 @@ public class NavAgentMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		lastTimeUpdate += Time.fixedDeltaTime;
 
 
 		if (!agent.pathPending)
@@ -34,10 +31,10 @@ public class NavAgentMovement : MonoBehaviour {
 			if (agent.remainingDistance <= agent.stoppingDistance)
 			{
 				//Debug.Log("Stopped2");
-				if (agent.velocity.sqrMagnitude == 0f)
+				if (agent.velocity.sqrMagnitude <= 0.1f)
 				{
 					//comments
-					Debug.Log("Stopped");
+				//	Debug.Log("Stopped");
 					targetReached = true;
 				}
 			}
