@@ -2,7 +2,18 @@
 using System.Collections.Generic;
 
 public class LoadVoxelPeople : MonoBehaviour {
-
+	public enum MODE {
+		DEFAULT,
+		BUILD,
+		THUNDER_CLAP,
+		WINDY,
+		GMBC,
+		MJOLNIR,
+		FIREBALL,
+		TORNADO
+	}
+	public MODE Powermode = MODE.DEFAULT;
+	public Vector3 pointOfContact;
 
 	GameObject personManager;
 	public List<Vector3> sources = new List<Vector3>();
@@ -40,24 +51,41 @@ public class LoadVoxelPeople : MonoBehaviour {
 		people.Add (obs);
 	}
 
-	void checkCrowdBlock(){
+
+
+	void checkCrowd(){
 		int people_nos = people.Count;
-		//	Debug.Log (people_nos+" ");
 		for (int i=0; i<people_nos; i++) {
 			int rand_pos = Random.Range(0,nos_sources);
 			NavAgentMovement person_script = people[i].GetComponent<NavAgentMovement>();
-		//	Debug.Log(person_script.lastTimeUpdate+" ");
+			//	Debug.Log(person_script.lastTimeUpdate+" ");
 			if(person_script.targetReached){
 				person_script.setNewPath(sources[rand_pos]);
 				Debug.Log("Recompute the new path");
 			}
+			switch(Powermode){
+			case MODE.THUNDER_CLAP:
+				person_script.toggleScaredRun(true);
+				person_script.currentlyScared = true;
+				Debug.Log("Thunder Clap at "+pointOfContact+" ");
+				break;
+			case MODE.FIREBALL:
+				Debug.Log("Fireball at "+pointOfContact+" ");
+				break;
+			case MODE.MJOLNIR:
+				Debug.Log("MJOLNIR at "+pointOfContact+" ");
+				break;
+			case MODE.TORNADO:
+				Debug.Log("Tornado at "+pointOfContact+" ");
+				break;
+			}
 		}
+		Powermode = MODE.DEFAULT;
 	}
 
 	// Update is called once per frame
 	void Update () {
-
-		checkCrowdBlock ();
+		checkCrowd ();
 
 		if (Input.GetKeyUp ("n")) {
 					initPerson ();

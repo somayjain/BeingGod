@@ -4510,7 +4510,7 @@ GameObject:
   - 114: {fileID: 1301215572}
   m_Layer: 0
   m_Name: People
-  m_TagString: Untagged
+  m_TagString: PeopleManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4526,6 +4526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e627b09d729bfc242bba35318daf8e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Powermode: 0
+  pointOfContact: {x: 0, y: 0, z: 0}
   sources: []
   nos_sources: 4
   people: []
@@ -6252,6 +6254,7 @@ MonoBehaviour:
   PowerMjolnir: {fileID: 1115764493}
   PowerFireball: {fileID: 106707115}
   PowerTornado: {fileID: 1403171756}
+  PeopleManager: {fileID: 0}
 --- !u!4 &1721188147
 Transform:
   m_ObjectHideFlags: 0

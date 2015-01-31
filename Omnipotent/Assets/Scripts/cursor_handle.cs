@@ -58,9 +58,11 @@ public class cursor_handle : MonoBehaviour {
 	public Power_Fireball PowerFireball;
 	public Power_Tornado PowerTornado;
 
+	public GameObject PeopleManager;
+
 	// Use this for initialization
 	void Start () {
-	
+		PeopleManager = GameObject.FindGameObjectWithTag("PeopleManager");
 	}
 	
 	// Update is called once per frame
@@ -99,6 +101,8 @@ public class cursor_handle : MonoBehaviour {
 			if ( !isOnHUD() && !isOnShelf() ) {
 				if (Input.GetMouseButtonUp(0)) {
 					// Trigger Thunder Clap
+					PeopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.THUNDER_CLAP;
+					PeopleManager.GetComponent<LoadVoxelPeople>().pointOfContact = cursor3d;
 					PowerThunderClap.Trigger( cursor3d );
 					setMode (MODE.DEFAULT);
 				}
@@ -113,7 +117,9 @@ public class cursor_handle : MonoBehaviour {
 			Cursor.SetCursor (mjolnir_cursor, Vector2.zero, CursorMode.Auto);
 			if ( !isOnHUD() && !isOnShelf() ) {
 				if (Input.GetMouseButtonUp(0)) {
-					// Trigger Mjolnir at cursor3d
+					// Trigger Mjolnir at cursor3d			
+					PeopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.MJOLNIR;
+					PeopleManager.GetComponent<LoadVoxelPeople>().pointOfContact = cursor3d;
 					PowerMjolnir.Trigger( cursor3d );
 					setMode (MODE.DEFAULT);
 				}
@@ -125,6 +131,8 @@ public class cursor_handle : MonoBehaviour {
 			if ( !isOnHUD() && !isOnShelf() ) {
 				if (Input.GetMouseButtonUp(0)) {
 					// Trigger Fireball at cursor3d
+					PeopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.FIREBALL;
+					PeopleManager.GetComponent<LoadVoxelPeople>().pointOfContact = cursor3d;
 					PowerFireball.Trigger( cursor3d );
 					setMode (MODE.DEFAULT);
 				}
@@ -136,6 +144,8 @@ public class cursor_handle : MonoBehaviour {
 			if ( !isOnHUD() && !isOnShelf() ) {
 				if (Input.GetMouseButtonUp(0)) {
 					// Trigger Tornado at cursor3d
+					PeopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.TORNADO;
+					PeopleManager.GetComponent<LoadVoxelPeople>().pointOfContact = cursor3d;
 					PowerTornado.Trigger( cursor3d );
 					setMode (MODE.DEFAULT);
 				}
