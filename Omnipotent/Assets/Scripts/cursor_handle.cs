@@ -6,7 +6,7 @@ public class cursor_handle : MonoBehaviour {
 
 	public Camera camera;
 
-	private Vector3 cursor3d;
+	public Vector3 cursor3d;
 	[Header("Cursors")]
 	public Texture2D normal;
 	public Texture2D closed;
@@ -59,7 +59,7 @@ public class cursor_handle : MonoBehaviour {
 	public Power_Tornado PowerTornado;
 
 	public GameObject PeopleManager;
-
+	public GameObject currentLevel;
 	// Use this for initialization
 	void Start () {
 		PeopleManager = GameObject.FindGameObjectWithTag("PeopleManager");
@@ -120,6 +120,10 @@ public class cursor_handle : MonoBehaviour {
 					// Trigger Mjolnir at cursor3d			
 					PeopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.MJOLNIR;
 					PeopleManager.GetComponent<LoadVoxelPeople>().pointOfContact = cursor3d;
+					if(currentLevel != null){
+						currentLevel.GetComponent<Level0script>().Powermode = Level0script.MODE.MJOLNIR;
+						currentLevel.GetComponent<Level0script>().hit3DLoc = cursor3d;
+					}
 					PowerMjolnir.Trigger( cursor3d );
 					setMode (MODE.DEFAULT);
 				}
@@ -133,6 +137,10 @@ public class cursor_handle : MonoBehaviour {
 					// Trigger Fireball at cursor3d
 					PeopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.FIREBALL;
 					PeopleManager.GetComponent<LoadVoxelPeople>().pointOfContact = cursor3d;
+					if(currentLevel != null){
+						currentLevel.GetComponent<Level0script>().Powermode = Level0script.MODE.FIREBALL;
+						currentLevel.GetComponent<Level0script>().hit3DLoc = cursor3d;
+					}
 					PowerFireball.Trigger( cursor3d );
 					setMode (MODE.DEFAULT);
 				}
@@ -146,6 +154,10 @@ public class cursor_handle : MonoBehaviour {
 					// Trigger Tornado at cursor3d
 					PeopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.TORNADO;
 					PeopleManager.GetComponent<LoadVoxelPeople>().pointOfContact = cursor3d;
+					if(currentLevel != null){
+						currentLevel.GetComponent<Level0script>().Powermode = Level0script.MODE.TORNADO;
+						currentLevel.GetComponent<Level0script>().hit3DLoc = cursor3d;
+					}
 					PowerTornado.Trigger( cursor3d );
 					setMode (MODE.DEFAULT);
 				}

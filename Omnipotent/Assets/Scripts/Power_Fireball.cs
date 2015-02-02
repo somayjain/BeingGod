@@ -27,7 +27,7 @@ public class Power_Fireball : MonoBehaviour {
 			GetComponent<Button> ().interactable = false;
 		else if (cursor.mode == cursor_handle.MODE.DEFAULT)
 			GetComponent<Button> ().interactable = true;
-		Debug.Log(time_left.ToString());
+		//Debug.Log(time_left.ToString());
 		if (time_left <= 0.0f) {
 			time_left = time;
 			active = false;
