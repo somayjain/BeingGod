@@ -11,8 +11,8 @@ GameObject:
   - 114: {fileID: 11414756}
   - 82: {fileID: 8209358}
   m_Layer: 0
-  m_Name: Level0
-  m_TagString: Untagged
+  m_Name: ZombieManager
+  m_TagString: ZombieManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 114756}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bd5450a5fbf3c8409382b9e689a64f6, type: 3}
+  m_Script: {fileID: 11500000, guid: a7a0d2c206943c946b4dbd4e4a219f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animalsList:
@@ -104,10 +104,14 @@ MonoBehaviour:
   - chr_zombie3
   - chr_zombie4
   ZombieList: []
+  destList: []
   dest: []
   nos_dest: 4
   nosZombies: 0
+  updateSources: 0
+  hit3DLoc: {x: 0, y: 0, z: 0}
   Powermode: 0
+  allZombiesDead: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

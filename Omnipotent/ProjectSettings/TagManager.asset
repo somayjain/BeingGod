@@ -5,10 +5,10 @@ TagManager:
   tags:
   - Tornado
   - RainParticles
-  - source1
-  - source0
-  - source2
-  - source3
+  - source
+  - person
+  - zombie
+  - ZombieManager
   - Clouds
   - PLANE
   - FireBALL
@@ -19,6 +19,7 @@ TagManager:
   - TDOWN
   - PeopleManager
   - Hand
+  - Building
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

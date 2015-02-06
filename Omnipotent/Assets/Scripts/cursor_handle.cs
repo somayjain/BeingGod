@@ -121,8 +121,8 @@ public class cursor_handle : MonoBehaviour {
 					PeopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.MJOLNIR;
 					PeopleManager.GetComponent<LoadVoxelPeople>().pointOfContact = cursor3d;
 					if(currentLevel != null){
-						currentLevel.GetComponent<Level0script>().Powermode = Level0script.MODE.MJOLNIR;
-						currentLevel.GetComponent<Level0script>().hit3DLoc = cursor3d;
+						currentLevel.GetComponent<ZombieManager>().Powermode = ZombieManager.MODE.MJOLNIR;
+						currentLevel.GetComponent<ZombieManager>().hit3DLoc = cursor3d;
 					}
 					PowerMjolnir.Trigger( cursor3d );
 					setMode (MODE.DEFAULT);
@@ -138,8 +138,8 @@ public class cursor_handle : MonoBehaviour {
 					PeopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.FIREBALL;
 					PeopleManager.GetComponent<LoadVoxelPeople>().pointOfContact = cursor3d;
 					if(currentLevel != null){
-						currentLevel.GetComponent<Level0script>().Powermode = Level0script.MODE.FIREBALL;
-						currentLevel.GetComponent<Level0script>().hit3DLoc = cursor3d;
+						currentLevel.GetComponent<ZombieManager>().Powermode = ZombieManager.MODE.FIREBALL;
+						currentLevel.GetComponent<ZombieManager>().hit3DLoc = cursor3d;
 					}
 					PowerFireball.Trigger( cursor3d );
 					setMode (MODE.DEFAULT);
@@ -155,8 +155,8 @@ public class cursor_handle : MonoBehaviour {
 					PeopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.TORNADO;
 					PeopleManager.GetComponent<LoadVoxelPeople>().pointOfContact = cursor3d;
 					if(currentLevel != null){
-						currentLevel.GetComponent<Level0script>().Powermode = Level0script.MODE.TORNADO;
-						currentLevel.GetComponent<Level0script>().hit3DLoc = cursor3d;
+						currentLevel.GetComponent<ZombieManager>().Powermode = ZombieManager.MODE.TORNADO;
+						currentLevel.GetComponent<ZombieManager>().hit3DLoc = cursor3d;
 					}
 					PowerTornado.Trigger( cursor3d );
 					setMode (MODE.DEFAULT);
