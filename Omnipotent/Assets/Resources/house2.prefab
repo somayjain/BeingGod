@@ -26,9 +26,10 @@ GameObject:
   - 33: {fileID: 3342406}
   - 23: {fileID: 2342406}
   - 208: {fileID: 20842406}
+  - 65: {fileID: 6556634}
   m_Layer: 0
   m_Name: house2
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -40,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106840}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 1.34000003, y: -6.21999979, z: .200000003}
+  m_LocalPosition: {x: -2.32999992, y: -6.78000021, z: .200000003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 442406}
@@ -53,7 +54,7 @@ Transform:
   m_GameObject: {fileID: 142406}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
   m_LocalPosition: {x: 48.2000008, y: 0, z: 62.0999985}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 406840}
   m_Father: {fileID: 0}
@@ -85,6 +86,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142406}
   m_Mesh: {fileID: 4300000, guid: 076f72ca35d50477a874e85ef31cf83a, type: 3}
+--- !u!65 &6556634
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 142406}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.19999981, y: 6.30000019, z: 2.4000001}
+  m_Center: {x: -.149999976, y: 0, z: 1.1500001}
 --- !u!208 &20842406
 NavMeshObstacle:
   m_ObjectHideFlags: 1

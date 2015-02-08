@@ -9,6 +9,9 @@ public class LevelController : MonoBehaviour {
 	public GameObject buildingManager;
 	public GameObject peopleManager;
 
+	public bool zombieStatus ;
+	public int humanStatus ;
+	public int houseStatus ;
 
 	public List<string>currentPower = new List<string>();
 	//Power Chart
@@ -36,11 +39,11 @@ public class LevelController : MonoBehaviour {
 
 	void initMinReqs(int level){
 		int nosZombies = level * Random.Range (5,zombies2Kill);
-		int nosHouses = level * Random.Range (1, minHouses2Build);
+		int nosHouses = level * Random.Range (1,minHouses2Build);
 
 		zombieManager.GetComponent<ZombieManager> ().initZombies (nosZombies);
 		//housemanager.init(nosHouses)
-		buildingManager.GetComponent<houseManager> ().nosHouses = level * minHouses2Build;
+		minHouses2Build = level * minHouses2Build;
 
 	}
 
@@ -57,14 +60,15 @@ public class LevelController : MonoBehaviour {
 		//init Person manager
 		peopleManager = GameObject.FindGameObjectWithTag ("PeopleManager");
 		int nosPeople = currentLevel * Random.Range (10,humans2create);
-		peopleManager.GetComponent<LoadVoxelPeople> ().initPerson (nosPeople);
+		//peopleManager.GetComponent<LoadVoxelPeople> ().initPerson (nosPeople);
+
+		buildingManager = GameObject.FindGameObjectWithTag ("Building");
 
 		// Init Zombie manager
 		zombieManager = (GameObject)Instantiate (Resources.Load ("ZombieManager"), gameObject.transform.position, Quaternion.identity) as GameObject;
 		zombieManager.transform.parent = transform;
 		GameObject.FindGameObjectWithTag("Hand").GetComponent<cursor_handle>().currentLevel = zombieManager;
 		buildingManager = GameObject.FindGameObjectWithTag ("Building");
-		initMinReqs (currentLevel);
 	}
 
 	public void setLevel(int level){
@@ -75,11 +79,50 @@ public class LevelController : MonoBehaviour {
 
 	}
 
+
+	private void resetLevel(){
+		zombieManager.GetComponent<ZombieManager> ().deleteZombie ();
+		if (currentLevel > 1) {
+						int nosPeople = currentLevel * Random.Range (10, humans2create);
+						peopleManager.GetComponent<LoadVoxelPeople> ().initPerson (nosPeople);
+						initMinReqs (currentLevel);
+				}
+	}
+
 	// Update is called once per frame
 	void Update () {
-		bool zombieStatus = zombieManager.GetComponent<ZombieManager> ().allZombiesDead;
+		zombieStatus = zombieManager.GetComponent<ZombieManager> ().allZombiesDead;
+		humanStatus = peopleManager.GetComponent<LoadVoxelPeople> ().people.Count;
+		houseStatus = buildingManager.GetComponent<houseManager> ().nosHouses;
 		// bool houseStatus = getstatus
-		if (zombieStatus /*&& houseStatus*/  && currentLevel <=3) {
+
+		if (currentLevel == 1) {
+			if(buildingManager.GetComponent<houseManager>().nosHouses == minHouses2Build){
+			int nosPeople = currentLevel * Random.Range (10,humans2create);
+			peopleManager.GetComponent<LoadVoxelPeople> ().initPerson (nosPeople);
+				currentLevel++;
+				initMinReqs(currentLevel);
+				return;
+			}
+
+		}
+
+		if (currentLevel > 1) {
+
+			if(humanStatus == 0){
+				resetLevel();
+			}
+			if(houseStatus == 0){
+				currentLevel=1;
+				resetLevel();
+			}
+		}
+
+		if (currentLevel == 2) {
+			//conditions to check level 2 criterias		
+		}
+
+		if (zombieStatus /*&& houseStatus*/  && currentLevel ==3) {
 			currentLevel++;
 			initMinReqs(currentLevel);
 		}else{

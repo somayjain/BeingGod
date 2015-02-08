@@ -15,7 +15,9 @@ public class camera_handle : MonoBehaviour {
 	public float turnSpeed = 35.0f;			// Speed of camera turning when mouse moves in along an axis
 	public float panSpeed = 360.0f;			// Speed of the camera when being panned
 	public float zoomSpeed = 500.0f;		// Speed of the camera going back and forth
-	
+
+	public float zoomOut = 100.0f;
+
 	public float turnDrag = 5.0f;			// RigidBody Drag when rotating camera
 	public float panDrag = 3.5f;			// RigidBody Drag when panning camera
 	public float zoomDrag = 3.3f;			// RigidBody Drag when zooming camera
@@ -85,13 +87,13 @@ public class camera_handle : MonoBehaviour {
 
 		// Get the mouse scroll
 		// Debug.Log(Input.mouseScrollDelta.ToString());
-		if (Input.mouseScrollDelta.magnitude == 0 || ((transform.position.y <= 5.0f && Input.mouseScrollDelta.y >= 0) || (transform.position.y >= 45.0f && Input.mouseScrollDelta.y <= 0)))
+		if (Input.mouseScrollDelta.magnitude == 0 || ((transform.position.y <= 5.0f && Input.mouseScrollDelta.y >= 0) || (transform.position.y >= zoomOut && Input.mouseScrollDelta.y <= 0)))
 						isZooming = false;
 				else
 						isZooming = true;
 
 		Vector3 cameraPosition = transform.position;
-		cameraPosition.y = Mathf.Clamp (transform.position.y, 5.0f, 45.0f);
+		cameraPosition.y = Mathf.Clamp (transform.position.y, 5.0f, zoomOut);
 		transform.position = cameraPosition;
 	}
 	
@@ -164,7 +166,7 @@ public class camera_handle : MonoBehaviour {
 			/* TODO: 
 			 * Closer the camera, more the pan speed.
 			 */
-			if ((Camera.main.transform.position.y < 5.0f && Input.mouseScrollDelta.y >= 0) || (Camera.main.transform.position.y > 45.0f && Input.mouseScrollDelta.y <= 0))
+			if ((Camera.main.transform.position.y < 5.0f && Input.mouseScrollDelta.y >= 0) || (Camera.main.transform.position.y > zoomOut && Input.mouseScrollDelta.y <= 0))
 				return;
 
 			// Get mouse displacement vector from original to current position

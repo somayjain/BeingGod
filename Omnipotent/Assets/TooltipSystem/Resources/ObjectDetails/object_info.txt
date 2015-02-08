@@ -1,0 +1,7 @@
+[ob]Warrior
+[id]0
+[d]An Interesting Warrior[5]
+
+[ob]Magician
+[id]1
+[d]A Magical Fello[5]

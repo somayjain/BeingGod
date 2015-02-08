@@ -17,7 +17,7 @@ public class ZombieNavAgent : MonoBehaviour {
 	    agent = (NavMeshAgent)gameObject.AddComponent("NavMeshAgent");
 		agent = (NavMeshAgent)gameObject.GetComponent("NavMeshAgent");
 		agent.SetDestination(target);
-		agent.speed = 0.5f;
+		agent.speed = 1.5f;
 		targetReached = false;
 	}
 

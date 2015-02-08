@@ -22,6 +22,7 @@ public class NavAgentMovement : MonoBehaviour {
 		agent = GetComponent<NavMeshAgent> ();
 		agent.SetDestination(target);
 		agent.stoppingDistance = Random.Range (0, 10);
+		agent.speed += 2.0f;
 		defaultSpeed = agent.speed;
 
 

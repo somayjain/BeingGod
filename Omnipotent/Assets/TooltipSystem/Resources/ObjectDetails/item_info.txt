@@ -1,0 +1,29 @@
+[it]Sword of Truth[4]
+[id]0
+[s]60 - 85 Damage
+[s]+10 Strength
+[s]+15 Wisdom
+[s]+30 Mana
+[s]+30 Health
+[d]Effect: Has a chance to banish beasts.[2]
+[d]A Sword of Truth.[5]
+
+[it]Staff of Light[3]
+[id]1
+[s]25 - 56 Damage
+[s]+10 Intelligence
+[s]+20 Wisdom
+[s]+30 Mana
+[d]Effect: Has a chance to heal the wielder.[2]
+[d]A staff of magical properties.[5]
+
+[it]Robe of Power[4]
+[id]2
+[s]20 Armor
+[s]+20 Intelligence
+[s]+10 Wisdom
+[s]+50 Mana
+[s]+25 Health
+[d]Use: Restores Mana By Consuming Health.[2]
+[d]Effect: Has a Chance to Increase Intelligence.[2]
+[d]A Robe of Intense Power.[5]

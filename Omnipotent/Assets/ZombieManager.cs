@@ -9,7 +9,7 @@ public class ZombieManager : MonoBehaviour {
 	public int nos_dest=4; 
 	public int nosZombies;
 	public bool updateSources = false;
-
+	public List<Vector3> zombSource = new List<Vector3>();
 
 	public Vector3 hit3DLoc;
 
@@ -19,7 +19,7 @@ public class ZombieManager : MonoBehaviour {
 
 
 	double tornadoRange = 10.0f;
-	double rayPowRange = 2.0f;
+	double rayPowRange = 4.0f;
 
 	public enum MODE {
 		DEFAULT,
@@ -37,6 +37,12 @@ public class ZombieManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		GameObject [] zSource = GameObject.FindGameObjectsWithTag("Zsource");
+		foreach (GameObject zS in zSource) {
+			zombSource.Add(zS.transform.position);
+		}
+
 	}
 
 	public void updateDest(){
@@ -47,6 +53,14 @@ public class ZombieManager : MonoBehaviour {
 		}
 	}
 
+	public void deleteZombie(){
+		int nosZombs = ZombieList.Count;
+
+		for (int i=0; i<nosZombs; i++) {
+			Destroy(ZombieList[i]);
+		}
+		ZombieList.Clear ();
+	}
 
 	public void addZombie(Vector3 spawnLoc){
 		int rand_indx = Random.Range (0,nos_dest);
@@ -74,7 +88,7 @@ public class ZombieManager : MonoBehaviour {
 			int rand_indx = Random.Range (0,nos_dest);
 			Vector3 targetLoc = dest[rand_indx];
 			int deltaVal = Random.Range(-10,10);
-			Vector3 sourceLoc = new Vector3(gameObject.transform.position.x+deltaVal+i,1,gameObject.transform.position.z+deltaVal);
+			Vector3 sourceLoc = zombSource[Random.Range(0,zombSource.Count)];
 			int rand_chr = Random.Range(0,animalsList.Count);
 			GameObject obs = (GameObject)Instantiate (Resources.Load ("prefabs/"+animalsList[rand_chr]), sourceLoc,	Quaternion.identity) as GameObject;
 			obs.name = animalsList[rand_chr];
