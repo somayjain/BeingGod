@@ -25,14 +25,14 @@ public class Plane_Collision_Trigger : MonoBehaviour {
 			audio.PlayOneShot(audioclip);
 			
 //			DestroyObject(other.gameObject);
-			StartCoroutine(W2SnD());	//Wait for 2 Seconds and Destroy
+			StartCoroutine(W2SnD(other.gameObject));	//Wait for 2 Seconds and Destroy
 		}
 	}
 	
-	IEnumerator W2SnD()
+	IEnumerator W2SnD(GameObject trail)
 	{
 		yield return new WaitForSeconds(3);
 		Explosion.GetComponent<ParticleEmitter> ().emit = false;
-//		DestroyObject(Explosion);
+		DestroyObject(trail);
 	}
 }

@@ -17,6 +17,8 @@ public class Power_GMBC : MonoBehaviour {
 			GetComponent<Button> ().interactable = false;
 		else if (cursor.mode == cursor_handle.MODE.DEFAULT)
 			GetComponent<Button> ().interactable = true;
+
+//		UpdateLast ();
 	}
 	
 	public void OnClick () {

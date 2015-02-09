@@ -2,23 +2,26 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class Power_Fireball : MonoBehaviour {
+public class Power_Fireball : Powers {
 	
-	public cursor_handle cursor;
+//	public cursor_handle cursor;
 	public GameObject Fireball;
-	
-	public float time = 10.0f;
-	private float time_left = 0.0f;
-	private bool active = false;
-	private bool emit = false;
 
 	public float Fireball_height = 30.0f;
 
-	public cursor_handle.MODE cursor_mode = cursor_handle.MODE.FIREBALL;
+//	public float Cooldown = 10.0f;
+//	public float CastTime = 10.0f;
+//	
+//	private float time_left = 0.0f;
+//	private bool refresh = false;
+//	private bool active = false;
+	private bool emit = false;
 	
 	// Use this for initialization
 	void Start () {
-		time_left = time;
+		enabled = true;
+		time_left = Cooldown;
+		refresh = true;
 	}
 	
 	// Update is called once per frame
@@ -28,21 +31,36 @@ public class Power_Fireball : MonoBehaviour {
 		else if (cursor.mode == cursor_handle.MODE.DEFAULT)
 			GetComponent<Button> ().interactable = true;
 		//Debug.Log(time_left.ToString());
-		if (time_left <= 0.0f) {
-			time_left = time;
+
+		if ( !enabled )	return;
+
+		if (active && time_left <= Cooldown - CastTime) {
 			active = false;
-//			DestroyObject(Fireball.transform.GetChild(0).gameObject);// Explosion);
 			Fireball.SetActive (active);
-		} else if (active)
-			time_left -= Time.deltaTime;
+		}
+
+		if (time_left <= 0.0f) {
+			time_left = Cooldown;
+			refresh = true;
+		}
+
+		UpdateLast ();
 	}
 	
 	public void Trigger (Vector3 loc) {
+		if ( !enabled )	return;
+
 		if (time_left <= 0.0f) {
-			time_left = time;
-		} else if (!active) {
+			time_left = Cooldown;
+			refresh = true;
+		}
+
+		if ( refresh ) {
+			refresh = false;
 			active = true;
-			time_left = time;
+			time_left = Cooldown;
+
+			location = loc;
 
 			Fireball.transform.position = loc;
 			Fireball.SetActive (active);
@@ -55,6 +73,6 @@ public class Power_Fireball : MonoBehaviour {
 	}
 	
 	public void OnClick () {
-		cursor.setMode (cursor_mode);
+		cursor.setMode (cursor_handle.MODE.FIREBALL);
 	}
 }
