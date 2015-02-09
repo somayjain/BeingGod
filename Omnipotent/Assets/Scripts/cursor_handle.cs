@@ -212,7 +212,56 @@ public class cursor_handle : MonoBehaviour {
 				}
 	}
 	public void soundFire(Trigger trgr){
-		setMode (MODE.MJOLNIR);
+		if (!isOnHUD () && !isOnShelf ()) {
+			setMode (MODE.FIREBALL);
+			PowerFireball.Trigger (cursor3d);
+			setMode (MODE.DEFAULT);
+		}
 		Debug.Log ("I heard Fire");
+	}
+	public void soundClap(Trigger trgr){
+		setMode (MODE.THUNDER_CLAP);
+		if ( !isOnHUD() && !isOnShelf() ) {
+			// Trigger Thunder Clap
+			PeopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.THUNDER_CLAP;
+			PeopleManager.GetComponent<LoadVoxelPeople>().pointOfContact = cursor3d;
+			PowerThunderClap.Trigger( cursor3d );
+			setMode (MODE.DEFAULT);
+		}
+		Debug.Log ("I heard Clap");
+		setMode (MODE.DEFAULT);
+	}
+	public void soundBolt(Trigger trgr){
+		setMode (MODE.MJOLNIR);
+		if (!isOnHUD () && !isOnShelf ()) {
+			// Trigger Mjolnir at cursor3d			
+//			PeopleManager.GetComponent<LoadVoxelPeople> ().Powermode = LoadVoxelPeople.MODE.MJOLNIR;
+//			PeopleManager.GetComponent<LoadVoxelPeople> ().pointOfContact = cursor3d;
+//			if (currentLevel != null) {
+//				currentLevel.GetComponent<ZombieManager> ().Powermode = ZombieManager.MODE.MJOLNIR;
+//				currentLevel.GetComponent<ZombieManager> ().hit3DLoc = cursor3d;
+//			}
+			PowerMjolnir.Trigger (cursor3d);
+		}
+		setMode (MODE.DEFAULT);
+		Debug.Log ("I heard bolt");
+	}
+	public void soundTornado(Trigger trgr) {
+		if ( !isOnHUD() && !isOnShelf() ) {
+			setMode(MODE.TORNADO);
+			// Trigger Tornado at cursor3d
+			PeopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.TORNADO;
+			PeopleManager.GetComponent<LoadVoxelPeople>().pointOfContact = cursor3d;
+			if(currentLevel != null){
+				currentLevel.GetComponent<ZombieManager>().Powermode = ZombieManager.MODE.TORNADO;
+				currentLevel.GetComponent<ZombieManager>().hit3DLoc = cursor3d;
+			}
+			PowerTornado.Trigger( cursor3d );
+			setMode (MODE.DEFAULT);
+		}
+		Debug.Log ("I heard Tornado");
+	}
+	public void HandDetected (Trigger trgr) {
+
 	}
 }

@@ -171,12 +171,8 @@ GameObject:
   - 114: {fileID: 76940604}
   - 114: {fileID: 76940615}
   - 114: {fileID: 76940627}
-  - 114: {fileID: 76940618}
-  - 114: {fileID: 76940625}
-  - 114: {fileID: 76940616}
   - 114: {fileID: 76940626}
   - 114: {fileID: 76940617}
-  - 114: {fileID: 76940619}
   m_Layer: 0
   m_Name: Eye of God
   m_TagString: MainCamera
@@ -684,22 +680,6 @@ MonoBehaviour:
   Enabled: 1
   FoldoutOpen: 0
   AssociatedAction: {fileID: 0}
---- !u!114 &76940616
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 76940589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46106f3ff9ce7f94e8d14c4e7375074c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ActionOwner: {fileID: 76940625}
-  FriendlyName: Always True
-  Enabled: 1
-  FoldoutOpen: 0
-  AssociatedAction: {fileID: 0}
 --- !u!114 &76940617
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -716,68 +696,9 @@ MonoBehaviour:
   Enabled: 1
   FoldoutOpen: 1
   AssociatedAction: {fileID: 0}
-  FacialExpression: 4
-  FireOverIntensity: 30
-  FaceIndex: 0
---- !u!114 &76940618
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 76940589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e33140781a3e92d40add2490c4ce1fb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ActionOwner: {fileID: 76940625}
-  ErrorDetected: 0
-  FriendlyName: Event Source
-  Rules:
-  - {fileID: 76940619}
-  - {fileID: 76940616}
-  TriggerAttributeName: EventTriggerAtt
-  FoldoutOpen: 1
-  AssociatedAction: {fileID: 0}
-  Source: 
-  Success: 0
---- !u!114 &76940619
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 76940589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48d9f523ea09ab6498166446a0d7f5e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ActionOwner: {fileID: 76940625}
-  FriendlyName: Facial Expression Lost
-  Enabled: 0
-  FoldoutOpen: 1
-  AssociatedAction: {fileID: 0}
   FacialExpression: 6
   FireOverIntensity: 30
   FaceIndex: 0
-  LostThreshold: .75
---- !u!114 &76940625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 76940589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3396deaed274ea7499d8acd51f450bbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SupportedTriggers:
-  - {fileID: 76940618}
-  CustomTag: 
-  CustomActionId: 5
-  GameObjects:
-  - {fileID: 2112777166}
 --- !u!114 &76940626
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -815,7 +736,7 @@ MonoBehaviour:
   CustomTag: 
   CustomActionId: 6
   GameObjects:
-  - {fileID: 2112777166}
+  - {fileID: 967378842}
 --- !u!1 &113825439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1519,11 +1440,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: ef8cee47242c1944080e9cf6720da939, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -8
+      value: 23.3999996
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ef8cee47242c1944080e9cf6720da939, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 10
+      value: 26.8999996
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ef8cee47242c1944080e9cf6720da939, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1587,7 +1508,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: ef8cee47242c1944080e9cf6720da939, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef8cee47242c1944080e9cf6720da939, type: 2}
@@ -1953,6 +1874,9 @@ GameObject:
   - 4: {fileID: 825608608}
   - 114: {fileID: 825608607}
   - 154: {fileID: 825608606}
+  - 114: {fileID: 825608611}
+  - 114: {fileID: 825608610}
+  - 114: {fileID: 825608609}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -2009,6 +1933,60 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &825608609
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 825608605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46106f3ff9ce7f94e8d14c4e7375074c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 825608611}
+  FriendlyName: Always True
+  Enabled: 1
+  FoldoutOpen: 0
+  AssociatedAction: {fileID: 0}
+--- !u!114 &825608610
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 825608605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33140781a3e92d40add2490c4ce1fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 825608611}
+  ErrorDetected: 0
+  FriendlyName: Event Source
+  Rules:
+  - {fileID: 825608609}
+  TriggerAttributeName: EventTriggerAtt
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  Source: 
+  Success: 0
+--- !u!114 &825608611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 825608605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3396deaed274ea7499d8acd51f450bbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SupportedTriggers:
+  - {fileID: 825608610}
+  CustomTag: 
+  CustomActionId: 1
+  GameObjects:
+  - {fileID: 967378842}
 --- !u!1 &891573382
 GameObject:
   m_ObjectHideFlags: 0
@@ -2733,9 +2711,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faith: {fileID: 1782862579}
   fear: {fileID: 739025104}
-  XP_limit: 0
-  faith_val: 0
-  fear_val: 0
+  XP_Limit: 0
+  Faith: 0
+  Fear: 0
+  Inc_Time: .5
+  Faith_Degradation: 0
+  Fear_Degradation: 0
 --- !u!1 &1261428561
 GameObject:
   m_ObjectHideFlags: 0
@@ -3395,6 +3376,10 @@ Prefab:
       propertyPath: m_TagString
       value: Explosion
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 281d51c638f2e427898292e052c27859, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 281d51c638f2e427898292e052c27859, type: 2}
   m_RootGameObject: {fileID: 967378842}
@@ -3748,7 +3733,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!76 &2112777167
 WorldParticleCollider:
   m_ObjectHideFlags: 0
@@ -3860,7 +3845,7 @@ Transform:
   m_PrefabInternal: {fileID: 526489369}
   m_GameObject: {fileID: 2112777166}
   m_LocalRotation: {x: 0, y: 0, z: -.087155737, w: .99619472}
-  m_LocalPosition: {x: -8, y: 10, z: 0}
+  m_LocalPosition: {x: 23.3999996, y: 26.8999996, z: 0}
   m_LocalScale: {x: 1, y: .99999994, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

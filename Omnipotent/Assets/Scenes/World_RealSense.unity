@@ -1384,7 +1384,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6dffa51ac85d064fa9ee0737faa4e7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  XP: {fileID: 0}
   cursor: {fileID: 229264807}
+  Cooldown: 10
+  CastTime: 3
+  PowerType: 1
+  XP_per_NPC: 1
+  Windy: {fileID: 0}
 --- !u!114 &221968730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1547,6 +1553,9 @@ GameObject:
   - 114: {fileID: 229264815}
   - 114: {fileID: 229264814}
   - 114: {fileID: 229264813}
+  - 114: {fileID: 229264818}
+  - 114: {fileID: 229264817}
+  - 114: {fileID: 229264816}
   m_Layer: 0
   m_Name: Hand of God
   m_TagString: Untagged
@@ -1566,16 +1575,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 902344029}
+  cursor3d: {x: 0, y: 0, z: 0}
   normal: {fileID: 2800000, guid: fbe8ede4a4e058a418a376bb7ac016fb, type: 3}
   closed: {fileID: 2800000, guid: 255bf05779ce6e74c99ea2a2bf2d08cb, type: 3}
+  thunderclap_cursor: {fileID: 0}
   mjolnir_cursor: {fileID: 0}
   fireball_cursor: {fileID: 2800000, guid: 255bf05779ce6e74c99ea2a2bf2d08cb, type: 3}
   tornado_cursor: {fileID: 0}
   sphere: {fileID: 1293942760}
   mode: 0
+  PowerThunderClap: {fileID: 0}
   PowerMjolnir: {fileID: 1528907467}
   PowerFireball: {fileID: 1040109808}
   PowerTornado: {fileID: 295267796}
+  PeopleManager: {fileID: 0}
+  currentLevel: {fileID: 0}
 --- !u!114 &229264808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1749,6 +1763,63 @@ MonoBehaviour:
   - {fileID: 229264814}
   CustomTag: 
   CustomActionId: 2
+  FunctionName: soundFire
+--- !u!114 &229264816
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 229264806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26ac117756a94d14cba411c44238f89e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 229264818}
+  FriendlyName: Speech Detected
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  UpdateCommands: 0
+  SpeechCommands:
+  - Word: fire
+    Confidence: 20
+--- !u!114 &229264817
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 229264806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33140781a3e92d40add2490c4ce1fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 229264818}
+  ErrorDetected: 0
+  FriendlyName: Event Source
+  Rules:
+  - {fileID: 229264816}
+  TriggerAttributeName: EventTriggerAtt
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  Source: 
+  Success: 0
+--- !u!114 &229264818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 229264806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8ca451fae141046aaac1dc626433f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SupportedTriggers:
+  - {fileID: 229264817}
+  CustomTag: 
+  CustomActionId: 3
   FunctionName: soundFire
 --- !u!1 &235918502
 GameObject:
@@ -1955,9 +2026,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857e4266a63f87c40a87403ed04ff078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  XP: {fileID: 0}
   cursor: {fileID: 229264807}
+  Cooldown: 10
+  CastTime: 3
+  PowerType: 1
+  XP_per_NPC: 1
   Tornado: {fileID: 0}
-  time: 3
 --- !u!114 &295267797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2182,6 +2257,7 @@ GameObject:
   - 12: {fileID: 305862419}
   - 26: {fileID: 305862418}
   - 114: {fileID: 305862417}
+  - 114: {fileID: 305862422}
   - 114: {fileID: 305862416}
   m_Layer: 0
   m_Name: Small explosion
@@ -2319,6 +2395,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1971586521}
   m_RootOrder: 1
+--- !u!114 &305862422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11446110, guid: bd943c792514675e464dfc7a8c26d3e0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1802213962}
+  m_GameObject: {fileID: 305862415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a09dad89d11389ed000e82b8d76c639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeOut: 100000
+  detachChildren: 0
 --- !u!1 &313713875
 GameObject:
   m_ObjectHideFlags: 0
@@ -2492,6 +2582,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e627b09d729bfc242bba35318daf8e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Powermode: 0
+  pointOfContact: {x: 0, y: 0, z: 0}
   sources: []
   nos_sources: 4
   people: []
@@ -2696,7 +2788,7 @@ Transform:
   m_PrefabInternal: {fileID: 872428385}
   m_GameObject: {fileID: 432036786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.9354887, z: 0}
+  m_LocalPosition: {x: 0, y: 2.93548894, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 355898018}
@@ -4366,6 +4458,7 @@ MonoBehaviour:
   turnSpeed: 35
   panSpeed: 360
   zoomSpeed: 500
+  zoomOut: 100
   turnDrag: 5
   panDrag: 5
   zoomDrag: 3.29999995
@@ -4496,10 +4589,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1070d0cb5fa94d94da0b74260fb92f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  XP: {fileID: 0}
   cursor: {fileID: 229264807}
+  Cooldown: 10
+  CastTime: 3
+  PowerType: 1
+  XP_per_NPC: 1
   Fireball: {fileID: 0}
-  time: 3
-  cursor_mode: 6
+  Fireball_height: 30
 --- !u!114 &1040109809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4751,9 +4848,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faith: {fileID: 522008445}
   fear: {fileID: 1857232292}
-  XP_limit: 0
-  faith_val: 0
-  fear_val: 0
+  XP_Limit: 0
+  Faith: 0
+  Fear: 0
+  Inc_Time: .5
+  Faith_Degradation: 0
+  Fear_Degradation: 0
 --- !u!1 &1115494353
 GameObject:
   m_ObjectHideFlags: 0
@@ -5603,9 +5703,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 452b2a205fd47154bba5b10cc722b922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  XP: {fileID: 0}
   cursor: {fileID: 229264807}
+  Cooldown: 10
+  CastTime: 3
+  PowerType: 1
+  XP_per_NPC: 1
   Mjolnir: {fileID: 1115494353}
-  time: 3
 --- !u!114 &1528907468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7485,7 +7589,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c79e596dceb0cb1448e79745856c4a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  XP: {fileID: 0}
   cursor: {fileID: 229264807}
+  Cooldown: 10
+  CastTime: 3
+  PowerType: 1
+  XP_per_NPC: 1
+  ThunderClap: {fileID: 0}
 --- !u!114 &2113062159
 MonoBehaviour:
   m_ObjectHideFlags: 0

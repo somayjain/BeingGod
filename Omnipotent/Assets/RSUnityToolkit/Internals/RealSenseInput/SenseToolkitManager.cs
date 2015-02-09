@@ -62,6 +62,9 @@ namespace RSUnityToolkit
         [HideInInspector]
         public PXCMFaceData FaceModuleOutput = null;
 
+		[HideInInspector]
+		public PXCMEmotion Emotion = null;
+
         [HideInInspector]
         public PXCMHandData HandDataOutput = null;		
 
@@ -214,7 +217,8 @@ namespace RSUnityToolkit
             /* Enable modalities according to the set options*/
             if (IsSenseOptionSet(SenseOption.SenseOptionID.Face, true))
             {				            	
-				SenseManager.EnableFace();                     			
+				SenseManager.EnableFace();
+				SenseManager.EnableEmotion();
 				_senseOptions.Find( i => i.ID == SenseOption.SenseOptionID.Face).Initialized = true;
 				_senseOptions.Find( i => i.ID == SenseOption.SenseOptionID.Face).Enabled = true;
 				SetSenseOption(SenseOption.SenseOptionID.VideoColorStream);
@@ -377,6 +381,8 @@ namespace RSUnityToolkit
 				faceConfiguration.Dispose();
 
                 FaceModuleOutput = faceModule.CreateOutput();
+				Emotion = SenseManager.QueryEmotion();
+
 				
 				UnsetSenseOption(SenseOption.SenseOptionID.VideoColorStream);
             }
@@ -466,6 +472,11 @@ namespace RSUnityToolkit
                 FaceModuleOutput.Dispose();
                 FaceModuleOutput = null;
             }
+			if (Emotion != null)
+			{
+				Emotion.Dispose();
+				Emotion = null;
+			}
             if (HandDataOutput != null)
             {
                 SenseManager.PauseHand(true);
