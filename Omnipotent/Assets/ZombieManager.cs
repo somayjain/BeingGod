@@ -21,6 +21,7 @@ public class ZombieManager : MonoBehaviour {
 	double tornadoRange = 10.0f;
 	double rayPowRange = 4.0f;
 
+
 	public enum MODE {
 		DEFAULT,
 		BUILD,
@@ -46,6 +47,7 @@ public class ZombieManager : MonoBehaviour {
 	}
 
 	public void updateDest(){
+
 		destList = GameObject.FindGameObjectsWithTag ("source");
 		nos_dest = destList.Length;
 		foreach (GameObject gob in destList) {

@@ -26,7 +26,16 @@ public class LevelController : MonoBehaviour {
 		TORNADO
 	}
 	public MODE Powermode = MODE.DEFAULT;
+	public Vector3 PowerLoc = new Vector3();
 
+	//Power
+	public void setPower(MODE currentMode){
+		Powermode = currentMode;
+	}
+
+	public void setPowerLoc(Vector3 powL){
+		PowerLoc = powL;
+	}
 
 	//Levels: min requirements
 	int minHouses2Build=3 ;
