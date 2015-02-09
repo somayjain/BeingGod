@@ -314,6 +314,29 @@ public class RotationAction : BaseAction {
 				this.gameObject.transform.RotateAround(point, forwardAxis, _zRot);	
 				this.gameObject.transform.RotateAround(point, forwardAxis, _xRot);
 			}
+			else if (RotateAround == RotateAroundE.Point)
+			{
+				upAxis = Vector3.up;
+				forwardAxis = Vector3.forward;
+				Vector3 screenCenter = new Vector3(Screen.width/2,Screen.height/2);
+				
+				Ray ray = Camera.main.ScreenPointToRay(screenCenter);
+				
+				RaycastHit hit;
+				
+				if(Physics.Raycast(ray, out hit)) {
+					Debug.DrawLine(ray.origin, hit.point);
+				
+					Vector3 point = hit.point;
+					this.gameObject.transform.RotateAround(point, upAxis, _yRot);
+//					this.gameObject.transform.RotateAround(point, forwardAxis, _zRot);	
+//					this.gameObject.transform.RotateAround(point, forwardAxis, _xRot);
+//
+//					Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
+//					rigidbody.transform.RotateAround(hit.point, Vector3.up, pos.x*turnSpeed);
+				}
+				 
+			}
 
 			//Update new rotation angle
 			_rotationAngleX = _rotationAngleX + _xRot;
@@ -349,6 +372,7 @@ public class RotationAction : BaseAction {
 		WorldAxis,
 		GameObjectAxis,
 		Gameobject,
+		Point,
 	};
 	
 	#endregion

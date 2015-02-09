@@ -94,6 +94,13 @@ GameObject:
   - 114: {fileID: 5982398}
   - 114: {fileID: 5982397}
   - 114: {fileID: 5982396}
+  - 114: {fileID: 5982405}
+  - 114: {fileID: 5982404}
+  - 114: {fileID: 5982403}
+  - 114: {fileID: 5982402}
+  - 114: {fileID: 5982401}
+  - 114: {fileID: 5982400}
+  - 114: {fileID: 5982399}
   m_Layer: 0
   m_Name: Eye of God
   m_TagString: MainCamera
@@ -387,6 +394,167 @@ MonoBehaviour:
   CustomTag: 
   CustomActionId: 1
   FunctionName: dummyFaceForEmotion
+--- !u!114 &5982399
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04a9c13c9dfa1744dad9f0bd59806111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982405}
+  FriendlyName: Hand Openned
+  Enabled: 1
+  FoldoutOpen: 0
+  AssociatedAction: {fileID: 0}
+  WhichHand: 2
+  HandIndex: 0
+  ContinuousTracking: 0
+  OpennessFactor: 50
+--- !u!114 &5982400
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc36184d7c481f41b8582c3cb049b15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982405}
+  FriendlyName: Two Hands Scale and Rotate
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  DistanceThresholdX: 0
+  DistanceThresholdY: 0
+  DistanceThresholdZ: 0
+--- !u!114 &5982401
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8425e81730581264e8bc707bd5925622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982405}
+  FriendlyName: Hand Closed
+  Enabled: 1
+  FoldoutOpen: 0
+  AssociatedAction: {fileID: 0}
+  WhichHand: 2
+  HandIndex: 0
+  ContinuousTracking: 0
+  OpennessFactor: 50
+--- !u!114 &5982402
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33140781a3e92d40add2490c4ce1fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982405}
+  ErrorDetected: 0
+  FriendlyName: Stop Event
+  Rules:
+  - {fileID: 5982399}
+  TriggerAttributeName: EventTriggerAtt
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  Source: 
+  Success: 0
+--- !u!114 &5982403
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12c384f5f40c6c34d83ffeb6ad7f926c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982405}
+  ErrorDetected: 0
+  FriendlyName: Rotation Trigger
+  Rules:
+  - {fileID: 5982400}
+  TriggerAttributeName: RotationTriggerAtt
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  Source: 
+  Success: 0
+  Restart: 0
+--- !u!114 &5982404
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33140781a3e92d40add2490c4ce1fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982405}
+  ErrorDetected: 0
+  FriendlyName: Start Event
+  Rules:
+  - {fileID: 5982401}
+  TriggerAttributeName: EventTriggerAtt
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  Source: 
+  Success: 0
+--- !u!114 &5982405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 362184c31ff9b8c429957dad1c77bd2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SupportedTriggers:
+  - {fileID: 5982404}
+  - {fileID: 5982403}
+  - {fileID: 5982402}
+  CustomTag: 
+  CustomActionId: 2
+  Constraints:
+    XRotation:
+      MaxNeg: -360
+      MaxPos: 360
+    YRotation:
+      MaxNeg: -360
+      MaxPos: 360
+    ZRotation:
+      MaxNeg: -360
+      MaxPos: 360
+    Freeze:
+      X: 0
+      Y: 0
+      Z: 0
+  ContinuousRotation: 1
+  ContinuousRotationSpeed: 1.60000002
+  RotateDumpingFactor: .5
+  SmoothingFactor: 0
+  SmoothingType: 2
+  RotateAround: 4
+  RefGameObject: {fileID: 0}
 --- !u!1001 &23711185
 Prefab:
   m_ObjectHideFlags: 0
@@ -1534,7 +1702,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 179952633}
   m_LocalRotation: {x: .0871723145, y: .899590492, z: .210452527, w: -.372622669}
-  m_LocalPosition: {x: 268.06485, y: -202.023743, z: 268.778442}
+  m_LocalPosition: {x: 1206.74646, y: -839.054993, z: 1208.96753}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
