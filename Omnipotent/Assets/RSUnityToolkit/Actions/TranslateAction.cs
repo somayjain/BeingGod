@@ -109,6 +109,7 @@ public class TranslateAction : VirtualWorldBoxAction {
 	/// <summary>
 	/// Update is called once per frame.
 	/// </summary>
+	private Vector3 lastTranslate = Vector3.zero;
     void Update () 
 	{	 
 		updateVirtualWorldBoxCenter();
@@ -135,6 +136,7 @@ public class TranslateAction : VirtualWorldBoxAction {
 		}
 		
 		TranslationTrigger trgr = (TranslationTrigger)SupportedTriggers[1];
+
 		
 		if( trgr.Success )
 		{ 			
@@ -148,9 +150,20 @@ public class TranslateAction : VirtualWorldBoxAction {
 			{
 				translate = _translationSmoothingUtility.ProcessSmoothing(SmoothingType, SmoothingFactor, translate);
 			}
-			
-			Vector3 vec = this.gameObject.transform.localPosition + translate;
-			
+
+			// Our code
+			if (translate.x < 1 && translate.x > -1)
+				translate.x = lastTranslate.x;
+			if ( translate.z < 1 && translate.z > -1 )
+				translate.z = lastTranslate.z;
+			lastTranslate = translate;
+
+			Vector3 move = ( translate.x * Vector3.ProjectOnPlane(transform.right, Vector3.up) ) + 
+				( translate.z * Vector3.ProjectOnPlane(transform.forward, Vector3.up)) ;
+
+//			Vector3 vec = this.gameObject.transform.localPosition + translate;
+			Vector3 vec = this.gameObject.transform.localPosition + move;
+
 			// Be sure we have valid values:				
 			if ( VirtualWorldBoxDimensions.x < 0 )
 			{
@@ -159,6 +172,11 @@ public class TranslateAction : VirtualWorldBoxAction {
 						
 			float left = VirtualWorldBoxCenter.x - (VirtualWorldBoxDimensions.x)/2;		
 			float right = VirtualWorldBoxCenter.x + (VirtualWorldBoxDimensions.x)/2;				
+
+			// Our code
+			Vector3 limits = ( left * Vector3.ProjectOnPlane(transform.right, Vector3.up) ) + 
+				( right * Vector3.ProjectOnPlane(transform.forward, Vector3.up)) ;
+
 			
 			if (left > this.gameObject.transform.localPosition.x)
 			{
@@ -210,7 +228,7 @@ public class TranslateAction : VirtualWorldBoxAction {
 			{
 				vec = this.gameObject.transform.parent.transform.TransformPoint(vec);
 			}
-			 
+
 			this.gameObject.rigidbody.MovePosition(vec);			
 		}
 	}
