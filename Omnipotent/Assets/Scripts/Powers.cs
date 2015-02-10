@@ -49,7 +49,7 @@ public class Powers : MonoBehaviour {
 			
 			Vector2 size = GetComponent<RectTransform> ().sizeDelta;
 			size.x *= time_left / Cooldown;
-			transform.GetChild (1).GetComponent<RectTransform> ().sizeDelta = size;
+			transform.GetChild (2).GetComponent<RectTransform> ().sizeDelta = size;
 		}
 	}
 }

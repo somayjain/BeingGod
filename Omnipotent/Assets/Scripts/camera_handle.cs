@@ -43,6 +43,10 @@ public class camera_handle : MonoBehaviour {
 		// gameObject.AddComponent<Rigidbody>();
 		// rigidbody.useGravity = false;
 	}
+
+	
+	private float prevRealTime;
+	private float thisRealTime;
 	
 	//
 	// UPDATE: For input
@@ -50,7 +54,7 @@ public class camera_handle : MonoBehaviour {
 	
 	void Update () 
 	{
-		if (cursor.isOnShelf () && !isPanning && !isRotating && !isZooming)
+		if (cursor.isOnHUD () && !isPanning && !isRotating && !isZooming)
 			return;
 
 		// == Getting Input ==
@@ -104,12 +108,23 @@ public class camera_handle : MonoBehaviour {
 		Vector3 cameraPosition = transform.position;	
 		cameraPosition.y = Mathf.Clamp (transform.position.y, zoomIn, zoomOut);
 		transform.position = cameraPosition;
+
+		prevRealTime = thisRealTime;
+		thisRealTime = Time.realtimeSinceStartup;
 	}
 	
+	public float deltaTime {
+		get {
+			if (Time.timeScale > 0f)  return  Time.deltaTime / Time.timeScale;
+			return Time.realtimeSinceStartup - prevRealTime; // Checks realtimeSinceStartup again because it may have changed since Update was called
+		}
+	}
+
 	//
 	// Fixed Update: For Physics
 	//
-	
+
+
 	void FixedUpdate()
 	{
 		if (cursor.isOnShelf () && !isPanning && !isRotating && !isZooming)
