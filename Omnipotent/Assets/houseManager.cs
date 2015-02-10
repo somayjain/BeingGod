@@ -9,7 +9,8 @@ public class houseManager : MonoBehaviour
 		private bool f_deleteHouse;
 		public ArrayList houses;
 		private Transform Buildings;
-	private int sourceId;
+		private int sourceId;
+		private GameObject house;
 
 		private class houseComparer: IComparer
 		{
@@ -37,11 +38,24 @@ public class houseManager : MonoBehaviour
 		{
 				if (!f_buildHouse) {
 						f_buildHouse = Input.GetKeyDown ("b");
+						if (f_buildHouse) {
+								string myHouseType = houseTYPE (Random.Range (0, 4));
+						
+								house = Instantiate (Resources.Load (myHouseType)) as GameObject;
+								house.transform.SetParent (Buildings);
+								house.transform.GetChild (0).gameObject.name = "source_" + sourceId.ToString ();
+								house.layer = 2;
+						}
 				}
 				if (!f_deleteHouse) {
 						f_deleteHouse = Input.GetKeyDown ("d");
 				}
 				//Debug.Log (f_buildHouse.ToString () + " " + f_deleteHouse.ToString ());
+				
+				if (f_buildHouse) {
+						buildHouse_cursor ();
+
+				}
 				if (f_buildHouse && Input.GetMouseButtonUp (0)) {
 						buildHouse ();
 						
@@ -53,37 +67,55 @@ public class houseManager : MonoBehaviour
 
 		}
 
+		void buildHouse_cursor ()
+		{
+		
+				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+				RaycastHit hit;
+				Vector3 hitPoint = new Vector3 ();
+				if (Physics.Raycast (ray, out hit)) {
+						hitPoint = hit.point;
+						house.transform.position = hitPoint;
+						house.renderer.material.color = new Color (0.8f, 0.8f, 0.8f);
+						Collider c = hit.collider;
+						if (c.tag.ToString ().CompareTo ("terrain") != 0) {  // ONLY BUILD on TERRAIN
+								Debug.Log ("Cannot build house here");
+								//Debug.Log("objectColor="+house.renderer.material.color.ToString());
+								house.renderer.material.color = Color.red;
+						}
+						if (hit.point.y > 5) { // No houses on hills
+								house.renderer.material.color = Color.red;
+						}
+				}		
+		}
+	
 		void buildHouse ()
 		{
 				f_buildHouse = false;
-
+		 
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 				RaycastHit hit;
-				Vector3 hitPoint = new Vector3();
+				Vector3 hitPoint = new Vector3 ();
 				if (Physics.Raycast (ray, out hit)) {
-					hitPoint = hit.point;
-					Collider c = hit.collider;
-					Debug.Log("hitObject type=" + c.GetType().ToString() + " tag="+ c.tag.ToString());
-					if(c.tag.ToString().CompareTo("terrain")!=0){  // ONLY BUILD on TERRAIN
-						Debug.Log("Cannot build house here");
-						return;
-					}
-					if(hit.point.y>5){ // No houses on hills
-						return;
+						hitPoint = hit.point;
 
-					}
-					//Debug.Log("hitPoint="+hitPoint.ToString());
-				}	
-				
-				//Vector3 pos = 
-				string myHouseType = houseTYPE (Random.Range (0, 4));
-				GameObject house = Instantiate (Resources.Load (myHouseType)) as GameObject;
-				house.transform.SetParent (Buildings);
-				house.transform.GetChild (0).gameObject.name = "source_" + sourceId.ToString ();
-				sourceId++;
-
+						Collider c = hit.collider;
+						Debug.Log ("hitObject type=" + c.GetType ().ToString () + " tag=" + c.tag.ToString ());
+						if (c.tag.ToString ().CompareTo ("terrain") != 0) {  // ONLY BUILD on TERRAIN
+								Debug.Log ("Cannot build house here");
+								Destroy (house);
+								return;
+						}
+						if (hit.point.y > 5) { // No houses on hills
+								Destroy (house);
+								return;
+						}
+				}		
+							
 				house.transform.position = hitPoint;//new Vector3 (-10.0f * nosHouses, 0f, 0f);
+				house.layer = 0;
 				houses.Add (house);
+				sourceId++;
 				nosHouses++;
 				Debug.Log ("Inside buildHouse=" + nosHouses.ToString () + " source.name=" + house.transform.GetChild (0).gameObject.name);
 		}
@@ -102,7 +134,7 @@ public class houseManager : MonoBehaviour
 								int index = houses.BinarySearch (foo, foo_comparer);
 								houses.RemoveAt (index);
 								//int index = houses.BinarySearch (hit.transform.gameObject);
-				Debug.Log (foo.transform.GetChild(0).name+" " +index.ToString () + " " + houses.Count.ToString ());	
+								Debug.Log (foo.transform.GetChild (0).name + " " + index.ToString () + " " + houses.Count.ToString ());	
 								Destroy (hit.transform.gameObject);
 								f_deleteHouse = false;
 						}
