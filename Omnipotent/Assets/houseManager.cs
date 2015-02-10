@@ -56,19 +56,31 @@ public class houseManager : MonoBehaviour
 		void buildHouse ()
 		{
 				f_buildHouse = false;
+
+				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+				RaycastHit hit;
+				Vector3 hitPoint = new Vector3();
+				if (Physics.Raycast (ray, out hit)) {
+					hitPoint = hit.point;
+					Collider c = hit.collider;
+					Debug.Log("hitObject type=" + c.GetType().ToString() + " tag="+ c.tag.ToString());
+					if(c.tag.ToString().CompareTo("terrain")!=0){  // ONLY BUILD on TERRAIN
+						Debug.Log("Cannot build house here");
+						return;
+					}
+					if(hit.point.y>5){ // No houses on hills
+						return;
+
+					}
+					//Debug.Log("hitPoint="+hitPoint.ToString());
+				}	
+				
 				//Vector3 pos = 
 				string myHouseType = houseTYPE (Random.Range (0, 4));
 				GameObject house = Instantiate (Resources.Load (myHouseType)) as GameObject;
 				house.transform.SetParent (Buildings);
 				house.transform.GetChild (0).gameObject.name = "source_" + sourceId.ToString ();
-		sourceId++;
-			
-				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-				RaycastHit hit;
-				Vector3 hitPoint = new Vector3();
-				if (Physics.Raycast (ray, out hit)) {
-						hitPoint = hit.point;
-				}
+				sourceId++;
 
 				house.transform.position = hitPoint;//new Vector3 (-10.0f * nosHouses, 0f, 0f);
 				houses.Add (house);

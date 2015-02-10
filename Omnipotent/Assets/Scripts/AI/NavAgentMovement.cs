@@ -11,6 +11,8 @@ public class NavAgentMovement : MonoBehaviour {
 	public float scaredRunTimer = 4.0f;
 	public float defaultSpeed;
 
+	bool powerhit = false;
+
 	public bool collisionWithZombie = false;
 
 	public float waitTimer = 5.0f;
@@ -44,18 +46,35 @@ public class NavAgentMovement : MonoBehaviour {
 
 	public void toggleScaredRun(bool scared){
 		if (scared) {
-						Debug.Log ("Run for your life!!! He seems angry!!");
+						//Debug.Log ("Run for your life!!! He seems angry!!");
 						agent.speed = defaultSpeed + 5.0f;
 				} else {
-						Debug.Log("Phew! That was close!");
+						//Debug.Log("Phew! That was close!");
 						agent.speed = defaultSpeed;
 			            scaredRunTimer = 4.0f;
 			             currentlyScared = false;
 				}
 	}
+
+	public void haltMovement(bool halt){
+		if (halt) {
+			powerhit = true;
+			agent.Stop ();
+		} else {
+			powerhit = false;
+			agent.Resume ();
+		}
+		
+	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (powerhit == true) {
+			//Debug.Log(gameObject.name+" stopping ");
+						return;
+				}
+		//Debug.Log (powerhit + " ");
+
 		if(currentlyScared)
 		scaredRunTimer -= Time.fixedDeltaTime;
 		if (scaredRunTimer <= 0) {
@@ -65,21 +84,23 @@ public class NavAgentMovement : MonoBehaviour {
 						}
 				}
 
+
+
 		if (agent.velocity.magnitude <= 0.2f) {
-						Debug.Log ("Stopped1");
+						//Debug.Log ("Stopped1");
 						waitTimer -= Time.fixedDeltaTime;
 						//Debug.Log("Stopped2");
 						if (waitTimer <= 0.0f || !agent.pathPending) {
 								if (!agent.pathPending){
 										//comments
-										Debug.Log ("Stopped at dest");
+										//Debug.Log ("Stopped at dest");
 										targetReached = true;
 					                    waitTimer = 5.0f;
 								}
 								if(waitTimer <= 0.0f)
 								{
 					                    waitTimer = 5.0f;
-										Debug.Log ("villager stuck");
+										//Debug.Log ("villager stuck");
 								}
 								
 						}

@@ -12,6 +12,7 @@ public class Powers : MonoBehaviour {
 
 	public XP_handle XP;
 	public cursor_handle cursor;
+	public LevelController Levelcontroller;
 
 	public float Cooldown = 10.0f;
 	public float CastTime = 3.0f;

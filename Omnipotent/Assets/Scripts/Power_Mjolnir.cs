@@ -64,6 +64,9 @@ public class Power_Mjolnir : Powers {
 		}
 
 		if ( refresh ) {
+			Levelcontroller.Powermode = LevelController.MODE.MJOLNIR;
+			Levelcontroller.PowerLoc = loc;
+
 			refresh = false;
 			active = true;
 			time_left = Cooldown;

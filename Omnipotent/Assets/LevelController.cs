@@ -26,16 +26,10 @@ public class LevelController : MonoBehaviour {
 		TORNADO
 	}
 	public MODE Powermode = MODE.DEFAULT;
+
 	public Vector3 PowerLoc = new Vector3();
-
-	//Power
-	public void setPower(MODE currentMode){
-		Powermode = currentMode;
-	}
-
-	public void setPowerLoc(Vector3 powL){
-		PowerLoc = powL;
-	}
+	public Vector3 TornadoLoc = new Vector3 ();
+	
 
 	//Levels: min requirements
 	int minHouses2Build=3 ;
@@ -84,10 +78,6 @@ public class LevelController : MonoBehaviour {
 		currentLevel = level;
 	}
 
-	public void setPower(string power, Vector3 powerLocation){
-
-	}
-
 
 	private void resetLevel(){
 		zombieManager.GetComponent<ZombieManager> ().deleteZombie ();
@@ -98,8 +88,31 @@ public class LevelController : MonoBehaviour {
 				}
 	}
 
+
+	void setCurrentPower(){
+		if (MODE.FIREBALL == Powermode) {
+			zombieManager.GetComponent<ZombieManager>().Powermode = ZombieManager.MODE.FIREBALL;
+			peopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.FIREBALL;
+		}
+		if (MODE.TORNADO == Powermode) {
+			zombieManager.GetComponent<ZombieManager>().Powermode = ZombieManager.MODE.TORNADO;
+			peopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.TORNADO;
+		}
+		if (MODE.MJOLNIR == Powermode) {
+			zombieManager.GetComponent<ZombieManager>().Powermode = ZombieManager.MODE.MJOLNIR;
+			peopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.MJOLNIR;
+		}
+		if (MODE.THUNDER_CLAP == Powermode) {
+			zombieManager.GetComponent<ZombieManager>().Powermode = ZombieManager.MODE.THUNDER_CLAP;
+			peopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.THUNDER_CLAP;
+		}
+		Powermode = MODE.DEFAULT;	
+	}
+
 	// Update is called once per frame
 	void Update () {
+
+		setCurrentPower ();
 		zombieStatus = zombieManager.GetComponent<ZombieManager> ().allZombiesDead;
 		humanStatus = peopleManager.GetComponent<LoadVoxelPeople> ().people.Count;
 		houseStatus = buildingManager.GetComponent<houseManager> ().nosHouses;

@@ -28,7 +28,7 @@ public class ZombieNavAgent : MonoBehaviour {
 	public void haltMovement(bool halt){
 		if (halt) {
 						powerhit = true;
-						agent.Stop (false);
+						agent.Stop ();
 				} else {
 			            powerhit = false;
 						agent.Resume ();
@@ -41,7 +41,9 @@ public class ZombieNavAgent : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		currentCursor3D = getCursorLoc ();
+		if (powerhit == true) {
+			return;
+		}
 
 
 		//Stopping on touch
@@ -62,14 +64,14 @@ public class ZombieNavAgent : MonoBehaviour {
 			if (waitTimer <= 0.0f || !agent.pathPending) {
 				if (!agent.pathPending){
 					//comments
-					Debug.Log ("Stopped at dest, destroy !!");
+					//Debug.Log ("Stopped at dest, destroy !!");
 					targetReached = true;
 					waitTimer = 5.0f;
 				}
 				if(waitTimer <= 0.0f)
 				{
 					waitTimer = 5.0f;
-					Debug.Log ("zombie stuck!");
+					//Debug.Log ("zombie stuck!");
 				}
 				
 			}
@@ -77,12 +79,6 @@ public class ZombieNavAgent : MonoBehaviour {
 			waitTimer = 5.0f;
 		}
 
-		if (powerhit == true) {
-			timeToHalt -= Time.fixedDeltaTime;
-			if(timeToHalt<= 0.0f){
-				haltMovement(false);
-				timeToHalt = 5.0f;
-			}
-		}
+
 	}
 }

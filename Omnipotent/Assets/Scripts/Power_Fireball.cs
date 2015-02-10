@@ -56,6 +56,9 @@ public class Power_Fireball : Powers {
 		}
 
 		if ( refresh ) {
+			Levelcontroller.Powermode = LevelController.MODE.FIREBALL;
+			Levelcontroller.PowerLoc = loc;
+
 			refresh = false;
 			active = true;
 			time_left = Cooldown;

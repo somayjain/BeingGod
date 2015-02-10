@@ -49,6 +49,9 @@ public class Power_ThunderClap : Powers {
 		}
 		
 		if ( refresh ) {
+			Levelcontroller.Powermode = LevelController.MODE.THUNDER_CLAP;
+			Levelcontroller.PowerLoc = loc;
+
 			refresh = false;
 			active = true;
 			time_left = Cooldown;

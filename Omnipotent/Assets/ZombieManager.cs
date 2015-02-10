@@ -12,15 +12,19 @@ public class ZombieManager : MonoBehaviour {
 	public List<Vector3> zombSource = new List<Vector3>();
 
 	public Vector3 hit3DLoc;
-
 	List<int>fireBallHit = new List<int>();
 	float timeToHit = 3.0f;
 	bool fireTimer = false;
+	double rayPowRange = 3.0f;
 
+	List<int>tornadoHit = new List<int>();
+	double tornadoTime = 25.0f;
+	bool tornadoOn = false;
+	double tornadoRange = 20.0f;
+	Vector3 tornadoLoc = new Vector3();
 
-	double tornadoRange = 10.0f;
-	double rayPowRange = 4.0f;
-
+	bool haltOn = false;
+	float haltTimer = 3.0f;
 
 	public enum MODE {
 		DEFAULT,
@@ -105,47 +109,97 @@ public class ZombieManager : MonoBehaviour {
 
 	void checkPowerHit(){
 
-		if (fireTimer == true && timeToHit < 0.0f) {
-			Debug.Log(timeToHit+" time to hit");
-			timeToHit = 3.0f;
-			int removed = 0;
-			fireTimer = false;
-			foreach(int index in fireBallHit){
-				if(index+removed >= ZombieList.Count)
-					continue;
-				Destroy(ZombieList[index+removed]);
-				ZombieList.RemoveAt(index+removed);
-				removed--;
+		if (haltOn == true || Powermode == MODE.THUNDER_CLAP) {
+			haltOn = true;
+			if(haltTimer <= 0.0f){
+				haltTimer = 3.0f;
+				haltOn = false;
 			}
-			fireBallHit.Clear();
-			nosZombies = ZombieList.Count;
+			haltTimer-=Time.fixedDeltaTime;
 		}
-	
+
+		if (Powermode == MODE.FIREBALL || Powermode == MODE.MJOLNIR) {
+			hit3DLoc = GetComponentInParent<LevelController>().PowerLoc;
+			hit3DLoc.y=0.0f;
+		}
+		if (Powermode == MODE.FIREBALL || fireTimer == true) {
+			fireTimer=true;
+			if(timeToHit<=0.0f){
+				fireTimer = false;
+				timeToHit = 3.0f;
+			}
+			else{
+				timeToHit-=Time.fixedDeltaTime;
+			}
+		}
+
+		if (Powermode == MODE.TORNADO)
+						tornadoOn = true;
+
+		if(tornadoOn == true && tornadoTime <= 0.0f){
+			//Debug.Log ("Allowing all "+tornadoHit.Count);
+			tornadoOn = false;
+			tornadoTime = 25.0f;
+		}else{
+			if(tornadoOn == true){
+				tornadoTime -= Time.fixedDeltaTime;
+				tornadoLoc = GetComponentInParent<LevelController>().TornadoLoc;
+				//Debug.Log(tornadoTime+" ");
+			}
+		}
+			nosZombies = ZombieList.Count;
 		for (int i=0; i<nosZombies; i++) {
 			Vector3 zombLoc = ZombieList[i].transform.position;
 			double hitDistance = (hit3DLoc - zombLoc).magnitude;
+
+
 			if(Powermode == MODE.MJOLNIR ){
 				if(hitDistance<=rayPowRange){
-					 Debug.Log(ZombieList[i].name+" is hit ");
-					//ZombieList.RemoveAt(i);
 					Destroy(ZombieList[i]);
 					ZombieList.RemoveAt(i);
 		            nosZombies = ZombieList.Count;
 					i--;
+					continue;
 				}
 			}
-			if(Powermode == MODE.FIREBALL){
-			    if(hitDistance <= rayPowRange){
-					fireBallHit.Add (i);
-					fireTimer = true;
-			   }
+
+			if(fireTimer == true){
+				if(timeToHit<=0.0f){
+						if((ZombieList[i].transform.position-hit3DLoc).magnitude <= rayPowRange){
+							//Debug.Log("Ball hitting"+ZombieList[i].name);
+							if(ZombieList[i]!=null)
+								Destroy(ZombieList[i]);
+							if(i<ZombieList.Count)
+								ZombieList.RemoveAt(i);
+							i--;
+							nosZombies = ZombieList.Count; 
+						    continue;
+						}
+					}
 			}
-				if(Powermode==MODE.TORNADO && hitDistance <= tornadoRange)
-					ZombieList[i].GetComponent<ZombieNavAgent>().haltMovement(true);
 
-				if(Powermode == MODE.THUNDER_CLAP)
+			if(tornadoOn == true){
+				tornadoLoc.y=0.0f;
+				if(tornadoTime<=0.0f)
+					ZombieList[i].GetComponent<ZombieNavAgent>().haltMovement(false);
+				else{
+				if((ZombieList[i].transform.position-tornadoLoc).magnitude <= tornadoRange){
+					//Debug.Log ("halting: "+people[i].name);
 					ZombieList[i].GetComponent<ZombieNavAgent>().haltMovement(true);
+				}else{
+					if((ZombieList[i].transform.position-tornadoLoc).magnitude > tornadoRange){
+						ZombieList[i].GetComponent<ZombieNavAgent>().haltMovement(false);
+					}
+				 }
+				}
+			}
 
+			if(haltOn == true){
+				if(haltTimer>=0.0f)
+					ZombieList[i].GetComponent<ZombieNavAgent>().haltMovement(true);
+				else
+					ZombieList[i].GetComponent<ZombieNavAgent>().haltMovement(false);
+			}
 		}
 		Powermode = MODE.DEFAULT;
 		///foreach (int index  in indicesToDelete) {
@@ -153,13 +207,14 @@ public class ZombieManager : MonoBehaviour {
 	//	}
 		if (nosZombies == 0)
 						allZombiesDead = true;
+
 	}
+
+
+
 
 	// Update is called once per frame
 	void FixedUpdate () {
 		checkPowerHit ();
-		if(fireTimer==true){
-			timeToHit -= Time.fixedDeltaTime;
-		}
 	}
 }

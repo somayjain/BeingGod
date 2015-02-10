@@ -13,7 +13,7 @@ GameObject:
   - 114: {fileID: 11463704}
   m_Layer: 5
   m_Name: Text
-  m_TagString: Untagged
+  m_TagString: text
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +31,7 @@ GameObject:
   - 114: {fileID: 11463708}
   m_Layer: 5
   m_Name: Dialogue
-  m_TagString: Untagged
+  m_TagString: dialogue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,7 +72,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: Empty
 --- !u!114 &11463708
 MonoBehaviour:
   m_ObjectHideFlags: 1

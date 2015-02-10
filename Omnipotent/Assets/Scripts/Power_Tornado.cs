@@ -50,9 +50,11 @@ public class Power_Tornado : Powers {
 				ParticleEmitter[] twister_emitters = Tornado.GetComponentsInChildren<ParticleEmitter> ();
 				foreach (ParticleEmitter emitter in twister_emitters)
 					emitter.emit = emit;
-			}
+			} 
 		
 			location = Tornado.transform.GetChild (0).position;
+			//Debug.Log ( location.ToString());
+			Levelcontroller.TornadoLoc = location;
 		}
 		
 		if (time_left <= 0.0f) {
@@ -73,6 +75,9 @@ public class Power_Tornado : Powers {
 		}
 		
 		if ( refresh ) {
+			Levelcontroller.Powermode = LevelController.MODE.TORNADO;
+			Levelcontroller.TornadoLoc = loc;
+
 			refresh = false;
 			active = true;
 			emit = true;
