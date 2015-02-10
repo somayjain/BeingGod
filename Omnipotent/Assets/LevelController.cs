@@ -13,6 +13,8 @@ public class LevelController : MonoBehaviour {
 	public int humanStatus ;
 	public int houseStatus ;
 
+	int prevHouseNos;
+
 	public List<string>currentPower = new List<string>();
 	//Power Chart
 	public enum MODE {
@@ -42,11 +44,11 @@ public class LevelController : MonoBehaviour {
 
 	void initMinReqs(int level){
 		int nosZombies = level * Random.Range (5,zombies2Kill);
-		int nosHouses = level * Random.Range (1,minHouses2Build);
+		//int nosHouses = level * Random.Range (1,minHouses2Build);
 
 		zombieManager.GetComponent<ZombieManager> ().initZombies (nosZombies);
 		//housemanager.init(nosHouses)
-		minHouses2Build = level * minHouses2Build;
+		//minHouses2Build = level * minHouses2Build;
 
 	}
 
@@ -72,6 +74,7 @@ public class LevelController : MonoBehaviour {
 		zombieManager.transform.parent = transform;
 		GameObject.FindGameObjectWithTag("Hand").GetComponent<cursor_handle>().currentLevel = zombieManager;
 		buildingManager = GameObject.FindGameObjectWithTag ("Building");
+		prevHouseNos = 0;
 	}
 
 	public void setLevel(int level){
@@ -113,15 +116,22 @@ public class LevelController : MonoBehaviour {
 	void Update () {
 
 		setCurrentPower ();
+
+		// bool houseStatus = getstatus
+		if (buildingManager.GetComponent<houseManager> ().houseCreated) {
+			buildingManager.GetComponent<houseManager> ().houseCreated = false;
+			updateSources();
+			peopleManager.GetComponent<LoadVoxelPeople> ().initPerson (5);
+		}
+
+
 		zombieStatus = zombieManager.GetComponent<ZombieManager> ().allZombiesDead;
 		humanStatus = peopleManager.GetComponent<LoadVoxelPeople> ().people.Count;
 		houseStatus = buildingManager.GetComponent<houseManager> ().nosHouses;
-		// bool houseStatus = getstatus
+
 
 		if (currentLevel == 1) {
 			if(buildingManager.GetComponent<houseManager>().nosHouses == minHouses2Build){
-			int nosPeople = currentLevel * Random.Range (10,humans2create);
-			peopleManager.GetComponent<LoadVoxelPeople> ().initPerson (nosPeople);
 				currentLevel++;
 				initMinReqs(currentLevel);
 				return;

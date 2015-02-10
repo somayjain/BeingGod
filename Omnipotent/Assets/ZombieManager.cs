@@ -13,7 +13,7 @@ public class ZombieManager : MonoBehaviour {
 
 	public Vector3 hit3DLoc;
 	List<int>fireBallHit = new List<int>();
-	float timeToHit = 3.0f;
+	float timeToHit = 6.0f;
 	bool fireTimer = false;
 	double rayPowRange = 3.0f;
 

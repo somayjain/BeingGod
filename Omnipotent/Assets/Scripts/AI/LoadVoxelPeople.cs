@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
@@ -36,13 +37,27 @@ public class LoadVoxelPeople : MonoBehaviour {
 	List<int>tornadoHit = new List<int>();
 	float tornadoRange = 18.0f;
 
+	//Fire
+	float fireTimer = 6.0f;
+	bool firemode = false;
+	Vector3 fireLoc = new Vector3();
 	float hoverTextTimer = 5.0f;
+
+	Vector3 newHouseLoc = new Vector3();
 
 	public void updateSources(){
 		sourceList = GameObject.FindGameObjectsWithTag ("source");
 		nos_sources = sourceList.Length;
+		int index = 0;
+		sources.Clear ();
 		foreach (GameObject gob in sourceList) {
-			sources.Add(gob.transform.position);
+			if(gob.name.ToString().CompareTo("source_"+(nos_sources-1).ToString())==0)
+				newHouseLoc = gob.transform.position;
+			Vector3 pos = gob.transform.position;
+//			sources.Add(gob.transform.position);
+			sources.Add(pos);
+			Debug.Log(sources[index]+" House at "+index+" "+gob.transform.position);
+			index++;
 		}
 	}
 
@@ -57,28 +72,50 @@ public class LoadVoxelPeople : MonoBehaviour {
 
 	}
 
+	private float secs = 1.0f;
 	public void initPerson(int nosPeople){
 		updateSources ();
+		secs = 1.0f;
 
 		for (int i=0; i<nosPeople; i++) {
-						int rand_indx = Random.Range (0, nos_sources);
-						Vector3 sourceLoc = sources [rand_indx];
-						Vector3 targetLoc = sources [nos_sources - rand_indx - 1];
-						int rand_chr = Random.Range (0, prefabNameList.Count);
-						GameObject obs = (GameObject)Instantiate (Resources.Load ("prefabs/" + prefabNameList [rand_chr]), sourceLoc, Quaternion.AngleAxis (270, Vector3.right)) as GameObject;
-						obs.name = prefabNameList [rand_chr];
-						obs.transform.parent = transform;
-						NavMeshAgent agent = (NavMeshAgent)obs.AddComponent ("NavMeshAgent");
-						NavAgentMovement agentMovement = obs.AddComponent<NavAgentMovement> ();
-						agentMovement.target = targetLoc;
-						obs.transform.GetChild(0).gameObject.SetActive(false);
-						//obs.transform.GetComponent<Rigidbody> ().detectCollisions = false;
-						obs.transform.FindChild (obs.name).transform.Rotate (Vector3.forward, 180);
-						people.Add (obs);
+	secs++;
+			StartCoroutine(createPPL());
+//						int rand_indx = Random.Range (0, nos_sources);
+//			            Vector3 sourceLoc = newHouseLoc;
+//						Vector3 targetLoc = sources [rand_indx];
+//						int rand_chr = Random.Range (0, prefabNameList.Count);
+//						GameObject obs = (GameObject)Instantiate (Resources.Load ("prefabs/" + prefabNameList [rand_chr]), sourceLoc, Quaternion.AngleAxis (270, Vector3.right)) as GameObject;
+//						obs.name = prefabNameList [rand_chr];
+//						obs.transform.parent = transform;
+//						NavMeshAgent agent = (NavMeshAgent)obs.AddComponent ("NavMeshAgent");
+//						NavAgentMovement agentMovement = obs.AddComponent<NavAgentMovement> ();
+//						agentMovement.target = targetLoc;
+//						obs.transform.GetChild(0).gameObject.SetActive(false);
+//						//obs.transform.GetComponent<Rigidbody> ().detectCollisions = false;
+//						obs.transform.FindChild (obs.name).transform.Rotate (Vector3.forward, 180);
+//						people.Add (obs);
 				}
 	}
 
-
+	IEnumerator createPPL()
+	{
+		yield return new WaitForSeconds(secs);
+		int rand_indx = Random.Range (0, nos_sources);
+	//	Debug.Log("Rnd: " + rand_indx.ToString() + "," + nos_sources.ToString());
+		Vector3 sourceLoc = newHouseLoc;
+		Vector3 targetLoc = sources [rand_indx];
+		int rand_chr = Random.Range (0, prefabNameList.Count);
+		GameObject obs = (GameObject)Instantiate (Resources.Load ("prefabs/" + prefabNameList [rand_chr]), sourceLoc, Quaternion.AngleAxis (270, Vector3.right)) as GameObject;
+		obs.name = prefabNameList [rand_chr];
+		obs.transform.parent = transform;
+		NavMeshAgent agent = (NavMeshAgent)obs.AddComponent ("NavMeshAgent");
+		NavAgentMovement agentMovement = obs.AddComponent<NavAgentMovement> ();
+		agentMovement.target = targetLoc;
+		obs.transform.GetChild(0).gameObject.SetActive(false);
+		//obs.transform.GetComponent<Rigidbody> ().detectCollisions = false;
+		obs.transform.FindChild (obs.name).transform.Rotate (Vector3.forward, 180);
+		people.Add (obs);
+	}
 
 	void checkCrowd(){
 		//Debug.Log (tornadoTime+" ");
@@ -86,6 +123,17 @@ public class LoadVoxelPeople : MonoBehaviour {
 		if (Powermode == MODE.TORNADO)
 						tornadoOn = true;
 
+		if (Powermode == MODE.FIREBALL || firemode == true) {
+			if(!firemode)
+				fireLoc = GetComponentInParent<LevelController>().PowerLoc;
+			firemode = true;
+			if(fireTimer<-3.0f){
+				fireTimer = 6.0f;
+				firemode = false;
+			}else{
+				fireTimer -= Time.fixedDeltaTime;
+			}
+		}
 		if(tornadoOn == true && tornadoTime <= 0.0f){
 			tornadoOn = false;
 			tornadoTime = 25.0f;
@@ -124,7 +172,20 @@ public class LoadVoxelPeople : MonoBehaviour {
 				continue;
 			}
 
+			//people[i].transform.GetChild(0);
 
+			if(fireTimer<=2.0f && fireTimer > -3.0f && (people[i].transform.position - fireLoc).magnitude<=15.0f && people[i].transform.childCount<3){
+				GameObject head_fire = (GameObject)Instantiate (Resources.Load ("human_fire"),Vector3.zero,	Quaternion.identity) as GameObject;
+				head_fire.transform.parent = people[i].transform;
+				head_fire.transform.localPosition = new Vector3(0,0.7f,0);
+				person_script.toggleScaredRun(true);
+				//Debug.Log(people[i].name+" on fire");
+			}
+		    if(fireTimer<=-3.0f && (people[i].transform.childCount>2)){
+				GameObject fireObj = people[i].transform.GetChild(2).gameObject;
+				Destroy(fireObj);
+				//Debug.Log(people[i].name + " off fire");
+			}
 
 			if(tornadoOn == true){
 				tornadoLoc.y = 0.0f;
@@ -160,6 +221,10 @@ public class LoadVoxelPeople : MonoBehaviour {
 			}
 
 			if(person_script.targetReached){
+				//Random random = new Random();
+				//random.seed = i;
+				//updateSources();
+				//Debug.Log("Rnd: " + rand_pos.ToString() + "," + nos_sources.ToString()+" "+sources[rand_pos]);
 				person_script.setNewPath(sources[rand_pos]);
 				//Debug.Log("Recompute the new path");
 			}
@@ -169,12 +234,9 @@ public class LoadVoxelPeople : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+		Debug.Log("HUMAN MANAGER");
 		checkCrowd ();
 
-			
-		if (Input.GetKeyUp ("o")) {
-			//Vector3 loc = new Vector3(Random.Range(-5f,5f),0.5f,Random.Range(-5f,5f));
-			//GameObject obs = (GameObject)Instantiate(Resources.Load("Block_NavObs"),loc,Quaternion.identity) as GameObject;
-		}
 		}
 }

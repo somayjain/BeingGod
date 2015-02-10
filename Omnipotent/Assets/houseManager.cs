@@ -11,7 +11,7 @@ public class houseManager : MonoBehaviour
 		private Transform Buildings;
 		private int sourceId;
 		private GameObject house;
-
+		public bool houseCreated = false;
 		private class houseComparer: IComparer
 		{
 				int IComparer.Compare (object a, object b)
@@ -117,6 +117,7 @@ public class houseManager : MonoBehaviour
 				houses.Add (house);
 				sourceId++;
 				nosHouses++;
+				houseCreated = true;
 				Debug.Log ("Inside buildHouse=" + nosHouses.ToString () + " source.name=" + house.transform.GetChild (0).gameObject.name);
 		}
 

@@ -100,7 +100,7 @@ public class NavAgentMovement : MonoBehaviour {
 								if(waitTimer <= 0.0f)
 								{
 					                    waitTimer = 5.0f;
-										//Debug.Log ("villager stuck");
+										Debug.Log ("villager stuck");
 								}
 								
 						}
