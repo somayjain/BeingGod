@@ -101,7 +101,7 @@ public class HandRenderer : MonoBehaviour {
                         if (temp[i, j] != null && _myJointData[i, j] != null)
                         {
                             myJoints[i, j].SetActive(true);
-                            sumOfJointPositions[i, j] += new Vector3(-1 * temp[i, j].positionWorld.x * 1.3f, temp[i, j].positionWorld.y, -1 * temp[i, j].positionWorld.z);
+                            sumOfJointPositions[i, j] += new Vector3(-1 * temp[i, j].positionWorld.x * 1.3f, temp[i, j].positionWorld.y, temp[i, j].positionWorld.z);
                         }
                         else
                             myJoints[i, j].SetActive(false);

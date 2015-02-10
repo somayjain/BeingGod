@@ -47,6 +47,10 @@ public class ScaleAction : BaseAction {
 	private float _scale = 0f;	
 	private float _lastScale = 0f;
 
+	// our code
+	public float zoomDrag = 3.3f;
+	public float zoomOut = 100.0f;
+
 	private bool _actionTriggered = false;
 	
 	#endregion
@@ -215,10 +219,31 @@ public class ScaleAction : BaseAction {
 			_scaleY = !Constraints.Freeze.Y ? scaleVector.y + _scaleY : scaleVector.y;
 			_scaleZ = !Constraints.Freeze.Z ? scaleVector.z + _scaleZ : scaleVector.z;
 
-			//Scale				
+			Debug.Log (_scale);
 
-			this.gameObject.transform.localScale = new Vector3(_scaleX, _scaleY, _scaleZ);
+			//Scale				
+			//this.gameObject.transform.localScale = new Vector3(_scaleX, _scaleY, _scaleZ);
+
+			// our code
+			//this.gameObject = new Vector3(_scaleX, 1, 1);
+
+			/* TODO: 
+			 * Closer the camera, more the pan speed.
+			 */
+			if ((Camera.main.transform.position.y < 5.0f && _scaleX >= 0) || (Camera.main.transform.position.y > zoomOut && _scaleX <= 0))
+				return;
 			
+			// Get mouse displacement vector from original to current position
+			// Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
+			// Vector3 move = pos.y * zoomSpeed * transform.forward; 
+			Vector3 move = _scaleX * transform.forward;
+			
+			// Set Drag
+			rigidbody.drag = zoomDrag;
+			
+			// Zoom
+			rigidbody.AddForce(move, ForceMode.Acceleration);
+
 						
 			if (ScaleDumpingFactor==0)
 			{

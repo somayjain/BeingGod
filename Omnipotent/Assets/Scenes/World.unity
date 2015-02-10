@@ -108,6 +108,14 @@ GameObject:
   - 114: {fileID: 5982407}
   - 114: {fileID: 5982406}
   - 54: {fileID: 5982392}
+  - 114: {fileID: 5982419}
+  - 114: {fileID: 5982418}
+  - 114: {fileID: 5982417}
+  - 114: {fileID: 5982416}
+  - 114: {fileID: 5982415}
+  - 114: {fileID: 5982414}
+  - 114: {fileID: 5982413}
+  - 114: {fileID: 5982420}
   m_Layer: 0
   m_Name: Eye of God
   m_TagString: MainCamera
@@ -714,6 +722,179 @@ MonoBehaviour:
   Sensitivity: {x: -150, y: 0, z: 150}
   SmoothingFactor: 15.3999996
   SmoothingType: 2
+--- !u!114 &5982413
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85cc44cc9c9c94246b9d493ee7709f90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982419}
+  FriendlyName: Two Hands Lost
+  Enabled: 1
+  FoldoutOpen: 0
+  AssociatedAction: {fileID: 0}
+--- !u!114 &5982414
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52dfce64c1c77094983f527cd979aec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982419}
+  FriendlyName: Two Hands Detected
+  Enabled: 1
+  FoldoutOpen: 0
+  AssociatedAction: {fileID: 0}
+--- !u!114 &5982415
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc36184d7c481f41b8582c3cb049b15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982419}
+  FriendlyName: Two Hands Scale and Rotate
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  DistanceThresholdX: 5
+  DistanceThresholdY: 1000
+  DistanceThresholdZ: 1000
+--- !u!114 &5982416
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33140781a3e92d40add2490c4ce1fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982419}
+  ErrorDetected: 0
+  FriendlyName: Stop Event
+  Rules:
+  - {fileID: 5982420}
+  - {fileID: 5982413}
+  TriggerAttributeName: EventTriggerAtt
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  Source: 
+  Success: 0
+--- !u!114 &5982417
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 140c1a8a400267c428fc82278ff0b4e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982419}
+  ErrorDetected: 0
+  FriendlyName: Scale Trigger
+  Rules:
+  - {fileID: 5982415}
+  TriggerAttributeName: ScaleTriggerAtt
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  Source: 
+  Success: 0
+  Restart: 0
+--- !u!114 &5982418
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33140781a3e92d40add2490c4ce1fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982419}
+  ErrorDetected: 0
+  FriendlyName: Start Event
+  Rules:
+  - {fileID: 5982414}
+  TriggerAttributeName: EventTriggerAtt
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  Source: 
+  Success: 0
+--- !u!114 &5982419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e704260d383b4a4ca1ae0f3024a8ee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SupportedTriggers:
+  - {fileID: 5982418}
+  - {fileID: 5982417}
+  - {fileID: 5982416}
+  CustomTag: 
+  CustomActionId: 4
+  Constraints:
+    XScale:
+      Min: 0
+      Max: 0
+    YScale:
+      Min: 0
+      Max: 0
+    ZScale:
+      Min: 0
+      Max: 0
+    Freeze:
+      X: 0
+      Y: 0
+      Z: 0
+  ContinuousScale: 0
+  ContinuousScaleSpeed: 0
+  ScaleDumpingFactor: .00100000005
+  zoomDrag: 3.29999995
+  zoomOut: 100
+--- !u!114 &5982420
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e9099431f481f04f9ec64be0a04d996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982419}
+  FriendlyName: Gesture Lost
+  Enabled: 0
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  LostThreshold: .75
+  Gesture: 3
+  WhichHand: 2
+  HandIndex: 0
+  ContinuousTracking: 0
 --- !u!1 &34452610
 GameObject:
   m_ObjectHideFlags: 0

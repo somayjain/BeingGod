@@ -37,7 +37,7 @@ public class trackHand : MonoBehaviour {
 	            handIds[i] = _handData.QueryUniqueId();
 	            bodySides[i] = _handData.QueryBodySide();
 
-				Debug.Log(_handData.QueryMassCenterImage().x.ToString() + " " + _handData.QueryMassCenterImage().y.ToString());
+				//Debug.Log(_handData.QueryMassCenterImage().x.ToString() + " " + _handData.QueryMassCenterImage().y.ToString());
 
 	        }
 	        handRenderer.DisplaySmoothenedJoints(joints, handIds, bodySides);
