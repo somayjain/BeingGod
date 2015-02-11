@@ -16,9 +16,8 @@ public class HandRenderer : MonoBehaviour {
     public GameObject TipPrefab; //Prefab for Finger Tips
     public GameObject BonePrefab; //Prafab for Bones
     public GameObject PalmCenterPrefab;//Prefab for Palm Center
-    public GameObject myGestureTextLeft;//Pointer to LeftGUIText
-    public GameObject myGestureTextRight;//Pointer to RightGUIText
-    public GameObject lastAlert;//Pointer to RightGUIText
+
+    public GameObject handofGod;
 
     private int MaxHands; //Max no. of Hands
     private GameObject[,] myJoints; //Array of Joint GameObjects
@@ -46,57 +45,31 @@ public class HandRenderer : MonoBehaviour {
         for (int i = 0; i < MaxHands; i++)
             for (int j = 0; j < PXCMHandData.NUMBER_OF_JOINTS; j++)
             {
-                 if (j == 1)
+                if (j == 1)
+                {
                     myJoints[i, j] = (GameObject)Instantiate(PalmCenterPrefab, Vector3.zero, Quaternion.identity);
+                    myJoints[i, j].transform.parent = handofGod.transform;    
+                }
                 else if (j == 21 || j == 17 || j == 13 || j == 9 || j == 5)
+                {
                     myJoints[i, j] = (GameObject)Instantiate(TipPrefab, Vector3.zero, Quaternion.identity);
+                    myJoints[i, j].transform.parent = handofGod.transform;
+                }
                 else
+                {
                     myJoints[i, j] = (GameObject)Instantiate(JointPrefab, Vector3.zero, Quaternion.identity);
+                    myJoints[i, j].transform.parent = handofGod.transform;
+                }
 
                 if (j != 1)
+                {
                     myBones[i, j] = (GameObject)Instantiate(BonePrefab, Vector3.zero, Quaternion.identity);
+                    myBones[i, j].transform.parent = handofGod.transform;
+                }
             }
 
         
 	}
-
-    public void DisplayAlerts(PXCMHandData.AlertData alertData)
-    {
-         if (alertData.label == PXCMHandData.AlertType.ALERT_HAND_DETECTED || alertData.label == PXCMHandData.AlertType.ALERT_HAND_NOT_DETECTED)
-                {
-                    StopCoroutine("TimedAlert");
-                    StartCoroutine("TimedAlert", alertData.label.ToString());
-                     myGestureTextLeft.GetComponent<TextMesh>().text = "";
-                     myGestureTextRight.GetComponent<TextMesh>().text = "";
-                     avgQueue.Clear();
-                }
- 
-    }
-
-    IEnumerator TimedAlert(string _label)
-    {
-        lastAlert.GetComponent<TextMesh>().text = "Last Alert : " + _label; 
-        yield return new WaitForSeconds(2.5f);
-        lastAlert.GetComponent<TextMesh>().text = "";
-    }
-
-
-    public void DisplayGestures(PXCMHandData.GestureData gestureData)
-    {
-        for (int i = 0; i < MaxHands; i++)
-            if (gestureData.handId == handIds[i])
-            {
-                if (bodySide[i] == PXCMHandData.BodySideType.BODY_SIDE_LEFT)
-                {
-                    myGestureTextLeft.GetComponent<TextMesh>().text =  PXCMHandData.BodySideType.BODY_SIDE_LEFT.ToString() + " : "+ gestureData.name.ToString();
-                }
-                else if (bodySide[i] == PXCMHandData.BodySideType.BODY_SIDE_RIGHT)
-                {
-                    myGestureTextRight.GetComponent<TextMesh>().text = PXCMHandData.BodySideType.BODY_SIDE_RIGHT.ToString() + " : "+ gestureData.name.ToString(); 
-                }
-                break;
-            }
-    }
 
     public void DisplayJoints(PXCMHandData.JointData[,] _myJointData, int[] _handIds, PXCMHandData.BodySideType[] _bodySides)
     {
@@ -108,7 +81,7 @@ public class HandRenderer : MonoBehaviour {
                         if (_myJointData[i, j] != null)
                         {
                             myJoints[i, j].SetActive(true);
-                            myJoints[i, j].transform.position = new Vector3(_myJointData[i, j].positionWorld.x, _myJointData[i, j].positionWorld.y, _myJointData[i, j].positionWorld.z) * 100f;
+                            myJoints[i, j].transform.localPosition = new Vector3(_myJointData[i, j].positionWorld.x, _myJointData[i, j].positionWorld.y, _myJointData[i, j].positionWorld.z) * 100f;
                         }
                         else
                             myJoints[i, j].SetActive(false);
@@ -128,7 +101,7 @@ public class HandRenderer : MonoBehaviour {
                         if (temp[i, j] != null && _myJointData[i, j] != null)
                         {
                             myJoints[i, j].SetActive(true);
-                            sumOfJointPositions[i, j] += new Vector3(-1 * temp[i, j].positionWorld.x, temp[i, j].positionWorld.y, temp[i, j].positionWorld.z);
+                            sumOfJointPositions[i, j] += new Vector3(-1 * temp[i, j].positionWorld.x * 1.3f, temp[i, j].positionWorld.y, -1 * temp[i, j].positionWorld.z);
                         }
                         else
                             myJoints[i, j].SetActive(false);
@@ -136,7 +109,7 @@ public class HandRenderer : MonoBehaviour {
             for (int i = 0; i < MaxHands; i++)
                 for (int j = 0; j < PXCMHandData.NUMBER_OF_JOINTS; j++)
                 {
-                    myJoints[i, j].transform.position = (sumOfJointPositions[i, j] / avgQueue.Count) * 100f;
+                    myJoints[i, j].transform.localPosition = (sumOfJointPositions[i, j] / avgQueue.Count) * 100f;
                     sumOfJointPositions[i, j] = Vector3.zero;
                 }
 

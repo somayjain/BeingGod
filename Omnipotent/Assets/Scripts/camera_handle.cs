@@ -92,8 +92,17 @@ public class camera_handle : MonoBehaviour {
 				else
 						isZooming = true;
 
-		Vector3 cameraPosition = transform.position;
-		cameraPosition.y = Mathf.Clamp (transform.position.y, 5.0f, zoomOut);
+		Vector3 screenCenter = new Vector3(Screen.width/2,Screen.height/2);
+		Ray ray = Camera.main.ScreenPointToRay(screenCenter);
+		float zoomIn = 5.0f;
+		RaycastHit hit;
+		
+		if(Physics.Raycast(ray, out hit)) {
+			zoomIn = hit.point.y + 3.0f;
+		}
+
+		Vector3 cameraPosition = transform.position;	
+		cameraPosition.y = Mathf.Clamp (transform.position.y, zoomIn, zoomOut);
 		transform.position = cameraPosition;
 	}
 	
