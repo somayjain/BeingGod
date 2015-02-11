@@ -137,6 +137,160 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!1 &439644555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: 1cce44ff6da27c042bf6cfae60abea8c, type: 2}
+  m_PrefabInternal: {fileID: 527290156}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 439644557}
+  - 114: {fileID: 439644556}
+  - 114: {fileID: 439644560}
+  - 114: {fileID: 439644559}
+  - 114: {fileID: 439644558}
+  m_Layer: 0
+  m_Name: PointCloudMesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &439644556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: 1cce44ff6da27c042bf6cfae60abea8c,
+    type: 2}
+  m_PrefabInternal: {fileID: 527290156}
+  m_GameObject: {fileID: 439644555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58fa8c395078ea940947cd57b50bffa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PointCloudMaterial: {fileID: 2100000, guid: 674ef0bd4cd38a442861ed507955f83f, type: 2}
+  MaxDepthVal: 90
+  UseUVMap: 1
+  _removeBackTriangles: 1
+--- !u!4 &439644557
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: 1cce44ff6da27c042bf6cfae60abea8c, type: 2}
+  m_PrefabInternal: {fileID: 527290156}
+  m_GameObject: {fileID: 439644555}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
+  m_LocalPosition: {x: 0, y: -100, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+--- !u!114 &439644558
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 439644555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65adc5e7bdf8abf47a4101fcb2464974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 439644560}
+  FriendlyName: Face Detected
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  RiseForEveryDetectedFace: 1
+  NumberOfFaces: 1
+--- !u!114 &439644559
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 439644555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33140781a3e92d40add2490c4ce1fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 439644560}
+  ErrorDetected: 0
+  FriendlyName: Event Source
+  Rules:
+  - {fileID: 439644558}
+  TriggerAttributeName: EventTriggerAtt
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  Source: 
+  Success: 0
+--- !u!114 &439644560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 439644555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8ca451fae141046aaac1dc626433f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SupportedTriggers:
+  - {fileID: 439644559}
+  CustomTag: 
+  CustomActionId: 1
+  FunctionName: OnFaceDetected
+--- !u!1001 &527290156
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 1cce44ff6da27c042bf6cfae60abea8c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 1cce44ff6da27c042bf6cfae60abea8c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 1cce44ff6da27c042bf6cfae60abea8c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 1cce44ff6da27c042bf6cfae60abea8c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 1cce44ff6da27c042bf6cfae60abea8c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 1cce44ff6da27c042bf6cfae60abea8c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 1cce44ff6da27c042bf6cfae60abea8c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -4.37113883e-08
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 1cce44ff6da27c042bf6cfae60abea8c, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 1cce44ff6da27c042bf6cfae60abea8c, type: 2}
+      propertyPath: UseUVMap
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 1cce44ff6da27c042bf6cfae60abea8c, type: 2}
+      propertyPath: _removeBackTriangles
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 1cce44ff6da27c042bf6cfae60abea8c, type: 2}
+  m_RootGameObject: {fileID: 439644555}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &595615586
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,6 +495,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e627b09d729bfc242bba35318daf8e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sources: []
+  nos_sources: 0
+  people: []
+  people_last_check: []
+  Powermode: 0
+  pointOfContact: {x: 0, y: 0, z: 0}
+  tornadoLoc: {x: 0, y: 0, z: 0}
 --- !u!1 &1107109187
 GameObject:
   m_ObjectHideFlags: 0

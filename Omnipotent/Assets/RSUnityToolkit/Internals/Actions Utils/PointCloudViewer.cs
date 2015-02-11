@@ -44,7 +44,7 @@ public class PointCloudViewer : MonoBehaviour {
 	private Vector4[] _tangents = null;
 	private int[] _triangles 	= null;
 	
-	private bool _removeBackTriangles = true;
+	public bool _removeBackTriangles = true;
 	
 	private bool _lastUseUVMAP = true;
 	
