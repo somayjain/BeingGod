@@ -31,7 +31,7 @@ public class emotion : MonoBehaviour {
 		}
 		if ((epidx != -1) && (maxscoreI > 0.4))
 		{
-			Debug.Log(EmotionLabels[epidx]);
+			//Debug.Log(EmotionLabels[epidx]);
 			emotionPresent = true;
 		}
 		

@@ -8,6 +8,7 @@ public class trackHand : MonoBehaviour {
 	private int[] handIds; //Array of HandIds for HandRenderer
     private PXCMHandData.BodySideType[] bodySides; //Array of BodySides for HandRenderer
     private HandRenderer handRenderer; //Rendererer for Visualization
+	private PXCMHandData _outputData;
 
 	// Use this for initialization
 	void Start () {
@@ -19,11 +20,13 @@ public class trackHand : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-		PXCMHandData _outputData = SenseToolkitManager.Instance.HandDataOutput;
+		// For testing only.
+		handRenderer.queryLeftHand2DCoordinates ();
+		
+		_outputData = SenseToolkitManager.Instance.HandDataOutput;
 		if (_outputData != null)
 		{
-                _outputData.Update();
+            _outputData.Update();
 
 			/* Retrieve Hand Joints*/      
 	        joints = new PXCMHandData.JointData[2, PXCMHandData.NUMBER_OF_JOINTS];
@@ -37,11 +40,17 @@ public class trackHand : MonoBehaviour {
 	            handIds[i] = _handData.QueryUniqueId();
 	            bodySides[i] = _handData.QueryBodySide();
 
-				//Debug.Log(_handData.QueryMassCenterImage().x.ToString() + " " + _handData.QueryMassCenterImage().y.ToString());
-
 	        }
-	        handRenderer.DisplaySmoothenedJoints(joints, handIds, bodySides);
+	        handRenderer.DisplaySmoothenedJoints(_outputData, joints, handIds, bodySides);
+
+			if(_outputData.QueryNumberOfHands()==0)
+				handRenderer.makeNull();
 	    }
+		else
+		{
+			handRenderer.makeNull();
+		}
+		// For testing
 	}
 
 	public void dummyHandDetected (){
