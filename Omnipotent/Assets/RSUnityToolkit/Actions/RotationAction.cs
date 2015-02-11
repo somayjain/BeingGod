@@ -323,7 +323,9 @@ public class RotationAction : BaseAction {
 				Ray ray = Camera.main.ScreenPointToRay(screenCenter);
 				
 				RaycastHit hit;
-				
+				//Debug.Log (_yRot);
+				//Debug.Log (_xRot);
+				//Debug.Log (_zRot);
 				if(Physics.Raycast(ray, out hit)) {
 					Debug.DrawLine(ray.origin, hit.point);
 				
