@@ -20,6 +20,8 @@ public class XP_handle : MonoBehaviour {
 	public float Faith_Degradation, Fear_Degradation;
 	private float Faith_deg, Fear_deg;
 
+	private bool LevelUpReached = false;
+
 	// Use this for initialization
 	void Start () {
 		Faith_ratio = Faith / (float) XP_Limit;
@@ -44,40 +46,8 @@ public class XP_handle : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Faith_min_ratio + Fear_min_ratio >= 1.0f) {
+			LevelUpReached = true;
 			// Level Up
-			if (Faith_pool > 0) {
-				Faith = Faith_pool;
-				Faith_ratio = Faith / XP_Limit;
-				Faith_min_ratio = 0.0f;
-				faith_time = 0.5f;
-				faith_updated = true;
-				Faith_pool = 0;
-				Faith_deg = 0.0f;
-			} else {
-				Faith = 0;
-				Faith_ratio = 0.0f;
-				Faith_min_ratio = 0.0f;
-				faith_time = 0.0f;
-				faith_updated = false;
-				Faith_deg = 0.0f;
-			}
-
-			if (Fear_pool > 0) {
-				Fear = Fear_pool;
-				Fear_ratio = Fear / XP_Limit;
-				Fear_min_ratio = 0.0f;
-				fear_time = 0.5f;
-				fear_updated = true;
-				Fear_pool = 0;
-				Faith_deg = 0.0f;
-			} else {
-				Fear = 0;
-				Fear_ratio = 0.0f;
-				Fear_min_ratio = 0.0f;
-				fear_time = 0.0f;
-				fear_updated = false;
-				Fear_deg = 0.0f;
-			}
 		}
 
 		if (faith_time > 0.0f) {
@@ -92,7 +62,7 @@ public class XP_handle : MonoBehaviour {
 		} else
 				fear_updated = false;
 
-		if ( !faith_updated && !fear_updated ) {
+		if ( !faith_updated && !fear_updated && !LevelUpReached ) {
 			if (Faith > 1) Faith_deg += Time.deltaTime * Faith_Degradation;
 			else Faith_deg = 0.0f;
 			if (Fear > 1) Fear_deg += Time.deltaTime * Fear_Degradation;
@@ -130,6 +100,8 @@ public class XP_handle : MonoBehaviour {
 	}
 
 	public void AddXP (int xp, Powers.POWERTYPE powertype) {
+		if (LevelUpReached)		return;
+
 		switch (powertype) {
 		case Powers.POWERTYPE.GOOD:
 			if (Faith+Fear+xp > XP_Limit) {
@@ -167,7 +139,7 @@ public class XP_handle : MonoBehaviour {
 				Fear_pool += pool;
 
 				int unpool = xp - 2*pool;
-				float faith_share = Faith / (float)(Faith+Fear);
+				float faith_share = (Faith+Fear == 0 ? 0.5f : Faith / (float)(Faith+Fear) );
 				Faith = Faith + Mathf.CeilToInt(unpool*faith_share);
 				Fear = Fear + Mathf.CeilToInt(unpool*(1-faith_share));
 
@@ -178,7 +150,7 @@ public class XP_handle : MonoBehaviour {
 				faith_time += time;
 				fear_time += time;
 			} else {
-				float faith_share = Faith / (float)(Faith+Fear);
+				float faith_share = (Faith+Fear == 0 ? 0.5f : Faith / (float)(Faith+Fear) );
 				Faith = Faith + Mathf.CeilToInt(xp*faith_share);
 				Fear = Fear + xp - Mathf.CeilToInt(xp*faith_share);
 				Debug.Log("fs="+faith_share.ToString()+", fa="+Mathf.CeilToInt(xp*faith_share).ToString()+", fe="+Mathf.FloorToInt(xp*(1-faith_share)).ToString());
@@ -193,5 +165,44 @@ public class XP_handle : MonoBehaviour {
 			fear_updated = true;
 			break;
 		}
+	}
+
+	public void LevelUp ( int level ) {
+		Debug.Log (level+" Level set");
+		if (Faith_pool > 0) {
+			Faith = Faith_pool;
+			Faith_ratio = Faith / XP_Limit;
+			Faith_min_ratio = 0.0f;
+			faith_time = 0.5f;
+			faith_updated = true;
+			Faith_pool = 0;
+			Faith_deg = 0.0f;
+		} else {
+			Faith = 0;
+			Faith_ratio = 0.0f;
+			Faith_min_ratio = 0.0f;
+			faith_time = 0.0f;
+			faith_updated = false;
+			Faith_deg = 0.0f;
+		}
+		
+		if (Fear_pool > 0) {
+			Fear = Fear_pool;
+			Fear_ratio = Fear / XP_Limit;
+			Fear_min_ratio = 0.0f;
+			fear_time = 0.5f;
+			fear_updated = true;
+			Fear_pool = 0;
+			Faith_deg = 0.0f;
+		} else {
+			Fear = 0;
+			Fear_ratio = 0.0f;
+			Fear_min_ratio = 0.0f;
+			fear_time = 0.0f;
+			fear_updated = false;
+			Fear_deg = 0.0f;
+		}
+
+		LevelUpReached = false;
 	}
 }

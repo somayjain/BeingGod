@@ -68,7 +68,7 @@ public class NavAgentMovement : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (powerhit == true) {
 			//Debug.Log(gameObject.name+" stopping ");
 						return;

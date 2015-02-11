@@ -2,29 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class Power_Mjolnir : Powers {
-
-//	public enum POWERTYPE
-//	{
-//		GOOD, 
-//		NEUTRAL, 
-//		EVIL
-//	};
-//
-//	public cursor_handle cursor;
-	public GameObject Mjolnir;
-
-//	public float Cooldown = 10.0f;
-//	public float CastTime = 3.0f;
-//	
-//	private float time_left = 0.0f;
-//	private bool refresh = false;
-//	private bool active = false;
-//
-//	public POWERTYPE PowerType = POWERTYPE.NEUTRAL;
-//	public float XP_per_NPC = 1.0f;
-//
-//	private bool enabled = false;
+public class Power_Hey : Powers {
 
 	// Use this for initialization
 	void Start () {
@@ -44,7 +22,6 @@ public class Power_Mjolnir : Powers {
 
 		if (active && time_left <= Cooldown - CastTime) {
 			active = false;
-			Mjolnir.SetActive (active);
 		}
 
 		if (time_left <= 0.0f) {
@@ -64,7 +41,7 @@ public class Power_Mjolnir : Powers {
 		}
 
 		if ( refresh ) {
-			Levelcontroller.Powermode = LevelController.MODE.MJOLNIR;
+			Levelcontroller.Powermode = LevelController.MODE.HEY;
 			Levelcontroller.PowerLoc = loc;
 
 			refresh = false;
@@ -72,19 +49,14 @@ public class Power_Mjolnir : Powers {
 			time_left = Cooldown;
 
 			location = loc;
-
-			Mjolnir.transform.position = loc;
-			Mjolnir.SetActive (active);
-
-//			XP.AddXP(XP_per_NPC, PowerType);
 		}
 	}
 
 	public void AddXP (int num_of_people, int flag) {
-		XP.AddXP (num_of_people * XP_per_NPC, PowerType);
+			XP.AddXP (num_of_people * XP_per_NPC, PowerType);
 	}
 	
 	public void OnClick () {
-		cursor.setMode (cursor_handle.MODE.MJOLNIR);
+		cursor.setMode (cursor_handle.MODE.HEY);
 	}
 }

@@ -40,7 +40,7 @@ public class ZombieNavAgent : MonoBehaviour {
 		//Debug.Log ("Zombie collides: "+gameObject.name+" "+collision.tag);
 	}
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (powerhit == true) {
 			return;
 		}

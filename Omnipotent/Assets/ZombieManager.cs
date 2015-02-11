@@ -13,7 +13,7 @@ public class ZombieManager : MonoBehaviour {
 
 	public Vector3 hit3DLoc;
 	List<int>fireBallHit = new List<int>();
-	float timeToHit = 6.0f;
+	float timeToHit = 5.0f;
 	bool fireTimer = false;
 	double rayPowRange = 3.0f;
 
@@ -26,6 +26,8 @@ public class ZombieManager : MonoBehaviour {
 	bool haltOn = false;
 	float haltTimer = 3.0f;
 
+	private cursor_handle csHandle;
+
 	public enum MODE {
 		DEFAULT,
 		BUILD,
@@ -34,7 +36,9 @@ public class ZombieManager : MonoBehaviour {
 		GMBC,
 		MJOLNIR,
 		FIREBALL,
-		TORNADO
+		TORNADO,
+		BOO,
+		HEY
 	}
 	public MODE Powermode = MODE.DEFAULT;
 
@@ -155,6 +159,7 @@ public class ZombieManager : MonoBehaviour {
 
 			if(Powermode == MODE.MJOLNIR ){
 				if(hitDistance<=rayPowRange){
+					csHandle.PowerMjolnir.AddXP(1,1);
 					Destroy(ZombieList[i]);
 					ZombieList.RemoveAt(i);
 		            nosZombies = ZombieList.Count;
@@ -166,6 +171,7 @@ public class ZombieManager : MonoBehaviour {
 			if(fireTimer == true){
 				if(timeToHit<=0.0f){
 						if((ZombieList[i].transform.position-hit3DLoc).magnitude <= rayPowRange){
+						csHandle.PowerFireball.AddXP(1,1);
 							//Debug.Log("Ball hitting"+ZombieList[i].name);
 							if(ZombieList[i]!=null)
 								Destroy(ZombieList[i]);
@@ -184,6 +190,7 @@ public class ZombieManager : MonoBehaviour {
 					ZombieList[i].GetComponent<ZombieNavAgent>().haltMovement(false);
 				else{
 				if((ZombieList[i].transform.position-tornadoLoc).magnitude <= tornadoRange){
+						csHandle.PowerTornado.AddXP(1,1);
 					//Debug.Log ("halting: "+people[i].name);
 					ZombieList[i].GetComponent<ZombieNavAgent>().haltMovement(true);
 				}else{

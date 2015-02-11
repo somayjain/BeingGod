@@ -49,7 +49,9 @@ public class cursor_handle : MonoBehaviour {
 		GMBC,
 		MJOLNIR,
 		FIREBALL,
-		TORNADO
+		TORNADO,
+		HEY,
+		BOO
 	}
 	public MODE mode = MODE.DEFAULT;
 
@@ -58,6 +60,8 @@ public class cursor_handle : MonoBehaviour {
 	public Power_Mjolnir PowerMjolnir;
 	public Power_Fireball PowerFireball;
 	public Power_Tornado PowerTornado;
+	public Power_Hey PowerHey;
+	public Power_Boo PowerBoo;
 
 	public GameObject PeopleManager;
 	public GameObject currentLevel;
@@ -165,6 +169,16 @@ public class cursor_handle : MonoBehaviour {
 					setMode (MODE.DEFAULT);
 				}
 			}
+			break;
+
+		case MODE.BOO:
+			PowerBoo.Trigger ( cursor3d );
+			setMode (MODE.DEFAULT);
+			break;
+		
+		case MODE.HEY:
+			PowerHey.Trigger ( cursor3d );
+			setMode (MODE.DEFAULT);
 			break;
 		}
 	}

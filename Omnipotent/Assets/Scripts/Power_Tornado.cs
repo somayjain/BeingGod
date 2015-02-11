@@ -96,6 +96,11 @@ public class Power_Tornado : Powers {
 				emitter.emit = emit;
 		}
 	}
+
+	public void AddXP (int num_of_people, int flag) {
+		XP.AddXP (num_of_people * XP_per_NPC, PowerType);
+	}
+
 	
 	public void OnClick () {
 		cursor.setMode (cursor_handle.MODE.TORNADO);

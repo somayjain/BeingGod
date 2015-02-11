@@ -26,12 +26,14 @@ public class Power_GMBC : Powers {
 	// ANGER NEGATIVE
 	public void EnableRain () {
 		if ( !enabled ) return;
+		Levelcontroller.Powermode = LevelController.MODE.GMBC;
 		snow.GetComponent<ParticleEmitter>().emit = false;
 		rain.GetComponent<ParticleEmitter>().emit = true;
 	}
 	// JOY + POSITIVE
 	public void EnableSnow () {
 		if ( !enabled ) return;
+		Levelcontroller.Powermode = LevelController.MODE.GMBC;
 		rain.GetComponent<ParticleEmitter>().emit = false;
 		snow.GetComponent<ParticleEmitter>().emit = true;
 	}
