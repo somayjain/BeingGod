@@ -19,7 +19,7 @@ using RSUnityToolkit;
 public class RotationAction : BaseAction {
 
 	#region Public Fields	
-	
+
 	/// <summary>
 	/// The min/max rotation angles constraints
 	/// </summary>
@@ -174,22 +174,28 @@ public class RotationAction : BaseAction {
 	/// <summary>
 	/// Update is called once per frame.
 	/// </summary>
+	/// 
+
+	public cursor_handle cursor;
+
 	void Update () 
 	{	 
 		ProcessAllTriggers();
 		
 		//Start Event
-		if ( !_actionTriggered && SupportedTriggers[0].Success )
+		//Debug.Log (cursor.mode);
+		if ( !_actionTriggered && SupportedTriggers[0].Success && cursor.mode == cursor_handle.MODE.DEFAULT)
 		{			
-			_actionTriggered = true;	
-			
+			_actionTriggered = true;
+			cursor.mode = cursor_handle.MODE.ROTATE;
 			((RotationTrigger)SupportedTriggers[1]).Restart = true;
 			return;
 		}
 		
 		//Stop Event
 		if ( _actionTriggered && SupportedTriggers[2].Success )
-		{			
+		{	
+			cursor.mode = cursor_handle.MODE.DEFAULT;
 			_actionTriggered = false;	
 		}
 		

@@ -127,15 +127,19 @@ public class ScaleAction : BaseAction {
 	/// <summary>
 	/// Update is called once per frame.
 	/// </summary>
+	/// 
+
+	public cursor_handle cursor;
+
 	void Update () 
 	{	 
 		ProcessAllTriggers();
 		
 		//Start Event
-		if ( !_actionTriggered && SupportedTriggers[0].Success )
+		if ( !_actionTriggered && SupportedTriggers[0].Success && cursor.mode == cursor_handle.MODE.DEFAULT)
 		{
 			_actionTriggered = true;	
-			
+			cursor.mode = cursor_handle.MODE.ZOOM;
 			((ScaleTrigger)SupportedTriggers[1]).Restart = true;
 			return;
 		}
@@ -143,6 +147,7 @@ public class ScaleAction : BaseAction {
 		//Stop Event
 		if ( _actionTriggered && SupportedTriggers[2].Success )
 		{
+			cursor.mode = cursor_handle.MODE.DEFAULT;
 			_actionTriggered = false;	
 		}
 		

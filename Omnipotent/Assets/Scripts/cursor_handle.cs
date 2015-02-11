@@ -50,7 +50,10 @@ public class cursor_handle : MonoBehaviour {
 		MJOLNIR,
 		FIREBALL,
 		TORNADO,
-		HOG
+		HOG,
+		PAN,
+		ZOOM,
+		ROTATE
 	}
 	public MODE mode = MODE.DEFAULT;
 

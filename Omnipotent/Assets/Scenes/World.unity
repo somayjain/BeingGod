@@ -466,7 +466,7 @@ MonoBehaviour:
   FoldoutOpen: 1
   AssociatedAction: {fileID: 0}
   WhichHand: 2
-  HandIndex: 0
+  HandIndex: 1
   ContinuousTracking: 0
   OpennessFactor: 50
 --- !u!114 &5982402
@@ -571,6 +571,7 @@ MonoBehaviour:
   SmoothingType: 2
   RotateAround: 4
   RefGameObject: {fileID: 0}
+  cursor: {fileID: 1721188146}
 --- !u!114 &5982406
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -722,6 +723,7 @@ MonoBehaviour:
   Sensitivity: {x: -150, y: 0, z: 150}
   SmoothingFactor: 15.3999996
   SmoothingType: 2
+  cursor: {fileID: 1721188146}
 --- !u!114 &5982413
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -874,6 +876,7 @@ MonoBehaviour:
   ScaleDumpingFactor: .00100000005
   zoomDrag: 3.29999995
   zoomOut: 100
+  cursor: {fileID: 1721188146}
 --- !u!114 &5982421
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -9311,7 +9314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1326373555
 RectTransform:
   m_ObjectHideFlags: 0
