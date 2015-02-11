@@ -127,7 +127,8 @@ public class TranslateAction : VirtualWorldBoxAction {
 		//Stop Event
 		if ( _actionTriggered && SupportedTriggers[2].Success )
 		{
-			_actionTriggered = false;					
+			_actionTriggered = false;
+			lastTranslate = Vector3.zero;
 		}
 		
 		if ( !_actionTriggered )
@@ -150,6 +151,8 @@ public class TranslateAction : VirtualWorldBoxAction {
 			{
 				translate = _translationSmoothingUtility.ProcessSmoothing(SmoothingType, SmoothingFactor, translate);
 			}
+
+			//Debug.Log (translate.x);
 
 			// Our code
 			if (translate.x < 1 && translate.x > -1)

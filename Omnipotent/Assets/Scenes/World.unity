@@ -438,9 +438,9 @@ MonoBehaviour:
   Enabled: 1
   FoldoutOpen: 1
   AssociatedAction: {fileID: 0}
-  DistanceThresholdX: 0
-  DistanceThresholdY: 0
-  DistanceThresholdZ: 0
+  DistanceThresholdX: 1000
+  DistanceThresholdY: 5
+  DistanceThresholdZ: 5
 --- !u!114 &5982401
 MonoBehaviour:
   m_ObjectHideFlags: 2
