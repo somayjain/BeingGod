@@ -110,17 +110,18 @@ public class TranslateAction : VirtualWorldBoxAction {
 	/// Update is called once per frame.
 	/// </summary>
 	private Vector3 lastTranslate = Vector3.zero;
+	public cursor_handle cursor;
     void Update () 
 	{	 
 		updateVirtualWorldBoxCenter();
-		
 		ProcessAllTriggers();
 		
 		//Start Event
-		if ( !_actionTriggered && SupportedTriggers[0].Success )
+
+		if ( !_actionTriggered && SupportedTriggers[0].Success && cursor.mode == cursor_handle.MODE.DEFAULT)
 		{
-			_actionTriggered = true;	
-			
+			_actionTriggered = true;
+			cursor.mode = cursor_handle.MODE.PAN;
 			((TranslationTrigger)SupportedTriggers[1]).Restart = true;
 		}
 		
@@ -128,6 +129,7 @@ public class TranslateAction : VirtualWorldBoxAction {
 		if ( _actionTriggered && SupportedTriggers[2].Success )
 		{
 			_actionTriggered = false;
+			cursor.mode = cursor_handle.MODE.DEFAULT;
 			lastTranslate = Vector3.zero;
 		}
 		
