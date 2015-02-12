@@ -115,6 +115,7 @@ GameObject:
   - 114: {fileID: 5982439}
   - 114: {fileID: 5982421}
   - 114: {fileID: 5982413}
+  - 114: {fileID: 5982414}
   m_Layer: 0
   m_Name: Eye of God
   m_TagString: MainCamera
@@ -649,9 +650,10 @@ MonoBehaviour:
   ErrorDetected: 0
   FriendlyName: Stop Event
   Rules:
+  - {fileID: 5982414}
   - {fileID: 5982406}
   TriggerAttributeName: EventTriggerAtt
-  FoldoutOpen: 1
+  FoldoutOpen: 0
   AssociatedAction: {fileID: 0}
   Source: 
   Success: 0
@@ -743,6 +745,26 @@ MonoBehaviour:
   WhichHand: 2
   HandIndex: 0
   ContinuousTracking: 0
+--- !u!114 &5982414
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8425e81730581264e8bc707bd5925622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982412}
+  FriendlyName: Hand Closed
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  WhichHand: 2
+  HandIndex: 1
+  ContinuousTracking: 0
+  OpennessFactor: 50
 --- !u!114 &5982421
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -2633,8 +2655,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 179952633}
-  m_LocalRotation: {x: -.124451838, y: .259629965, z: .0337610841, w: .957060218}
-  m_LocalPosition: {x: 426.922852, y: -576.701111, z: -336.292694}
+  m_LocalRotation: {x: -.0442119427, y: .935049951, z: .328459561, w: .125862017}
+  m_LocalPosition: {x: 551.187195, y: -268.968323, z: 551.02655}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -14161,7 +14183,7 @@ MonoBehaviour:
   Enabled: 1
   FoldoutOpen: 1
   AssociatedAction: {fileID: 0}
-  Gesture: 8
+  Gesture: 4
   WhichHand: 4
   HandIndex: 0
   ContinuousTracking: 0
@@ -14218,7 +14240,7 @@ MonoBehaviour:
   Enabled: 1
   FoldoutOpen: 1
   AssociatedAction: {fileID: 0}
-  Gesture: 8
+  Gesture: 5
   WhichHand: 3
   HandIndex: 0
   ContinuousTracking: 0
