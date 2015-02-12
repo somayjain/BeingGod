@@ -99,49 +99,86 @@ public class HandRenderer : MonoBehaviour {
 		outputData = _outputData;
 
 		Vector3 pos, palmCenterPos;
-            avgQueue.Enqueue(_myJointData);
+        avgQueue.Enqueue(_myJointData);
 
-            foreach (PXCMHandData.JointData[,] temp in avgQueue)
-                for (int i = 0; i < MaxHands; i++)
-                    for (int j = 0; j < PXCMHandData.NUMBER_OF_JOINTS; j++)
-                        if (temp[i, j] != null && _myJointData[i, j] != null)
-                        {
-                            myJoints[i, j].SetActive(true);
-                            sumOfJointPositions[i, j] += new Vector3(-1 * temp[i, j].positionWorld.x * 2.0f, temp[i, j].positionWorld.y * 1.2f, temp[i, j].positionWorld.z);
-                        }
-                        else
-                            myJoints[i, j].SetActive(false);
-
+        foreach (PXCMHandData.JointData[,] temp in avgQueue)
             for (int i = 0; i < MaxHands; i++)
-			{
-				palmCenterPos = (sumOfJointPositions[i, 1] / avgQueue.Count) * factor;
-				if(bodySide[i] == (PXCMHandData.BodySideType)1)
-					// Left Hand
-					leftPalmCenterJoint = (sumOfJointPositions[i, 1] / avgQueue.Count) * factor;
+                for (int j = 0; j < PXCMHandData.NUMBER_OF_JOINTS; j++)
+                    if (temp[i, j] != null && _myJointData[i, j] != null)
+                    {
+                        myJoints[i, j].SetActive(true);
+                        sumOfJointPositions[i, j] += new Vector3(-1 * temp[i, j].positionWorld.x * 2.0f, temp[i, j].positionWorld.y * 1.2f, temp[i, j].positionWorld.z);
+                    }
+                    else
+                        myJoints[i, j].SetActive(false);
+
+        for (int i = 0; i < MaxHands; i++)
+		{
+			palmCenterPos = (sumOfJointPositions[i, 1] / avgQueue.Count) * factor;
+			if(bodySide[i] == (PXCMHandData.BodySideType)1)
+				// Left Hand
+				leftPalmCenterJoint = (sumOfJointPositions[i, 1] / avgQueue.Count) * factor;
+			
+			else if(bodySide[i] == (PXCMHandData.BodySideType)2)
+				// Right Hand
+				rightPalmCenterJoint = (sumOfJointPositions[i, 1] / avgQueue.Count) * factor;
+			
+			for (int j = 0; j < PXCMHandData.NUMBER_OF_JOINTS; j++)
+            {
+				pos = (sumOfJointPositions[i, j] / avgQueue.Count) * factor;
+				//Debug.Log ("Joint " + j + ": " + (pos - palmCenterPos).ToString ());
+                
+				myJoints[i, j].transform.localPosition = pos;
+                sumOfJointPositions[i, j] = Vector3.zero;
+            }
+		}
+
+		for (int i = 0; i < MaxHands; i++)
+			for (int j = 0; j < PXCMHandData.NUMBER_OF_JOINTS; j++) {		
 				
-				else if(bodySide[i] == (PXCMHandData.BodySideType)2)
-					// Right Hand
-					rightPalmCenterJoint = (sumOfJointPositions[i, 1] / avgQueue.Count) * factor;
+				if (j != 21 && j != 0 && j != 1 && j != 5 && j != 9 && j != 13 && j != 17)
+					UpdateBoneTransform (myBones [i, j], myJoints [i, j], myJoints [i, j + 1]);
 				
-				for (int j = 0; j < PXCMHandData.NUMBER_OF_JOINTS; j++)
-                {
-					pos = (sumOfJointPositions[i, j] / avgQueue.Count) * factor;
-					//Debug.Log ("Joint " + j + ": " + (pos - palmCenterPos).ToString ());
-                    
-					myJoints[i, j].transform.localPosition = pos;
-                    sumOfJointPositions[i, j] = Vector3.zero;
-                }
-			}
-            if (avgQueue.Count >= SmoothingFactor)
-                avgQueue.Dequeue();
+				UpdateBoneTransform (myBones [i, 21], myJoints [i, 0], myJoints [i, 2]);
+				UpdateBoneTransform (myBones [i, 17], myJoints [i, 0], myJoints [i, 18]);
+				
+				UpdateBoneTransform (myBones [i, 5], myJoints [i, 14], myJoints [i, 18]);
+				UpdateBoneTransform (myBones [i, 9], myJoints [i, 10], myJoints [i, 14]);
+				UpdateBoneTransform (myBones [i, 13], myJoints [i, 6], myJoints [i, 10]);
+				UpdateBoneTransform (myBones [i, 0], myJoints [i, 2], myJoints [i, 6]);
+		}
+
+        if (avgQueue.Count >= SmoothingFactor)
+            avgQueue.Dequeue();
 
     }
+
+	//Update Bones
+	void UpdateBoneTransform (GameObject _bone, GameObject _prevJoint, GameObject _nextJoint)
+	{
+		
+		if (_prevJoint.activeSelf == false || _nextJoint.activeSelf == false)
+			_bone.SetActive (false);
+		else {
+			_bone.SetActive (true);
+			
+			// Update Position
+			_bone.transform.position = ((_nextJoint.transform.position - _prevJoint.transform.position) / 2f) + _prevJoint.transform.position;
+			
+			// Update Scale
+			_bone.transform.localScale = new Vector3 (0.8f, (_nextJoint.transform.position - _prevJoint.transform.position).magnitude - (_prevJoint.transform.position - _nextJoint.transform.position).magnitude / 2f, 0.8f);
+			
+			// Update Rotation
+			_bone.transform.rotation = Quaternion.FromToRotation (Vector3.up, _nextJoint.transform.position - _prevJoint.transform.position);
+		}
+		
+	}
 
 	public Vector2 queryLeftHand2DCoordinates()
 	{
 		if (outputData != null) {
 			Vector3 pos = transform.TransformPoint (leftPalmCenterJoint);
-			//Debug.Log ("Left hand Screen coords " + Camera.main.camera.WorldToScreenPoint (pos).ToString ());
+			Debug.Log ("Left hand Screen coords " + Camera.main.camera.WorldToScreenPoint (pos).ToString ());
 			return Camera.main.camera.WorldToScreenPoint(pos);
 		}
 		else
@@ -155,7 +192,7 @@ public class HandRenderer : MonoBehaviour {
 	{
 		if (outputData != null) {
 			Vector3 pos = transform.TransformPoint (rightPalmCenterJoint);
-			//Debug.Log ("Right hand Screen coords " + Camera.main.camera.WorldToScreenPoint (pos).ToString ());
+			Debug.Log ("Right hand Screen coords " + Camera.main.camera.WorldToScreenPoint (pos).ToString ());
 			return Camera.main.camera.WorldToScreenPoint(pos);
 		}
 		else
