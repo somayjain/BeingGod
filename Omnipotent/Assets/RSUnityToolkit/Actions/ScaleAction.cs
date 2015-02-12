@@ -242,7 +242,7 @@ public class ScaleAction : BaseAction {
 			// Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
 			// Vector3 move = pos.y * zoomSpeed * transform.forward; 
 			Vector3 move = _scaleX * transform.forward;
-			//Debug.Log (_scaleX);
+			Debug.Log (_scaleX);
 			// Set Drag
 			rigidbody.drag = zoomDrag;
 			
