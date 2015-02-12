@@ -396,7 +396,11 @@ namespace RSUnityToolkit
 				if (handConfiguration == null) throw new UnityException("CreateActiveConfiguration returned null");
 				                			
 				handConfiguration.Update();   
-                handConfiguration.EnableAllGestures();
+                //handConfiguration.EnableAllGestures();
+				handConfiguration.EnableGesture("v_sign");
+				handConfiguration.EnableGesture("thumb_up");
+				handConfiguration.EnableGesture ("thumb_down");
+				handConfiguration.EnableGesture ("two_fingers_pinch_open");
                 handConfiguration.EnableStabilizer(true);
 				handConfiguration.DisableAllAlerts();
                 handConfiguration.EnableSegmentationImage(false);
