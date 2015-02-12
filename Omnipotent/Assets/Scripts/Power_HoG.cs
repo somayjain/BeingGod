@@ -9,11 +9,10 @@ public class Power_HoG : Powers {
 	public GameObject faceMesh2;
 	public GameObject faceMesh3;
 	public GameObject faceMesh4;
-		bool flag=false;
+	bool flag=false;
 
 	// Use this for initialization
 	void Start () {
-		enabled = true;
 		time_left = Cooldown;
 		refresh = true;
 	}
@@ -89,7 +88,7 @@ public class Power_HoG : Powers {
 //			faceMesh4.transform.localScale = new Vector3(0.04f,0.05f,0.05f);
 //			faceMesh4.transform.localRotation = Quaternion.Euler(-10,90,0);
 			
-			XP.AddXP(XP_per_NPC, PowerType);
+//			XP.AddXP(XP_per_NPC, PowerType);
 		}
 	}
 	

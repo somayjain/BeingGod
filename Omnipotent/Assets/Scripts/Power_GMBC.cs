@@ -11,7 +11,6 @@ public class Power_GMBC : Powers {
 
 	// Use this for initialization
 	void Start () {
-		enabled = true;
 	}
 	
 	// Update is called once per frame

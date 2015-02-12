@@ -4,31 +4,10 @@ using UnityEngine.UI;
 
 public class Power_Mjolnir : Powers {
 
-//	public enum POWERTYPE
-//	{
-//		GOOD, 
-//		NEUTRAL, 
-//		EVIL
-//	};
-//
-//	public cursor_handle cursor;
 	public GameObject Mjolnir;
-
-//	public float Cooldown = 10.0f;
-//	public float CastTime = 3.0f;
-//	
-//	private float time_left = 0.0f;
-//	private bool refresh = false;
-//	private bool active = false;
-//
-//	public POWERTYPE PowerType = POWERTYPE.NEUTRAL;
-//	public float XP_per_NPC = 1.0f;
-//
-//	private bool enabled = false;
 
 	// Use this for initialization
 	void Start () {
-		enabled = true;
 		time_left = Cooldown;
 		refresh = true;
 	}
@@ -75,13 +54,14 @@ public class Power_Mjolnir : Powers {
 
 			Mjolnir.transform.position = loc;
 			Mjolnir.SetActive (active);
-
-//			XP.AddXP(XP_per_NPC, PowerType);
 		}
 	}
 
 	public void AddXP (int num_of_people, int flag) {
-		XP.AddXP (num_of_people * XP_per_NPC, PowerType);
+		if (flag > 0)
+			XP.AddXP (num_of_people * XP_per_NPC, POWERTYPE.GOOD);
+		else
+			XP.AddXP (num_of_people * XP_per_NPC, POWERTYPE.EVIL);
 	}
 	
 	public void OnClick () {
