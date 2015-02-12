@@ -121,6 +121,8 @@ public class HandRenderer : MonoBehaviour {
 
 		Vector3 pos, palmCenterPos;
         avgQueue.Enqueue(_myJointData);
+		bool leftPresent = false;
+		bool rightPresent = false;
 
         foreach (PXCMHandData.JointData[,] temp in avgQueue)
             for (int i = 0; i < MaxHands; i++)
@@ -137,13 +139,18 @@ public class HandRenderer : MonoBehaviour {
 		{
 			palmCenterPos = (sumOfJointPositions[i, 1] / avgQueue.Count) * factor;
 			if(bodySide[i] == (PXCMHandData.BodySideType)1)
+			{
 				// Left Hand
 				leftPalmCenterJoint = (sumOfJointPositions[i, 1] / avgQueue.Count) * factor;
-			
+				leftPresent = true;
+			}
 			else if(bodySide[i] == (PXCMHandData.BodySideType)2)
+			{
 				// Right Hand
 				rightPalmCenterJoint = (sumOfJointPositions[i, 1] / avgQueue.Count) * factor;
-			
+				rightPresent = true;
+			}
+
 			for (int j = 0; j < PXCMHandData.NUMBER_OF_JOINTS; j++)
             {
 				pos = (sumOfJointPositions[i, j] / avgQueue.Count) * factor;
@@ -172,6 +179,10 @@ public class HandRenderer : MonoBehaviour {
         if (avgQueue.Count >= SmoothingFactor)
             avgQueue.Dequeue();
 
+		if(!leftPresent)
+			myGestureTextLeft.GetComponent<Text> ().text = "";
+		if(!rightPresent)
+			myGestureTextRight.GetComponent<Text> ().text = "";
     }
 
 	//Update Bones
