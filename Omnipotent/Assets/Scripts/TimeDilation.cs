@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using RSUnityToolkit;
 
 public class TimeDilation : MonoBehaviour {
 
@@ -18,5 +19,20 @@ public class TimeDilation : MonoBehaviour {
 				Time.timeScale = scale;
 				last_scale = scale;
 		}
+	}
+
+	// used by SendMessage components
+	public void increaseSpeed(Trigger trgr) {
+		float speed = (float)GetComponent<Slider> ().value;
+		if(speed + 1.0f <= 20)
+			GetComponent<Slider> ().value = speed + 1.0f;
+		Debug.Log ("increase to " + speed);
+	}
+
+	public void decreaseSpeed(Trigger trgr) {
+		float speed = (float)GetComponent<Slider> ().value;
+		if(speed - 1.0f > 0)
+			GetComponent<Slider> ().value = speed - 1.0f;
+		Debug.Log ("decrease to " + speed);
 	}
 }

@@ -233,10 +233,19 @@ public class LoadVoxelPeople : MonoBehaviour {
 				else{
 					if((people[i].transform.position-tornadoLoc).magnitude <= tornadoRange){
 						csHandle.PowerTornado.AddXP(1,-1);
-						people[i].GetComponent<NavAgentMovement>().haltMovement(true);
+						//people[i].GetComponent<NavAgentMovement>().haltMovement(true);
+						//people[i].GetComponent<Rigidbody>().AddForce(10000,300000,100000);
+						people[i].GetComponent<NavMeshAgent>().Stop();
+						people[i].rigidbody.isKinematic = false;
+						people[i].rigidbody.useGravity = true;
+						people[i].rigidbody.AddForce(new Vector3(5,100,5));
+						// AddRelativeForce(new Vector3(10,100,10),ForceMode.Impulse);
 					}else{
-						if((people[i].transform.position-tornadoLoc).magnitude > tornadoRange){
-							people[i].GetComponent<NavAgentMovement>().haltMovement(false);
+						if((people[i].transform.position-tornadoLoc).magnitude > 2*tornadoRange){
+							people[i].GetComponent<NavMeshAgent>().Resume();
+							people[i].rigidbody.isKinematic = true;
+							people[i].rigidbody.useGravity = false;
+							//people[i].GetComponent<NavAgentMovement>().haltMovement(false);
 						}
 					}
 				}
