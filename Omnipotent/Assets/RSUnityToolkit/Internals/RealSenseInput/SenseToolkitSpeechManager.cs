@@ -115,13 +115,13 @@ namespace RSUnityToolkit
 		
 		#region Private Fields
 		
-		private PXCMSession session;		
+		private PXCMSession session;
 		private bool _isInitialized = false;
 		
 		private PXCMAudioSource.DeviceInfo[] sourceDeviceInfo;
 		private int[] modulesIuID;
-
 		
+//		private PXCMAudio audio;
 		private PXCMAudioSource source;
 		private PXCMSpeechRecognition sr;
 		
@@ -159,7 +159,7 @@ namespace RSUnityToolkit
 			_isInitialized = false;
 			
 			session = PXCMSession.CreateInstance();
-			
+
 			//Get Sources
 			source = session.CreateAudioSource();
 			if (source == null)
@@ -430,6 +430,32 @@ namespace RSUnityToolkit
 			}
 			return false;
 		}
+
+		public int abc(Byte[] databuff, int index, PXCMAudio.AudioInfo audioinfo)
+		{
+			PXCMAudio.AudioInfo ainfo=new PXCMAudio.AudioInfo() {
+				bufferSize=8820,                   // max number of bytes
+				format=PXCMAudio.AudioFormat.AUDIO_FORMAT_PCM,    // audio sample format
+				sampleRate=44100,              // sampling rate in Hz
+				nchannels=2,                          // number of channels
+			};
+
+			PXCMAudio audio = session.CreateAudio (ainfo);
+			if (audio == null) {
+					Debug.Log ("RSSDK: CreateAudio error !");
+					return 0;
+			}
+
+			audioinfo = audio.QueryInfo ();
+			PXCMAudio.AudioData data;
+			int num_samples = 0;
+			audio.AcquireAccess(PXCMAudio.Access.ACCESS_READ,out data);
+			data.ToByteArray ().CopyTo (databuff, (long)index);
+			num_samples = (int)(data.dataSize);
+			audio.ReleaseAccess(data);
+			audio.Dispose ();
+			return num_samples;
+		}
 		
 		#endregion
 		
@@ -671,7 +697,8 @@ namespace RSUnityToolkit
 			VoiceThreadError_CommandsListEmpty,
 			VoiceThreadError_AlreadyRunning,
 			VoiceThreadError_ResetFailed_StartRec,
-			VoiceThreadError_UnrecognizedLabel
+			VoiceThreadError_UnrecognizedLabel,
+//			CreateAudioFailed
 		};
 		
 		/// <summary>
