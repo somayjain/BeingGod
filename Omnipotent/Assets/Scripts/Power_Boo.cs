@@ -6,7 +6,6 @@ public class Power_Boo : Powers {
 
 	// Use this for initialization
 	void Start () {
-		enabled = true;
 		time_left = Cooldown;
 		refresh = true;
 	}

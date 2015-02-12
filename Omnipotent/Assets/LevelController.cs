@@ -7,7 +7,7 @@ public class LevelController : MonoBehaviour {
 
 	bool gamePaused = false;
 	bool levelInProgress = false;
-	public int currentLevel=0;
+	public int currentLevel=1;
 	bool levelInit = true;
 	float tutTimer = 15.0f;
 	public GameObject TutImage;
@@ -82,7 +82,7 @@ public class LevelController : MonoBehaviour {
 			}
 		}
 		if (currentLevel == 2) {
-			if(Powermode == MODE.FIREBALL){
+			if(Powermode == MODE.GMBC){
 				objectiveComplete[0] = true;
 				toggle[0].isOn = true;
 				toggle[0].transform.GetChild(1).GetComponent<Text>().color=Color.green;
@@ -231,7 +231,7 @@ public class LevelController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		currentLevel = 3;
+		currentLevel = 1;
 
 		//init Person manager
 		peopleManager = GameObject.FindGameObjectWithTag ("PeopleManager");

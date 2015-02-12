@@ -68,6 +68,7 @@ public class cursor_handle : MonoBehaviour {
 	public Power_HoG PowerHoG;
 	public Power_Hey PowerHey;
 	public Power_Boo PowerBoo;
+	public Power_GMBC PowerGMBC;
 
 	public GameObject PeopleManager;
 	public GameObject currentLevel;

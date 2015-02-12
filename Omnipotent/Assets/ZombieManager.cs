@@ -55,6 +55,8 @@ public class ZombieManager : MonoBehaviour {
 			zombSource.Add(zS.transform.position);
 		}
 
+		csHandle = GameObject.FindWithTag ("Hand").GetComponent<cursor_handle> ();
+
 	}
 
 	public void updateDest(){
@@ -178,7 +180,7 @@ public class ZombieManager : MonoBehaviour {
 
 			if(Powermode == MODE.MJOLNIR ){
 				if(hitDistance<=rayPowRange){
-					//csHandle.PowerMjolnir.AddXP(1,1);
+					csHandle.PowerMjolnir.AddXP(1,1);
 					Destroy(ZombieList[i]);
 					ZombieList.RemoveAt(i);
 		            nosZombies = ZombieList.Count;
@@ -190,7 +192,7 @@ public class ZombieManager : MonoBehaviour {
 			if(fireTimer == true){
 				if(timeToHit<=0.0f){
 						if((ZombieList[i].transform.position-hit3DLoc).magnitude <= rayPowRange){
-						//csHandle.PowerFireball.AddXP(1,1);
+						csHandle.PowerFireball.AddXP(1,1);
 							//Debug.Log("Ball hitting"+ZombieList[i].name);
 							if(ZombieList[i]!=null)
 								Destroy(ZombieList[i]);
@@ -209,7 +211,7 @@ public class ZombieManager : MonoBehaviour {
 					ZombieList[i].GetComponent<ZombieNavAgent>().haltMovement(false);
 				else{
 				if((ZombieList[i].transform.position-tornadoLoc).magnitude <= tornadoRange){
-						//csHandle.PowerTornado.AddXP(1,1);
+						csHandle.PowerTornado.AddXP(1,1);
 					//Debug.Log ("halting: "+people[i].name);
 					ZombieList[i].GetComponent<ZombieNavAgent>().haltMovement(true);
 				}else{

@@ -4,16 +4,10 @@ using UnityEngine.UI;
 
 public class Power_ThunderClap : Powers {
 
-//	public cursor_handle cursor;
 	public GameObject ThunderClap;
-
-//	public float time = 8.0f;
-//	private float time_left = 0;
-//	private bool active = false;
 
 	// Use this for initialization
 	void Start () {
-		enabled = true;
 		time_left = Cooldown;
 		refresh = true;
 	}
