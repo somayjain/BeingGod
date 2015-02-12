@@ -7,8 +7,9 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: RedMat
-  m_Shader: {fileID: 7, guid: 0000000000000000e000000000000000, type: 0}
+  m_Shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
+  m_CustomRenderQueue: -1
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -24,4 +25,4 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .634328365, g: .288761407, b: .288761407, a: 1}
+        second: {r: 1, g: .937746465, b: .454901934, a: 1}

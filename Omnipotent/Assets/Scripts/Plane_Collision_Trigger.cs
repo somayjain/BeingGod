@@ -25,6 +25,8 @@ public class Plane_Collision_Trigger : MonoBehaviour {
 			
 //			DestroyObject(other.gameObject);
 			StartCoroutine(W2SnD(other.gameObject));	//Wait for 2 Seconds and Destroy
+		} else {
+			other.transform.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
 		}
 	}
 	

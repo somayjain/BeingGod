@@ -5,8 +5,8 @@ public class addFace : MonoBehaviour {
 	Mesh mesh;
 	// Use this for initialization
 	void Start () {
-		gameObject.AddComponent("MeshFilter");
-		gameObject.AddComponent("MeshRenderer");
+		//gameObject.AddComponent("MeshFilter");
+		//gameObject.AddComponent("MeshRenderer");
 		mesh = CreatePlaneMesh();
 		gameObject.GetComponent<MeshFilter>().mesh = mesh;
 		Material newMat = Resources.Load("DiffuseMat", typeof(Material)) as Material;

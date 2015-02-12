@@ -49,7 +49,8 @@ public class cursor_handle : MonoBehaviour {
 		GMBC,
 		MJOLNIR,
 		FIREBALL,
-		TORNADO
+		TORNADO,
+		HOG
 	}
 	public MODE mode = MODE.DEFAULT;
 
@@ -58,6 +59,7 @@ public class cursor_handle : MonoBehaviour {
 	public Power_Mjolnir PowerMjolnir;
 	public Power_Fireball PowerFireball;
 	public Power_Tornado PowerTornado;
+	public Power_HoG PowerHoG;
 
 	public GameObject PeopleManager;
 	public GameObject currentLevel;
@@ -166,6 +168,17 @@ public class cursor_handle : MonoBehaviour {
 				}
 			}
 			break;
+
+		case MODE.HOG:
+			Cursor.SetCursor (tornado_cursor, Vector2.zero, CursorMode.Auto);
+			if ( !isOnHUD() && !isOnShelf() ) {
+				if (Input.GetMouseButtonUp(0)) {
+					PowerHoG.Trigger( cursor3d );
+					setMode (MODE.DEFAULT);
+				}
+			}
+			break;
+
 		}
 	}
 
