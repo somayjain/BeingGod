@@ -2,18 +2,29 @@
 // Require a character controller to be attached to the same game object
 @script RequireComponent(CharacterController)
 
-public var idleAnimation : AnimationClip;
+public var idleAnimation01 : AnimationClip;
+public var idleAnimation02 : AnimationClip;
+public var idleAnimation03 : AnimationClip;
+
 public var walkAnimation : AnimationClip;
 public var runAnimation : AnimationClip;
-public var jumpPoseAnimation : AnimationClip;
+private public var jumpPoseAnimation : AnimationClip;
+
+public var JumpPoseAnimation : AnimationClip;
+public var LeftjumpPoseAnimation : AnimationClip;
+public var RightjumpPoseAnimation : AnimationClip;
 
 public var walkMaxAnimationSpeed : float = 0.75;
 public var trotMaxAnimationSpeed : float = 1.0;
 public var runMaxAnimationSpeed : float = 1.0;
-public var jumpAnimationSpeed : float = 1.15;
+private var jumpAnimationSpeed : float = 1.5;
+public  var JumpAnimationSpeed : float = 1.5;
+public var sideJumpAnimationSpeed : float = 1.0; 
 public var landAnimationSpeed : float = 1.0;
 
 private var _animation : Animation;
+private var idleRnd:int=0;
+private var sideMove:float=0;
 
 enum CharacterState {
 	Idle = 0,
@@ -21,6 +32,7 @@ enum CharacterState {
 	Trotting = 2,
 	Running = 3,
 	Jumping = 4,
+ 
 }
 
 private var _characterState : CharacterState;
@@ -90,6 +102,10 @@ private var lastGroundedTime = 0.0;
 
 private var isControllable = true;
 
+
+InvokeRepeating ("idleRND",0,2);
+
+
 function Awake ()
 {
 	moveDirection = transform.TransformDirection(Vector3.forward);
@@ -98,13 +114,8 @@ function Awake ()
 	if(!_animation)
 		Debug.Log("The character you would like to control doesn't have animations. Moving her might look weird.");
 	
-	/*
-public var idleAnimation : AnimationClip;
-public var walkAnimation : AnimationClip;
-public var runAnimation : AnimationClip;
-public var jumpPoseAnimation : AnimationClip;	
-	*/
-	if(!idleAnimation) {
+ 
+	if(!idleAnimation01||!idleAnimation02) {
 		_animation = null;
 		Debug.Log("No idle animation found. Turning off animations.");
 	}
@@ -136,7 +147,7 @@ function UpdateSmoothedMovementDirection ()
 
 	// Right vector relative to the camera
 	// Always orthogonal to the forward vector
-	var right = Vector3(forward.z, 0, -forward.x);
+	var right = Vector3(forward.z, 0,forward.x);
 
 	var v = Input.GetAxisRaw("Vertical");
 	var h = Input.GetAxisRaw("Horizontal");
@@ -190,7 +201,7 @@ function UpdateSmoothedMovementDirection ()
 		_characterState = CharacterState.Idle;
 		
 		// Pick speed modifier
-		if (Input.GetKey (KeyCode.LeftShift) || Input.GetKey (KeyCode.RightShift))
+		if (Input.GetKey (KeyCode.LeftShift) | Input.GetKey (KeyCode.RightShift))
 		{
 			targetSpeed *= runSpeed;
 			_characterState = CharacterState.Running;
@@ -222,9 +233,7 @@ function UpdateSmoothedMovementDirection ()
 		if (isMoving)
 			inAirVelocity += targetDirection.normalized * Time.deltaTime * inAirControlAcceleration;
 	}
-	
-
-		
+ 
 }
 
 
@@ -293,8 +302,8 @@ function Update() {
 		// kill all inputs if not controllable.
 		Input.ResetInputAxes();
 	}
-
-	if (Input.GetButtonDown ("Jump"))
+ 
+	if (Input.GetButtonDown ("Jump")|| Input.GetKeyDown ("y") || Input.GetKeyDown ("m"))
 	{
 		lastJumpButtonTime = Time.time;
 	}
@@ -310,7 +319,7 @@ function Update() {
 	ApplyJumping ();
 	
 	// Calculate actual motion
-	var movement = moveDirection * moveSpeed + Vector3 (0, verticalSpeed, 0) + inAirVelocity;
+	var movement = moveDirection * moveSpeed + Vector3 (0,verticalSpeed, 0) + inAirVelocity;
 	movement *= Time.deltaTime;
 	
 	// Move the controller
@@ -318,6 +327,33 @@ function Update() {
 	collisionFlags = controller.Move(movement);
 	
 	// ANIMATION sector
+	if (Input.GetButtonDown ("Jump")){
+  		jumpPoseAnimation=JumpPoseAnimation;
+  		jumpAnimationSpeed=JumpAnimationSpeed;
+  		 sideMove=0;
+  		}
+	if (Input.GetKeyDown ("y"))
+		{
+		jumpPoseAnimation=LeftjumpPoseAnimation;
+		jumpAnimationSpeed=sideJumpAnimationSpeed;
+		 sideMove= 0.2;
+	///	 Debug.Log (GameObject.Find ("SideJumpDummy").transform.position-this.transform.position+"   "+this.transform.TransformDirection);
+		 
+		}
+	if (Input.GetKeyDown ("m"))
+		{
+		jumpPoseAnimation=RightjumpPoseAnimation;
+		jumpAnimationSpeed=sideJumpAnimationSpeed;
+		 sideMove=- 0.2;
+		}
+		
+		if (IsJumping ()){
+		this.transform.localPosition +=  (GameObject.Find ("SideJumpDummy").transform.position-this.transform.position) *sideMove   ;
+		 
+		 }
+		
+		
+		
 	if(_animation) {
 		if(_characterState == CharacterState.Jumping) 
 		{
@@ -333,8 +369,23 @@ function Update() {
 		} 
 		else 
 		{
+		
+		
 			if(controller.velocity.sqrMagnitude < 0.1) {
-				_animation.CrossFade(idleAnimation.name);
+					if (lastJumpTime + jumpRepeatTime > Time.time)
+					
+					idleRnd=Random.Range (0,3);
+			
+				switch (idleRnd){
+								
+				case 0: _animation.CrossFade(idleAnimation01.name);
+						break;
+				case 1: _animation.CrossFade(idleAnimation02.name);
+						break;
+				case 2: _animation.CrossFade(idleAnimation03.name);
+						break;
+				}
+				 
 			}
 			else 
 			{
@@ -438,3 +489,11 @@ function Reset ()
 	gameObject.tag = "Player";
 }
 
+
+function idleRND()
+{
+	 
+	idleRnd=Random.Range (0,3);
+
+
+}

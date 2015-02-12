@@ -27,7 +27,7 @@ public class ZombieManager : MonoBehaviour {
 	bool haltOn = false;
 	float haltTimer = 3.0f;
 
-	private cursor_handle csHandle;
+	private cursor_handle csHandle ;
 
 
 	public enum MODE {
@@ -49,7 +49,7 @@ public class ZombieManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		csHandle = GameObject.FindGameObjectWithTag ("Hand").GetComponent<cursor_handle> ();
 		GameObject [] zSource = GameObject.FindGameObjectsWithTag("Zsource");
 		foreach (GameObject zS in zSource) {
 			zombSource.Add(zS.transform.position);
@@ -191,8 +191,10 @@ public class ZombieManager : MonoBehaviour {
 
 			if(fireTimer == true){
 				if(timeToHit<=0.0f){
-						if((ZombieList[i].transform.position-hit3DLoc).magnitude <= rayPowRange){
-						csHandle.PowerFireball.AddXP(1,1);
+
+						if((ZombieList[i].transform.position-hit3DLoc).magnitude <= 15.0f){
+						    csHandle.PowerFireball.AddXP(1,1);
+
 							//Debug.Log("Ball hitting"+ZombieList[i].name);
 							if(ZombieList[i]!=null)
 								Destroy(ZombieList[i]);
@@ -211,7 +213,8 @@ public class ZombieManager : MonoBehaviour {
 					ZombieList[i].GetComponent<ZombieNavAgent>().haltMovement(false);
 				else{
 				if((ZombieList[i].transform.position-tornadoLoc).magnitude <= tornadoRange){
-						csHandle.PowerTornado.AddXP(1,1);
+					csHandle.PowerTornado.AddXP(1,1);
+
 					//Debug.Log ("halting: "+people[i].name);
 					ZombieList[i].GetComponent<ZombieNavAgent>().haltMovement(true);
 				}else{
