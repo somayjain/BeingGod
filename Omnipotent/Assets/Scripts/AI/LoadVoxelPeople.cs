@@ -83,6 +83,18 @@ public class LoadVoxelPeople : MonoBehaviour {
 	}
 
 	private float secs = 1.0f;
+
+	public void initPersonRandom(int nosPeople){
+		float l_secs = 1.0f;
+		
+		Vector3 c_housePos = sources[Random.Range(0,sources.Count)];
+		
+		for (int i=0; i<nosPeople; i++) {
+			l_secs++;
+			StartCoroutine(createPPL(c_housePos, l_secs));
+		}
+	}
+
 	public void initPerson(int nosPeople){
 		float l_secs = 1.0f;
 
@@ -91,20 +103,6 @@ public class LoadVoxelPeople : MonoBehaviour {
 		for (int i=0; i<nosPeople; i++) {
 	l_secs++;
 			StartCoroutine(createPPL(c_housePos, l_secs));
-//						int rand_indx = Random.Range (0, nos_sources);
-//			            Vector3 sourceLoc = newHouseLoc;
-//						Vector3 targetLoc = sources [rand_indx];
-//						int rand_chr = Random.Range (0, prefabNameList.Count);
-//						GameObject obs = (GameObject)Instantiate (Resources.Load ("prefabs/" + prefabNameList [rand_chr]), sourceLoc, Quaternion.AngleAxis (270, Vector3.right)) as GameObject;
-//						obs.name = prefabNameList [rand_chr];
-//						obs.transform.parent = transform;
-//						NavMeshAgent agent = (NavMeshAgent)obs.AddComponent ("NavMeshAgent");
-//						NavAgentMovement agentMovement = obs.AddComponent<NavAgentMovement> ();
-//						agentMovement.target = targetLoc;
-//						obs.transform.GetChild(0).gameObject.SetActive(false);
-//						//obs.transform.GetComponent<Rigidbody> ().detectCollisions = false;
-//						obs.transform.FindChild (obs.name).transform.Rotate (Vector3.forward, 180);
-//						people.Add (obs);
 				}
 	}
 
@@ -163,9 +161,15 @@ public class LoadVoxelPeople : MonoBehaviour {
 			if(hoverTextTimer<=0.0f){
 				chosenMode = false;
 				hoverTextTimer = 5.0f;
-				people[chosenOne].GetComponent<NavAgentMovement>().haltMovement(false);
+				for(int i=0;i<people.Count;i++){
+				people[i].GetComponent<NavAgentMovement>().haltMovement(false);
 					//Debug.Log (people[i].transform.GetChild(0).GetChild(0).GetComponent<Text>().text);
-					people[chosenOne].transform.GetChild(0).gameObject.SetActive(false);
+				people[i].transform.GetChild(0).gameObject.SetActive(false);
+				if(people[i].transform.childCount==3){
+						Transform toDestroyRays = people[i].transform.GetChild(2);
+						Destroy (toDestroyRays.gameObject);
+					}
+				}
 			}else{
 				if(chosenMode == false){
 					chosenMode = true;
@@ -262,7 +266,11 @@ public class LoadVoxelPeople : MonoBehaviour {
 					//csHandle.PowerHey.AddXP(1,1);
 					people[i].transform.GetChild(0).gameObject.SetActive(true);
 					people[i].GetComponentInChildren<Text>().text = HeyString[Random.Range(0,HeyString.Count)];
-						person_script.haltMovement(true);
+					GameObject godRays = (GameObject)Instantiate (Resources.Load ("GodRays"),Vector3.zero,	Quaternion.identity) as GameObject;
+					godRays.transform.parent = people[i].transform;
+					godRays.transform.localPosition = new Vector3(0,0,0);
+					person_script.haltMovement(true);
+					person_script.health += 10.0f;
 					}
 				}
 			}
