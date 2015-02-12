@@ -7,6 +7,7 @@ public class cursor_handle : MonoBehaviour {
 	public Camera camera;
 
 	public Vector3 cursor3d;
+	public GameObject cursor;
 
 	[Header("Cursors")]
 	public Texture2D normal;
@@ -77,6 +78,13 @@ public class cursor_handle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Vector2 handpos = GetComponentInChildren<HandRenderer> ().queryLeftHand2DCoordinates ();
+		if (handpos.x == -1 && handpos.y == -1) {
+						cursor.SetActive (false);
+				} else {
+						cursor.SetActive (true);
+						cursor.GetComponent<RectTransform> ().position = new Vector3 (handpos.x, handpos.y, 0);
+				}
 		Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 		if(Physics.Raycast(ray, out hit)) {

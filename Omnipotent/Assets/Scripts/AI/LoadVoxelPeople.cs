@@ -50,7 +50,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 	Vector3 newHouseLoc = new Vector3();
 
 	float interactTimer = 5.0f;
-	bool interactNPC = true;
+	bool interactNPC = false;
 	int NPC;
 
 	public cursor_handle csHandle;
