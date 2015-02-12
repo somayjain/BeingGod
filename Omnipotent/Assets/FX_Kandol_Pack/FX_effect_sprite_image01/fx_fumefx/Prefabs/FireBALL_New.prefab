@@ -96,7 +96,7 @@ GameObject:
   - 198: {fileID: 19845200}
   - 199: {fileID: 19945200}
   m_Layer: 0
-  m_Name: FireBall_New
+  m_Name: FireBALL_New
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
