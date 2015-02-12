@@ -127,15 +127,19 @@ public class ScaleAction : BaseAction {
 	/// <summary>
 	/// Update is called once per frame.
 	/// </summary>
+	/// 
+
+	public cursor_handle cursor;
+
 	void Update () 
 	{	 
 		ProcessAllTriggers();
 		
 		//Start Event
-		if ( !_actionTriggered && SupportedTriggers[0].Success )
+		if ( !_actionTriggered && SupportedTriggers[0].Success && cursor.mode == cursor_handle.MODE.DEFAULT)
 		{
 			_actionTriggered = true;	
-			
+			cursor.mode = cursor_handle.MODE.ZOOM;
 			((ScaleTrigger)SupportedTriggers[1]).Restart = true;
 			return;
 		}
@@ -143,6 +147,7 @@ public class ScaleAction : BaseAction {
 		//Stop Event
 		if ( _actionTriggered && SupportedTriggers[2].Success )
 		{
+			cursor.mode = cursor_handle.MODE.DEFAULT;
 			_actionTriggered = false;	
 		}
 		
@@ -219,7 +224,7 @@ public class ScaleAction : BaseAction {
 			_scaleY = !Constraints.Freeze.Y ? scaleVector.y + _scaleY : scaleVector.y;
 			_scaleZ = !Constraints.Freeze.Z ? scaleVector.z + _scaleZ : scaleVector.z;
 
-			Debug.Log (_scale);
+			//Debug.Log (_scale);
 
 			//Scale				
 			//this.gameObject.transform.localScale = new Vector3(_scaleX, _scaleY, _scaleZ);
@@ -237,7 +242,7 @@ public class ScaleAction : BaseAction {
 			// Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
 			// Vector3 move = pos.y * zoomSpeed * transform.forward; 
 			Vector3 move = _scaleX * transform.forward;
-			
+			//Debug.Log (_scaleX);
 			// Set Drag
 			rigidbody.drag = zoomDrag;
 			

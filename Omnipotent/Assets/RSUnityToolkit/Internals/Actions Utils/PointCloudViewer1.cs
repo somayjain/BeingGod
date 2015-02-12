@@ -15,7 +15,7 @@ using RSUnityToolkit;
 /// <summary>
 /// Point cloud viewer 
 /// </summary>
-public class PointCloudViewer : MonoBehaviour {
+public class PointCloudViewer1 : MonoBehaviour {
 	
 	#region Public Fields
 	
@@ -43,13 +43,13 @@ public class PointCloudViewer : MonoBehaviour {
 	private Vector2[] _uv 		= null;
 	private Vector4[] _tangents = null;
 	private int[] _triangles 	= null;
-	
 	public bool _removeBackTriangles = true;
 	
 	private bool _lastUseUVMAP = true;
 	
 	private DrawImages _drawImagesComponent;
-	
+	private bool detectedOnce = false;
+	private GameObject trapezoid;
 	#endregion
 	
 	#region Private methods
@@ -81,7 +81,7 @@ public class PointCloudViewer : MonoBehaviour {
 	
 	#endregion
 	
-	#region Unity's overridden methods
+	#region Unitys overridden methods
 	
 	// Use this for initialization
 	void Start () 
@@ -119,9 +119,20 @@ public class PointCloudViewer : MonoBehaviour {
 		}
 
 	}
-	
+	void Update()
+	{
+		
+	}
 	// Update is called once per frame
-	void Update () 
+	void OnFaceDetected()
+	{
+		if(!detectedOnce)
+		{
+			CreateMesh();
+			detectedOnce = true;
+		}
+	}
+	void CreateMesh () 
 	{	
 		if (_lastUseUVMAP != UseUVMap)
 		{

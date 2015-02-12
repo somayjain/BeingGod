@@ -52,6 +52,10 @@ public class cursor_handle : MonoBehaviour {
 		TORNADO,
 		HEY,
 		BOO
+		HOG,
+		PAN,
+		ZOOM,
+		ROTATE
 	}
 	public MODE mode = MODE.DEFAULT;
 
@@ -60,6 +64,7 @@ public class cursor_handle : MonoBehaviour {
 	public Power_Mjolnir PowerMjolnir;
 	public Power_Fireball PowerFireball;
 	public Power_Tornado PowerTornado;
+	public Power_HoG PowerHoG;
 	public Power_Hey PowerHey;
 	public Power_Boo PowerBoo;
 
@@ -180,6 +185,17 @@ public class cursor_handle : MonoBehaviour {
 			PowerHey.Trigger ( cursor3d );
 			setMode (MODE.DEFAULT);
 			break;
+
+		case MODE.HOG:
+			Cursor.SetCursor (tornado_cursor, Vector2.zero, CursorMode.Auto);
+			if ( !isOnHUD() && !isOnShelf() ) {
+				if (Input.GetMouseButtonUp(0)) {
+					PowerHoG.Trigger( cursor3d );
+					setMode (MODE.DEFAULT);
+				}
+			}
+			break;
+
 		}
 	}
 

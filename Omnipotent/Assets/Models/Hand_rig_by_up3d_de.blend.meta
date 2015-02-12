@@ -1,0 +1,125 @@
+fileFormatVersion: 2
+guid: 2fe301ca52ef36846a86a2362971f49a
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Follow_Path
+    100002: Forefinger_1
+    100004: Forefinger_2
+    100006: Forefinger_3
+    100008: Forefinger_IK
+    100010: Hand
+    100012: Hand_Rig
+    100014: //RootNode
+    100016: Middle_finger_1
+    100018: Middle_finger_2
+    100020: Middle_finger_3
+    100022: Middle_finger_IK
+    100024: Palm_2
+    100026: Palm_3
+    100028: Palm_Forefinger
+    100030: Palm_Pinky
+    100032: Palm_Thumb
+    100034: Pinky_1
+    100036: Pinky_2
+    100038: Pinky_3
+    100040: Pinky_IK
+    100042: Ring_finger_1
+    100044: Ring_finger_2
+    100046: Ring_finger_3
+    100048: Ring_finger_IK
+    100050: Root
+    100052: Thumb_1
+    100054: Thumb_2
+    100056: Thumb_IK
+    400000: Follow_Path
+    400002: Forefinger_1
+    400004: Forefinger_2
+    400006: Forefinger_3
+    400008: Forefinger_IK
+    400010: Hand
+    400012: Hand_Rig
+    400014: //RootNode
+    400016: Middle_finger_1
+    400018: Middle_finger_2
+    400020: Middle_finger_3
+    400022: Middle_finger_IK
+    400024: Palm_2
+    400026: Palm_3
+    400028: Palm_Forefinger
+    400030: Palm_Pinky
+    400032: Palm_Thumb
+    400034: Pinky_1
+    400036: Pinky_2
+    400038: Pinky_3
+    400040: Pinky_IK
+    400042: Ring_finger_1
+    400044: Ring_finger_2
+    400046: Ring_finger_3
+    400048: Ring_finger_IK
+    400050: Root
+    400052: Thumb_1
+    400054: Thumb_2
+    400056: Thumb_IK
+    2300000: Follow_Path
+    3300000: Follow_Path
+    4300000: Follow_Path
+    4300002: Hand
+    7400000: Default Take
+    7400002: ArmatureAction_001
+    9500000: //RootNode
+    13700000: Hand
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

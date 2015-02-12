@@ -291,7 +291,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-		Debug.Log("HUMAN MANAGER");
+		//Debug.Log("HUMAN MANAGER");
 		checkCrowd ();
 
 		}
