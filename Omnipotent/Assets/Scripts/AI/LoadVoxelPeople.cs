@@ -50,7 +50,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 	Vector3 newHouseLoc = new Vector3();
 
 	float interactTimer = 5.0f;
-	bool interactNPC = true;
+	bool interactNPC = false;
 	int NPC;
 
 	public cursor_handle csHandle;
@@ -219,7 +219,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 			}
 		    if(fireTimer<=-3.0f && (people[i].transform.childCount>2)){
 
-				csHandle.PowerFireball.AddXP(1,-1);
+				//csHandle.PowerFireball.AddXP(1,-1);
 
 				GameObject fireObj = people[i].transform.GetChild(2).gameObject;
 				Destroy(fireObj);
@@ -232,7 +232,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 					people[i].GetComponent<NavAgentMovement>().haltMovement(false);
 				else{
 					if((people[i].transform.position-tornadoLoc).magnitude <= tornadoRange){
-						csHandle.PowerTornado.AddXP(1,-1);
+						//csHandle.PowerTornado.AddXP(1,-1);
 						people[i].GetComponent<NavAgentMovement>().haltMovement(true);
 					}else{
 						if((people[i].transform.position-tornadoLoc).magnitude > tornadoRange){
@@ -246,7 +246,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 				if(NPC == i){
 					if(interactTimer==5.0f){
 						Debug.Log("BOO"+i);
-						csHandle.PowerBoo.AddXP(1,-1);
+						//csHandle.PowerBoo.AddXP(1,-1);
 					people[i].transform.GetChild(0).gameObject.SetActive(true);
 					people[i].GetComponentInChildren<Text>().text = BooString[Random.Range(0,BooString.Count)];
 						person_script.toggleScaredRun(true);
@@ -259,7 +259,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 				if(chosenOne == i){
 					if(hoverTextTimer == 5.0f){
 					Debug.Log ("CHOSEN!!"+i);
-						csHandle.PowerHey.AddXP(1,1);
+					//csHandle.PowerHey.AddXP(1,1);
 					people[i].transform.GetChild(0).gameObject.SetActive(true);
 					people[i].GetComponentInChildren<Text>().text = HeyString[Random.Range(0,HeyString.Count)];
 						person_script.haltMovement(true);
@@ -271,7 +271,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 			case MODE.THUNDER_CLAP:
 				person_script.toggleScaredRun(true);
 				person_script.currentlyScared = true;
-				csHandle.PowerFireball.AddXP(1,-1);
+				//csHandle.PowerFireball.AddXP(1,-1);
 				Debug.Log("Thunder Clap at "+pointOfContact+" ");
 				break;
 			}

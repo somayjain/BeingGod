@@ -16,7 +16,7 @@ public class LevelController : MonoBehaviour {
 
 	public int nosOfObjectives;
 	public bool[]objectiveComplete=new bool[]{false,false, false, false, false};
-	public int[] ObjectiveNos = new int[]{0,2,3,4,0};
+	public int[] ObjectiveNos = new int[]{0,2,3,5,0};
 	public int freeLevel = 4;
 
 	public GameObject zombieManager;
@@ -54,6 +54,7 @@ public class LevelController : MonoBehaviour {
 	//Levels: min requirements
 	int minHouses2Build=5 ;
 
+	int spawnZombs = 10;
 
 	bool autoSpawn = false;
 	float time2Spawn = 10.0f;
@@ -81,7 +82,7 @@ public class LevelController : MonoBehaviour {
 			}
 		}
 		if (currentLevel == 2) {
-			if(Powermode == MODE.GMBC){
+			if(Powermode == MODE.FIREBALL){
 				objectiveComplete[0] = true;
 				toggle[0].isOn = true;
 				toggle[0].transform.GetChild(1).GetComponent<Text>().color=Color.green;
@@ -103,6 +104,41 @@ public class LevelController : MonoBehaviour {
 				objectiveComplete[3] = true;
 				toggle[3].isOn = true;
 				toggle[3].transform.GetChild(1).GetComponent<Text>().color=Color.green;
+				Debug.Log("changed XP");
+			}
+		}
+
+		if (currentLevel == 3) {
+
+			if(zombieManager.GetComponent<ZombieManager>().checkZombsDead() == true){
+				objectiveComplete[0] = true;
+				toggle[0].isOn = true;
+				toggle[0].transform.GetChild(1).GetComponent<Text>().color=Color.green;
+				Debug.Log("changed zombies");
+			}
+
+			if(Powermode == MODE.MJOLNIR){
+				objectiveComplete[1] = true;
+				toggle[1].isOn = true;
+				toggle[1].transform.GetChild(1).GetComponent<Text>().color=Color.green;
+				Debug.Log("changed lightening");
+			}
+			if(Powermode == MODE.TORNADO){
+				objectiveComplete[2] = true;
+				toggle[2].isOn = true;
+				toggle[2].transform.GetChild(1).GetComponent<Text>().color=Color.green;
+				Debug.Log("changed Tornado");
+			}
+			if(Powermode == MODE.FIREBALL){
+				objectiveComplete[3] = true;
+				toggle[3].isOn = true;
+				toggle[3].transform.GetChild(1).GetComponent<Text>().color=Color.green;
+				Debug.Log("changed Fireball");
+			}
+			if(xp_handler.Faith+xp_handler.Fear==xp_handler.XP_Limit){
+				objectiveComplete[4] = true;
+				toggle[4].isOn = true;
+				toggle[4].transform.GetChild(1).GetComponent<Text>().color=Color.green;
 				Debug.Log("changed XP");
 			}
 		}
@@ -140,8 +176,33 @@ public class LevelController : MonoBehaviour {
 			toggle[3].gameObject.SetActive(true);
 			toggle[3].isOn = false;
 			toggle[3].transform.GetChild(1).GetComponent<Text>().color=Color.red;
-
+		}
+		if (currentLevel == 3) {
+			toggle[0].transform.GetChild(1).GetComponent<Text>().text = "Kill All Zombies";
+			toggle[0].gameObject.SetActive(true);
+			toggle[0].isOn = false;
+			toggle[0].transform.GetChild(1).GetComponent<Text>().color=Color.red;
 			
+			toggle[1].transform.GetChild(1).GetComponent<Text>().text ="!!Lightening!!";
+			toggle[1].transform.GetChild(1).GetComponent<Text>().color=Color.red;
+			toggle[1].gameObject.SetActive(true);
+			toggle[1].isOn = false;
+			
+			toggle[2].transform.GetChild(1).GetComponent<Text>().text = "!!Tornado!!";
+			toggle[2].gameObject.SetActive(true);
+			toggle[2].isOn = false;
+			toggle[2].transform.GetChild(1).GetComponent<Text>().color=Color.red;
+			
+			toggle[3].transform.GetChild(1).GetComponent<Text>().text = "!!Fireball!!";
+			toggle[3].gameObject.SetActive(true);
+			toggle[3].isOn = false;
+			toggle[3].transform.GetChild(1).GetComponent<Text>().color=Color.red;
+
+			toggle[4].transform.GetChild(1).GetComponent<Text>().text = "Fill The XP Bar!";
+			toggle[4].gameObject.SetActive(true);
+			toggle[4].isOn = false;
+			toggle[4].transform.GetChild(1).GetComponent<Text>().color=Color.red;
+
 		}
 	}
 
@@ -155,6 +216,7 @@ public class LevelController : MonoBehaviour {
 	}
 
 	void resetObjectives(){
+		Debug.Log (nosOfObjectives+" resetting ");
 		for (int i=0; i<nosOfObjectives; i++) {
 			toggle[i].gameObject.SetActive(false);
 			objectiveComplete [i] = false;
@@ -169,7 +231,7 @@ public class LevelController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		currentLevel = 1;
+		currentLevel = 3;
 
 		//init Person manager
 		peopleManager = GameObject.FindGameObjectWithTag ("PeopleManager");
@@ -280,6 +342,36 @@ public class LevelController : MonoBehaviour {
 							}
 						}else{
 							tutTimer-=Time.fixedDeltaTime;
+						}
+					}
+				}else{
+					if(currentLevel == 3){
+						if(levelInit == true){
+							xp_handler.LevelUp(currentLevel);
+							nosOfObjectives = ObjectiveNos[currentLevel];
+							levelInit = false;
+							tutTimer = 15.0f;
+							Sprite newTutImage = Resources.Load<Sprite>("intel.svg");
+							TutImage.GetComponent<Image>().sprite = newTutImage;
+							TutImage.SetActive(true);
+							displayObjective();
+						}else{
+							if(tutTimer <= 0.0f){
+								TutImage.SetActive(false);
+								updateObjectives();
+								bool nextLevelStatus = ObjectiveCompleted();
+								if(nextLevelStatus == true){
+									levelInit = true;
+									currentLevel++;
+									resetObjectives();
+								}
+							}else{
+								tutTimer-=Time.fixedDeltaTime;
+								if(tutTimer<=0.0f){
+									Debug.Log(tutTimer+" "+spawnZombs);
+									zombieManager.GetComponent<ZombieManager>().initZombies(spawnZombs);
+								}
+							}
 						}
 					}
 				}
