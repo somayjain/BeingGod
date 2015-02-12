@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class ZombieManager : MonoBehaviour {
 	public List<string> animalsList = new List<string>(new string []{"chr_zombie1","chr_zombie2","chr_zombie3","chr_zombie4"});
@@ -28,6 +29,7 @@ public class ZombieManager : MonoBehaviour {
 
 	private cursor_handle csHandle;
 
+
 	public enum MODE {
 		DEFAULT,
 		BUILD,
@@ -43,6 +45,7 @@ public class ZombieManager : MonoBehaviour {
 	public MODE Powermode = MODE.DEFAULT;
 
 	public bool allZombiesDead = false;
+	public bool zombsInit = false;
 
 	// Use this for initialization
 	void Start () {
@@ -55,7 +58,7 @@ public class ZombieManager : MonoBehaviour {
 	}
 
 	public void updateDest(){
-
+		dest.Clear ();
 		destList = GameObject.FindGameObjectsWithTag ("source");
 		nos_dest = destList.Length;
 		foreach (GameObject gob in destList) {
@@ -86,29 +89,45 @@ public class ZombieManager : MonoBehaviour {
 		ZombieList.Add(obs);
 	}
 
+	IEnumerator createZOM(Vector3 newSpawnPos, float l_secs)
+	{
+		yield return new WaitForSeconds(l_secs);
+		int rand_indx = Random.Range (0,nos_dest);
+		Vector3 targetLoc = newSpawnPos;
+		int deltaVal = Random.Range(-10,10);
+		Vector3 sourceLoc = zombSource[Random.Range(0,zombSource.Count)];
+		int rand_chr = Random.Range(0,animalsList.Count);
+		GameObject obs = (GameObject)Instantiate (Resources.Load ("prefabs/"+animalsList[rand_chr]), sourceLoc,	Quaternion.identity) as GameObject;
+		obs.name = animalsList[rand_chr];
+		obs.transform.parent = transform;
+		//obs.transform.GetComponent<Rigidbody>().detectCollisions = false;
+		ZombieNavAgent zombScript = (ZombieNavAgent)obs.AddComponent("ZombieNavAgent");
+		obs.transform.FindChild (animalsList[rand_chr]).transform.Rotate (Vector3.forward, 180);
+		zombScript.target = targetLoc;
+		ZombieList.Add(obs);
+		zombsInit = true;
+	}
+	
 	//initZombiesinLevel
 	public void initZombies(int spawnZombies){
-
-		allZombiesDead = false;
-		nosZombies = spawnZombies;
-
+		float l_secs=0.0f;
 		updateDest ();
-		
-		for (int i=0; i<nosZombies; i++) {
-			int rand_indx = Random.Range (0,nos_dest);
-			Vector3 targetLoc = dest[rand_indx];
-			int deltaVal = Random.Range(-10,10);
-			Vector3 sourceLoc = zombSource[Random.Range(0,zombSource.Count)];
-			int rand_chr = Random.Range(0,animalsList.Count);
-			GameObject obs = (GameObject)Instantiate (Resources.Load ("prefabs/"+animalsList[rand_chr]), sourceLoc,	Quaternion.identity) as GameObject;
-			obs.name = animalsList[rand_chr];
-			obs.transform.parent = transform;
-			//obs.transform.GetComponent<Rigidbody>().detectCollisions = false;
-			ZombieNavAgent zombScript = (ZombieNavAgent)obs.AddComponent("ZombieNavAgent");
-			obs.transform.FindChild (animalsList[rand_chr]).transform.Rotate (Vector3.forward, 180);
-			zombScript.target = targetLoc;
-			ZombieList.Add(obs);
+		for (int i=0; i<spawnZombies; i++) {
+			Vector3 destLoc = dest[Random.Range(0,dest.Count)];
+			StartCoroutine(createZOM(destLoc, l_secs));
+			l_secs++;
 		}
+	}
+
+	public bool checkZombsDead(){
+		if (ZombieList.Count == 0)
+						allZombiesDead = true;
+				else
+						allZombiesDead = false;
+		if (zombsInit == true && allZombiesDead == true)
+						return true;
+				else
+						return false;
 	}
 
 	void checkPowerHit(){
@@ -130,7 +149,7 @@ public class ZombieManager : MonoBehaviour {
 			fireTimer=true;
 			if(timeToHit<=0.0f){
 				fireTimer = false;
-				timeToHit = 3.0f;
+				timeToHit = 5.0f;
 			}
 			else{
 				timeToHit-=Time.fixedDeltaTime;
@@ -159,7 +178,7 @@ public class ZombieManager : MonoBehaviour {
 
 			if(Powermode == MODE.MJOLNIR ){
 				if(hitDistance<=rayPowRange){
-					csHandle.PowerMjolnir.AddXP(1,1);
+					//csHandle.PowerMjolnir.AddXP(1,1);
 					Destroy(ZombieList[i]);
 					ZombieList.RemoveAt(i);
 		            nosZombies = ZombieList.Count;
@@ -171,7 +190,7 @@ public class ZombieManager : MonoBehaviour {
 			if(fireTimer == true){
 				if(timeToHit<=0.0f){
 						if((ZombieList[i].transform.position-hit3DLoc).magnitude <= rayPowRange){
-						csHandle.PowerFireball.AddXP(1,1);
+						//csHandle.PowerFireball.AddXP(1,1);
 							//Debug.Log("Ball hitting"+ZombieList[i].name);
 							if(ZombieList[i]!=null)
 								Destroy(ZombieList[i]);
@@ -190,7 +209,7 @@ public class ZombieManager : MonoBehaviour {
 					ZombieList[i].GetComponent<ZombieNavAgent>().haltMovement(false);
 				else{
 				if((ZombieList[i].transform.position-tornadoLoc).magnitude <= tornadoRange){
-						csHandle.PowerTornado.AddXP(1,1);
+						//csHandle.PowerTornado.AddXP(1,1);
 					//Debug.Log ("halting: "+people[i].name);
 					ZombieList[i].GetComponent<ZombieNavAgent>().haltMovement(true);
 				}else{
@@ -212,8 +231,7 @@ public class ZombieManager : MonoBehaviour {
 		///foreach (int index  in indicesToDelete) {
 		//	ZombieList.RemoveAt(index);
 	//	}
-		if (nosZombies == 0)
-						allZombiesDead = true;
+
 
 	}
 
