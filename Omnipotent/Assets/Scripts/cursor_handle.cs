@@ -303,6 +303,21 @@ public class cursor_handle : MonoBehaviour {
 		}
 		Debug.Log ("I heard Tornado");
 	}
+
+	public void soundBuild(Trigger trgr) {
+		if ( !isOnHUD() && !isOnShelf() ) {
+			setMode(MODE.BUILD);
+		}
+		Debug.Log ("I heard build");
+	}
+
+	public void soundExitBuild(Trigger trgr) {
+		if ( !isOnHUD() && !isOnShelf() ) {
+			setMode(MODE.DEFAULT);
+		}
+		Debug.Log ("I heard exit build");
+	}
+
 	public void HandDetected (Trigger trgr) {
 
 	}
