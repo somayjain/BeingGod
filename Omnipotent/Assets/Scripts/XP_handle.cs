@@ -22,7 +22,7 @@ public class XP_handle : MonoBehaviour {
 	public float Faith_Degradation, Fear_Degradation;
 	private float Faith_deg, Fear_deg;
 
-	private bool LevelUpReached = false;
+	public bool LevelUpReached = true;
 
 	// Use this for initialization
 	void Start () {
@@ -47,8 +47,9 @@ public class XP_handle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Faith_min_ratio + Fear_min_ratio >= 1.0f) {
+		if (Faith_min_ratio + Fear_min_ratio >= 1.0f || XP_Limit == 0.0f) {
 			LevelUpReached = true;
+			return;
 			// Level Up
 		}
 
@@ -175,10 +176,15 @@ public class XP_handle : MonoBehaviour {
 	}
 
 	public void LevelUp ( int level ) {
-		Debug.Log (level+" Level set");
+//		if (!LevelUpReached) {
+//			Debug.Log ("What are you doing ? I dont even have enuf XP for level " + level.ToString ());
+//			Debug.Log ("My Faith: " + Faith.ToString () + " and Fear: " + Fear.ToString ());
+//			return;
+//		}
 		switch (level) {
 		case 1:
 			XP_Limit = 0;
+			cursor.PowerFireball.Enable();
 			break;
 		case 2:
 			XP_Limit = 50;
@@ -191,8 +197,6 @@ public class XP_handle : MonoBehaviour {
 			cursor.PowerGMBC.Enable();
 			cursor.PowerGMBC.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("GMBC");
 			cursor.PowerGMBC.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
-
-			Debug.Log("level up" + cursor.PowerBoo.enabled.ToString() + " : " + XP_Limit.ToString() + " : ");
 			break;
 		case 3:
 			XP_Limit = 100;
@@ -237,6 +241,7 @@ public class XP_handle : MonoBehaviour {
 			faith_time = 0.0f;
 			faith_updated = true;
 			Faith_deg = 0.0f;
+			faith.GetComponent<RectTransform> ().anchorMax = new Vector2 (Faith_min_ratio, 1);
 		}
 		
 		if (Fear_pool > 0) {
@@ -254,8 +259,9 @@ public class XP_handle : MonoBehaviour {
 			fear_time = 0.0f;
 			fear_updated = true;
 			Fear_deg = 0.0f;
+			fear.GetComponent<RectTransform> ().anchorMin = new Vector2 (1-Fear_min_ratio, 0);
 		}
-
+		
 		LevelUpReached = false;
 	}
 }
