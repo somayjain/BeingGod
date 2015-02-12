@@ -183,7 +183,7 @@ public class RotationAction : BaseAction {
 		ProcessAllTriggers();
 		
 		//Start Event
-		Debug.Log (cursor.mode);
+		//Debug.Log (cursor.mode);
 		if ( !_actionTriggered && SupportedTriggers[0].Success && cursor.mode == cursor_handle.MODE.DEFAULT)
 		{			
 			_actionTriggered = true;

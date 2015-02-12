@@ -178,12 +178,12 @@ public class HandRenderer : MonoBehaviour {
 	{
 		if (outputData != null) {
 			Vector3 pos = transform.TransformPoint (leftPalmCenterJoint);
-			Debug.Log ("Left hand Screen coords " + Camera.main.camera.WorldToScreenPoint (pos).ToString ());
+			//Debug.Log ("Left hand Screen coords " + Camera.main.camera.WorldToScreenPoint (pos).ToString ());
 			return Camera.main.camera.WorldToScreenPoint(pos);
 		}
 		else
 		{
-			Debug.Log("No Hand");
+			//Debug.Log("No Hand");
 			return new Vector2(-1f, -1f);
 		}
 	}
@@ -192,12 +192,12 @@ public class HandRenderer : MonoBehaviour {
 	{
 		if (outputData != null) {
 			Vector3 pos = transform.TransformPoint (rightPalmCenterJoint);
-			Debug.Log ("Right hand Screen coords " + Camera.main.camera.WorldToScreenPoint (pos).ToString ());
+			//Debug.Log ("Right hand Screen coords " + Camera.main.camera.WorldToScreenPoint (pos).ToString ());
 			return Camera.main.camera.WorldToScreenPoint(pos);
 		}
 		else
 		{
-			Debug.Log("No Hand");
+			//Debug.Log("No Hand");
 			return new Vector2(-1f, -1f);
 		}
 	}
