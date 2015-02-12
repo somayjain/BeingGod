@@ -43,6 +43,19 @@ public class trackHand : MonoBehaviour {
 	        }
 	        handRenderer.DisplaySmoothenedJoints(_outputData, joints, handIds, bodySides);
 
+			/* Retrieve Alert Data */
+			/*
+			PXCMHandData.AlertData _alertData;
+			for (int i = 0; i < _outputData.QueryFiredAlertsNumber(); i++)
+				if (_outputData.QueryFiredAlertData(i, out _alertData) == pxcmStatus.PXCM_STATUS_NO_ERROR)
+					handRenderer.DisplayAlerts(_alertData);
+			*/
+			/* Retrieve Gesture Data */
+			PXCMHandData.GestureData _gestureData;
+			for (int i = 0; i < _outputData.QueryFiredGesturesNumber(); i++)
+				if (_outputData.QueryFiredGestureData(i, out _gestureData) == pxcmStatus.PXCM_STATUS_NO_ERROR)
+					handRenderer.DisplayGestures(_gestureData);
+
 			if(_outputData.QueryNumberOfHands()==0)
 				handRenderer.makeNull();
 	    }

@@ -20,6 +20,9 @@ public class NavAgentMovement : MonoBehaviour {
 	public float health = 10.0f;
 	public float damage = 4f;
 	// Use this for initialization
+
+	bool deathCause = true;
+
 	void Start () {
 		agent = GetComponent<NavMeshAgent> ();
 		agent.SetDestination(target);
@@ -40,7 +43,15 @@ public class NavAgentMovement : MonoBehaviour {
 	void OnTriggerEnter(Collider collision){
 		if (collision.tag == "zombie") {
 			health -= damage;
-			agent.speed += 2.0f;
+			toggleScaredRun(true);
+			if(health<=0.0f)
+			deathCause = true;
+		}
+		if (collision.tag == "Dino" || collision.tag == "Spidey") {
+			health -= damage;
+			toggleScaredRun(true);
+			if(health<=0.0f)
+			deathCause = false;
 		}
 	}
 

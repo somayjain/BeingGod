@@ -9,12 +9,12 @@ Shader "Hidden/ConvertDepth" {
 	#include "UnityCG.cginc"
 	
 	struct v2f {
-		float4 pos : SV_POSITION;
+		float4 pos : POSITION;
 		float2 uv : TEXCOORD0;
 	};
 		
 	sampler2D _MainTex;
-	sampler2D_float _CameraDepthTexture;
+	sampler2D _CameraDepthTexture;
 		
 	v2f vert( appdata_img v ) 
 	{
@@ -24,9 +24,9 @@ Shader "Hidden/ConvertDepth" {
 		return o;
 	}
 	
-	half4 frag(v2f i) : SV_Target 
+	half4 frag(v2f i) : COLOR 
 	{
-		float d = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, i.uv.xy);
+		float d = UNITY_SAMPLE_DEPTH( tex2D(_CameraDepthTexture, i.uv.xy) );
 		d = Linear01Depth(d);
 			 
 		if(d>0.99999)

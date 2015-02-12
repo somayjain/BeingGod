@@ -64,12 +64,10 @@ public class houseManager : MonoBehaviour
 						deleteHouse ();
 						
 				}
-
 		}
 
 		void buildHouse_cursor ()
 		{
-		
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 				RaycastHit hit;
 				Vector3 hitPoint = new Vector3 ();

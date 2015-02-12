@@ -22,7 +22,7 @@ public class LevelController : MonoBehaviour {
 	public GameObject zombieManager;
 	public GameObject buildingManager;
 	public GameObject peopleManager;
-
+	public GameObject BossManager;
 	public bool zombieStatus ;
 	public int humanStatus ;
 	public int houseStatus ;
@@ -58,6 +58,10 @@ public class LevelController : MonoBehaviour {
 
 	bool autoSpawn = false;
 	float time2Spawn = 10.0f;
+
+	float survivalTime = 180.0f;
+	float BossRate = 10.0f;
+	float ZombRate = 4.0f;
 
 	void initMinReqs(int level){
 		//int nosZombies = level * Random.Range (5,zombies2Kill);
@@ -230,7 +234,8 @@ public class LevelController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		currentLevel = 1;
+
+		currentLevel = 4;
 
 		//init Person manager
 		peopleManager = GameObject.FindGameObjectWithTag ("PeopleManager");
@@ -264,6 +269,7 @@ public class LevelController : MonoBehaviour {
 
 	void setCurrentPower(){
 		if (MODE.FIREBALL == Powermode) {
+			BossManager.GetComponent<WildManagement>().Powermode = WildManagement.MODE.FIREBALL;
 			zombieManager.GetComponent<ZombieManager>().Powermode = ZombieManager.MODE.FIREBALL;
 			peopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.FIREBALL;
 		}
@@ -272,6 +278,7 @@ public class LevelController : MonoBehaviour {
 			peopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.TORNADO;
 		}
 		if (MODE.MJOLNIR == Powermode) {
+			BossManager.GetComponent<WildManagement>().Powermode = WildManagement.MODE.MJOLNIR;
 			zombieManager.GetComponent<ZombieManager>().Powermode = ZombieManager.MODE.MJOLNIR;
 			peopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.MJOLNIR;
 		}
@@ -369,6 +376,45 @@ public class LevelController : MonoBehaviour {
 								if(tutTimer<=0.0f){
 									Debug.Log(tutTimer+" "+spawnZombs);
 									zombieManager.GetComponent<ZombieManager>().initZombies(spawnZombs);
+								}
+							}
+						}
+					}else{
+						if(currentLevel == 4){
+							if(levelInit == true){
+								xp_handler.LevelUp(currentLevel);
+								nosOfObjectives = ObjectiveNos[currentLevel];
+								levelInit = false;
+								tutTimer = 15.0f;
+								Sprite newTutImage = Resources.Load<Sprite>("intel.svg");
+								TutImage.GetComponent<Image>().sprite = newTutImage;
+								TutImage.SetActive(true);
+								displayObjective();
+							}else{
+								if(tutTimer <= 0.0f){
+									TutImage.SetActive(false);
+									updateObjectives();
+									bool nextLevelStatus = ObjectiveCompleted();
+									survivalTime -= Time.fixedDeltaTime;
+									ZombRate -= Time.fixedDeltaTime;
+									BossRate -= Time.fixedDeltaTime;
+									if(survivalTime <= 0.0){
+										if(peopleManager.GetComponent<LoadVoxelPeople>().people.Count == 0){
+										}else{
+										resetObjectives();
+										zombieManager.GetComponent<ZombieManager>().deleteZombie();
+											for(int i=0;i<buildingManager.GetComponent<houseManager>().nosHouses;i++){
+												peopleManager.GetComponent<LoadVoxelPeople> ().initPersonRandom (5);
+											}
+										}
+									}
+								}else{
+									tutTimer-=Time.fixedDeltaTime;
+									if(tutTimer<=0.0f){
+										Debug.Log(tutTimer+" "+spawnZombs);
+										zombieManager.GetComponent<ZombieManager>().initZombies(spawnZombs);
+										BossManager.GetComponent<WildManagement>().SpawnEnemy(5);
+									}
 								}
 							}
 						}
