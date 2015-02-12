@@ -219,7 +219,7 @@ public class ScaleAction : BaseAction {
 			_scaleY = !Constraints.Freeze.Y ? scaleVector.y + _scaleY : scaleVector.y;
 			_scaleZ = !Constraints.Freeze.Z ? scaleVector.z + _scaleZ : scaleVector.z;
 
-			Debug.Log (_scale);
+			//Debug.Log (_scale);
 
 			//Scale				
 			//this.gameObject.transform.localScale = new Vector3(_scaleX, _scaleY, _scaleZ);
@@ -237,7 +237,7 @@ public class ScaleAction : BaseAction {
 			// Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
 			// Vector3 move = pos.y * zoomSpeed * transform.forward; 
 			Vector3 move = _scaleX * transform.forward;
-			
+			//Debug.Log (_scaleX);
 			// Set Drag
 			rigidbody.drag = zoomDrag;
 			
