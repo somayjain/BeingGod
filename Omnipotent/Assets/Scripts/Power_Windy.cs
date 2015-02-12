@@ -8,7 +8,6 @@ public class Power_Windy : Powers {
 
 	// Use this for initialization
 	void Start () {
-		enabled = true;
 		time_left = Cooldown;
 		refresh = true;
 	}

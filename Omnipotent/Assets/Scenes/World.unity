@@ -1814,7 +1814,7 @@ MonoBehaviour:
   Cooldown: 25
   CastTime: 25
   PowerType: 1
-  XP_per_NPC: 1
+  XP_per_NPC: 10
   Fireball: {fileID: 2146187185}
   Fireball_height: 110
 --- !u!114 &106707116
@@ -2284,8 +2284,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 179952633}
-  m_LocalRotation: {x: .127591029, y: .871424019, z: .311995119, w: -.3563703}
-  m_LocalPosition: {x: 493.223236, y: -208.798813, z: 557.839355}
+  m_LocalRotation: {x: -.258819044, y: 0, z: 0, w: .965925813}
+  m_LocalPosition: {x: 0, y: -23.8600006, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2823,14 +2823,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 263515111}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 5711f3f3117908d48a213c6cc6e38039, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3095,10 +3095,10 @@ MonoBehaviour:
   XP: {fileID: 1265907473}
   cursor: {fileID: 1721188146}
   Levelcontroller: {fileID: 1741207453}
-  Cooldown: 10
-  CastTime: 3
+  Cooldown: 5
+  CastTime: 5
   PowerType: 1
-  XP_per_NPC: 1
+  XP_per_NPC: 10
   ThunderClap: {fileID: 297417000}
 --- !u!114 &270210617
 MonoBehaviour:
@@ -4869,7 +4869,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 45, y: 45}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &465320196
 MonoBehaviour:
@@ -4884,7 +4884,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 904846443ead5464889e89648832c310, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5711f3f3117908d48a213c6cc6e38039, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4938,14 +4938,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 468833620}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 5711f3f3117908d48a213c6cc6e38039, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6140,7 +6140,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 45, y: 45}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &594249035
 MonoBehaviour:
@@ -6155,7 +6155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 803b4d2280a4e0c41aa68890181c8547, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5711f3f3117908d48a213c6cc6e38039, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10218,10 +10218,10 @@ MonoBehaviour:
   XP: {fileID: 1265907473}
   cursor: {fileID: 1721188146}
   Levelcontroller: {fileID: 1741207453}
-  Cooldown: 10
-  CastTime: 3
+  Cooldown: 1.5
+  CastTime: 1.5
   PowerType: 1
-  XP_per_NPC: 1
+  XP_per_NPC: 10
   Mjolnir: {fileID: 1983434033}
 --- !u!114 &1115764494
 MonoBehaviour:
@@ -10977,6 +10977,12 @@ GameObject:
   - 224: {fileID: 1263540699}
   - 114: {fileID: 1263540700}
   - 114: {fileID: 1263540701}
+  - 114: {fileID: 1263540707}
+  - 114: {fileID: 1263540706}
+  - 114: {fileID: 1263540705}
+  - 114: {fileID: 1263540704}
+  - 114: {fileID: 1263540703}
+  - 114: {fileID: 1263540702}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -11063,6 +11069,120 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6120c78efcc5ef64abb4d3cc7e8c6faa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1263540702
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1263540698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af32bad64e00ae459bee76f086536cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 1263540704}
+  FriendlyName: Gesture Detected
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  Gesture: 8
+  WhichHand: 4
+  HandIndex: 0
+  ContinuousTracking: 0
+--- !u!114 &1263540703
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1263540698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33140781a3e92d40add2490c4ce1fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 1263540704}
+  ErrorDetected: 0
+  FriendlyName: Event Source
+  Rules:
+  - {fileID: 1263540702}
+  TriggerAttributeName: EventTriggerAtt
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  Source: 
+  Success: 0
+--- !u!114 &1263540704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1263540698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8ca451fae141046aaac1dc626433f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SupportedTriggers:
+  - {fileID: 1263540703}
+  CustomTag: 
+  CustomActionId: 7
+  FunctionName: increaseSpeed
+--- !u!114 &1263540705
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1263540698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af32bad64e00ae459bee76f086536cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 1263540707}
+  FriendlyName: Gesture Detected
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  Gesture: 8
+  WhichHand: 3
+  HandIndex: 0
+  ContinuousTracking: 0
+--- !u!114 &1263540706
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1263540698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33140781a3e92d40add2490c4ce1fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 1263540707}
+  ErrorDetected: 0
+  FriendlyName: Event Source
+  Rules:
+  - {fileID: 1263540705}
+  TriggerAttributeName: EventTriggerAtt
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  Source: 
+  Success: 0
+--- !u!114 &1263540707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1263540698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8ca451fae141046aaac1dc626433f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SupportedTriggers:
+  - {fileID: 1263540706}
+  CustomTag: 
+  CustomActionId: 6
+  FunctionName: decreaseSpeed
 --- !u!1 &1265907471
 GameObject:
   m_ObjectHideFlags: 0
@@ -11112,12 +11232,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a9e0b234bcdf324e83c96b2c9fc5979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursor: {fileID: 1721188146}
   faith: {fileID: 855786966}
   fear: {fileID: 799490935}
   XP_Limit: 500
   Faith: 0
   Fear: 0
-  Inc_Time: .5
+  Inc_Time: 1
   Faith_Degradation: 0
   Fear_Degradation: 0
 --- !u!1 &1284468227
@@ -11622,7 +11743,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 45, y: 45}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1336888198
 MonoBehaviour:
@@ -11637,7 +11758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 425ec8dbd55ad674aa405db16045097c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5711f3f3117908d48a213c6cc6e38039, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12160,10 +12281,10 @@ MonoBehaviour:
   XP: {fileID: 1265907473}
   cursor: {fileID: 1721188146}
   Levelcontroller: {fileID: 1741207453}
-  Cooldown: 10
-  CastTime: 3
-  PowerType: 1
-  XP_per_NPC: 1
+  Cooldown: 1000
+  CastTime: 1000
+  PowerType: 0
+  XP_per_NPC: 25
   HoG: {fileID: 242762730}
   faceMesh1: {fileID: 19220524}
   faceMesh2: {fileID: 778376743}
@@ -12518,7 +12639,7 @@ MonoBehaviour:
   Cooldown: 25
   CastTime: 25
   PowerType: 1
-  XP_per_NPC: 1
+  XP_per_NPC: 2
   Tornado: {fileID: 373395988}
 --- !u!114 &1403171757
 MonoBehaviour:
@@ -13032,7 +13153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 0d83b33593ed83245b3ad16e29177b66, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5711f3f3117908d48a213c6cc6e38039, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13061,7 +13182,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 45, y: 45}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &1540064678
 GameObject:
@@ -14570,6 +14691,7 @@ MonoBehaviour:
   PowerHoG: {fileID: 1393125388}
   PowerHey: {fileID: 569461481}
   PowerBoo: {fileID: 154301431}
+  PowerGMBC: {fileID: 50733226}
   PeopleManager: {fileID: 0}
   currentLevel: {fileID: 0}
 --- !u!4 &1721188147
@@ -15989,6 +16111,10 @@ Prefab:
       propertyPath: XP_Limit
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 11445322, guid: 9cfed70bcb351624e81ff0f519b93d7d, type: 2}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 1721188146}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9cfed70bcb351624e81ff0f519b93d7d, type: 2}
   m_RootGameObject: {fileID: 1265907471}

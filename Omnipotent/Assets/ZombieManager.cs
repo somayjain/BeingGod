@@ -55,6 +55,8 @@ public class ZombieManager : MonoBehaviour {
 			zombSource.Add(zS.transform.position);
 		}
 
+		csHandle = GameObject.FindWithTag ("Hand").GetComponent<cursor_handle> ();
+
 	}
 
 	public void updateDest(){
@@ -189,8 +191,10 @@ public class ZombieManager : MonoBehaviour {
 
 			if(fireTimer == true){
 				if(timeToHit<=0.0f){
+
 						if((ZombieList[i].transform.position-hit3DLoc).magnitude <= 15.0f){
 						    csHandle.PowerFireball.AddXP(1,1);
+
 							//Debug.Log("Ball hitting"+ZombieList[i].name);
 							if(ZombieList[i]!=null)
 								Destroy(ZombieList[i]);
@@ -210,6 +214,7 @@ public class ZombieManager : MonoBehaviour {
 				else{
 				if((ZombieList[i].transform.position-tornadoLoc).magnitude <= tornadoRange){
 					csHandle.PowerTornado.AddXP(1,1);
+
 					//Debug.Log ("halting: "+people[i].name);
 					ZombieList[i].GetComponent<ZombieNavAgent>().haltMovement(true);
 				}else{

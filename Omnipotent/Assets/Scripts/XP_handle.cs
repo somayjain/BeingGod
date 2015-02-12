@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class XP_handle : MonoBehaviour {
 
+	public cursor_handle cursor;
 	public GameObject faith;
 	public GameObject fear;
 
 	public int XP_Limit, Faith, Fear;
 
-	public float Inc_Time = 0.5f;
+	public float Inc_Time = 1.0f;
 	
 	private float Faith_ratio, Fear_ratio;
 	private float Faith_min_ratio, Fear_min_ratio;
@@ -100,7 +102,10 @@ public class XP_handle : MonoBehaviour {
 	}
 
 	public void AddXP (int xp, Powers.POWERTYPE powertype) {
+		Debug.Log ("AddXP : " + LevelUpReached.ToString ());
 		if (LevelUpReached)		return;
+
+		Debug.Log ("Adding XP + " + xp + powertype.ToString ());
 
 		switch (powertype) {
 		case Powers.POWERTYPE.GOOD:
@@ -163,12 +168,60 @@ public class XP_handle : MonoBehaviour {
 			}
 			faith_updated = true;
 			fear_updated = true;
+
+			Debug.Log (Faith.ToString()+" + "+ Fear.ToString() + " = " + XP_Limit.ToString());
 			break;
 		}
 	}
 
 	public void LevelUp ( int level ) {
 		Debug.Log (level+" Level set");
+		switch (level) {
+		case 1:
+			XP_Limit = 0;
+			break;
+		case 2:
+			XP_Limit = 50;
+			cursor.PowerHey.Enable();
+			cursor.PowerHey.transform.GetChild(1).GetComponent<Image>().enabled = false;
+
+			cursor.PowerBoo.Enable();
+			cursor.PowerBoo.transform.GetChild(1).GetComponent<Image>().enabled = false;
+
+			cursor.PowerGMBC.Enable();
+			cursor.PowerGMBC.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("GMBC");
+			cursor.PowerGMBC.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
+
+			Debug.Log("level up" + cursor.PowerBoo.enabled.ToString() + " : " + XP_Limit.ToString() + " : ");
+			break;
+		case 3:
+			XP_Limit = 100;
+			cursor.PowerThunderClap.Enable();
+			cursor.PowerThunderClap.transform.GetChild(1).GetComponent<Image>().enabled = false;
+			//cursor.PowerThunderClap.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Thunderclap");
+
+			cursor.PowerMjolnir.Enable();
+			cursor.PowerMjolnir.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Mjolnir");
+			cursor.PowerMjolnir.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
+
+			cursor.PowerFireball.Enable();
+			cursor.PowerFireball.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Fireball");
+			cursor.PowerFireball.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
+
+			cursor.PowerTornado.Enable();
+			cursor.PowerTornado.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Tornado");
+			cursor.PowerTornado.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
+			break;
+
+		case 4:
+			XP_Limit = 200;
+			break;
+		case 5:
+			XP_Limit = 400;
+			cursor.PowerHoG.Enable();
+			break;
+		}
+
 		if (Faith_pool > 0) {
 			Faith = Faith_pool;
 			Faith_ratio = Faith / XP_Limit;
@@ -182,7 +235,7 @@ public class XP_handle : MonoBehaviour {
 			Faith_ratio = 0.0f;
 			Faith_min_ratio = 0.0f;
 			faith_time = 0.0f;
-			faith_updated = false;
+			faith_updated = true;
 			Faith_deg = 0.0f;
 		}
 		
@@ -199,7 +252,7 @@ public class XP_handle : MonoBehaviour {
 			Fear_ratio = 0.0f;
 			Fear_min_ratio = 0.0f;
 			fear_time = 0.0f;
-			fear_updated = false;
+			fear_updated = true;
 			Fear_deg = 0.0f;
 		}
 

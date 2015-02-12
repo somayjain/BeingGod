@@ -223,7 +223,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 			}
 		    if(fireTimer<=-3.0f && (people[i].transform.childCount>2)){
 
-				//csHandle.PowerFireball.AddXP(1,-1);
+				csHandle.PowerFireball.AddXP(1,-1);
 
 				GameObject fireObj = people[i].transform.GetChild(2).gameObject;
 				Destroy(fireObj);
@@ -236,11 +236,20 @@ public class LoadVoxelPeople : MonoBehaviour {
 					people[i].GetComponent<NavAgentMovement>().haltMovement(false);
 				else{
 					if((people[i].transform.position-tornadoLoc).magnitude <= tornadoRange){
-						//csHandle.PowerTornado.AddXP(1,-1);
-						people[i].GetComponent<NavAgentMovement>().haltMovement(true);
+						csHandle.PowerTornado.AddXP(1,-1);
+						//people[i].GetComponent<NavAgentMovement>().haltMovement(true);
+						//people[i].GetComponent<Rigidbody>().AddForce(10000,300000,100000);
+						people[i].GetComponent<NavMeshAgent>().Stop();
+						people[i].rigidbody.isKinematic = false;
+						people[i].rigidbody.useGravity = true;
+						people[i].rigidbody.AddForce(new Vector3(5,100,5));
+						// AddRelativeForce(new Vector3(10,100,10),ForceMode.Impulse);
 					}else{
-						if((people[i].transform.position-tornadoLoc).magnitude > tornadoRange){
-							people[i].GetComponent<NavAgentMovement>().haltMovement(false);
+						if((people[i].transform.position-tornadoLoc).magnitude > 2*tornadoRange){
+							people[i].GetComponent<NavMeshAgent>().Resume();
+							people[i].rigidbody.isKinematic = true;
+							people[i].rigidbody.useGravity = false;
+							//people[i].GetComponent<NavAgentMovement>().haltMovement(false);
 						}
 					}
 				}
@@ -250,7 +259,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 				if(NPC == i){
 					if(interactTimer==5.0f){
 						Debug.Log("BOO"+i);
-						//csHandle.PowerBoo.AddXP(1,-1);
+						csHandle.PowerBoo.AddXP(1,-1);
 					people[i].transform.GetChild(0).gameObject.SetActive(true);
 					people[i].GetComponentInChildren<Text>().text = BooString[Random.Range(0,BooString.Count)];
 						person_script.toggleScaredRun(true);
@@ -263,7 +272,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 				if(chosenOne == i){
 					if(hoverTextTimer == 5.0f){
 					Debug.Log ("CHOSEN!!"+i);
-					//csHandle.PowerHey.AddXP(1,1);
+					csHandle.PowerHey.AddXP(1,1);
 					people[i].transform.GetChild(0).gameObject.SetActive(true);
 					people[i].GetComponentInChildren<Text>().text = HeyString[Random.Range(0,HeyString.Count)];
 					GameObject godRays = (GameObject)Instantiate (Resources.Load ("GodRays"),Vector3.zero,	Quaternion.identity) as GameObject;
@@ -279,7 +288,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 			case MODE.THUNDER_CLAP:
 				person_script.toggleScaredRun(true);
 				person_script.currentlyScared = true;
-				//csHandle.PowerFireball.AddXP(1,-1);
+				csHandle.PowerThunderClap.AddXP(1,-1);
 				Debug.Log("Thunder Clap at "+pointOfContact+" ");
 				break;
 			}

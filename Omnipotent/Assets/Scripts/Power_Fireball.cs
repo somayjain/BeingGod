@@ -4,22 +4,12 @@ using UnityEngine.UI;
 
 public class Power_Fireball : Powers {
 	
-//	public cursor_handle cursor;
 	public GameObject Fireball;
-
 	public float Fireball_height = 30.0f;
-
-//	public float Cooldown = 10.0f;
-//	public float CastTime = 10.0f;
-//	
-//	private float time_left = 0.0f;
-//	private bool refresh = false;
-//	private bool active = false;
 	private bool emit = false;
 	
 	// Use this for initialization
 	void Start () {
-		enabled = true;
 		time_left = Cooldown;
 		refresh = true;
 	}
@@ -76,7 +66,10 @@ public class Power_Fireball : Powers {
 	}
 
 	public void AddXP (int num_of_people, int flag) {
-		XP.AddXP (num_of_people * XP_per_NPC, PowerType);
+		if (flag > 0)
+			XP.AddXP (num_of_people * XP_per_NPC, POWERTYPE.GOOD);
+		else
+			XP.AddXP (num_of_people * XP_per_NPC, POWERTYPE.EVIL);
 	}
 	
 	public void OnClick () {
