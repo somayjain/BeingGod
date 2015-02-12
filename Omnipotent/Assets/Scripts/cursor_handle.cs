@@ -51,7 +51,7 @@ public class cursor_handle : MonoBehaviour {
 		FIREBALL,
 		TORNADO,
 		HEY,
-		BOO
+		BOO,
 		HOG,
 		PAN,
 		ZOOM,
