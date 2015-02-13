@@ -19,7 +19,7 @@ RenderSettings:
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientLight: {r: .200000003, g: .200000003, b: .200000003, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 068305e3312a68d4f95530b6afbb01e7, type: 2}
   m_HaloStrength: .5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -116,6 +116,11 @@ GameObject:
   - 114: {fileID: 5982421}
   - 114: {fileID: 5982413}
   - 114: {fileID: 5982414}
+  - 114: {fileID: 5982415}
+  - 114: {fileID: 5982416}
+  - 114: {fileID: 5982417}
+  - 114: {fileID: 5982419}
+  - 114: {fileID: 5982418}
   m_Layer: 0
   m_Name: Eye of God
   m_TagString: MainCamera
@@ -484,6 +489,8 @@ MonoBehaviour:
   ErrorDetected: 0
   FriendlyName: Stop Event
   Rules:
+  - {fileID: 5982417}
+  - {fileID: 5982416}
   - {fileID: 5982399}
   TriggerAttributeName: EventTriggerAtt
   FoldoutOpen: 1
@@ -650,10 +657,11 @@ MonoBehaviour:
   ErrorDetected: 0
   FriendlyName: Stop Event
   Rules:
+  - {fileID: 5982419}
   - {fileID: 5982414}
   - {fileID: 5982406}
   TriggerAttributeName: EventTriggerAtt
-  FoldoutOpen: 0
+  FoldoutOpen: 1
   AssociatedAction: {fileID: 0}
   Source: 
   Success: 0
@@ -765,6 +773,102 @@ MonoBehaviour:
   HandIndex: 1
   ContinuousTracking: 0
   OpennessFactor: 50
+--- !u!114 &5982415
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8425e81730581264e8bc707bd5925622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982456}
+  FriendlyName: Hand Closed
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  WhichHand: 2
+  HandIndex: 1
+  ContinuousTracking: 0
+  OpennessFactor: 50
+--- !u!114 &5982416
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4015b9e4cf58a4041b7385ec4ee7677d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982405}
+  FriendlyName: Hand Lost
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  WhichHand: 2
+  HandIndex: 1
+  ContinuousTracking: 0
+--- !u!114 &5982417
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4015b9e4cf58a4041b7385ec4ee7677d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982405}
+  FriendlyName: Hand Lost
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  WhichHand: 2
+  HandIndex: 0
+  ContinuousTracking: 0
+--- !u!114 &5982418
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4015b9e4cf58a4041b7385ec4ee7677d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982456}
+  FriendlyName: Hand Lost
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  WhichHand: 2
+  HandIndex: 0
+  ContinuousTracking: 0
+--- !u!114 &5982419
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4015b9e4cf58a4041b7385ec4ee7677d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982412}
+  FriendlyName: Hand Lost
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  WhichHand: 2
+  HandIndex: 0
+  ContinuousTracking: 0
 --- !u!114 &5982421
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -800,6 +904,8 @@ MonoBehaviour:
   ErrorDetected: 0
   FriendlyName: Stop Event
   Rules:
+  - {fileID: 5982418}
+  - {fileID: 5982415}
   - {fileID: 5982413}
   TriggerAttributeName: EventTriggerAtt
   FoldoutOpen: 1
@@ -1991,6 +2097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de8605f94d7163840addf9785b78f38c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursor: {fileID: 1721188146}
   nosHouses: 0
   houseCreated: 0
 --- !u!1 &106707110
@@ -4552,7 +4659,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -6125,6 +6232,10 @@ Prefab:
     - target: {fileID: 1500000, guid: ef8cee47242c1944080e9cf6720da939, type: 2}
       propertyPath: m_Emit
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1500000, guid: ef8cee47242c1944080e9cf6720da939, type: 2}
+      propertyPath: maxEmission
+      value: 5000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef8cee47242c1944080e9cf6720da939, type: 2}
@@ -9430,6 +9541,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1500000, guid: 144b203f383094d16b1f336c74c47326, type: 2}
+      propertyPath: minEmission
+      value: 1500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 144b203f383094d16b1f336c74c47326, type: 2}
   m_RootGameObject: {fileID: 1400495011}
@@ -10400,7 +10515,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -10588,7 +10703,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -12106,11 +12221,11 @@ MonoBehaviour:
   worldTimeHour: 0
   fullLight: {r: .838235259, g: .789954543, b: .548551023, a: 1}
   fullDark: {r: .249903888, g: .216262966, b: .367647052, a: 1}
-  dawnDuskSkybox: {fileID: 0}
+  dawnDuskSkybox: {fileID: 2100000, guid: 068305e3312a68d4f95530b6afbb01e7, type: 2}
   dawnDuskFog: {r: .521568656, g: .486274511, b: .400000006, a: 1}
-  daySkybox: {fileID: 0}
+  daySkybox: {fileID: 2100000, guid: 068305e3312a68d4f95530b6afbb01e7, type: 2}
   dayFog: {r: .70588237, g: .815686285, b: .819607854, a: 1}
-  nightSkybox: {fileID: 0}
+  nightSkybox: {fileID: 2100000, guid: 185821a8d1654644c896a6394886e67e, type: 2}
   nightFog: {r: .0470588244, g: .0588235296, b: .356862754, a: 1}
 --- !u!108 &1019610882
 Light:
@@ -13169,7 +13284,7 @@ MonoBehaviour:
   CastTime: 1.5
   PowerType: 1
   XP_per_NPC: 10
-  Mjolnir: {fileID: 0}
+  Mjolnir: {fileID: 2010366220}
 --- !u!114 &1115764494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14012,7 +14127,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -14653,6 +14768,7 @@ MonoBehaviour:
   myGestureTextLeft: {fileID: 245425259}
   myGestureTextRight: {fileID: 1163027974}
   handofGod: {fileID: 1721188145}
+  bonescale: {x: .400000006, y: .400000006, z: .400000006}
 --- !u!114 &1286810200
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -16221,7 +16337,7 @@ EllipsoidParticleEmitter:
   maxSize: .5
   minEnergy: 5
   maxEnergy: 10
-  minEmission: 2500
+  minEmission: 1500
   maxEmission: 5000
   worldVelocity: {x: 0, y: 0, z: 0}
   localVelocity: {x: 0, y: 0, z: 0}
@@ -19165,6 +19281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 5982389}
   cursor3d: {x: 0, y: 0, z: 0}
+  cursor2d: {x: 0, y: 0}
   cursor: {fileID: 561226344}
   normal: {fileID: 2800000, guid: fbe8ede4a4e058a418a376bb7ac016fb, type: 3}
   closed: {fileID: 2800000, guid: 255bf05779ce6e74c99ea2a2bf2d08cb, type: 3}
@@ -19190,9 +19307,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1721188145}
-  m_LocalRotation: {x: -.258819044, y: 0, z: 0, w: .965925813}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 30}
+  m_LocalScale: {x: 1, y: 1, z: -1}
   m_Children:
   - {fileID: 1286810204}
   m_Father: {fileID: 5982390}
@@ -21916,7 +22033,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -23412,7 +23529,7 @@ EllipsoidParticleEmitter:
   minEnergy: 1
   maxEnergy: 10
   minEmission: 200
-  maxEmission: 10000
+  maxEmission: 5000
   worldVelocity: {x: 6, y: -10, z: 0}
   localVelocity: {x: 6, y: -10, z: 0}
   rndVelocity: {x: 0, y: 0, z: 0}

@@ -106,14 +106,17 @@ public class NavAgentMovement : MonoBehaviour {
 							toggleScaredRun (false);
 						}
 				}
-
+		
 		/*
-		if (/*agent.pathStatus == NavMeshPathStatus.PathComplete || agent.pathStatus == NavMeshPathStatus.PathInvalid ||*/ //!agent.hasPath) {
+		if (/*agent.pathStatus == NavMeshPathStatus.PathComplete || agent.pathStatus == NavMeshPathStatus.PathInvalid ||*/ // !agent.hasPath) {
 			//Debug.Log(agent.pathStatus+" "+agent.hasPath+" "+transform.name);
 			/*targetReached = true;
+
 			return;
 		} */
 		
+
+
 		lastCheck -= Time.fixedDeltaTime;
 		Ddist = (transform.position-lastPos).magnitude;
 		if (lastCheck <= 0.0f && targetReached == false) {

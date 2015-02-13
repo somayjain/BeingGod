@@ -22,6 +22,8 @@ public class HandRenderer : MonoBehaviour {
 
     public GameObject handofGod;
 
+	public Vector3 bonescale = new Vector3 (0.5f,0.5f,0.5f);
+
     private int MaxHands; //Max no. of Hands
     private GameObject[,] myJoints; //Array of Joint GameObjects
     private GameObject[,] myBones; //Array of Bone GameObjects
@@ -34,6 +36,7 @@ public class HandRenderer : MonoBehaviour {
 
 	private Vector3 leftPalmCenterJoint, rightPalmCenterJoint;
 	private PXCMHandData outputData;
+	private PXCMHandData.GestureData gestureData;
 
 	// Use this for initialization
 	void Start() {
@@ -77,10 +80,15 @@ public class HandRenderer : MonoBehaviour {
         
 	}
 
-	public void DisplayGestures(PXCMHandData.GestureData gestureData)
+	public void DisplayGestures(PXCMHandData.GestureData _gestureData)
 	{
+		gestureData = _gestureData;
+
+		myGestureTextLeft.GetComponent<Text> ().text = "Left Hand: " + getLeftHandGesture ();
+		myGestureTextRight.GetComponent<Text> ().text = "Right Hand: " + getRightHandGesture ();
+		/*
 		for (int i = 0; i < MaxHands; i++)
-			if (gestureData.handId == handIds[i])
+		if (gestureData.handId == handIds[i])
 		{
 			if (bodySide[i] == PXCMHandData.BodySideType.BODY_SIDE_LEFT)
 			{
@@ -92,8 +100,36 @@ public class HandRenderer : MonoBehaviour {
 			}
 			break;
 		}
+		*/
 	}
 
+	public string getLeftHandGesture()
+	{
+		for (int i = 0; i < MaxHands; i++)
+		if (gestureData.handId == handIds[i])
+		{
+			if (bodySide[i] == PXCMHandData.BodySideType.BODY_SIDE_LEFT)
+			{
+				return gestureData.name.ToString();
+			}
+			break;
+		}
+		return "";
+	}
+
+	public string getRightHandGesture()
+	{
+		for (int i = 0; i < MaxHands; i++)
+			if (gestureData.handId == handIds[i])
+		{
+			if (bodySide[i] == PXCMHandData.BodySideType.BODY_SIDE_RIGHT)
+			{
+				return gestureData.name.ToString();
+			}
+			break;
+		}
+		return "";
+	}
 
 	public void DisplayJoints(PXCMHandData.JointData[,] _myJointData, int[] _handIds, PXCMHandData.BodySideType[] _bodySides)
     {
@@ -114,7 +150,8 @@ public class HandRenderer : MonoBehaviour {
 
 	public void DisplaySmoothenedJoints(PXCMHandData _outputData, PXCMHandData.JointData[,] _myJointData, int[] _handIds, PXCMHandData.BodySideType[] _bodySides)
     {
-		float factor = 30.0f;
+		float factor = 10.0f;
+		float xscale = (Screen.width / 600.0f)/bonescale.x, yscale = (Screen.height/360.0f)/bonescale.y;
         handIds = _handIds;
         bodySide = _bodySides;
 		outputData = _outputData;
@@ -130,7 +167,7 @@ public class HandRenderer : MonoBehaviour {
                     if (temp[i, j] != null && _myJointData[i, j] != null)
                     {
                         myJoints[i, j].SetActive(true);
-                        sumOfJointPositions[i, j] += new Vector3(-1 * temp[i, j].positionWorld.x * 2.0f, temp[i, j].positionWorld.y * 1.2f, temp[i, j].positionWorld.z);
+                        sumOfJointPositions[i, j] += new Vector3(-1 * temp[i, j].positionWorld.x * xscale, temp[i, j].positionWorld.y * yscale, temp[i, j].positionWorld.z);
                     }
                     else
                         myJoints[i, j].SetActive(false);
@@ -198,7 +235,7 @@ public class HandRenderer : MonoBehaviour {
 			_bone.transform.position = ((_nextJoint.transform.position - _prevJoint.transform.position) / 2f) + _prevJoint.transform.position;
 			
 			// Update Scale
-			_bone.transform.localScale = new Vector3 (0.8f, (_nextJoint.transform.position - _prevJoint.transform.position).magnitude - (_prevJoint.transform.position - _nextJoint.transform.position).magnitude / 2f, 0.8f);
+			_bone.transform.localScale = new Vector3 (bonescale.x, (_nextJoint.transform.position - _prevJoint.transform.position).magnitude - (_prevJoint.transform.position - _nextJoint.transform.position).magnitude / 2f, bonescale.y);
 			
 			// Update Rotation
 			_bone.transform.rotation = Quaternion.FromToRotation (Vector3.up, _nextJoint.transform.position - _prevJoint.transform.position);
@@ -206,50 +243,59 @@ public class HandRenderer : MonoBehaviour {
 		
 	}
 
-	public Vector2 queryLeftHand2DCoordinates()
+	public bool queryLeftHand2DCoordinates(out Vector2 point)
 	{
 		if (outputData != null) {
 			Vector3 pos = transform.TransformPoint (leftPalmCenterJoint);
 			//Debug.Log ("Left hand Screen coords " + Camera.main.camera.WorldToScreenPoint (pos).ToString ());
-			return Camera.main.camera.WorldToScreenPoint(pos);
+			point = Camera.main.camera.WorldToScreenPoint(pos);
+			return true;
 		}
 		else
 		{
 			//Debug.Log("No Hand");
-			return new Vector2(-1f, -1f);
+			point = Vector2.zero;
+			return false;
 		}
 	}
 
-	public Vector2 queryRightHand2DCoordinates()
+	public bool queryRightHand2DCoordinates(out Vector2 point)
 	{
 		if (outputData != null) {
 			Vector3 pos = transform.TransformPoint (rightPalmCenterJoint);
 			//Debug.Log ("Right hand Screen coords " + Camera.main.camera.WorldToScreenPoint (pos).ToString ());
-			return Camera.main.camera.WorldToScreenPoint(pos);
+			point = Camera.main.camera.WorldToScreenPoint(pos);
+			return true;
 		}
 		else
 		{
 			//Debug.Log("No Hand");
-			return new Vector2(-1f, -1f);
+			point = Vector2.zero;
+			return false;
 		}
 	}
 
-	public Vector3 queryLeftHand3DCoordinates()
+	public bool queryLeftHand3DCoordinates(out Vector3 point)
 	{
 		if (outputData != null) {
-			return transform.TransformPoint(leftPalmCenterJoint);
+				point = transform.TransformPoint (leftPalmCenterJoint);
+//				Debug.Log ("My point: " + point.ToString ());
+				return true;
+		} else {
+				point = Vector3.zero;
+				return false;
 		}
-		else
-			return new Vector3(-1f, -1f, -1f);
 	}
 
-	public Vector3 queryRightHand3DCoordinates()
+	public bool queryRightHand3DCoordinates(out Vector3 point)
 	{
 		if (outputData != null) {
-			return transform.TransformPoint(leftPalmCenterJoint);
+				point = transform.TransformPoint (leftPalmCenterJoint);
+				return true;
+		} else {
+				point = Vector3.zero;
+				return false;
 		}
-		else
-			return new Vector3(-1f, -1f, -1f);
 	}
 	public void makeNull()
 	{
