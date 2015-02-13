@@ -190,10 +190,12 @@ public class XP_handle : MonoBehaviour {
 		case 2:
 			XP_Limit = 50;
 			cursor.PowerHey.Enable();
-			cursor.PowerHey.transform.GetChild(1).GetComponent<Image>().enabled = false;
+			cursor.PowerHey.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Hey");
+			cursor.PowerHey.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
 
 			cursor.PowerBoo.Enable();
-			cursor.PowerBoo.transform.GetChild(1).GetComponent<Image>().enabled = false;
+			cursor.PowerBoo.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Boo");
+			cursor.PowerBoo.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
 
 			cursor.PowerGMBC.Enable();
 			cursor.PowerGMBC.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("GMBC");

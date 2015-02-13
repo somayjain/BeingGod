@@ -46,7 +46,7 @@ public class NavAgentMovement : MonoBehaviour {
 
 		//agent.transform.Rotate (0,30,0);
 		bool success = agent.SetDestination(targetLoc);
-		Debug.Log (targetLoc+"Done reset"+transform.position+" "+success);
+		//Debug.Log (targetLoc+"Done reset"+transform.position+" "+success);
 		agent.stoppingDistance = Random.Range (0, 10);
 		targetReached = false;
 		//toggleScaredRun (true);
@@ -109,7 +109,7 @@ public class NavAgentMovement : MonoBehaviour {
 
 
 		if (/*agent.pathStatus == NavMeshPathStatus.PathComplete || agent.pathStatus == NavMeshPathStatus.PathInvalid ||*/ !agent.hasPath) {
-			Debug.Log(agent.pathStatus+" "+agent.hasPath+" "+transform.name);
+			//Debug.Log(agent.pathStatus+" "+agent.hasPath+" "+transform.name);
 			targetReached = true;
 			return;
 		}
@@ -125,7 +125,7 @@ public class NavAgentMovement : MonoBehaviour {
 				if(agent.pathPending)
 					transform.Rotate(0,30,0);
 
-				Debug.Log(transform.name+" stuck "+transform.position+" "+lastPos);
+				//Debug.Log(transform.name+" stuck "+transform.position+" "+lastPos);
 				targetReached = true;
 			}
 			lastCheck = 0.5f;

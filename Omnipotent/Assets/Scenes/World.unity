@@ -4553,7 +4553,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -6126,6 +6126,10 @@ Prefab:
     - target: {fileID: 1500000, guid: ef8cee47242c1944080e9cf6720da939, type: 2}
       propertyPath: m_Emit
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1500000, guid: ef8cee47242c1944080e9cf6720da939, type: 2}
+      propertyPath: maxEmission
+      value: 5000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef8cee47242c1944080e9cf6720da939, type: 2}
@@ -9431,6 +9435,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1500000, guid: 144b203f383094d16b1f336c74c47326, type: 2}
+      propertyPath: minEmission
+      value: 1500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 144b203f383094d16b1f336c74c47326, type: 2}
   m_RootGameObject: {fileID: 1400495011}
@@ -10401,7 +10409,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -10589,7 +10597,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -14013,7 +14021,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -16223,7 +16231,7 @@ EllipsoidParticleEmitter:
   maxSize: .5
   minEnergy: 5
   maxEnergy: 10
-  minEmission: 2500
+  minEmission: 1500
   maxEmission: 5000
   worldVelocity: {x: 0, y: 0, z: 0}
   localVelocity: {x: 0, y: 0, z: 0}
@@ -21919,7 +21927,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 24
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -23415,7 +23423,7 @@ EllipsoidParticleEmitter:
   minEnergy: 1
   maxEnergy: 10
   minEmission: 200
-  maxEmission: 10000
+  maxEmission: 5000
   worldVelocity: {x: 6, y: -10, z: 0}
   localVelocity: {x: 6, y: -10, z: 0}
   rndVelocity: {x: 0, y: 0, z: 0}

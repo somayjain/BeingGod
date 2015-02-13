@@ -309,7 +309,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 				//random.seed = i;
 				//updateSources();
 				//Debug.Log("Rnd: " + rand_pos.ToString() + "," + nos_sources.ToString()+" "+sources[rand_pos]);
-				Debug.Log(people[i].name+" at index "+i);
+				//Debug.Log(people[i].name+" at index "+i);
 				person_script.setNewPath(sources[Random.Range(0,sources.Count)]);
 				//Debug.Log("Recompute the new path");
 			}
