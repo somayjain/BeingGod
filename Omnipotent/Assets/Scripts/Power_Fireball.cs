@@ -66,6 +66,7 @@ public class Power_Fireball : Powers {
 			GameObject trail = (GameObject)Instantiate(Resources.Load("FireBall"), loc + new Vector3(0,Fireball_height,0), Quaternion.identity) as GameObject;
 			trail.name = "Trail";
 			trail.transform.parent = Fireball.transform;
+			trail.rigidbody.AddForce(new Vector3(0,-10000,0));
 			trail.SetActive (true);
 		}
 	}
