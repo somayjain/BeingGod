@@ -34,8 +34,21 @@ public class houseManager : MonoBehaviour
 		}
 	
 		// Update is called once per frame
-		void Update ()
-		{
+	void Update ()
+	{
+		if (cursor.mode == cursor_handle.MODE.BUILD) {
+						if (!f_buildHouse) {
+								f_buildHouse = true;
+								string myHouseType = houseTYPE (Random.Range (0, 4));
+								house = Instantiate (Resources.Load (myHouseType)) as GameObject;
+								house.transform.SetParent (Buildings);
+								house.transform.GetChild (0).gameObject.name = "source_" + sourceId.ToString ();
+								house.layer = 2;
+						}
+						buildHouse_cursor ();
+				}
+				
+		/*
 				if (!f_buildHouse) {
 						f_buildHouse = Input.GetKeyDown ("b");
 						if (f_buildHouse) {
@@ -64,6 +77,7 @@ public class houseManager : MonoBehaviour
 						deleteHouse ();
 						
 				}
+		*/
 		}
 
 		void buildHouse_cursor ()
@@ -87,7 +101,7 @@ public class houseManager : MonoBehaviour
 				}		
 		}
 	
-		void buildHouse ()
+		public void buildHouse ()
 		{
 				f_buildHouse = false;
 		 
@@ -117,6 +131,10 @@ public class houseManager : MonoBehaviour
 				nosHouses++;
 				houseCreated = true;
 				Debug.Log ("Inside buildHouse=" + nosHouses.ToString () + " source.name=" + house.transform.GetChild (0).gameObject.name);
+		}
+		
+		public void cancelBuild (){
+			Destroy (house);
 		}
 
 		void deleteHouse ()
