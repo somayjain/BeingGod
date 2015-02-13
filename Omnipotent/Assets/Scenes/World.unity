@@ -116,6 +116,11 @@ GameObject:
   - 114: {fileID: 5982421}
   - 114: {fileID: 5982413}
   - 114: {fileID: 5982414}
+  - 114: {fileID: 5982415}
+  - 114: {fileID: 5982416}
+  - 114: {fileID: 5982417}
+  - 114: {fileID: 5982419}
+  - 114: {fileID: 5982418}
   m_Layer: 0
   m_Name: Eye of God
   m_TagString: MainCamera
@@ -484,6 +489,8 @@ MonoBehaviour:
   ErrorDetected: 0
   FriendlyName: Stop Event
   Rules:
+  - {fileID: 5982417}
+  - {fileID: 5982416}
   - {fileID: 5982399}
   TriggerAttributeName: EventTriggerAtt
   FoldoutOpen: 1
@@ -650,10 +657,11 @@ MonoBehaviour:
   ErrorDetected: 0
   FriendlyName: Stop Event
   Rules:
+  - {fileID: 5982419}
   - {fileID: 5982414}
   - {fileID: 5982406}
   TriggerAttributeName: EventTriggerAtt
-  FoldoutOpen: 0
+  FoldoutOpen: 1
   AssociatedAction: {fileID: 0}
   Source: 
   Success: 0
@@ -765,6 +773,102 @@ MonoBehaviour:
   HandIndex: 1
   ContinuousTracking: 0
   OpennessFactor: 50
+--- !u!114 &5982415
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8425e81730581264e8bc707bd5925622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982456}
+  FriendlyName: Hand Closed
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  WhichHand: 2
+  HandIndex: 1
+  ContinuousTracking: 0
+  OpennessFactor: 50
+--- !u!114 &5982416
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4015b9e4cf58a4041b7385ec4ee7677d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982405}
+  FriendlyName: Hand Lost
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  WhichHand: 2
+  HandIndex: 1
+  ContinuousTracking: 0
+--- !u!114 &5982417
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4015b9e4cf58a4041b7385ec4ee7677d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982405}
+  FriendlyName: Hand Lost
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  WhichHand: 2
+  HandIndex: 0
+  ContinuousTracking: 0
+--- !u!114 &5982418
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4015b9e4cf58a4041b7385ec4ee7677d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982456}
+  FriendlyName: Hand Lost
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  WhichHand: 2
+  HandIndex: 0
+  ContinuousTracking: 0
+--- !u!114 &5982419
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 5982385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4015b9e4cf58a4041b7385ec4ee7677d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 5982412}
+  FriendlyName: Hand Lost
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  WhichHand: 2
+  HandIndex: 0
+  ContinuousTracking: 0
 --- !u!114 &5982421
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -800,6 +904,8 @@ MonoBehaviour:
   ErrorDetected: 0
   FriendlyName: Stop Event
   Rules:
+  - {fileID: 5982418}
+  - {fileID: 5982415}
   - {fileID: 5982413}
   TriggerAttributeName: EventTriggerAtt
   FoldoutOpen: 1
