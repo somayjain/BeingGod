@@ -47,7 +47,7 @@ public class WildManagement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		csHandle = GameObject.FindWithTag ("Hand").GetComponent<cursor_handle> ();
 	}
 
 	public void checkEnem(){
@@ -74,13 +74,13 @@ public class WildManagement : MonoBehaviour {
 			double hitDistance = (hit3DLoc - bossLoc).magnitude;
 
 			if(enemList[i].GetComponent<WildMovement>().agentReached == true){
-				enemList[i].GetComponent<WildMovement>().resetPath(enemList[Random.Range(0,enemList.Count)].transform.position);
+				enemList[i].GetComponent<WildMovement>().resetPath(wildSpots[Random.Range(0,wildSpots.Length)].transform.position);
 			}
 			
 			if(Powermode == MODE.MJOLNIR ){
 				if(hitDistance<=rayPowRange){
 					csHandle.PowerMjolnir.AddXP(1,1);
-
+					Debug.Log(i+" enemy List "+enemList[i].GetComponent<WildMovement>().health);
 					enemList[i].GetComponent<WildMovement>().health -= 10.0f;
 					if(enemList[i].GetComponent<WildMovement>().health <= 0.0f){
 					Destroy(enemList[i]);

@@ -15,6 +15,11 @@ public class WildMovement : MonoBehaviour {
 
 	string attackAnim;
 	string walkAnim;
+
+
+	Vector3 lastPos = new Vector3();
+	float lastCheck = 2.0f;
+
 	// Use this for initialization
 	void Start () {
 		agent = GetComponent<NavMeshAgent> ();
@@ -28,6 +33,10 @@ public class WildMovement : MonoBehaviour {
 		agent.SetDestination (currentDestination);
 		animation.CrossFade (walkAnim);
 		agent.speed += 5.0f;
+
+		agent.autoRepath = true;
+		lastPos = transform.position;
+
 	}
 
 	void OnTriggerEnter(Collider collision){
@@ -42,6 +51,7 @@ public class WildMovement : MonoBehaviour {
 
 	public void resetPath(Vector3 newLoc){
 		agent.SetDestination (newLoc);
+		agent.stoppingDistance = Random.Range (0, 10);
 		agentReached = true;
 	}
 
@@ -57,9 +67,31 @@ public class WildMovement : MonoBehaviour {
 			}else{
 				switchTimer -= Time.fixedDeltaTime;
 			}
+			return;
 		}
-		if (!agent.pathPending){
+
+		lastCheck -= Time.fixedDeltaTime;
+
+		if (agent.pathStatus == NavMeshPathStatus.PathComplete || agent.pathStatus == NavMeshPathStatus.PathInvalid) {
 			agentReached = true;
+			return;
 		}
+
+		if (lastCheck <= 0.0f) {
+			if((transform.position-lastPos).magnitude <= 0.5f){
+				/*if(!agent.pathPending){
+					Vector3 newTarget = new Vector3(transform.position.x+3.0f,transform.position.y, transform.position.z+2.0f);
+					agent.SetDestination(newTarget);
+				}*/
+				if(agent.pathPending)
+					transform.Rotate(0,30,0);
+				
+				Debug.Log(transform.name+" stuck "+transform.position+" "+lastPos);
+				agentReached = true;
+			}
+			lastCheck = 0.5f;
+			lastPos = transform.position;
+		}
+
 	}
 }

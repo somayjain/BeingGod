@@ -175,11 +175,14 @@ public class ZombieManager : MonoBehaviour {
 			nosZombies = ZombieList.Count;
 		for (int i=0; i<nosZombies; i++) {
 			Vector3 zombLoc = ZombieList[i].transform.position;
-			double hitDistance = (hit3DLoc - zombLoc).magnitude;
+			Vector3 newZombLoc = zombLoc;
+			newZombLoc.y=0;
+			double hitDistance = (hit3DLoc - newZombLoc).magnitude;
 
 
 			if(Powermode == MODE.MJOLNIR ){
-				if(hitDistance<=rayPowRange){
+				if(hitDistance<=5.0f){
+					//Debug.Log(ZombieList[i].name+" "+ZombieList[i].transform.position+" due to "+hit3DLoc);
 					csHandle.PowerMjolnir.AddXP(1,1);
 					Destroy(ZombieList[i]);
 					ZombieList.RemoveAt(i);
@@ -231,6 +234,11 @@ public class ZombieManager : MonoBehaviour {
 				else
 					ZombieList[i].GetComponent<ZombieNavAgent>().haltMovement(false);
 			}
+
+			if(ZombieList[i].GetComponent<ZombieNavAgent>().targetReached == true){
+				ZombieList[i].GetComponent<ZombieNavAgent>().setNewPath(dest[Random.Range(0,dest.Count)]);
+			}
+
 		}
 		Powermode = MODE.DEFAULT;
 		///foreach (int index  in indicesToDelete) {

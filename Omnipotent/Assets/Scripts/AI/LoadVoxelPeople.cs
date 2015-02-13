@@ -133,8 +133,10 @@ public class LoadVoxelPeople : MonoBehaviour {
 						tornadoOn = true;
 
 		if (Powermode == MODE.FIREBALL || firemode == true) {
-			if(!firemode)
+			if(!firemode){
 				fireLoc = GetComponentInParent<LevelController>().PowerLoc;
+				fireLoc.y=0;
+			}
 			firemode = true;
 			if(fireTimer<-3.0f){
 				fireTimer = 6.0f;
@@ -214,6 +216,9 @@ public class LoadVoxelPeople : MonoBehaviour {
 
 			//people[i].transform.GetChild(0);
 
+			Vector3 newLoc = people[i].transform.position;
+			newLoc.y = 0;
+
 			if(fireTimer<=1.0f && fireTimer > -3.0f && (people[i].transform.position - fireLoc).magnitude<=15.0f && people[i].transform.childCount<3){
 				GameObject head_fire = (GameObject)Instantiate (Resources.Load ("human_fire"),Vector3.zero,	Quaternion.identity) as GameObject;
 				head_fire.transform.parent = people[i].transform;
@@ -288,7 +293,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 			case MODE.THUNDER_CLAP:
 				person_script.toggleScaredRun(true);
 				person_script.currentlyScared = true;
-				csHandle.PowerThunderClap.AddXP(1,-1);
+				//csHandle.PowerThunderClap.AddXP(1,-1);
 				Debug.Log("Thunder Clap at "+pointOfContact+" ");
 				break;
 			}
@@ -298,7 +303,8 @@ public class LoadVoxelPeople : MonoBehaviour {
 				//random.seed = i;
 				//updateSources();
 				//Debug.Log("Rnd: " + rand_pos.ToString() + "," + nos_sources.ToString()+" "+sources[rand_pos]);
-				person_script.setNewPath(sources[rand_pos]);
+				Debug.Log(people[i].name+" at index "+i);
+				person_script.setNewPath(sources[Random.Range(0,sources.Count)]);
 				//Debug.Log("Recompute the new path");
 			}
 		}

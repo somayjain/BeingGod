@@ -16,7 +16,7 @@ public class LevelController : MonoBehaviour {
 
 	public int nosOfObjectives;
 	public bool[]objectiveComplete=new bool[]{false,false, false, false, false};
-	public int[] ObjectiveNos = new int[]{0,2,3,5,1};
+	public int[] ObjectiveNos;
 	public int freeLevel = 4;
 
 	public GameObject zombieManager;
@@ -146,6 +146,9 @@ public class LevelController : MonoBehaviour {
 				Debug.Log("changed XP");
 			}
 		}
+		if (currentLevel == 4) {
+			// no logic for next level here.. check the switch function itself
+		}
 	}
 
 	void displayObjective(){
@@ -208,6 +211,12 @@ public class LevelController : MonoBehaviour {
 			toggle[4].transform.GetChild(1).GetComponent<Text>().color=Color.red;
 
 		}
+		if (currentLevel == 4) {
+			toggle[0].transform.GetChild(1).GetComponent<Text>().text = "Protect Them!";
+			toggle[0].gameObject.SetActive(true);
+			toggle[0].isOn = false;
+			toggle[0].transform.GetChild(1).GetComponent<Text>().color=Color.red;
+		}
 	}
 
 
@@ -236,7 +245,7 @@ public class LevelController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		currentLevel = 4;
+		currentLevel = 3;
 
 		//init Person manager
 		peopleManager = GameObject.FindGameObjectWithTag ("PeopleManager");
@@ -367,10 +376,18 @@ public class LevelController : MonoBehaviour {
 								TutImage.SetActive(false);
 								updateObjectives();
 								bool nextLevelStatus = ObjectiveCompleted();
+								if(peopleManager.GetComponent<LoadVoxelPeople>().people.Count == 0){
+									resetObjectives();
+									zombieManager.GetComponent<ZombieManager>().deleteZombie();
+									for(int i=0;i<buildingManager.GetComponent<houseManager>().nosHouses;i++){
+										peopleManager.GetComponent<LoadVoxelPeople> ().initPersonRandom (5);
+									}
+								}else{
 								if(nextLevelStatus == true){
 									levelInit = true;
 									currentLevel++;
 									resetObjectives();
+									}
 								}
 							}else{
 								tutTimer-=Time.fixedDeltaTime;
@@ -401,12 +418,22 @@ public class LevelController : MonoBehaviour {
 									BossRate -= Time.fixedDeltaTime;
 									if(survivalTime <= 0.0){
 										if(peopleManager.GetComponent<LoadVoxelPeople>().people.Count == 0){
-										}else{
-										resetObjectives();
-										zombieManager.GetComponent<ZombieManager>().deleteZombie();
+											resetObjectives();
+											zombieManager.GetComponent<ZombieManager>().deleteZombie();
 											for(int i=0;i<buildingManager.GetComponent<houseManager>().nosHouses;i++){
 												peopleManager.GetComponent<LoadVoxelPeople> ().initPersonRandom (5);
 											}
+										}else{
+											currentLevel++;
+										}
+										}else{
+										if(ZombRate<=0.0f){
+											ZombRate = 4.0f;
+											zombieManager.GetComponent<ZombieManager>().initZombies(1);
+										}
+										if(BossRate<=0.0f){
+											BossRate = 10.0f;
+											BossManager.GetComponent<WildManagement>().SpawnEnemy(1);
 										}
 									}
 								}else{
@@ -414,7 +441,7 @@ public class LevelController : MonoBehaviour {
 									if(tutTimer<=0.0f){
 										Debug.Log(tutTimer+" "+spawnZombs);
 										zombieManager.GetComponent<ZombieManager>().initZombies(spawnZombs);
-										BossManager.GetComponent<WildManagement>().SpawnEnemy(5);
+										BossManager.GetComponent<WildManagement>().SpawnEnemy(1);
 									}
 								}
 							}
