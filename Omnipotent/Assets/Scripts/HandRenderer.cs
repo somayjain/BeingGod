@@ -9,6 +9,7 @@ Copyright(c) 2014 Intel Corporation. All Rights Reserved.
 *******************************************************************************/
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class HandRenderer : MonoBehaviour {
 
@@ -16,6 +17,8 @@ public class HandRenderer : MonoBehaviour {
     public GameObject TipPrefab; //Prefab for Finger Tips
     public GameObject BonePrefab; //Prafab for Bones
     public GameObject PalmCenterPrefab;//Prefab for Palm Center
+	public GameObject myGestureTextLeft;//Pointer to LeftGUIText
+	public GameObject myGestureTextRight;//Pointer to RightGUIText
 
     public GameObject handofGod;
 
@@ -74,7 +77,25 @@ public class HandRenderer : MonoBehaviour {
         
 	}
 
-    public void DisplayJoints(PXCMHandData.JointData[,] _myJointData, int[] _handIds, PXCMHandData.BodySideType[] _bodySides)
+	public void DisplayGestures(PXCMHandData.GestureData gestureData)
+	{
+		for (int i = 0; i < MaxHands; i++)
+			if (gestureData.handId == handIds[i])
+		{
+			if (bodySide[i] == PXCMHandData.BodySideType.BODY_SIDE_LEFT)
+			{
+				myGestureTextLeft.GetComponent<Text>().text =  "Left Hand : "+ gestureData.name.ToString();
+			}
+			else if (bodySide[i] == PXCMHandData.BodySideType.BODY_SIDE_RIGHT)
+			{
+				myGestureTextRight.GetComponent<Text>().text = "Right Hand : "+ gestureData.name.ToString(); 
+			}
+			break;
+		}
+	}
+
+
+	public void DisplayJoints(PXCMHandData.JointData[,] _myJointData, int[] _handIds, PXCMHandData.BodySideType[] _bodySides)
     {
         handIds = _handIds;
         bodySide = _bodySides;
@@ -100,6 +121,8 @@ public class HandRenderer : MonoBehaviour {
 
 		Vector3 pos, palmCenterPos;
         avgQueue.Enqueue(_myJointData);
+		bool leftPresent = false;
+		bool rightPresent = false;
 
         foreach (PXCMHandData.JointData[,] temp in avgQueue)
             for (int i = 0; i < MaxHands; i++)
@@ -116,13 +139,18 @@ public class HandRenderer : MonoBehaviour {
 		{
 			palmCenterPos = (sumOfJointPositions[i, 1] / avgQueue.Count) * factor;
 			if(bodySide[i] == (PXCMHandData.BodySideType)1)
+			{
 				// Left Hand
 				leftPalmCenterJoint = (sumOfJointPositions[i, 1] / avgQueue.Count) * factor;
-			
+				leftPresent = true;
+			}
 			else if(bodySide[i] == (PXCMHandData.BodySideType)2)
+			{
 				// Right Hand
 				rightPalmCenterJoint = (sumOfJointPositions[i, 1] / avgQueue.Count) * factor;
-			
+				rightPresent = true;
+			}
+
 			for (int j = 0; j < PXCMHandData.NUMBER_OF_JOINTS; j++)
             {
 				pos = (sumOfJointPositions[i, j] / avgQueue.Count) * factor;
@@ -151,6 +179,10 @@ public class HandRenderer : MonoBehaviour {
         if (avgQueue.Count >= SmoothingFactor)
             avgQueue.Dequeue();
 
+		if(!leftPresent)
+			myGestureTextLeft.GetComponent<Text> ().text = "";
+		if(!rightPresent)
+			myGestureTextRight.GetComponent<Text> ().text = "";
     }
 
 	//Update Bones
@@ -222,5 +254,7 @@ public class HandRenderer : MonoBehaviour {
 	public void makeNull()
 	{
 		outputData = null;
+		myGestureTextLeft.GetComponent<Text> ().text = "";
+		myGestureTextRight.GetComponent<Text> ().text = "";
 	}
 }

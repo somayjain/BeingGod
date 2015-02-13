@@ -2446,7 +2446,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 128758356}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29, y: 5.72999954, z: -490.000031}
+  m_LocalPosition: {x: -74.5, y: 6.40999985, z: -483.5}
   m_LocalScale: {x: .961538494, y: .649350643, z: .869565248}
   m_Children: []
   m_Father: {fileID: 1027737499}
@@ -4502,7 +4502,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1741207454}
+<<<<<<< HEAD
+  m_RootOrder: 1
+=======
   m_RootOrder: 0
+>>>>>>> origin/master
 --- !u!1 &312883261
 GameObject:
   m_ObjectHideFlags: 0
@@ -13169,7 +13173,7 @@ MonoBehaviour:
   CastTime: 1.5
   PowerType: 1
   XP_per_NPC: 10
-  Mjolnir: {fileID: 0}
+  Mjolnir: {fileID: 2010366220}
 --- !u!114 &1115764494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19739,6 +19743,7 @@ Transform:
   m_Children:
   - {fileID: 306863064}
   - {fileID: 1301215573}
+  - {fileID: 306863064}
   m_Father: {fileID: 0}
   m_RootOrder: 11
 --- !u!1001 &1742736211
@@ -20658,10 +20663,10 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1843515231}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 150, y: 100, z: 100}
+  m_Size: {x: 150, y: 5, z: 100}
   m_Center: {x: 25, y: 0, z: -50}
 --- !u!1 &1847834806
 GameObject:

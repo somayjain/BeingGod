@@ -58,10 +58,15 @@ public class Power_Fireball : Powers {
 			Fireball.transform.position = loc;
 			Fireball.SetActive (active);
 
-			GameObject trail = (GameObject)Instantiate(Resources.Load("FireBall"), loc + new Vector3(0,Fireball_height,0), Quaternion.identity) as GameObject;
-			trail.name = "Trail";
-			trail.transform.parent = Fireball.transform;
-			trail.SetActive (true);
+			GameObject fireball = (GameObject)Instantiate(Resources.Load("FireBALL_NEW"), loc + new Vector3(0,90f,0), Quaternion.identity) as GameObject;
+			fireball.name = "fireball";
+			fireball.transform.parent = Fireball.transform;
+			fireball.transform.rotation = Quaternion.Euler(90f,-180f,0);
+			fireball.SetActive (true);
+//			GameObject trail = (GameObject)Instantiate(Resources.Load("FireBall"), loc + new Vector3(0,Fireball_height,0), Quaternion.identity) as GameObject;
+//			trail.name = "Trail";
+//			trail.transform.parent = Fireball.transform;
+//			trail.SetActive (true);
 		}
 	}
 

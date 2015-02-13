@@ -104,11 +104,10 @@ public class LevelController : MonoBehaviour {
 				toggle[2].transform.GetChild(1).GetComponent<Text>().color=Color.green;
 				Debug.Log("changed Boo");
 			}
-			if(xp_handler.Faith+xp_handler.Fear==xp_handler.XP_Limit){
+			if(xp_handler.LevelUpReached){
 				objectiveComplete[3] = true;
 				toggle[3].isOn = true;
 				toggle[3].transform.GetChild(1).GetComponent<Text>().color=Color.green;
-				Debug.Log("changed XP");
 			}
 		}
 
@@ -139,7 +138,7 @@ public class LevelController : MonoBehaviour {
 				toggle[3].transform.GetChild(1).GetComponent<Text>().color=Color.green;
 				Debug.Log("changed Fireball");
 			}
-			if(xp_handler.Faith+xp_handler.Fear==xp_handler.XP_Limit){
+			if(xp_handler.LevelUpReached){
 				objectiveComplete[4] = true;
 				toggle[4].isOn = true;
 				toggle[4].transform.GetChild(1).GetComponent<Text>().color=Color.green;
@@ -244,7 +243,7 @@ public class LevelController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		
 		currentLevel = 3;
 
 		//init Person manager
