@@ -21,6 +21,7 @@ public class ZombieNavAgent : MonoBehaviour {
 		agent = (NavMeshAgent)gameObject.GetComponent("NavMeshAgent");
 		agent.SetDestination(target);
 		agent.speed = 3.0f;
+		agent.acceleration = 16.0f;
 		targetReached = false;
 		lastPos = transform.position;
 	}
@@ -41,9 +42,12 @@ public class ZombieNavAgent : MonoBehaviour {
 	}
 
 	public void setNewPath(Vector3 newLoc){
-
+		float randDelta = Random.Range(-10,10);
+		float randD = randDelta/8.0f;
+		agent.Warp(new Vector3(transform.position.x-randD,transform.position.y,transform.position.z-randD));
 		agent.SetDestination (newLoc);
-	
+		agent.stoppingDistance = Random.Range (0, 10);
+		targetReached = false;
 	}
 
 	void OnTriggerEnter(Collider collision){
@@ -64,9 +68,7 @@ public class ZombieNavAgent : MonoBehaviour {
 				}*/
 				
 				//if(agent.path.status == NavMeshPathStatus.PathPartial)
-				float randDelta = Random.Range(-10,10);
-				float randD = randDelta/10.0f;
-				agent.Warp(new Vector3(transform.position.x-randD,transform.position.y,transform.position.z-randD));
+
 				
 				//Debug.Log(transform.name+" stuck "+transform.position+" "+lastPos);
 				targetReached = true;

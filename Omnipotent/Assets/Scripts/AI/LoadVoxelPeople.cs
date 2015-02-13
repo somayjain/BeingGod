@@ -117,6 +117,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 		GameObject obs = (GameObject)Instantiate (Resources.Load ("prefabs/" + prefabNameList [rand_chr]), sourceLoc, Quaternion.AngleAxis (270, Vector3.right)) as GameObject;
 		obs.name = prefabNameList [rand_chr];
 		obs.transform.parent = transform;
+		//obs.transform.localPosition = new Vector3(0,0,0);
 		NavMeshAgent agent = (NavMeshAgent)obs.AddComponent ("NavMeshAgent");
 		NavAgentMovement agentMovement = obs.AddComponent<NavAgentMovement> ();
 		agentMovement.target = targetLoc;
@@ -166,8 +167,8 @@ public class LoadVoxelPeople : MonoBehaviour {
 				for(int i=0;i<people.Count;i++){
 				people[i].GetComponent<NavAgentMovement>().haltMovement(false);
 					//Debug.Log (people[i].transform.GetChild(0).GetChild(0).GetComponent<Text>().text);
-				people[i].transform.GetChild(0).gameObject.SetActive(false);
-				if(people[i].transform.childCount==3){
+				if(people[i].transform.childCount==3 && people[i].transform.GetChild(2).name=="GodRays"){
+						people[i].transform.GetChild(0).gameObject.SetActive(false);
 						Transform toDestroyRays = people[i].transform.GetChild(2);
 						Destroy (toDestroyRays.gameObject);
 					}
@@ -187,7 +188,13 @@ public class LoadVoxelPeople : MonoBehaviour {
 			if(interactTimer<=0.0f){
 				interactNPC = false;
 				interactTimer = 5.0f;
-				people[NPC].transform.GetChild(0).gameObject.SetActive(false);
+				for(int i=0;i<people.Count;i++){
+					people[i].GetComponent<NavAgentMovement>().haltMovement(false);
+					//Debug.Log (people[i].transform.GetChild(0).GetChild(0).GetComponent<Text>().text);
+					if(people[i].transform.childCount == 2 && i<=NPC){
+						people[i].transform.GetChild(0).gameObject.SetActive(false);
+					}
+				}
 			}else{
 
 				if(interactNPC == false){
@@ -204,7 +211,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 			int rand_pos = Random.Range(0,nos_sources);
 			NavAgentMovement person_script = people[i].GetComponent<NavAgentMovement>();
 			//	Debug.Log(person_script.lastTimeUpdate+" ");
-			if(person_script.health <= 0.0f){
+			if(person_script.health <= 0.0f && person_script.deathCause == false){
 				Vector3 spawnLoc = people[i].transform.position;
 				Destroy(people[i]);
 				GameObject.FindGameObjectWithTag("ZombieManager").GetComponent<ZombieManager>().addZombie(spawnLoc);
@@ -212,6 +219,14 @@ public class LoadVoxelPeople : MonoBehaviour {
 				people_nos--;
 				i--;
 				continue;
+			}else{
+				if(person_script.health <= 0.0f && person_script.deathCause == true){
+					Destroy(people[i]);
+					people.RemoveAt(i);
+					people_nos--;
+					i--;
+					continue;
+				}
 			}
 
 			//people[i].transform.GetChild(0);
@@ -273,7 +288,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 						csHandle.PowerBoo.AddXP(1,-1);
 					people[i].transform.GetChild(0).gameObject.SetActive(true);
 					people[i].GetComponentInChildren<Text>().text = BooString[Random.Range(0,BooString.Count)];
-						person_script.toggleScaredRun(true);
+					person_script.toggleScaredRun(true);
 					
 					}
 				}
@@ -287,6 +302,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 					people[i].transform.GetChild(0).gameObject.SetActive(true);
 					people[i].GetComponentInChildren<Text>().text = HeyString[Random.Range(0,HeyString.Count)];
 					GameObject godRays = (GameObject)Instantiate (Resources.Load ("GodRays"),Vector3.zero,	Quaternion.identity) as GameObject;
+					godRays.name = "GodRays";
 					godRays.transform.parent = people[i].transform;
 					godRays.transform.localPosition = new Vector3(0,0,0);
 					person_script.haltMovement(true);

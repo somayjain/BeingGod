@@ -18,7 +18,7 @@ public class WildMovement : MonoBehaviour {
 
 
 	Vector3 lastPos = new Vector3();
-	float lastCheck = 2.0f;
+	float lastCheck = 1.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -34,7 +34,6 @@ public class WildMovement : MonoBehaviour {
 		animation.CrossFade (walkAnim);
 		agent.speed += 5.0f;
 
-		agent.autoRepath = true;
 		lastPos = transform.position;
 
 	}
@@ -52,7 +51,7 @@ public class WildMovement : MonoBehaviour {
 	public void resetPath(Vector3 newLoc){
 		agent.SetDestination (newLoc);
 		agent.stoppingDistance = Random.Range (0, 10);
-		agentReached = true;
+		agentReached = false;
 	}
 
 	// Update is called once per frame
@@ -70,26 +69,28 @@ public class WildMovement : MonoBehaviour {
 			return;
 		}
 
-		lastCheck -= Time.fixedDeltaTime;
-
+		/*
 		if (agent.pathStatus == NavMeshPathStatus.PathComplete || agent.pathStatus == NavMeshPathStatus.PathInvalid) {
 			agentReached = true;
 			return;
-		}
+		} */
 
-		if (lastCheck <= 0.0f) {
+		lastCheck -= Time.fixedDeltaTime;
+		if (lastCheck <= 0.0f && agentReached == false) {
 			if((transform.position-lastPos).magnitude <= 0.5f){
 				/*if(!agent.pathPending){
 					Vector3 newTarget = new Vector3(transform.position.x+3.0f,transform.position.y, transform.position.z+2.0f);
 					agent.SetDestination(newTarget);
 				}*/
-				if(agent.pathPending)
-					transform.Rotate(0,30,0);
 				
+				//if(agent.path.status == NavMeshPathStatus.PathPartial
+				float randDelta = Random.Range(-10,10);
+				float randD = randDelta/8.0f;
+				agent.Warp(new Vector3(transform.position.x-randD,transform.position.y,transform.position.z-randD));
 				//Debug.Log(transform.name+" stuck "+transform.position+" "+lastPos);
 				agentReached = true;
 			}
-			lastCheck = 2.0f;
+			lastCheck = 1.0f;
 			lastPos = transform.position;
 		}
 

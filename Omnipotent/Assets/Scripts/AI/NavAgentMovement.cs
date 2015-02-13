@@ -21,7 +21,7 @@ public class NavAgentMovement : MonoBehaviour {
 	public float damage = 4f;
 	// Use this for initialization
 
-	bool deathCause = true;
+	public bool deathCause = true;
 
 
 	public Vector3 lastPos = new Vector3();
@@ -108,13 +108,12 @@ public class NavAgentMovement : MonoBehaviour {
 				}
 		
 		/*
-		if (/*agent.pathStatus == NavMeshPathStatus.PathComplete || agent.pathStatus == NavMeshPathStatus.PathInvalid ||*/ // !agent.hasPath) {
+		if (/*agent.pathStatus == NavMeshPathStatus.PathComplete || agent.pathStatus == NavMeshPathStatus.PathInvalid ||*/  //!agent.hasPath) {
 			//Debug.Log(agent.pathStatus+" "+agent.hasPath+" "+transform.name);
 			/*targetReached = true;
-
 			return;
-		} */
-		
+		} 
+		*/
 
 
 		lastCheck -= Time.fixedDeltaTime;
@@ -128,7 +127,7 @@ public class NavAgentMovement : MonoBehaviour {
 		
 				//if(agent.path.status == NavMeshPathStatus.PathPartial)
 				float randDelta = Random.Range(-10,10);
-				float randD = randDelta/10.0f;
+				float randD = randDelta/8.0f;
 				agent.Warp(new Vector3(transform.position.x-randD,transform.position.y,transform.position.z-randD));
 
 				//Debug.Log(transform.name+" stuck "+transform.position+" "+lastPos);
