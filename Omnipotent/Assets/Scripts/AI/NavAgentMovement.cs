@@ -25,7 +25,7 @@ public class NavAgentMovement : MonoBehaviour {
 
 
 	public Vector3 lastPos = new Vector3();
-	public float lastCheck = 0.5f;
+	public float lastCheck = 1.0f;
 	public float Ddist;
 	//public bool pendingPath = true;
 
@@ -33,9 +33,9 @@ public class NavAgentMovement : MonoBehaviour {
 		agent = GetComponent<NavMeshAgent> ();
 		agent.SetDestination(target);
 		//agent.stoppingDistance = Random.Range (0, 10);
-		agent.speed += 2.0f;
+		agent.speed += 4.0f;
 		defaultSpeed = agent.speed;
-		agent.autoRepath = true;
+		agent.acceleration = 20.0f;
 		lastPos = transform.position;
 
 		//gameObject.AddComponent<GUIText> ();
@@ -46,7 +46,7 @@ public class NavAgentMovement : MonoBehaviour {
 
 		//agent.transform.Rotate (0,30,0);
 		bool success = agent.SetDestination(targetLoc);
-		Debug.Log (targetLoc+"Done reset"+transform.position+" "+success);
+		//Debug.Log (targetLoc+"Done reset"+transform.position+" "+success);
 		agent.stoppingDistance = Random.Range (0, 10);
 		targetReached = false;
 		//toggleScaredRun (true);
@@ -107,13 +107,13 @@ public class NavAgentMovement : MonoBehaviour {
 						}
 				}
 
-
-		if (/*agent.pathStatus == NavMeshPathStatus.PathComplete || agent.pathStatus == NavMeshPathStatus.PathInvalid ||*/ !agent.hasPath) {
-			Debug.Log(agent.pathStatus+" "+agent.hasPath+" "+transform.name);
-			targetReached = true;
+		/*
+		if (/*agent.pathStatus == NavMeshPathStatus.PathComplete || agent.pathStatus == NavMeshPathStatus.PathInvalid ||*/ //!agent.hasPath) {
+			//Debug.Log(agent.pathStatus+" "+agent.hasPath+" "+transform.name);
+			/*targetReached = true;
 			return;
-		}
-
+		} */
+		
 		lastCheck -= Time.fixedDeltaTime;
 		Ddist = (transform.position-lastPos).magnitude;
 		if (lastCheck <= 0.0f && targetReached == false) {
@@ -122,17 +122,20 @@ public class NavAgentMovement : MonoBehaviour {
 					Vector3 newTarget = new Vector3(transform.position.x+3.0f,transform.position.y, transform.position.z+2.0f);
 					agent.SetDestination(newTarget);
 				}*/
-				if(agent.pathPending)
-					transform.Rotate(0,30,0);
+		
+				//if(agent.path.status == NavMeshPathStatus.PathPartial)
+				float randDelta = Random.Range(-10,10);
+				float randD = randDelta/10.0f;
+				agent.Warp(new Vector3(transform.position.x-randD,transform.position.y,transform.position.z-randD));
 
-				Debug.Log(transform.name+" stuck "+transform.position+" "+lastPos);
+				//Debug.Log(transform.name+" stuck "+transform.position+" "+lastPos);
 				targetReached = true;
 			}
-			lastCheck = 0.5f;
+			lastCheck = 1.0f;
 			lastPos = transform.position;
 		}
-
 		/*
+		
 		if (agent.velocity.magnitude <= 0.2f) {
 						//Debug.Log ("Stopped1");
 						waitTimer -= Time.fixedDeltaTime;
@@ -154,7 +157,7 @@ public class NavAgentMovement : MonoBehaviour {
 				} else {
 						waitTimer = 5.0f;
 		}
-*/
 
+*/
 	}
 }

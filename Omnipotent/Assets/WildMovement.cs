@@ -41,7 +41,7 @@ public class WildMovement : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collision){
 		if (collision.tag == "person") {
-			Debug.Log("Kill!!!");
+			//Debug.Log("Kill!!!");
 			animation.CrossFade (attackAnim);
 			attackMode = true;
 			agent.Stop();
@@ -60,7 +60,7 @@ public class WildMovement : MonoBehaviour {
 		if (attackMode == true) {
 			if(switchTimer<=0.0f){
 				switchTimer = 2.0f;
-		    Debug.Log("set to Walk");
+		    //Debug.Log("set to Walk");
 			animation.CrossFade(walkAnim);
 			attackMode = false;
 			agent.Resume();
@@ -86,10 +86,10 @@ public class WildMovement : MonoBehaviour {
 				if(agent.pathPending)
 					transform.Rotate(0,30,0);
 				
-				Debug.Log(transform.name+" stuck "+transform.position+" "+lastPos);
+				//Debug.Log(transform.name+" stuck "+transform.position+" "+lastPos);
 				agentReached = true;
 			}
-			lastCheck = 0.5f;
+			lastCheck = 2.0f;
 			lastPos = transform.position;
 		}
 

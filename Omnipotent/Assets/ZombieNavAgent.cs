@@ -13,14 +13,14 @@ public class ZombieNavAgent : MonoBehaviour {
 	public float waitTimer = 5.0f;
 
 	Vector3 lastPos = new Vector3();
-	float lastCheck = 2.0f;
+	float lastCheck = 1.0f;
 
 	// Use this for initialization
 	void Start () {
 	    agent = (NavMeshAgent)gameObject.AddComponent("NavMeshAgent");
 		agent = (NavMeshAgent)gameObject.GetComponent("NavMeshAgent");
 		agent.SetDestination(target);
-		agent.speed = 1.5f;
+		agent.speed = 3.0f;
 		targetReached = false;
 		lastPos = transform.position;
 	}
@@ -56,12 +56,22 @@ public class ZombieNavAgent : MonoBehaviour {
 		}
 
 		lastCheck -= Time.fixedDeltaTime;
-		if (lastCheck <= 0.0f) {
-			if((transform.position-lastPos).magnitude <= 1.0f){
-				Debug.Log(transform.name+" stuck "+transform.position);
+		if (lastCheck <= 0.0f && targetReached == false) {
+			if((transform.position-lastPos).magnitude <= 0.5f){
+				/*if(!agent.pathPending){
+					Vector3 newTarget = new Vector3(transform.position.x+3.0f,transform.position.y, transform.position.z+2.0f);
+					agent.SetDestination(newTarget);
+				}*/
+				
+				//if(agent.path.status == NavMeshPathStatus.PathPartial)
+				float randDelta = Random.Range(-10,10);
+				float randD = randDelta/10.0f;
+				agent.Warp(new Vector3(transform.position.x-randD,transform.position.y,transform.position.z-randD));
+				
+				//Debug.Log(transform.name+" stuck "+transform.position+" "+lastPos);
 				targetReached = true;
 			}
-			lastCheck = 2.0f;
+			lastCheck = 1.0f;
 			lastPos = transform.position;
 		}
 

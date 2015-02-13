@@ -74,6 +74,7 @@ public class ZombieManager : MonoBehaviour {
 		for (int i=0; i<nosZombs; i++) {
 			Destroy(ZombieList[i]);
 		}
+		zombsInit = false;
 		ZombieList.Clear ();
 	}
 

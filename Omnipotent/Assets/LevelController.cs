@@ -233,6 +233,7 @@ public class LevelController : MonoBehaviour {
 			toggle[i].gameObject.SetActive(false);
 			objectiveComplete [i] = false;
 		}
+		zombieManager.GetComponent<ZombieManager> ().checkZombsDead ();
 		nosOfObjectives = ObjectiveNos [currentLevel];
 	}
 
@@ -381,6 +382,7 @@ public class LevelController : MonoBehaviour {
 									for(int i=0;i<buildingManager.GetComponent<houseManager>().nosHouses;i++){
 										peopleManager.GetComponent<LoadVoxelPeople> ().initPersonRandom (5);
 									}
+									levelInit = true;
 								}else{
 								if(nextLevelStatus == true){
 									levelInit = true;
