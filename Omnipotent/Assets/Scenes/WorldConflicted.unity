@@ -208,6 +208,9 @@ MonoBehaviour:
   turnSpeed: 35
   panSpeed: 360
   zoomSpeed: 500
+  handTurnSpeed: 35
+  handPanSpeed: 360
+  handZoomSpeed: 500
   zoomOut: 100
   turnDrag: 5
   panDrag: 5
@@ -1687,6 +1690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de8605f94d7163840addf9785b78f38c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursor: {fileID: 0}
   nosHouses: 0
   houseCreated: 0
 --- !u!1 &106707110
@@ -6497,7 +6501,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 888991449}
   m_GameObject: {fileID: 533448872}
   lengthInSec: .100000001
-  startDelay: 5
+  startDelay: 6
   speed: 1
   randomSeed: 0
   looping: 0
@@ -8025,6 +8029,50 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 594249033}
+--- !u!1001 &600758555
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 498978, guid: 9c2a12fefbfbb9f409c65abdfc382b26, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498978, guid: 9c2a12fefbfbb9f409c65abdfc382b26, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 498978, guid: 9c2a12fefbfbb9f409c65abdfc382b26, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498978, guid: 9c2a12fefbfbb9f409c65abdfc382b26, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498978, guid: 9c2a12fefbfbb9f409c65abdfc382b26, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498978, guid: 9c2a12fefbfbb9f409c65abdfc382b26, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498978, guid: 9c2a12fefbfbb9f409c65abdfc382b26, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 498978, guid: 9c2a12fefbfbb9f409c65abdfc382b26, type: 2}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 9c2a12fefbfbb9f409c65abdfc382b26, type: 2}
+  m_RootGameObject: {fileID: 1650241518}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &601130709
 GameObject:
   m_ObjectHideFlags: 0
@@ -10373,7 +10421,7 @@ GameObject:
   - 198: {fileID: 984509755}
   - 199: {fileID: 984509754}
   m_Layer: 0
-  m_Name: FireBall_New
+  m_Name: FireBALL_New
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10445,7 +10493,7 @@ ParticleSystem:
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: 3
+      scalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -14164,14 +14212,14 @@ ParticleSystem:
   startDelay: 0
   speed: 1
   randomSeed: 0
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   moveWithTransform: 1
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: 1
+      scalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -16003,14 +16051,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a9e0b234bcdf324e83c96b2c9fc5979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursor: {fileID: 0}
   faith: {fileID: 855786966}
   fear: {fileID: 799490935}
   XP_Limit: 100
   Faith: 0
   Fear: 0
-  Inc_Time: .5
+  Inc_Time: 1
   Faith_Degradation: 0
   Fear_Degradation: 0
+  LevelUpReached: 1
 --- !u!1 &1278308423
 GameObject:
   m_ObjectHideFlags: 0
@@ -16140,7 +16190,12 @@ MonoBehaviour:
   TipPrefab: {fileID: 100000, guid: 0a55d1df83688c845ada204a91349120, type: 2}
   BonePrefab: {fileID: 100000, guid: 9c8784fb30a6d5d459e452e48aa6202f, type: 2}
   PalmCenterPrefab: {fileID: 100000, guid: ae4081a49ded89448b133b5f037d92c8, type: 2}
+  myGestureTextLeft: {fileID: 0}
+  myGestureTextRight: {fileID: 0}
   handofGod: {fileID: 1721188145}
+  bonescale: {x: .5, y: .5, z: .5}
+  leftPresent: 0
+  rightPresent: 0
 --- !u!114 &1286810200
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -16412,7 +16467,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 888991449}
   m_GameObject: {fileID: 1296804453}
   lengthInSec: 2
-  startDelay: 0
+  startDelay: 2.5
   speed: 1
   randomSeed: 0
   looping: 0
@@ -18394,7 +18449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f28c5fe384b9740abaf1a0e14d89f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shelves: {fileID: 1771452441}
+  Houses: {fileID: 0}
   cursor: {fileID: 1721188146}
 --- !u!114 &1440859815
 MonoBehaviour:
@@ -20310,6 +20365,126 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1638414357}
+--- !u!1 &1650241518
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 198978, guid: 9c2a12fefbfbb9f409c65abdfc382b26, type: 2}
+  m_PrefabInternal: {fileID: 600758555}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1650241522}
+  - 15: {fileID: 1650241521}
+  - 12: {fileID: 1650241520}
+  - 26: {fileID: 1650241519}
+  m_Layer: 0
+  m_Name: Hearts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!26 &1650241519
+ParticleRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2698978, guid: 9c2a12fefbfbb9f409c65abdfc382b26,
+    type: 2}
+  m_PrefabInternal: {fileID: 600758555}
+  m_GameObject: {fileID: 1650241518}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 65836931803ab5b4fb9f60bd418f4100, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_CameraVelocityScale: 0
+  m_StretchParticles: 0
+  m_LengthScale: 0
+  m_VelocityScale: 0
+  m_MaxParticleSize: .25
+  UV Animation:
+    x Tile: 1
+    y Tile: 1
+    cycles: 1
+--- !u!12 &1650241520
+ParticleAnimator:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1298978, guid: 9c2a12fefbfbb9f409c65abdfc382b26,
+    type: 2}
+  m_PrefabInternal: {fileID: 600758555}
+  m_GameObject: {fileID: 1650241518}
+  Does Animate Color?: 1
+  colorAnimation[0]:
+    serializedVersion: 2
+    rgba: 16777215
+  colorAnimation[1]:
+    serializedVersion: 2
+    rgba: 2617245695
+  colorAnimation[2]:
+    serializedVersion: 2
+    rgba: 4294967295
+  colorAnimation[3]:
+    serializedVersion: 2
+    rgba: 3036676095
+  colorAnimation[4]:
+    serializedVersion: 2
+    rgba: 184549375
+  worldRotationAxis: {x: 0, y: 0, z: 0}
+  localRotationAxis: {x: 0, y: 0, z: 0}
+  sizeGrow: 0
+  rndForce: {x: 1, y: 0, z: 1}
+  force: {x: 0, y: -1.10000002, z: 0}
+  damping: 1
+  stopSimulation: 0
+  autodestruct: 0
+--- !u!15 &1650241521
+EllipsoidParticleEmitter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1598978, guid: 9c2a12fefbfbb9f409c65abdfc382b26,
+    type: 2}
+  m_PrefabInternal: {fileID: 600758555}
+  m_GameObject: {fileID: 1650241518}
+  serializedVersion: 2
+  m_Enabled: 1
+  m_Emit: 1
+  minSize: .100000001
+  maxSize: .5
+  minEnergy: 5
+  maxEnergy: 10
+  minEmission: 25
+  maxEmission: 50
+  worldVelocity: {x: 0, y: 0, z: 0}
+  localVelocity: {x: 0, y: 0, z: 0}
+  rndVelocity: {x: 2, y: .5, z: 2}
+  emitterVelocityScale: .0500000007
+  tangentVelocity: {x: 0, y: 0, z: 0}
+  angularVelocity: 90
+  rndAngularVelocity: 1
+  rndRotation: 1
+  Simulate in Worldspace?: 1
+  m_OneShot: 0
+  m_Ellipsoid: {x: 10, y: 1, z: 10}
+  m_MinEmitterRange: 0
+--- !u!4 &1650241522
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 498978, guid: 9c2a12fefbfbb9f409c65abdfc382b26, type: 2}
+  m_PrefabInternal: {fileID: 600758555}
+  m_GameObject: {fileID: 1650241518}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 30, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
 --- !u!1 &1652544274
 GameObject:
   m_ObjectHideFlags: 0
@@ -20824,6 +20999,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 5982389}
   cursor3d: {x: 0, y: 0, z: 0}
+  cursor2d: {x: 0, y: 0}
+  cursor: {fileID: 0}
   normal: {fileID: 2800000, guid: fbe8ede4a4e058a418a376bb7ac016fb, type: 3}
   closed: {fileID: 2800000, guid: 255bf05779ce6e74c99ea2a2bf2d08cb, type: 3}
   thunderclap_cursor: {fileID: 0}
@@ -20839,6 +21016,7 @@ MonoBehaviour:
   PowerHoG: {fileID: 0}
   PowerHey: {fileID: 1829083357}
   PowerBoo: {fileID: 1001739576}
+  PowerGMBC: {fileID: 0}
   PeopleManager: {fileID: 0}
   currentLevel: {fileID: 0}
 --- !u!4 &1721188147
@@ -21348,6 +21526,7 @@ MonoBehaviour:
   zombieManager: {fileID: 0}
   buildingManager: {fileID: 0}
   peopleManager: {fileID: 0}
+  BossManager: {fileID: 0}
   zombieStatus: 0
   humanStatus: 0
   houseStatus: 0
