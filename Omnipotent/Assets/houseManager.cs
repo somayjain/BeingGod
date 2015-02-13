@@ -3,7 +3,7 @@ using System.Collections;
 
 public class houseManager : MonoBehaviour
 {
-
+	public cursor_handle cursor;
 		public int nosHouses;
 		private bool f_buildHouse;
 		private bool f_deleteHouse;
@@ -68,7 +68,7 @@ public class houseManager : MonoBehaviour
 
 		void buildHouse_cursor ()
 		{
-				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+				Ray ray = Camera.main.ScreenPointToRay (cursor.cursor2d);
 				RaycastHit hit;
 				Vector3 hitPoint = new Vector3 ();
 				if (Physics.Raycast (ray, out hit)) {
@@ -91,7 +91,7 @@ public class houseManager : MonoBehaviour
 		{
 				f_buildHouse = false;
 		 
-				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+				Ray ray = Camera.main.ScreenPointToRay (cursor.cursor2d);
 				RaycastHit hit;
 				Vector3 hitPoint = new Vector3 ();
 				if (Physics.Raycast (ray, out hit)) {
@@ -123,7 +123,7 @@ public class houseManager : MonoBehaviour
 		{		
 				Debug.Log ("delete house");
 				string name;
-				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+				Ray ray = Camera.main.ScreenPointToRay (cursor.cursor2d);
 				RaycastHit hit;
 				if (Physics.Raycast (ray, out hit)) {
 						GameObject foo = hit.transform.gameObject;

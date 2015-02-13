@@ -21,7 +21,7 @@ public class trackHand : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// For testing only.
-		handRenderer.queryLeftHand2DCoordinates ();
+		//handRenderer.queryLeftHand2DCoordinates ();
 		
 		_outputData = SenseToolkitManager.Instance.HandDataOutput;
 		if (_outputData != null)

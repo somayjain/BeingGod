@@ -7,6 +7,7 @@ public class cursor_handle : MonoBehaviour {
 	public Camera camera;
 
 	public Vector3 cursor3d;
+	public Vector2 cursor2d;
 	public GameObject cursor;
 
 	[Header("Cursors")]
@@ -79,17 +80,34 @@ public class cursor_handle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Vector2 handpos = GetComponentInChildren<HandRenderer> ().queryLeftHand2DCoordinates ();
-		if (handpos.x == -1 && handpos.y == -1) {
-						cursor.SetActive (false);
+		bool hand2d = GetComponentInChildren<HandRenderer> ().queryRightHand2DCoordinates (out cursor2d);
+		if (!hand2d)
+			hand2d = GetComponentInChildren<HandRenderer> ().queryLeftHand2DCoordinates (out cursor2d);
+		if (!hand2d) {
+				cursor.SetActive (false);
+				cursor2d = Input.mousePosition;
+		} else {
+				cursor.SetActive (true);
+				cursor.GetComponent<RectTransform> ().position = cursor2d;
+		}
+
+		Ray ray;
+		Vector3 hand3dpos;
+		bool hand3d = GetComponentInChildren<HandRenderer> ().queryLeftHand3DCoordinates (out hand3dpos);
+		if (hand3d) {
+						ray = new Ray (hand3dpos, Vector3.down);
+//						RaycastHit hit;
+//						if (Physics.Raycast (ray, out hit)) {
+//								sphere.transform.position = new Vector3 (hit.point.x, hit.point.y + 1.0f, hit.point.z);
+//								cursor3d = hit.point;
+//						}
+						ray = camera.ScreenPointToRay (cursor2d);
 				} else {
-						cursor.SetActive (true);
-						cursor.GetComponent<RectTransform> ().position = new Vector3 (handpos.x, handpos.y, 0);
+						ray = camera.ScreenPointToRay (Input.mousePosition);
 				}
-		Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
-		if(Physics.Raycast(ray, out hit)) {
-			sphere.transform.position = new Vector3(hit.point.x, hit.point.y + 1.0f, hit.point.z);
+		if (Physics.Raycast (ray, out hit)) {
+			sphere.transform.position = new Vector3 (hit.point.x, hit.point.y + 1.0f, hit.point.z);
 			cursor3d = hit.point;
 		}
 //		Instantiate (object, mousePo, Quaternion.identity);

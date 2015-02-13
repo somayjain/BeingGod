@@ -1991,6 +1991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de8605f94d7163840addf9785b78f38c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursor: {fileID: 1721188146}
   nosHouses: 0
   houseCreated: 0
 --- !u!1 &106707110
@@ -13169,7 +13170,7 @@ MonoBehaviour:
   CastTime: 1.5
   PowerType: 1
   XP_per_NPC: 10
-  Mjolnir: {fileID: 0}
+  Mjolnir: {fileID: 2010366220}
 --- !u!114 &1115764494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14653,6 +14654,7 @@ MonoBehaviour:
   myGestureTextLeft: {fileID: 245425259}
   myGestureTextRight: {fileID: 1163027974}
   handofGod: {fileID: 1721188145}
+  bonescale: {x: .400000006, y: .400000006, z: .400000006}
 --- !u!114 &1286810200
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -19165,6 +19167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 5982389}
   cursor3d: {x: 0, y: 0, z: 0}
+  cursor2d: {x: 0, y: 0}
   cursor: {fileID: 561226344}
   normal: {fileID: 2800000, guid: fbe8ede4a4e058a418a376bb7ac016fb, type: 3}
   closed: {fileID: 2800000, guid: 255bf05779ce6e74c99ea2a2bf2d08cb, type: 3}
@@ -19190,9 +19193,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1721188145}
-  m_LocalRotation: {x: -.258819044, y: 0, z: 0, w: .965925813}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 30}
+  m_LocalScale: {x: 1, y: 1, z: -1}
   m_Children:
   - {fileID: 1286810204}
   m_Father: {fileID: 5982390}

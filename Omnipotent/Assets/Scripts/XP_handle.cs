@@ -185,6 +185,7 @@ public class XP_handle : MonoBehaviour {
 		case 1:
 			XP_Limit = 0;
 			cursor.PowerFireball.Enable();
+			cursor.PowerHoG.Enable();
 			break;
 		case 2:
 			XP_Limit = 50;
