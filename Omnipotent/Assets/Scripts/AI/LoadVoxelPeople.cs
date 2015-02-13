@@ -240,22 +240,28 @@ public class LoadVoxelPeople : MonoBehaviour {
 				if(tornadoTime <= 0.0f)
 					people[i].GetComponent<NavAgentMovement>().haltMovement(false);
 				else{
-					if((people[i].transform.position-tornadoLoc).magnitude <= tornadoRange){
+					Vector3 dir = people[i].transform.position-tornadoLoc;
+					if(dir.magnitude <= tornadoRange){
 						csHandle.PowerTornado.AddXP(1,-1);
 						//people[i].GetComponent<NavAgentMovement>().haltMovement(true);
 						//people[i].GetComponent<Rigidbody>().AddForce(10000,300000,100000);
 						people[i].GetComponent<NavMeshAgent>().Stop();
+						people[i].GetComponent<NavMeshAgent>().updatePosition = false;
+						people[i].GetComponent<NavMeshAgent>().updateRotation = false;
 						people[i].rigidbody.isKinematic = false;
 						people[i].rigidbody.useGravity = true;
-						people[i].rigidbody.AddForce(new Vector3(5,100,5));
-						// AddRelativeForce(new Vector3(10,100,10),ForceMode.Impulse);
-					}else{
-						if((people[i].transform.position-tornadoLoc).magnitude > 2*tornadoRange){
-							people[i].GetComponent<NavMeshAgent>().Resume();
-							people[i].rigidbody.isKinematic = true;
-							people[i].rigidbody.useGravity = false;
+						//people[i].rigidbody.AddForce(new Vector3(1,20,1));
+						people[i].rigidbody.constraints = RigidbodyConstraints.None;
+						people[i].rigidbody.AddRelativeForce(0.5f*dir.normalized + 2*Vector3.up,ForceMode.Impulse);
+					} else {
+//						if((people[i].transform.position-tornadoLoc).magnitude > 2*tornadoRange){
+//							people[i].GetComponent<NavMeshAgent>().Resume();
+//							people[i].GetComponent<NavMeshAgent>().updatePosition = true;
+//							people[i].GetComponent<NavMeshAgent>().updateRotation = true;
+//							people[i].rigidbody.isKinematic = true;
+//							people[i].rigidbody.useGravity = false;
 							//people[i].GetComponent<NavAgentMovement>().haltMovement(false);
-						}
+//						}
 					}
 				}
 			}

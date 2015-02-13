@@ -71,7 +71,6 @@ public class Power_Tornado : Powers {
 		
 		if ( refresh ) {
 			Levelcontroller.Powermode = LevelController.MODE.TORNADO;
-			Levelcontroller.TornadoLoc = loc;
 
 			refresh = false;
 			active = true;
@@ -89,6 +88,8 @@ public class Power_Tornado : Powers {
 			ParticleEmitter[] twister_emitters = Tornado.GetComponentsInChildren<ParticleEmitter>();
 			foreach (ParticleEmitter emitter in twister_emitters)
 				emitter.emit = emit;
+
+			Levelcontroller.TornadoLoc = Tornado.transform.GetChild (0).position;
 		}
 	}
 

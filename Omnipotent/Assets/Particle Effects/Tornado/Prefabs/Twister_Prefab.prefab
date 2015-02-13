@@ -305,7 +305,7 @@ EllipsoidParticleEmitter:
   tangentVelocity: {x: 10, y: 0, z: 0}
   angularVelocity: 0
   rndAngularVelocity: 0
-  rndRotation: 0
+  rndRotation: 1
   Simulate in Worldspace?: 1
   m_OneShot: 0
   m_Ellipsoid: {x: 10, y: 0, z: 10}
