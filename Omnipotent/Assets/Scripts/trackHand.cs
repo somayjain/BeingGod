@@ -34,6 +34,8 @@ public class trackHand : MonoBehaviour {
 	        {
 	            PXCMHandData.IHand _handData;
 	            _outputData.QueryHandData(PXCMHandData.AccessOrderType.ACCESS_ORDER_FIXED, i, out _handData);
+				if(_handData!=null){}// Debug.Log(_handData.ToString());
+				else { Debug.Log ("No data"); continue; }
 	            for (int j = 0; j < PXCMHandData.NUMBER_OF_JOINTS; j++)
 	                _handData.QueryTrackedJoint((PXCMHandData.JointType)j, out joints[i, j]);
 

@@ -37,6 +37,8 @@ public class HandRenderer : MonoBehaviour {
 	private Vector3 leftPalmCenterJoint, rightPalmCenterJoint;
 	private PXCMHandData outputData;
 	private PXCMHandData.GestureData gestureData;
+	private string lefthandgesture, righthandgesture;
+	public bool leftPresent, rightPresent;
 
 	// Use this for initialization
 	void Start() {
@@ -84,51 +86,64 @@ public class HandRenderer : MonoBehaviour {
 	{
 		gestureData = _gestureData;
 
-		myGestureTextLeft.GetComponent<Text> ().text = "Left Hand: " + getLeftHandGesture ();
-		myGestureTextRight.GetComponent<Text> ().text = "Right Hand: " + getRightHandGesture ();
-		/*
+//		myGestureTextLeft.GetComponent<Text> ().text = "Left Hand: " + getLeftHandGesture ();
+//		myGestureTextRight.GetComponent<Text> ().text = "Right Hand: " + getRightHandGesture ();
+
 		for (int i = 0; i < MaxHands; i++)
 		if (gestureData.handId == handIds[i])
 		{
 			if (bodySide[i] == PXCMHandData.BodySideType.BODY_SIDE_LEFT)
 			{
+				lefthandgesture = gestureData.name.ToString();
 				myGestureTextLeft.GetComponent<Text>().text =  "Left Hand : "+ gestureData.name.ToString();
 			}
 			else if (bodySide[i] == PXCMHandData.BodySideType.BODY_SIDE_RIGHT)
 			{
+				righthandgesture = gestureData.name.ToString();
 				myGestureTextRight.GetComponent<Text>().text = "Right Hand : "+ gestureData.name.ToString(); 
 			}
 			break;
 		}
-		*/
 	}
 
 	public string getLeftHandGesture()
 	{
-		for (int i = 0; i < MaxHands; i++)
-		if (gestureData.handId == handIds[i])
-		{
-			if (bodySide[i] == PXCMHandData.BodySideType.BODY_SIDE_LEFT)
-			{
-				return gestureData.name.ToString();
-			}
-			break;
-		}
-		return "";
+		// TODO: return null if no hand detected at all;
+
+//		for (int i = 0; i < MaxHands; i++)
+//		if (gestureData.handId == handIds[i])
+//		{
+//			if (bodySide[i] == PXCMHandData.BodySideType.BODY_SIDE_LEFT)
+//			{
+//				return gestureData.name.ToString();
+//			}
+//			break;
+//		}
+//		return "";
+		if (leftPresent)
+				return lefthandgesture;
+		else
+				return null;
 	}
 
 	public string getRightHandGesture()
 	{
-		for (int i = 0; i < MaxHands; i++)
-			if (gestureData.handId == handIds[i])
-		{
-			if (bodySide[i] == PXCMHandData.BodySideType.BODY_SIDE_RIGHT)
-			{
-				return gestureData.name.ToString();
-			}
-			break;
-		}
-		return "";
+		// TODO: return null if no hand detected at all
+
+//		for (int i = 0; i < MaxHands; i++)
+//			if (gestureData.handId == handIds[i])
+//		{
+//			if (bodySide[i] == PXCMHandData.BodySideType.BODY_SIDE_RIGHT)
+//			{
+//				return gestureData.name.ToString();
+//			}
+//			break;
+//		}
+//		return "";
+		if (rightPresent)
+				return righthandgesture;
+		else
+				return null;
 	}
 
 	public void DisplayJoints(PXCMHandData.JointData[,] _myJointData, int[] _handIds, PXCMHandData.BodySideType[] _bodySides)
@@ -150,6 +165,11 @@ public class HandRenderer : MonoBehaviour {
 
 	public void DisplaySmoothenedJoints(PXCMHandData _outputData, PXCMHandData.JointData[,] _myJointData, int[] _handIds, PXCMHandData.BodySideType[] _bodySides)
     {
+		lefthandgesture = "";
+		righthandgesture = "";
+		leftPresent = false;
+		rightPresent = false;
+
 		float factor = 10.0f;
 		float xscale = (Screen.width / 600.0f)/bonescale.x, yscale = (Screen.height/360.0f)/bonescale.y;
         handIds = _handIds;
@@ -158,8 +178,6 @@ public class HandRenderer : MonoBehaviour {
 
 		Vector3 pos, palmCenterPos;
         avgQueue.Enqueue(_myJointData);
-		bool leftPresent = false;
-		bool rightPresent = false;
 
         foreach (PXCMHandData.JointData[,] temp in avgQueue)
             for (int i = 0; i < MaxHands; i++)
@@ -197,6 +215,7 @@ public class HandRenderer : MonoBehaviour {
                 sumOfJointPositions[i, j] = Vector3.zero;
             }
 		}
+//		Debug.Log ("Presence : " + leftPresent.ToString () + " <-> " + rightPresent.ToString ());
 
 		for (int i = 0; i < MaxHands; i++)
 			for (int j = 0; j < PXCMHandData.NUMBER_OF_JOINTS; j++) {		
@@ -245,7 +264,7 @@ public class HandRenderer : MonoBehaviour {
 
 	public bool queryLeftHand2DCoordinates(out Vector2 point)
 	{
-		if (outputData != null) {
+		if (leftPresent) {
 			Vector3 pos = transform.TransformPoint (leftPalmCenterJoint);
 			//Debug.Log ("Left hand Screen coords " + Camera.main.camera.WorldToScreenPoint (pos).ToString ());
 			point = Camera.main.camera.WorldToScreenPoint(pos);
@@ -261,7 +280,7 @@ public class HandRenderer : MonoBehaviour {
 
 	public bool queryRightHand2DCoordinates(out Vector2 point)
 	{
-		if (outputData != null) {
+		if (rightPresent) {
 			Vector3 pos = transform.TransformPoint (rightPalmCenterJoint);
 			//Debug.Log ("Right hand Screen coords " + Camera.main.camera.WorldToScreenPoint (pos).ToString ());
 			point = Camera.main.camera.WorldToScreenPoint(pos);
@@ -277,9 +296,10 @@ public class HandRenderer : MonoBehaviour {
 
 	public bool queryLeftHand3DCoordinates(out Vector3 point)
 	{
-		if (outputData != null) {
-				point = transform.TransformPoint (leftPalmCenterJoint);
+		if (leftPresent) {
+				point = leftPalmCenterJoint;
 //				Debug.Log ("My point: " + point.ToString ());
+			Debug.Log("Left: "+point);
 				return true;
 		} else {
 				point = Vector3.zero;
@@ -289,8 +309,9 @@ public class HandRenderer : MonoBehaviour {
 
 	public bool queryRightHand3DCoordinates(out Vector3 point)
 	{
-		if (outputData != null) {
-				point = transform.TransformPoint (leftPalmCenterJoint);
+		if (rightPresent) {
+				point = rightPalmCenterJoint;
+			Debug.Log("Right: "+point);
 				return true;
 		} else {
 				point = Vector3.zero;
@@ -300,6 +321,10 @@ public class HandRenderer : MonoBehaviour {
 	public void makeNull()
 	{
 		outputData = null;
+		lefthandgesture = "";
+		righthandgesture = "";
+		leftPresent = false;
+		rightPresent = false;
 		myGestureTextLeft.GetComponent<Text> ().text = "";
 		myGestureTextRight.GetComponent<Text> ().text = "";
 	}

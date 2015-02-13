@@ -158,7 +158,7 @@ public class TranslateActionForZoom : VirtualWorldBoxAction {
 				translate = _translationSmoothingUtility.ProcessSmoothing(SmoothingType, SmoothingFactor, translate);
 			}
 
-			Debug.Log (translate.x);
+//			Debug.Log (translate.x);
 
 			// Our code
 			if (translate.x < 1 && translate.x > -1)
@@ -243,7 +243,7 @@ public class TranslateActionForZoom : VirtualWorldBoxAction {
 			// Vector3 move = pos.y * zoomSpeed * transform.forward; 
 			Vector3 movex = _scaleX * transform.forward;
 			float factor = 100.0f;
-			Debug.Log (_scaleX);
+//			Debug.Log (_scaleX);
 			// Set Drag
 			rigidbody.drag = zoomDrag;
 

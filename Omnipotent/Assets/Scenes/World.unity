@@ -211,6 +211,9 @@ MonoBehaviour:
   turnSpeed: 35
   panSpeed: 360
   zoomSpeed: 500
+  handTurnSpeed: 2
+  handPanSpeed: 10
+  handZoomSpeed: 4
   zoomOut: 100
   turnDrag: 5
   panDrag: 5
@@ -546,7 +549,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 5982385}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 362184c31ff9b8c429957dad1c77bd2b, type: 3}
   m_Name: 
@@ -714,7 +717,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 5982385}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b260ebd1d33883b40a49e08a2b690235, type: 3}
   m_Name: 
@@ -984,7 +987,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 5982385}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b8b7cd8a5245c342a589ec1b89643ab, type: 3}
   m_Name: 
@@ -14769,6 +14772,8 @@ MonoBehaviour:
   myGestureTextRight: {fileID: 1163027974}
   handofGod: {fileID: 1721188145}
   bonescale: {x: .400000006, y: .400000006, z: .400000006}
+  leftPresent: 0
+  rightPresent: 0
 --- !u!114 &1286810200
 MonoBehaviour:
   m_ObjectHideFlags: 2

@@ -49,7 +49,7 @@ public class emotion : MonoBehaviour {
 			}
 			if ((spidx != -1))
 			{
-				Debug.Log(SentimentLabels[spidx]);		
+//				Debug.Log(SentimentLabels[spidx]);		
 				if (EmotionLabels [epidx] == "ANGER" && SentimentLabels [spidx] == "NEGATIVE")
 					controlweather.EnableRain ();
 
