@@ -235,7 +235,7 @@ public class LevelController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		currentLevel = 4;
+		currentLevel = 1;
 
 		//init Person manager
 		peopleManager = GameObject.FindGameObjectWithTag ("PeopleManager");
