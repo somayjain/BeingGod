@@ -177,11 +177,11 @@ public class DayNightControl : MonoBehaviour
 		Skybox[] skyboxes = AssetBundle.FindObjectsOfTypeIncludingAssets(typeof(Skybox)) as Skybox[];
 		foreach (Skybox box in skyboxes)
 		{
-			if (box.name == "DawnDusk Skybox")
+			if (box.name == "Eerie Skybox")
 			{ dawnDuskSkybox = box.material; }
-			else if (box.name == "StarryNight Skybox")
+			else if (box.name == "MoonShine Skybox")
 			{ nightSkybox = box.material; }
-			else if (box.name == "Sunny2 Skybox")
+			else if (box.name == "Eerie Skybox")
 			{ daySkybox = box.material; }
 		}
 	}

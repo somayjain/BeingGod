@@ -19,7 +19,7 @@ RenderSettings:
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientLight: {r: .200000003, g: .200000003, b: .200000003, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 068305e3312a68d4f95530b6afbb01e7, type: 2}
   m_HaloStrength: .5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -12221,11 +12221,11 @@ MonoBehaviour:
   worldTimeHour: 0
   fullLight: {r: .838235259, g: .789954543, b: .548551023, a: 1}
   fullDark: {r: .249903888, g: .216262966, b: .367647052, a: 1}
-  dawnDuskSkybox: {fileID: 0}
+  dawnDuskSkybox: {fileID: 2100000, guid: 068305e3312a68d4f95530b6afbb01e7, type: 2}
   dawnDuskFog: {r: .521568656, g: .486274511, b: .400000006, a: 1}
-  daySkybox: {fileID: 0}
+  daySkybox: {fileID: 2100000, guid: 068305e3312a68d4f95530b6afbb01e7, type: 2}
   dayFog: {r: .70588237, g: .815686285, b: .819607854, a: 1}
-  nightSkybox: {fileID: 0}
+  nightSkybox: {fileID: 2100000, guid: 185821a8d1654644c896a6394886e67e, type: 2}
   nightFog: {r: .0470588244, g: .0588235296, b: .356862754, a: 1}
 --- !u!108 &1019610882
 Light:
