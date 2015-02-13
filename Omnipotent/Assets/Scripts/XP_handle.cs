@@ -184,8 +184,8 @@ public class XP_handle : MonoBehaviour {
 		switch (level) {
 		case 1:
 			XP_Limit = 0;
-			cursor.PowerFireball.Enable();
-			cursor.PowerHoG.Enable();
+			//cursor.PowerFireball.Enable();
+			//cursor.PowerHoG.Enable();
 			break;
 		case 2:
 			XP_Limit = 50;
@@ -204,11 +204,12 @@ public class XP_handle : MonoBehaviour {
 		case 3:
 			XP_Limit = 100;
 			cursor.PowerThunderClap.Enable();
-			cursor.PowerThunderClap.transform.GetChild(1).GetComponent<Image>().enabled = false;
+			cursor.PowerThunderClap.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Thunderclap");
+			cursor.PowerThunderClap.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
 			//cursor.PowerThunderClap.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Thunderclap");
 
 			cursor.PowerMjolnir.Enable();
-			cursor.PowerMjolnir.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Mjolnir");
+			cursor.PowerMjolnir.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Lightning");
 			cursor.PowerMjolnir.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
 
 			cursor.PowerFireball.Enable();
@@ -226,6 +227,8 @@ public class XP_handle : MonoBehaviour {
 		case 5:
 			XP_Limit = 400;
 			cursor.PowerHoG.Enable();
+			cursor.PowerHoG.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("HoG");
+			cursor.PowerHoG.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
 			break;
 		}
 

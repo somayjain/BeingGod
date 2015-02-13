@@ -74,7 +74,7 @@ public class camera_handle : MonoBehaviour {
 		if (!rotatemode) Debug.Log (hr.leftPresent +" <-> " +hr.rightPresent+" == "+hr.getLeftHandGesture () + " <-> " + hr.getRightHandGesture ());
 
 		handmode = panmode || rotatemode || zoommode;
-		handmode = true;
+		//handmode = true;
 
 		if (handmode) {
 			if (rotatemode) {
