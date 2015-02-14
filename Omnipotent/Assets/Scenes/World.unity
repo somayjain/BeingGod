@@ -3330,6 +3330,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 216557269}
   - 111: {fileID: 216557270}
+  - 54: {fileID: 216557271}
   m_Layer: 0
   m_Name: humpback_whale_model23
   m_TagString: Untagged
@@ -3371,6 +3372,21 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
+--- !u!54 &216557271
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 216557268}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &222089287
 GameObject:
   m_ObjectHideFlags: 0
@@ -5480,6 +5496,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 345568706}
   - 111: {fileID: 345568707}
+  - 54: {fileID: 345568708}
   m_Layer: 0
   m_Name: humpback_whale_model_baked_animation
   m_TagString: Untagged
@@ -5521,6 +5538,21 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
+--- !u!54 &345568708
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 345568705}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &345583901
 GameObject:
   m_ObjectHideFlags: 0
@@ -7355,6 +7387,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 543528376}
   - 111: {fileID: 543528377}
+  - 54: {fileID: 543528378}
   m_Layer: 0
   m_Name: humpback_whale_model23
   m_TagString: Untagged
@@ -7396,6 +7429,21 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
+--- !u!54 &543528378
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 543528375}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &552966582
 GameObject:
   m_ObjectHideFlags: 0
@@ -8194,6 +8242,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 586445787}
   - 111: {fileID: 586445786}
+  - 54: {fileID: 586445788}
   m_Layer: 0
   m_Name: humpback_whale_model_baked_animation
   m_TagString: Untagged
@@ -8235,6 +8284,21 @@ Transform:
   - {fileID: 564362992}
   m_Father: {fileID: 1528461509}
   m_RootOrder: 3
+--- !u!54 &586445788
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 586445785}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &594249033
 GameObject:
   m_ObjectHideFlags: 0
@@ -8431,6 +8495,7 @@ MonoBehaviour:
   tileRadius: 2
   hexRadius: 1.95000005
   offsetY: .00999999978
+  test_demo: {x: 0, y: 0, z: 0}
 --- !u!4 &602442066
 Transform:
   m_ObjectHideFlags: 0
@@ -12669,8 +12734,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1045941934}
-  m_LocalRotation: {x: .290285528, y: .0765475854, z: .0233021025, w: -.953588903}
-  m_LocalPosition: {x: 2.66714025, y: -125.079193, z: -16.5058041}
+  m_LocalRotation: {x: -.258819044, y: 0, z: 0, w: .965925813}
+  m_LocalPosition: {x: 0, y: -23.8600006, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -14107,7 +14172,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1217035648}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2000, y: 1, z: 800}
@@ -17678,7 +17743,7 @@ GameObject:
   - 114: {fileID: 1540064680}
   - 154: {fileID: 1540064679}
   - 114: {fileID: 1540064682}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Terrain
   m_TagString: terrain
   m_Icon: {fileID: 0}
@@ -20123,7 +20188,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1741207452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.7999992, y: 2.5, z: 20.9400005}
+  m_LocalPosition: {x: 36.7999992, y: 2.9000001, z: 20.8999996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 306863064}
@@ -21047,10 +21112,10 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1843515231}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 150, y: 100, z: 100}
+  m_Size: {x: 150, y: 10, z: 100}
   m_Center: {x: 25, y: 0, z: -50}
 --- !u!1 &1847834806
 GameObject:

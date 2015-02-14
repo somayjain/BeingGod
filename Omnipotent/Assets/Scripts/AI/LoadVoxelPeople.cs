@@ -81,6 +81,18 @@ public class LoadVoxelPeople : MonoBehaviour {
 
 
 	}
+	
+	private Queue<Vector3> people_houselocQ = new Queue<Vector3>();
+	private float spawn_deltatime = 0;
+	void Update () { 
+		if (people_houselocQ.Count > 0) {
+			spawn_deltatime += Time.deltaTime;
+			while(spawn_deltatime > 1.0f) {
+				spawn_deltatime -= 1.0f;
+				createPPLNow(people_houselocQ.Dequeue());
+			}
+		}
+	}
 
 	private float secs = 1.0f;
 
@@ -90,8 +102,9 @@ public class LoadVoxelPeople : MonoBehaviour {
 		Vector3 c_housePos = sources[Random.Range(0,sources.Count)];
 		
 		for (int i=0; i<nosPeople; i++) {
-			l_secs++;
-			StartCoroutine(createPPL(c_housePos, l_secs));
+			people_houselocQ.Enqueue(c_housePos);
+//			l_secs++;
+//			StartCoroutine(createPPL(c_housePos, l_secs));
 		}
 	}
 
@@ -101,9 +114,10 @@ public class LoadVoxelPeople : MonoBehaviour {
 		Vector3 c_housePos = houseLoc.Pop ();
 
 		for (int i=0; i<nosPeople; i++) {
-	l_secs++;
-			StartCoroutine(createPPL(c_housePos, l_secs));
-				}
+			people_houselocQ.Enqueue(c_housePos);
+//			l_secs++;
+//			StartCoroutine(createPPL(c_housePos, l_secs));
+		}
 	}
 
 	IEnumerator createPPL(Vector3 newSpawnPos, float l_secs)
@@ -123,6 +137,23 @@ public class LoadVoxelPeople : MonoBehaviour {
 		agentMovement.target = targetLoc;
 		obs.transform.GetChild(0).gameObject.SetActive(false);
 		//obs.transform.GetComponent<Rigidbody> ().detectCollisions = false;
+		obs.transform.FindChild (obs.name).transform.Rotate (Vector3.forward, 180);
+		people.Add (obs);
+	}
+
+	private void createPPLNow(Vector3 newSpawnPos)
+	{
+		int rand_indx = Random.Range (0, nos_sources);
+		Vector3 sourceLoc = newSpawnPos;
+		Vector3 targetLoc = sources [rand_indx];
+		int rand_chr = Random.Range (0, prefabNameList.Count);
+		GameObject obs = (GameObject)Instantiate (Resources.Load ("prefabs/" + prefabNameList [rand_chr]), sourceLoc, Quaternion.AngleAxis (270, Vector3.right)) as GameObject;
+		obs.name = prefabNameList [rand_chr];
+		obs.transform.parent = transform;
+		NavMeshAgent agent = (NavMeshAgent)obs.AddComponent ("NavMeshAgent");
+		NavAgentMovement agentMovement = obs.AddComponent<NavAgentMovement> ();
+		agentMovement.target = targetLoc;
+		obs.transform.GetChild(0).gameObject.SetActive(false);
 		obs.transform.FindChild (obs.name).transform.Rotate (Vector3.forward, 180);
 		people.Add (obs);
 	}

@@ -7,15 +7,20 @@ public class WildMovement : MonoBehaviour {
 	public Vector3 currentDestination; 
 	public NavMeshAgent agent;
 
-	public float health = 50.0f;
+	public float health = 20.0f;
 
 	public bool attackMode = false;
+	public bool hitMode = false;
+	public bool deadMode = false;
 	public float switchTimer = 2.0f;
+	public float hitTimer = 2.0f;
+	public float deadTimer = 2.0f;
 	public bool agentReached = false;
 
 	string attackAnim;
 	string walkAnim;
-
+	string deadAnim;
+	string hitAnim;
 
 	Vector3 lastPos = new Vector3();
 	float lastCheck = 1.0f;
@@ -26,9 +31,13 @@ public class WildMovement : MonoBehaviour {
 		if (gameObject.name == "Dino") {
 						walkAnim = "Allosaurus_Run";
 						attackAnim = "Allosaurus_Attack02";
+						hitAnim = "Allosaurus_Hit01";
+						deadAnim="Allosaurus_Die";
 				} else {
 			walkAnim = "Walk";
 			attackAnim = "Attack";
+			hitAnim="Dead";
+			deadAnim="Dead";
 		}
 		agent.SetDestination (currentDestination);
 		animation.CrossFade (walkAnim);
@@ -64,11 +73,38 @@ public class WildMovement : MonoBehaviour {
 			attackMode = false;
 			agent.Resume();
 			}else{
-				switchTimer -= Time.fixedDeltaTime;
+				switchTimer -= Time.deltaTime;
 			}
 			return;
 		}
 
+
+		if (hitMode == true) {
+			if(hitTimer<=0.0f){
+				hitTimer = 2.0f;
+				//Debug.Log("set to Walk");
+				animation.CrossFade(hitAnim);
+				hitMode = false;
+				agent.Resume();
+			}else{
+				hitTimer -= Time.deltaTime;
+			}
+			return;
+		}
+
+		if (deadMode == true || health <= 0.0f) {
+			deadMode = true;
+			if(deadTimer<=0.0f){
+				//deadTimer = 2.0f;
+				//Debug.Log("set to Walk");
+				animation.CrossFade(deadAnim);
+				//deadMode = false;
+				//agent.Resume();
+			}else{
+				deadTimer -= Time.deltaTime;
+			}
+			return;
+		}
 		/*
 		if (agent.pathStatus == NavMeshPathStatus.PathComplete || agent.pathStatus == NavMeshPathStatus.PathInvalid) {
 			agentReached = true;

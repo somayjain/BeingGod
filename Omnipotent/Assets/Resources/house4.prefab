@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 419972}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: source
   m_TagString: source
   m_Icon: {fileID: -1203168336, guid: 0000000000000000d000000000000000, type: 0}
@@ -27,7 +27,7 @@ GameObject:
   - 23: {fileID: 2337800}
   - 208: {fileID: 20837800}
   - 65: {fileID: 6593326}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: house4
   m_TagString: Building
   m_Icon: {fileID: 0}

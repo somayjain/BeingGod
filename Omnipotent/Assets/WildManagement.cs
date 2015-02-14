@@ -84,7 +84,8 @@ public class WildManagement : MonoBehaviour {
 				if(hitDistance<=rayPowRange){
 					csHandle.PowerMjolnir.AddXP(1,1);
 					Debug.Log(i+" enemy List "+enemList[i].GetComponent<WildMovement>().health);
-					enemList[i].GetComponent<WildMovement>().health -= 10.0f;
+					enemList[i].GetComponent<WildMovement>().health -= 8.0f;
+					enemList[i].GetComponent<WildMovement>().hitMode = true;
 
 				}
 			}
@@ -93,12 +94,13 @@ public class WildManagement : MonoBehaviour {
 				if(timeToHit<=0.0f){
 					if((enemList[i].transform.position-hit3DLoc).magnitude <= 15.0f){
 						csHandle.PowerFireball.AddXP(1,1);
+						enemList[i].GetComponent<WildMovement>().hitMode = true;
 						//Debug.Log("Ball hitting"+ZombieList[i].name);
-						enemList[i].GetComponent<WildMovement>().health -= 10.0f;
+						enemList[i].GetComponent<WildMovement>().health -= 8.0f;
 					}
 				}
 			}
-			if(enemList[i].GetComponent<WildMovement>().health <= 0.0f){
+			if(enemList[i].GetComponent<WildMovement>().deadTimer<=0.0f){
 				Destroy(enemList[i]);
 				enemList.RemoveAt(i);
 				bossNos = enemList.Count;
