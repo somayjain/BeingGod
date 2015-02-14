@@ -128,6 +128,7 @@ public class houseManager : MonoBehaviour
 		}
 		
 		public void cancelBuild (){
+			f_buildHouse = false;
 			Destroy (house);
 		}
 

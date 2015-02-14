@@ -399,7 +399,7 @@ public class LevelController : MonoBehaviour {
 							}else{
 								tutTimer-=Time.deltaTime;
 								if(tutTimer<=0.0f){
-									Debug.Log(tutTimer+" "+spawnZombs);
+//									Debug.Log(tutTimer+" "+spawnZombs);
 									zombieManager.GetComponent<ZombieManager>().initZombies(spawnZombs);
 								}
 							}

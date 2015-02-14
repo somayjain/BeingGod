@@ -212,9 +212,10 @@ MonoBehaviour:
   panSpeed: 360
   zoomSpeed: 500
   handTurnSpeed: 2
-  handPanSpeed: 10
-  handZoomSpeed: 4
+  handPanSpeed: {x: 20, y: 200}
+  handZoomSpeed: 8
   zoomOut: 100
+  autoforce: 25
   turnDrag: 5
   panDrag: 5
   zoomDrag: 3.29999995
@@ -1319,11 +1320,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400050, guid: 035a8130f4329504aaa80f75dc72628d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 86.5
+      value: 87
       objectReference: {fileID: 0}
     - target: {fileID: 400050, guid: 035a8130f4329504aaa80f75dc72628d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -253.5
+      value: -247.699997
       objectReference: {fileID: 0}
     - target: {fileID: 400050, guid: 035a8130f4329504aaa80f75dc72628d, type: 3}
       propertyPath: m_LocalRotation.x
@@ -3331,6 +3332,7 @@ GameObject:
   - 4: {fileID: 216557269}
   - 111: {fileID: 216557270}
   - 54: {fileID: 216557271}
+  - 136: {fileID: 216557272}
   m_Layer: 0
   m_Name: humpback_whale_model23
   m_TagString: Untagged
@@ -3387,6 +3389,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &216557272
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 216557268}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: .680000007
+  m_Height: 4.30000019
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &222089287
 GameObject:
   m_ObjectHideFlags: 0
@@ -4680,7 +4695,7 @@ MonoBehaviour:
   - {fileID: 1971054188}
   - {fileID: 1384020566}
   - {fileID: 1781156744}
-  MaxActiveObj: 5
+  enemList: []
   hit3DLoc: {x: 0, y: 0, z: 0}
   Powermode: 0
 --- !u!4 &306863064
@@ -5497,6 +5512,7 @@ GameObject:
   - 4: {fileID: 345568706}
   - 111: {fileID: 345568707}
   - 54: {fileID: 345568708}
+  - 136: {fileID: 345568709}
   m_Layer: 0
   m_Name: humpback_whale_model_baked_animation
   m_TagString: Untagged
@@ -5511,7 +5527,7 @@ Transform:
   m_PrefabInternal: {fileID: 44236405}
   m_GameObject: {fileID: 345568705}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -136.600006, y: 86.5, z: -253.5}
+  m_LocalPosition: {x: -136.600006, y: 87, z: -247.699997}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 1652886653}
@@ -5553,6 +5569,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &345568709
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 345568705}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: .800000012
+  m_Height: 3.88000011
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &345583901
 GameObject:
   m_ObjectHideFlags: 0
@@ -7388,6 +7417,7 @@ GameObject:
   - 4: {fileID: 543528376}
   - 111: {fileID: 543528377}
   - 54: {fileID: 543528378}
+  - 136: {fileID: 543528379}
   m_Layer: 0
   m_Name: humpback_whale_model23
   m_TagString: Untagged
@@ -7402,7 +7432,7 @@ Transform:
   m_PrefabInternal: {fileID: 1016016751}
   m_GameObject: {fileID: 543528375}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -137, y: 88.9000015, z: -217.100006}
+  m_LocalPosition: {x: -148.199997, y: 88.9000015, z: -198.699997}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 673223219}
@@ -7444,6 +7474,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &543528379
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 543528375}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: .5
+  m_Height: 4.03999996
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &552966582
 GameObject:
   m_ObjectHideFlags: 0
@@ -8243,6 +8286,7 @@ GameObject:
   - 4: {fileID: 586445787}
   - 111: {fileID: 586445786}
   - 54: {fileID: 586445788}
+  - 136: {fileID: 586445789}
   m_Layer: 0
   m_Name: humpback_whale_model_baked_animation
   m_TagString: Untagged
@@ -8277,7 +8321,7 @@ Transform:
   m_PrefabInternal: {fileID: 1432055846}
   m_GameObject: {fileID: 586445785}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -117.800003, y: 87.9000015, z: -239.699997}
+  m_LocalPosition: {x: -86.6999969, y: 87.9000015, z: -239.699997}
   m_LocalScale: {x: 12, y: 12, z: 12}
   m_Children:
   - {fileID: 609835722}
@@ -8299,6 +8343,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &586445789
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 586445785}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: .850000024
+  m_Height: 4.19999981
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &594249033
 GameObject:
   m_ObjectHideFlags: 0
@@ -12289,7 +12346,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400048, guid: 087a2ac1c75bbc34aa1d66d7766c1d5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -137
+      value: -148.199997
       objectReference: {fileID: 0}
     - target: {fileID: 400048, guid: 087a2ac1c75bbc34aa1d66d7766c1d5b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12297,7 +12354,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400048, guid: 087a2ac1c75bbc34aa1d66d7766c1d5b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -217.100006
+      value: -198.699997
       objectReference: {fileID: 0}
     - target: {fileID: 400048, guid: 087a2ac1c75bbc34aa1d66d7766c1d5b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -12734,8 +12791,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1045941934}
-  m_LocalRotation: {x: -.258819044, y: 0, z: 0, w: .965925813}
-  m_LocalPosition: {x: 0, y: -23.8600006, z: -10}
+  m_LocalRotation: {x: -.217454582, y: .534955621, z: .14478159, w: .803476453}
+  m_LocalPosition: {x: -72.3153152, y: -45.5597649, z: 481.348755}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -16098,6 +16155,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1288288787}
   m_RootOrder: 8
+--- !u!1 &1387277751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1387277752}
+  - 114: {fileID: 1387277753}
+  - 208: {fileID: 1387277755}
+  m_Layer: 2
+  m_Name: ProjectedHand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1387277752
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1387277751}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 22
+--- !u!114 &1387277753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1387277751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a5c8834b5b32b4d884ae081d1088a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursor: {fileID: 1721188146}
+--- !u!208 &1387277755
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1387277751}
+  m_Enabled: 1
+  m_Radius: 20
+  m_Height: 10
+  m_MoveThreshold: 5
+  m_Carve: 0
 --- !u!1 &1391400164
 GameObject:
   m_ObjectHideFlags: 0
@@ -16780,7 +16889,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400050, guid: 035a8130f4329504aaa80f75dc72628d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -117.800003
+      value: -86.6999969
       objectReference: {fileID: 0}
     - target: {fileID: 400050, guid: 035a8130f4329504aaa80f75dc72628d, type: 3}
       propertyPath: m_LocalPosition.y
