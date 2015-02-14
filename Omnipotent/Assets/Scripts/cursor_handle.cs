@@ -71,6 +71,10 @@ public class cursor_handle : MonoBehaviour {
 	public Power_Boo PowerBoo;
 	public Power_GMBC PowerGMBC;
 
+	public GameObject Kiss;
+
+	private  float kissTimer = 5.0f;
+
 	public GameObject PeopleManager;
 	public GameObject currentLevel;
 	// Use this for initialization
@@ -80,6 +84,15 @@ public class cursor_handle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (kissTimer != 5.0f) {
+			kissTimer-=Time.deltaTime;
+			if(kissTimer<=0.0f){
+				Kiss.GetComponent<ParticleEmitter>().emit = false;
+				kissTimer=5.0f;
+			}
+		}
+
 		bool hand2d = GetComponentInChildren<HandRenderer> ().queryRightHand2DCoordinates (out cursor2d);
 		if (!hand2d)
 			hand2d = GetComponentInChildren<HandRenderer> ().queryLeftHand2DCoordinates (out cursor2d);
@@ -278,9 +291,6 @@ public class cursor_handle : MonoBehaviour {
 	}
 	public void soundClap(Trigger trgr){
 		if ( !isOnHUD() && !isOnShelf() && setMode (MODE.THUNDER_CLAP) ) {
-			// Trigger Thunder Clap
-			// PeopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.THUNDER_CLAP;
-			// PeopleManager.GetComponent<LoadVoxelPeople>().pointOfContact = cursor3d;
 			PowerThunderClap.Trigger( cursor3d );
 			setMode (MODE.DEFAULT);
 		}
@@ -324,6 +334,11 @@ public class cursor_handle : MonoBehaviour {
 			PowerBoo.Trigger (cursor3d);
 			setMode (MODE.DEFAULT);
 		}
+	}
+	public void soundKiss(Trigger trgr){
+		Debug.Log ("Kiss");
+		Kiss.GetComponent<ParticleEmitter>().emit = true;
+		kissTimer = 4.99f;
 	}
 
 	public void HandDetected (Trigger trgr) {

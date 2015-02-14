@@ -15,8 +15,9 @@ public class HorseAgent : MonoBehaviour {
 
 
 	public void newPath(Vector3 newLoc){
+		Debug.Log (newLoc);
 		lastPos = newLoc;
-		agent.SetDestination (newLoc);
+		agent.SetDestination(newLoc);
 		targetReached = false;
 	}
 
