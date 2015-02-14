@@ -15,7 +15,6 @@ public class trackHand : MonoBehaviour {
 		handIds = new int[2];
         bodySides = new PXCMHandData.BodySideType[2];
         handRenderer = gameObject.GetComponent<HandRenderer>();
-		
 	}
 	
 	// Update is called once per frame
@@ -34,8 +33,8 @@ public class trackHand : MonoBehaviour {
 	        {
 	            PXCMHandData.IHand _handData;
 	            _outputData.QueryHandData(PXCMHandData.AccessOrderType.ACCESS_ORDER_FIXED, i, out _handData);
-				if(_handData!=null){}// Debug.Log(_handData.ToString());
-				else { Debug.Log ("No data"); continue; }
+				//if(_handData!=null){}// Debug.Log(_handData.ToString());
+				//else { Debug.Log ("No data"); continue; }
 	            for (int j = 0; j < PXCMHandData.NUMBER_OF_JOINTS; j++)
 	                _handData.QueryTrackedJoint((PXCMHandData.JointType)j, out joints[i, j]);
 
@@ -43,8 +42,8 @@ public class trackHand : MonoBehaviour {
 	            bodySides[i] = _handData.QueryBodySide();
 
 	        }
-	        handRenderer.DisplaySmoothenedJoints(_outputData, joints, handIds, bodySides);
-
+			handRenderer.DisplaySmoothenedJoints(_outputData, joints, handIds, bodySides, _outputData.QueryNumberOfHands());
+			
 			/* Retrieve Alert Data */
 			/*
 			PXCMHandData.AlertData _alertData;
@@ -66,6 +65,7 @@ public class trackHand : MonoBehaviour {
 			handRenderer.makeNull();
 		}
 		// For testing
+		handRenderer.DisplayGest ();
 	}
 
 	public void dummyHandDetected (){

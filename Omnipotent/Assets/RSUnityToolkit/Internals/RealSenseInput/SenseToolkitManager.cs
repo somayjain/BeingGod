@@ -400,7 +400,7 @@ namespace RSUnityToolkit
 				handConfiguration.EnableGesture("v_sign");
 				handConfiguration.EnableGesture("thumb_up");
 				handConfiguration.EnableGesture ("thumb_down");
-				handConfiguration.EnableGesture ("two_fingers_pinch_open");
+				//handConfiguration.EnableGesture ("two_fingers_pinch_open");
 				handConfiguration.EnableGesture ("spreadfingers");
 				handConfiguration.EnableGesture ("fist");
                 handConfiguration.EnableStabilizer(true);

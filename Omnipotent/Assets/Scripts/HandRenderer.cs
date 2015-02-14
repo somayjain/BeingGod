@@ -9,6 +9,7 @@ Copyright(c) 2014 Intel Corporation. All Rights Reserved.
 *******************************************************************************/
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class HandRenderer : MonoBehaviour {
@@ -40,6 +41,26 @@ public class HandRenderer : MonoBehaviour {
 	private string lefthandgesture, righthandgesture;
 	public bool leftPresent, rightPresent;
 
+	private enum HAND_GESTURE {
+		NONE,
+		FIST,
+		FULLPINCH,
+		SPREADFINGERS,
+		SWIPE,
+		TAP,
+		THUMBDOWN,
+		THUMBUP,
+		TWOFINGERSPINCH,
+		V_SIGN,
+		WAVE
+	};
+	public int AveragedFrameCount = 20;
+	private Dictionary<string, HAND_GESTURE> stringGestureMap;
+	private Queue<HAND_GESTURE> detectedLeftGestures;
+	private Queue<HAND_GESTURE> detectedRightGestures;
+//	private List <HAND_GESTURE> detectedLeftGestures;
+//	private List <HAND_GESTURE> detectedRightGestures;
+
 	// Use this for initialization
 	void Start() {
         MaxHands = 2;
@@ -50,6 +71,22 @@ public class HandRenderer : MonoBehaviour {
         avgQueue = new Queue();
         handIds = new int[MaxHands];
         bodySide = new PXCMHandData.BodySideType[MaxHands];
+
+		stringGestureMap = new Dictionary<string, HAND_GESTURE> ();
+		stringGestureMap.Add ("", HAND_GESTURE.NONE);
+		stringGestureMap.Add ("fist", HAND_GESTURE.FIST);
+		stringGestureMap.Add ("full_pinch", HAND_GESTURE.FULLPINCH);
+		stringGestureMap.Add ("spreadfingers", HAND_GESTURE.SPREADFINGERS);
+		stringGestureMap.Add ("swipe", HAND_GESTURE.SWIPE);
+		stringGestureMap.Add ("tap", HAND_GESTURE.TAP);
+		stringGestureMap.Add ("thumb_down", HAND_GESTURE.THUMBDOWN);
+		stringGestureMap.Add ("thumb_UP", HAND_GESTURE.THUMBUP);
+		stringGestureMap.Add ("two_fingers_pinch", HAND_GESTURE.TWOFINGERSPINCH);
+		stringGestureMap.Add ("v_sign", HAND_GESTURE.V_SIGN);
+		stringGestureMap.Add ("wave", HAND_GESTURE.WAVE);
+
+		detectedLeftGestures = new Queue<HAND_GESTURE>();
+		detectedRightGestures = new Queue<HAND_GESTURE>();
 
         handIds[0] = handIds[1] = -1;
         
@@ -95,15 +132,31 @@ public class HandRenderer : MonoBehaviour {
 			if (bodySide[i] == PXCMHandData.BodySideType.BODY_SIDE_LEFT)
 			{
 				lefthandgesture = gestureData.name.ToString();
-				myGestureTextLeft.GetComponent<Text>().text =  "Left Hand : "+ gestureData.name.ToString();
+//				myGestureTextLeft.GetComponent<Text>().text =  "Left Hand : "+ gestureData.name.ToString();
+				if(detectedLeftGestures.Count >= AveragedFrameCount)
+					detectedLeftGestures.Dequeue();
+				detectedLeftGestures.Enqueue(stringGestureMap[lefthandgesture]);
+//				myGestureTextLeft.GetComponent<Text>().text =  "Left Hand : "+ getAveragedLeftHandGesture()+"-"+gestureData.name.ToString();
 			}
 			else if (bodySide[i] == PXCMHandData.BodySideType.BODY_SIDE_RIGHT)
 			{
 				righthandgesture = gestureData.name.ToString();
-				myGestureTextRight.GetComponent<Text>().text = "Right Hand : "+ gestureData.name.ToString(); 
+//				myGestureTextRight.GetComponent<Text>().text = "Right Hand : "+ gestureData.name.ToString(); 
+				if(detectedRightGestures.Count >= AveragedFrameCount)
+					detectedRightGestures.Dequeue();
+				detectedRightGestures.Enqueue(stringGestureMap[righthandgesture]);
+//				myGestureTextRight.GetComponent<Text>().text = "Right Hand : "+ getAveragedRightHandGesture()+"-"+gestureData.name.ToString(); 
 			}
 			break;
 		}
+	}
+
+	public void DisplayGest()
+	{
+		myGestureTextLeft.GetComponent<Text>().text =  "Left Hand : "+ getAveragedLeftHandGesture()+"-"+getLeftHandGesture();
+
+		myGestureTextRight.GetComponent<Text>().text = "Right Hand : "+ getAveragedRightHandGesture()+"-"+getRightHandGesture(); 
+
 	}
 
 	public string getLeftHandGesture()
@@ -124,6 +177,48 @@ public class HandRenderer : MonoBehaviour {
 				return lefthandgesture;
 		else
 				return null;
+	}
+
+	public string getAveragedLeftHandGesture ()
+	{
+		HAND_GESTURE[] gestures = detectedLeftGestures.ToArray ();
+
+		Dictionary<HAND_GESTURE, int> count = new Dictionary<HAND_GESTURE, int> ();
+		HAND_GESTURE bestG = HAND_GESTURE.NONE;
+		int bestC = 0;
+
+		for (int i=0; i<gestures.GetLength(0); i++) {
+			if(count.ContainsKey(gestures[i]))
+				count[gestures[i]] ++;
+			else
+				count[gestures[i]] = 1;
+			if(count[gestures[i]] >= bestC) {
+				bestC = count[gestures[i]];
+				bestG = gestures[i];
+			}
+		}
+		return bestG.ToString ();
+	}
+
+	public string getAveragedRightHandGesture ()
+	{
+		HAND_GESTURE[] gestures = detectedRightGestures.ToArray ();
+		
+		Dictionary<HAND_GESTURE, int> count = new Dictionary<HAND_GESTURE, int> ();
+		HAND_GESTURE bestG = HAND_GESTURE.NONE;
+		int bestC = 0;
+		
+		for (int i=0; i<gestures.GetLength(0); i++) {
+			if(count.ContainsKey(gestures[i]))
+				count[gestures[i]] ++;
+			else
+				count[gestures[i]] = 1;
+			if(count[gestures[i]] >= bestC) {
+				bestC = count[gestures[i]];
+				bestG = gestures[i];
+			}
+		}
+		return bestG.ToString ();
 	}
 
 	public string getRightHandGesture()
@@ -163,7 +258,7 @@ public class HandRenderer : MonoBehaviour {
 
     }
 
-	public void DisplaySmoothenedJoints(PXCMHandData _outputData, PXCMHandData.JointData[,] _myJointData, int[] _handIds, PXCMHandData.BodySideType[] _bodySides)
+	public void DisplaySmoothenedJoints(PXCMHandData _outputData, PXCMHandData.JointData[,] _myJointData, int[] _handIds, PXCMHandData.BodySideType[] _bodySides, int num_hands)
     {
 		lefthandgesture = "";
 		righthandgesture = "";
@@ -180,7 +275,7 @@ public class HandRenderer : MonoBehaviour {
         avgQueue.Enqueue(_myJointData);
 
         foreach (PXCMHandData.JointData[,] temp in avgQueue)
-            for (int i = 0; i < MaxHands; i++)
+            for (int i = 0; i < num_hands; i++)
                 for (int j = 0; j < PXCMHandData.NUMBER_OF_JOINTS; j++)
                     if (temp[i, j] != null && _myJointData[i, j] != null)
                     {
@@ -190,21 +285,22 @@ public class HandRenderer : MonoBehaviour {
                     else
                         myJoints[i, j].SetActive(false);
 
-        for (int i = 0; i < MaxHands; i++)
+		for (int i = 0; i < num_hands; i++) {
+						if (bodySide [i] == PXCMHandData.BodySideType.BODY_SIDE_LEFT) {
+								// Left Hand
+								leftPalmCenterJoint = (sumOfJointPositions [i, 1] / avgQueue.Count) * factor;
+								leftPresent = true;
+								Debug.Log ("I AM HERE X(");
+						} else if (bodySide [i] == PXCMHandData.BodySideType.BODY_SIDE_RIGHT) {
+								// Right Hand
+								rightPalmCenterJoint = (sumOfJointPositions [i, 1] / avgQueue.Count) * factor;
+								rightPresent = true;
+						}
+				}
+
+		for (int i = 0; i < MaxHands; i++)
 		{
 			palmCenterPos = (sumOfJointPositions[i, 1] / avgQueue.Count) * factor;
-			if(bodySide[i] == (PXCMHandData.BodySideType)1)
-			{
-				// Left Hand
-				leftPalmCenterJoint = (sumOfJointPositions[i, 1] / avgQueue.Count) * factor;
-				leftPresent = true;
-			}
-			else if(bodySide[i] == (PXCMHandData.BodySideType)2)
-			{
-				// Right Hand
-				rightPalmCenterJoint = (sumOfJointPositions[i, 1] / avgQueue.Count) * factor;
-				rightPresent = true;
-			}
 
 			for (int j = 0; j < PXCMHandData.NUMBER_OF_JOINTS; j++)
             {
@@ -212,8 +308,10 @@ public class HandRenderer : MonoBehaviour {
 				//Debug.Log ("Joint " + j + ": " + (pos - palmCenterPos).ToString ());
                 
 				myJoints[i, j].transform.localPosition = pos;
+				if (j==1) Debug.Log("pos: "+pos.ToString()+",pcp:"+palmCenterPos.ToString()+",lpc:"+leftPalmCenterJoint.ToString()+",rpc:"+rightPalmCenterJoint.ToString());
                 sumOfJointPositions[i, j] = Vector3.zero;
-            }
+				if (j==1) Debug.Log("After pos: "+pos.ToString()+",pcp:"+palmCenterPos.ToString()+",lpc:"+leftPalmCenterJoint.ToString()+",rpc:"+rightPalmCenterJoint.ToString());
+			}
 		}
 //		Debug.Log ("Presence : " + leftPresent.ToString () + " <-> " + rightPresent.ToString ());
 
@@ -231,16 +329,19 @@ public class HandRenderer : MonoBehaviour {
 				UpdateBoneTransform (myBones [i, 13], myJoints [i, 6], myJoints [i, 10]);
 				UpdateBoneTransform (myBones [i, 0], myJoints [i, 2], myJoints [i, 6]);
 		}
+		Debug.Log("1 lpc:"+leftPalmCenterJoint.ToString()+",rpc:"+rightPalmCenterJoint.ToString());
 
-        if (avgQueue.Count >= SmoothingFactor)
+		if (avgQueue.Count >= SmoothingFactor)
             avgQueue.Dequeue();
+		Debug.Log("2 lpc:"+leftPalmCenterJoint.ToString()+",rpc:"+rightPalmCenterJoint.ToString());
 
 		if(!leftPresent)
 			myGestureTextLeft.GetComponent<Text> ().text = "";
 		if(!rightPresent)
 			myGestureTextRight.GetComponent<Text> ().text = "";
-    }
-
+		Debug.Log("3 lpc:"+leftPalmCenterJoint.ToString()+",rpc:"+rightPalmCenterJoint.ToString());
+	}
+	
 	//Update Bones
 	void UpdateBoneTransform (GameObject _bone, GameObject _prevJoint, GameObject _nextJoint)
 	{
@@ -302,7 +403,7 @@ public class HandRenderer : MonoBehaviour {
 			Debug.Log("Left: "+point);
 				return true;
 		} else {
-				point = Vector3.zero;
+			point = Vector3.zero + Vector3.one;
 				return false;
 		}
 	}

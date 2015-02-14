@@ -37,7 +37,9 @@ public class camera_handle : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		isPanning = false;
+		isRotating = false;
+		isZooming = false;
 	}
 
 	//
@@ -67,7 +69,8 @@ public class camera_handle : MonoBehaviour {
 		// == Getting Input ==
 		HandRenderer hr = cursor.GetComponentInChildren<HandRenderer> ();
 		bool panmode = false, rotatemode = false, zoommode = false;
-		panmode 	= (hr.getLeftHandGesture () == "v_sign" && hr.getRightHandGesture () == null) || (hr.getLeftHandGesture () == null && hr.getRightHandGesture () == "v_sign");
+		//panmode 	= (hr.getLeftHandGesture () == "fist" && hr.getRightHandGesture () == null) || (hr.getLeftHandGesture () == null && hr.getRightHandGesture () == "fist");
+		panmode 	= (hr.getLeftHandGesture () == "fist") || (hr.getRightHandGesture () == "fist");
 		rotatemode 	= ((hr.getLeftHandGesture () != null && hr.getRightHandGesture () == "v_sign" ) || (hr.getLeftHandGesture () == "v_sign" && hr.getRightHandGesture () != null ));
 		//rotatemode 	= (hr.getLeftHandGesture () == "v_sign" && hr.getRightHandGesture () == "v_sign");
 		zoommode 	= (hr.getLeftHandGesture () == "v_sign" && hr.getRightHandGesture () == "v_sign");
@@ -77,14 +80,12 @@ public class camera_handle : MonoBehaviour {
 		//handmode = true;
 
 		if (handmode) {
-			if (rotatemode) {
+			Debug.Log("Pan: " + isPanning.ToString() + ", Rot: " + isRotating.ToString() + ", " + panmode.ToString() + ", " + rotatemode.ToString());
+			if (!isPanning && rotatemode) {
 		//		Debug.Log (hr.leftPresent +" <-> " +hr.rightPresent+" == "+hr.getLeftHandGesture () + " <-> " + hr.getRightHandGesture ());
 
 				isRotating = true;
-			}
-			
-
-			if(panmode) {
+			} else if(!isRotating && panmode) {
 				Debug.Log (hr.leftPresent +" <-> " +hr.rightPresent+" == "+hr.getLeftHandGesture () + " <-> " + hr.getRightHandGesture ());
 
 				if(!isPanning) {
@@ -214,8 +215,7 @@ public class camera_handle : MonoBehaviour {
 					//	isRotating = false;
 					Debug.Log("Rota is " + isRotating.ToString());
 				}
-			}
-			if (isPanning) {
+			} else if (isPanning) {
 				Vector3 hc;
 				bool hdetected;
 
