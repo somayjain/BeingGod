@@ -7,7 +7,7 @@
 
 using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 
 public class HexWorld : MonoBehaviour 
 {
@@ -29,26 +29,71 @@ public class HexWorld : MonoBehaviour
 
 	private bool isInitialized = false;
 
+	public Vector3 test_demo = new Vector3();
+
 
 	//	-------------------------------------------------------  Persistent Functions
 	
-	
+
 	void Awake() 
 	{
-		Initialize();
+		//Initialize();
+		//Debug.Log ("First");
+		InitDamageHex (test_demo);
 	}
 	
 	
 	void Start() 
 	{
-		StartCoroutine( "GenerateHexWorld" );
+		//Debug.Log ("second");
+		StartCoroutine(GenerateHexWorld());
+	}
+
+
+	public void addDamageTexture(){
+		GenerateHexWorld ();
 	}
 	
-	
 	//	-------------------------------------------------------  Other Functions
+
+	public void InitDamageHex(Vector3 damageLoc){
+		damageLoc.x -= 2.0f;
+		damageLoc.z -= 2.0f;
+		Vector3 startLoc = new Vector3 (damageLoc.x-2.0f,damageLoc.y,damageLoc.z-2.0f);
+		Vector3 endLoc = new Vector3 (damageLoc.x+2.0f,damageLoc.y,damageLoc.z+2.0f);
+
+		if ( !hexChunkPrefab )
+			Debug.LogError( gameObject.name + " : NO hexChunkPrefab ASSIGNED IN THE INSPECTOR" );
+		
+		if ( !terrain )
+			Debug.LogError( gameObject.name + " : NO terrain ASSIGNED IN THE INSPECTOR" );
+		
+		// check hexRadius is not greater than tileRadius (stops overlapping hexagons)
+		if ( hexRadius > tileRadius )
+			hexRadius = tileRadius;
+		
+		// check chunk size doesn't exceed max allowed vertices
+		if ( chunkSize > 50 )
+			chunkSize = 50;
+		
+		// check worldSize values are integers
+		//worldSize.x = Mathf.RoundToInt( worldSize.x );
+		//worldSize.y = Mathf.RoundToInt( worldSize.y );
+		
+		// create a data array to store the texture index value of each hexagon
+
+		hexWorldData = new int[4,4];
+		
+		for ( int x = (int)startLoc.x; x < (int)endLoc.x; x ++ )
+		{
+			for ( int z = (int)startLoc.z; z < (int)endLoc.z; z ++ )
+			{
+				hexWorldData[ z+4, x+4 ] = 0; // default value
+			}
+		}
+	}
 	
-	
-	void Initialize() 
+	public void Initialize() 
 	{
 		if ( !hexChunkPrefab )
 			Debug.LogError( gameObject.name + " : NO hexChunkPrefab ASSIGNED IN THE INSPECTOR" );
@@ -83,8 +128,8 @@ public class HexWorld : MonoBehaviour
 
 	IEnumerator GenerateHexWorld()
 	{
-		int chunksX = Mathf.FloorToInt( worldSize.x / (float)chunkSize );
-		int chunksZ = Mathf.FloorToInt( worldSize.y / (float)chunkSize );
+		int chunksX = Mathf.FloorToInt( (float)hexWorldData.Length / (float)chunkSize );
+		int chunksZ = Mathf.FloorToInt((float)hexWorldData.Length / (float)chunkSize );
 
 		hexChunks = new HexChunk[ chunksX, chunksZ ];
 
@@ -95,12 +140,11 @@ public class HexWorld : MonoBehaviour
 		{
 			for ( int x = 0; x < chunksX; x ++ ) 
 			{
-				chunkPos.x = (float)x * (float)chunkSize * Mathf.Cos( 30f * Mathf.Deg2Rad ) * tileRadius;
+				chunkPos.x = (float)x * (float)chunkSize * Mathf.Cos( 30f * Mathf.Deg2Rad ) * tileRadius-12.50f;
 				chunkPos.y = 0;
-				chunkPos.z = (float)z * (float)chunkSize * 1.5f * Mathf.Sin( 30f * Mathf.Deg2Rad ) * tileRadius;
+				chunkPos.z = (float)z * (float)chunkSize * 1.5f * Mathf.Sin( 30f * Mathf.Deg2Rad ) * tileRadius-12.50f;
 
 				hexChunk = (HexChunk)Instantiate( hexChunkPrefab, chunkPos, Quaternion.identity );
-
 				hexChunk.gameObject.name = hexChunkPrefab.name + "_" + x.ToString() + "_" + z.ToString();
 				hexChunk.transform.parent = transform;
 

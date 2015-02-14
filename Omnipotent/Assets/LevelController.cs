@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
@@ -27,6 +27,11 @@ public class LevelController : MonoBehaviour {
 	public int humanStatus ;
 	public int houseStatus ;
 
+
+	bool lmode = false;
+	bool fmode = false;
+	float ftimer = 5.0f;
+	Vector3 fLoc = new Vector3();
 	int prevHouseNos;
 
 	public XP_handle xp_handler;
@@ -49,7 +54,8 @@ public class LevelController : MonoBehaviour {
 
 	public Vector3 PowerLoc = new Vector3();
 	public Vector3 TornadoLoc = new Vector3 ();
-	
+
+	List<GameObject> DamageT = new List<GameObject>();
 
 	//Levels: min requirements
 	int minHouses2Build=5 ;
@@ -458,6 +464,25 @@ public class LevelController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		Debug.Log(fLoc+" Fire "+Powermode.ToString()+" ");
+		if (Powermode == MODE.FIREBALL || fmode == true) {
+			Debug.Log(fLoc+" Fire ");
+			if(fmode == false){
+				fLoc = PowerLoc;
+				fmode = true;
+			}
+			if(ftimer<=0.0f){
+				Debug.Log(fLoc+" ");
+				GameObject obs = (GameObject)Instantiate (Resources.Load("Damage"), fLoc, Quaternion.identity) as GameObject;
+				obs.transform.parent = transform;
+				DamageT.Add (obs);
+				fmode = false;
+				ftimer = 5.0f;
+			}else{
+				ftimer -= Time.fixedDeltaTime;
+			}
+		}
+
 				LevelLogic ();
 
 				// bool houseStatus = getstatus
@@ -466,11 +491,13 @@ public class LevelController : MonoBehaviour {
 						updateSources ();
 						peopleManager.GetComponent<LoadVoxelPeople> ().initPerson (5);
 				}
+				
+				
 				return;
 
-				zombieStatus = zombieManager.GetComponent<ZombieManager> ().allZombiesDead;
-				humanStatus = peopleManager.GetComponent<LoadVoxelPeople> ().people.Count;
-				houseStatus = buildingManager.GetComponent<houseManager> ().nosHouses;
+				//zombieStatus = zombieManager.GetComponent<ZombieManager> ().allZombiesDead;
+				//humanStatus = peopleManager.GetComponent<LoadVoxelPeople> ().people.Count;
+				//houseStatus = buildingManager.GetComponent<houseManager> ().nosHouses;
 
 				/*
 		if (currentLevel == 1) {

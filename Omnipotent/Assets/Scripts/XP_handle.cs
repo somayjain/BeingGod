@@ -111,10 +111,11 @@ public class XP_handle : MonoBehaviour {
 		switch (powertype) {
 		case Powers.POWERTYPE.GOOD:
 			if (Faith+Fear+xp > XP_Limit) {
-				Faith_pool += Faith + Fear + xp - XP_Limit;
-				Faith = Faith + xp - Faith_pool;
+				int faith_pool = Faith + Fear + xp - XP_Limit;
+				Faith = Faith + xp - faith_pool;
+				Faith_pool += faith_pool;
 				Faith_ratio = Faith / (float) XP_Limit;
-				faith_time += Inc_Time * (1 - Faith_pool / (float)xp);
+				faith_time += Inc_Time * (1 - faith_pool / (float)xp);
 			} else {
 				Faith += xp;
 				Faith_ratio = Faith / (float) XP_Limit;
@@ -125,10 +126,11 @@ public class XP_handle : MonoBehaviour {
 
 		case Powers.POWERTYPE.EVIL:
 			if (Faith+Fear+xp > XP_Limit) {
-				Fear_pool += Faith + Fear + xp - XP_Limit;
-				Fear = Fear + xp - Fear_pool;
+				int fear_pool = Faith + Fear + xp - XP_Limit;
+				Fear = Fear + xp - fear_pool;
+				Fear_pool += fear_pool;
 				Fear_ratio = Fear / (float) XP_Limit;
-				fear_time += Inc_Time * (1 - Fear_pool / (float)xp);
+				fear_time += Inc_Time * (1 - fear_pool / (float)xp);
 			} else {
 				Fear += xp;
 				Fear_ratio = Fear / (float) XP_Limit;
@@ -222,10 +224,10 @@ public class XP_handle : MonoBehaviour {
 			break;
 
 		case 4:
-			XP_Limit = 200;
+			XP_Limit = 500;
 			break;
 		case 5:
-			XP_Limit = 400;
+			XP_Limit = 1000;
 			cursor.PowerHoG.Enable();
 			cursor.PowerHoG.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("HoG");
 			cursor.PowerHoG.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
