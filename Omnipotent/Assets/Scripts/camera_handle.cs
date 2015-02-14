@@ -164,16 +164,22 @@ public class camera_handle : MonoBehaviour {
 		Ray ray = Camera.main.ScreenPointToRay(screenCenter);
 		float zoomIn = 5.0f;
 		RaycastHit hit;		
-		if(Physics.Raycast(ray, out hit)) {
+		if(Physics.Raycast (ray, out hit, 10.0f)) {
 			zoomIn = hit.point.y + 3.0f;
 		}
 
 		Vector3 cameraPosition = transform.position;
-		cameraPosition.y = Mathf.Clamp (transform.position.y, zoomIn, zoomOut);
-		transform.position = cameraPosition;
+		// Debug.Log ("Camera: " + cameraPosition.ToString ()+" zin: " + zoomIn.ToString ()+ ", zout: " + zoomOut.ToString() + " clamp: " + Mathf.Clamp (transform.position.y, zoomIn, zoomOut).ToString() );
+//		cameraPosition.y = Mathf.Clamp (transform.position.y, zoomIn, zoomOut);
+//		transform.position = cameraPosition;
 
 		prevRealTime = thisRealTime;
 		thisRealTime = Time.realtimeSinceStartup;
+
+		if (isRotating || isZooming) {
+			transform.GetChild(0).GetComponent<TrackingAction>().enabled = false;
+		} else
+			transform.GetChild(0).GetComponent<TrackingAction>().enabled = true;
 	}
 	
 	public float deltaTime {
@@ -185,19 +191,19 @@ public class camera_handle : MonoBehaviour {
 
 	private void PanLeft () {
 		rigidbody.drag = panDrag;
-		rigidbody.AddForce (-autoforce * Vector3.ProjectOnPlane(transform.right, Vector3.up), ForceMode.Acceleration);
+		rigidbody.AddForce (-autoforce * Vector3.ProjectOnPlane(Camera.main.transform.right, Vector3.up), ForceMode.Acceleration);
 	}
 	private void PanRight () {
 		rigidbody.drag = panDrag;
-		rigidbody.AddForce (autoforce * Vector3.ProjectOnPlane(transform.right, Vector3.up), ForceMode.Acceleration);
+		rigidbody.AddForce (autoforce * Vector3.ProjectOnPlane(Camera.main.transform.right, Vector3.up), ForceMode.Acceleration);
 	}
 	private void PanTop () {
 		rigidbody.drag = panDrag;
-		rigidbody.AddForce (autoforce * Vector3.ProjectOnPlane(transform.forward, Vector3.up), ForceMode.Acceleration);
+		rigidbody.AddForce (autoforce * Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up), ForceMode.Acceleration);
 	}
 	private void PanBottom () {
 		rigidbody.drag = panDrag;
-		rigidbody.AddForce (-autoforce * Vector3.ProjectOnPlane(transform.forward, Vector3.up), ForceMode.Acceleration);
+		rigidbody.AddForce (-autoforce * Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up), ForceMode.Acceleration);
 	}
 
 	//
@@ -218,9 +224,9 @@ public class camera_handle : MonoBehaviour {
 			else if (cursor.cursor2d.x > Screen.width*2.0f/3.0f)
 					PanRight ();
 			if (cursor.cursor2d.y < Screen.height/3.0f)
-					PanTop ();
-			else if (cursor.cursor2d.y > Screen.height*2.0f/3.0f)
 					PanBottom ();
+			else if (cursor.cursor2d.y > Screen.height*2.0f/3.0f)
+					PanTop ();
 
 			return;
 		}
@@ -238,8 +244,8 @@ public class camera_handle : MonoBehaviour {
 				if (!hdetected) {
 					hdetected = hr.queryRightHand3DCoordinates(out hc);
 					if (hdetected) {
-						Vector3 move = ( (hc.x-righthandorigin.x) * handPanSpeed.x * Vector3.ProjectOnPlane(transform.right, Vector3.up) ) + 
-							( (hc.z-righthandorigin.z) * handPanSpeed.y * Vector3.ProjectOnPlane(transform.forward, Vector3.up)) ;
+						Vector3 move = ( (righthandorigin.x-hc.x) * handPanSpeed.x * Vector3.ProjectOnPlane(Camera.main.transform.right, Vector3.up) ) + 
+							( (hc.z-righthandorigin.z) * handPanSpeed.y * Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up)) ;
 						Debug.Log ("Move " + move.ToString() + " = " + hc.ToString() + " + " + righthandorigin.ToString());
 						rigidbody.drag = panDrag;
 						rigidbody.AddForce(move, ForceMode.Acceleration);
@@ -247,8 +253,8 @@ public class camera_handle : MonoBehaviour {
 				}
 				else {
 				//if (hdetected) {
-					Vector3 move = ( (hc.x-lefthandorigin.x) * handPanSpeed.x * Vector3.ProjectOnPlane(transform.right, Vector3.up) ) + 
-						( (hc.z-lefthandorigin.z) * handPanSpeed.y * Vector3.ProjectOnPlane(transform.forward, Vector3.up)) ;
+					Vector3 move = ( (lefthandorigin.x-hc.x) * handPanSpeed.x * Vector3.ProjectOnPlane(Camera.main.transform.right, Vector3.up) ) + 
+						( (hc.z-lefthandorigin.z) * handPanSpeed.y * Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up)) ;
 					Debug.Log ("Move " + move.ToString());
 					rigidbody.drag = panDrag;
 					rigidbody.AddForce(move, ForceMode.Acceleration);
@@ -286,12 +292,14 @@ public class camera_handle : MonoBehaviour {
 					if (lhdetected && rhdetected) {
 						float delta = ((rhc.x - lhc.x) - (righthandorigin.x - lefthandorigin.x));
 
-						if ((Camera.main.transform.position.y < 5.0f && delta >= 0) || (Camera.main.transform.position.y > zoomOut && delta <= 0))
+						if ((transform.position.y < 5.0f && delta >= 0) || (transform.position.y > zoomOut && delta <= 0))
 							return;
 
-						Vector3 move = delta * handZoomSpeed * transform.forward;
+						Vector3 move = delta * handZoomSpeed * Camera.main.transform.forward;
+						Debug.Log (move.ToString());
+						//if (delta > 1) transform.position = transform.position + Vector3.up;
 						rigidbody.drag = zoomDrag;
-						rigidbody.AddForce(move, ForceMode.Acceleration);
+						rigidbody.AddForce(move , ForceMode.Force);
 					}// else
 					//	isZooming = false;
 				}
@@ -316,8 +324,8 @@ public class camera_handle : MonoBehaviour {
 				// Get mouse displacement vector from original to current position
 				Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
 
-				Vector3 move = ( -pos.x * panSpeed * Vector3.ProjectOnPlane(transform.right, Vector3.up) ) + 
-								(-pos.y * panSpeed * Vector3.ProjectOnPlane(transform.forward, Vector3.up)) ;
+				Vector3 move = ( -pos.x * panSpeed * Vector3.ProjectOnPlane(Camera.main.transform.right, Vector3.up) ) + 
+								(-pos.y * panSpeed * Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up)) ;
 				rigidbody.drag = panDrag;
 				rigidbody.AddForce(move, ForceMode.Acceleration);
 			}
@@ -328,9 +336,9 @@ public class camera_handle : MonoBehaviour {
 				/* TODO: 
 				 * Closer the camera, more the pan speed.
 				 */
-				if ((Camera.main.transform.position.y < 5.0f && Input.mouseScrollDelta.y >= 0) || (Camera.main.transform.position.y > zoomOut && Input.mouseScrollDelta.y <= 0))
+				if ((transform.position.y < 5.0f && Input.mouseScrollDelta.y >= 0) || (transform.position.y > zoomOut && Input.mouseScrollDelta.y <= 0))
 					return;
-				Vector3 move = Input.mouseScrollDelta.y * zoomSpeed * transform.forward;
+				Vector3 move = Input.mouseScrollDelta.y * zoomSpeed * Camera.main.transform.forward;
 				rigidbody.drag = zoomDrag;
 				rigidbody.AddForce(move, ForceMode.Acceleration);
 			}

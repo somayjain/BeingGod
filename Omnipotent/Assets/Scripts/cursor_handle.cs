@@ -18,8 +18,14 @@ public class cursor_handle : MonoBehaviour {
 	public Texture2D fireball_cursor;
 	public Texture2D tornado_cursor;
 
+	public enum HAND_SIDES {
+		Left,
+		Right
+	};
+
 	[Header("")]
 	public GameObject sphere;
+	public HAND_SIDES PreferredHand = HAND_SIDES.Left;
 
 	private bool onShelf = false;
 	private bool onHUD = false;
@@ -85,6 +91,7 @@ public class cursor_handle : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+
 		if (kissTimer != 5.0f) {
 			kissTimer-=Time.deltaTime;
 			if(kissTimer<=0.0f){
@@ -93,25 +100,29 @@ public class cursor_handle : MonoBehaviour {
 			}
 		}
 
-		bool hand2d = GetComponentInChildren<HandRenderer> ().queryRightHand2DCoordinates (out cursor2d);
-		if (!hand2d)
-			hand2d = GetComponentInChildren<HandRenderer> ().queryLeftHand2DCoordinates (out cursor2d);
+		Ray ray;
+		bool hand2d = false;
+
+		if (PreferredHand == HAND_SIDES.Right) {
+						hand2d = GetComponentInChildren<HandRenderer> ().queryRightHand2DCoordinates (out cursor2d);
+						if (!hand2d)
+								hand2d = GetComponentInChildren<HandRenderer> ().queryLeftHand2DCoordinates (out cursor2d);
+				} else {
+						hand2d = GetComponentInChildren<HandRenderer> ().queryLeftHand2DCoordinates (out cursor2d);
+						if (!hand2d)
+							hand2d = GetComponentInChildren<HandRenderer> ().queryRightHand2DCoordinates (out cursor2d);
+				}
+
 		if (!hand2d) {
 				cursor.SetActive (false);
 				cursor2d = Input.mousePosition;
+				ray = camera.ScreenPointToRay (Input.mousePosition);
 		} else {
 				cursor.SetActive (true);
 				cursor.GetComponent<RectTransform> ().position = cursor2d;
+				ray = camera.ScreenPointToRay (cursor2d);
 		}
 
-		Ray ray;
-		Vector3 hand3dpos;
-		bool hand3d = GetComponentInChildren<HandRenderer> ().queryLeftHand3DCoordinates (out hand3dpos);
-		if (hand3d)
-				ray = camera.ScreenPointToRay (cursor2d);
-		else
-				ray = camera.ScreenPointToRay (Input.mousePosition);
-		
 		RaycastHit hit;
 		int terrainlayermask = 1 << 9;
 		if (Physics.Raycast (ray, out hit, Mathf.Infinity, terrainlayermask)) {
