@@ -42,7 +42,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 	float tornadoRange = 18.0f;
 
 	//Fire
-	float fireTimer = 6.0f;
+	float fireTimer = 2.0f;
 	bool firemode = false;
 	Vector3 fireLoc = new Vector3();
 	float hoverTextTimer = 5.0f;

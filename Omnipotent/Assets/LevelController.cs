@@ -30,7 +30,7 @@ public class LevelController : MonoBehaviour {
 
 	bool lmode = false;
 	bool fmode = false;
-	float ftimer = 5.0f;
+	float ftimer = 2.0f;
 	Vector3 fLoc = new Vector3();
 	int prevHouseNos;
 
@@ -474,10 +474,11 @@ public class LevelController : MonoBehaviour {
 			if(ftimer<=0.0f){
 				Debug.Log(fLoc+" ");
 				GameObject obs = (GameObject)Instantiate (Resources.Load("Damage"), fLoc, Quaternion.identity) as GameObject;
+				obs.transform.Rotate(0,Random.Range(0,360),0);
 				obs.transform.parent = transform;
 				DamageT.Add (obs);
 				fmode = false;
-				ftimer = 5.0f;
+				ftimer = 2.0f;
 			}else{
 				ftimer -= Time.fixedDeltaTime;
 			}
