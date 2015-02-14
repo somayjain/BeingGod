@@ -7,7 +7,7 @@ public class XP_handle : MonoBehaviour {
 	public cursor_handle cursor;
 	public GameObject faith;
 	public GameObject fear;
-
+	public Text XpText;
 	public int XP_Limit, Faith, Fear;
 
 	public float Inc_Time = 1.0f;
@@ -47,6 +47,7 @@ public class XP_handle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		XpText.text = (Faith+Fear).ToString()+" / "+XP_Limit.ToString()+" XP";
 		if (Faith_min_ratio + Fear_min_ratio >= 1.0f || XP_Limit == 0.0f) {
 			LevelUpReached = true;
 			return;

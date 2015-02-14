@@ -65,7 +65,7 @@ public class LevelController : MonoBehaviour {
 	bool autoSpawn = false;
 	float time2Spawn = 10.0f;
 
-	float survivalTime = 180.0f;
+	float survivalTime = 100.0f;
 	float BossRate = 10.0f;
 	float ZombRate = 4.0f;
 
@@ -423,23 +423,27 @@ public class LevelController : MonoBehaviour {
 									survivalTime -= Time.deltaTime;
 									ZombRate -= Time.deltaTime;
 									BossRate -= Time.deltaTime;
-									if(survivalTime <= 0.0){
-										if(peopleManager.GetComponent<LoadVoxelPeople>().people.Count == 0){
-											resetObjectives();
-											zombieManager.GetComponent<ZombieManager>().deleteZombie();
-											for(int i=0;i<buildingManager.GetComponent<houseManager>().nosHouses;i++){
-												peopleManager.GetComponent<LoadVoxelPeople> ().initPersonRandom (5);
-											}
-										}else{
-											currentLevel++;
+									if(peopleManager.GetComponent<LoadVoxelPeople>().people.Count == 0){
+										levelInit = true;
+										resetObjectives();
+										survivalTime = 100.0f;
+										zombieManager.GetComponent<ZombieManager>().deleteZombie();
+										for(int i=0;i<buildingManager.GetComponent<houseManager>().nosHouses;i++){
+											peopleManager.GetComponent<LoadVoxelPeople> ().initPersonRandom (5);
 										}
+										return;
+									}
+									if(survivalTime <= 0.0){
+											currentLevel++;
+											ZombRate = 20.0f;
+											BossRate = 40.0f;
 										}else{
 										if(ZombRate<=0.0f){
 											ZombRate = 4.0f;
 											zombieManager.GetComponent<ZombieManager>().initZombies(1);
 										}
 										if(BossRate<=0.0f){
-											if(BossManager.GetComponent<WildManagement>().enemList.Count<=10){
+											if(BossManager.GetComponent<WildManagement>().enemList.Count<=5){
 											BossRate = 10.0f;
 											BossManager.GetComponent<WildManagement>().SpawnEnemy(1);
 											}else
@@ -453,6 +457,22 @@ public class LevelController : MonoBehaviour {
 										zombieManager.GetComponent<ZombieManager>().initZombies(spawnZombs);
 										BossManager.GetComponent<WildManagement>().SpawnEnemy(1);
 									}
+								}
+							}
+						}else{
+							if(currentLevel == 5){
+								BossRate-=Time.deltaTime;
+								ZombRate-=Time.deltaTime;
+								if(ZombRate<=0.0f){
+									ZombRate = 20.0f;
+									zombieManager.GetComponent<ZombieManager>().initZombies(1);
+								}
+								if(BossRate<=0.0f){
+									if(BossManager.GetComponent<WildManagement>().enemList.Count<=5){
+										BossRate = 40.0f;
+										BossManager.GetComponent<WildManagement>().SpawnEnemy(1);
+									}else
+										BossRate = 40.0f;
 								}
 							}
 						}
@@ -498,52 +518,5 @@ public class LevelController : MonoBehaviour {
 				
 				
 				return;
-
-				//zombieStatus = zombieManager.GetComponent<ZombieManager> ().allZombiesDead;
-				//humanStatus = peopleManager.GetComponent<LoadVoxelPeople> ().people.Count;
-				//houseStatus = buildingManager.GetComponent<houseManager> ().nosHouses;
-
-				/*
-		if (currentLevel == 1) {
-			if(buildingManager.GetComponent<houseManager>().nosHouses == minHouses2Build){
-				currentLevel++;
-				initMinReqs(currentLevel);
-				return;
-			}
-
-		}
-
-		if (currentLevel > 1) {
-
-			if(humanStatus == 0){
-				resetLevel();
-			}
-			if(houseStatus == 0){
-				currentLevel=1;
-				resetLevel();
-			}
-		}
-
-		if (currentLevel == 2) {
-			//conditions to check level 2 criterias		
-		}
-
-		if (zombieStatus && houseStatus && currentLevel ==3) {
-			currentLevel++;
-			initMinReqs(currentLevel);
-		}else{
-			if(currentLevel==4){
-				currentLevel++;
-				autoSpawn = true;
-			}
-		}
-		if (autoSpawn == true) {
-			time2Spawn -= Time.fixedDeltaTime;
-			if(time2Spawn <= 0.0f){
-				int nosZombies = Random.Range (1,3);
-				zombieManager.GetComponent<ZombieManager> ().initZombies (nosZombies);
-				time2Spawn = 10.0f;
-			}
-		}*/
 	}
 }
