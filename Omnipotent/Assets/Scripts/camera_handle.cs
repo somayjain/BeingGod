@@ -159,8 +159,7 @@ public class camera_handle : MonoBehaviour {
 		Vector3 screenCenter = new Vector3(Screen.width/2,Screen.height/2);
 		Ray ray = Camera.main.ScreenPointToRay(screenCenter);
 		float zoomIn = 5.0f;
-		RaycastHit hit;
-		
+		RaycastHit hit;		
 		if(Physics.Raycast(ray, out hit)) {
 			zoomIn = hit.point.y + 3.0f;
 		}
@@ -242,9 +241,6 @@ public class camera_handle : MonoBehaviour {
 			}
 			if (isZooming)
 			{
-				// Get mouse displacement vector from original to current position
-				// Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
-				// Vector3 move = pos.y * zoomSpeed * transform.forward; 
 				Vector3 lhc, rhc;
 				bool lhdetected, rhdetected;
 				lhdetected = hr.queryLeftHand3DCoordinates(out lhc);
@@ -266,32 +262,13 @@ public class camera_handle : MonoBehaviour {
 			// Rotate camera along X and Y axis
 			if (isRotating)
 			{
-				/* TODO:
-				 * Rotate about a point instead of rotate about camera position
-				 */
-
 				Vector3 screenCenter = new Vector3(Screen.width/2,Screen.height/2);
-				
 				Ray ray = Camera.main.ScreenPointToRay(screenCenter);
-				
 				RaycastHit hit;
-				
 				if(Physics.Raycast(ray, out hit)) {
-					Debug.DrawLine(ray.origin, hit.point);
-
 					Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
 					rigidbody.transform.RotateAround(hit.point, Vector3.up, pos.x*turnSpeed);
 				}
-
-				// Get mouse displacement vector from original to current position
-	//			Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
-	//			
-	//			// Set Drag
-	//			rigidbody.angularDrag = turnDrag;
-	//			
-	//			// Two rotations are required, one for x-mouse movement and one for y-mouse movement
-	//			rigidbody.AddTorque(-pos.y * turnSpeed * transform.right, ForceMode.Acceleration);
-	//			rigidbody.AddTorque(pos.x * turnSpeed * transform.up, ForceMode.Acceleration);
 			}
 			
 			// Move (pan) the camera on it's XY plane
@@ -300,19 +277,9 @@ public class camera_handle : MonoBehaviour {
 				// Get mouse displacement vector from original to current position
 				Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
 
-	//			Vector3 move = new Vector3(-pos.x * panSpeed, 0, -pos.y * panSpeed);
-
 				Vector3 move = ( -pos.x * panSpeed * Vector3.ProjectOnPlane(transform.right, Vector3.up) ) + 
 								(-pos.y * panSpeed * Vector3.ProjectOnPlane(transform.forward, Vector3.up)) ;
-				
-				// Apply the pan's move vector in the orientation of the camera's front
-				// Quaternion forwardRotation = Quaternion.LookRotation(transform.forward, transform.up);
-				// move = forwardRotation * move;
-				
-				// Set Drag
 				rigidbody.drag = panDrag;
-				
-				// Pan
 				rigidbody.AddForce(move, ForceMode.Acceleration);
 			}
 			
@@ -324,16 +291,8 @@ public class camera_handle : MonoBehaviour {
 				 */
 				if ((Camera.main.transform.position.y < 5.0f && Input.mouseScrollDelta.y >= 0) || (Camera.main.transform.position.y > zoomOut && Input.mouseScrollDelta.y <= 0))
 					return;
-
-				// Get mouse displacement vector from original to current position
-				// Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - mouseOrigin);
-				// Vector3 move = pos.y * zoomSpeed * transform.forward; 
 				Vector3 move = Input.mouseScrollDelta.y * zoomSpeed * transform.forward;
-
-				// Set Drag
 				rigidbody.drag = zoomDrag;
-				
-				// Zoom
 				rigidbody.AddForce(move, ForceMode.Acceleration);
 			}
 		}

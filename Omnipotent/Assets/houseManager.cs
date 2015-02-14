@@ -88,49 +88,43 @@ public class houseManager : MonoBehaviour
 				if (Physics.Raycast (ray, out hit)) {
 						hitPoint = hit.point;
 						house.transform.position = hitPoint;
-						house.renderer.material.color = new Color (0.8f, 0.8f, 0.8f);
 						Collider c = hit.collider;
 						if (c.tag.ToString ().CompareTo ("terrain") != 0) {  // ONLY BUILD on TERRAIN
-								Debug.Log ("Cannot build house here");
-								//Debug.Log("objectColor="+house.renderer.material.color.ToString());
 								house.renderer.material.color = Color.red;
-						}
-						if (hit.point.y > 5) { // No houses on hills
+						} else if (hit.point.y > 5) { // No houses on hills
 								house.renderer.material.color = Color.red;
-						}
-				}		
+						} else 
+								house.renderer.material.color = new Color (0.5f, 1.0f, 0.5f);
+				}
 		}
 	
 		public void buildHouse ()
-		{
-				f_buildHouse = false;
-		 
+		{ 
 				Ray ray = Camera.main.ScreenPointToRay (cursor.cursor2d);
 				RaycastHit hit;
 				Vector3 hitPoint = new Vector3 ();
 				if (Physics.Raycast (ray, out hit)) {
 						hitPoint = hit.point;
-
 						Collider c = hit.collider;
-						Debug.Log ("hitObject type=" + c.GetType ().ToString () + " tag=" + c.tag.ToString ());
+						// Debug.Log ("hitObject type=" + c.GetType ().ToString () + " tag=" + c.tag.ToString ());
 						if (c.tag.ToString ().CompareTo ("terrain") != 0) {  // ONLY BUILD on TERRAIN
-								Debug.Log ("Cannot build house here");
-								Destroy (house);
+								// Debug.Log ("Cannot build house here");
+								// Destroy (house);
+								return;
+						} else if (hit.point.y > 5) { // No houses on hills
+								// Destroy (house);
 								return;
 						}
-						if (hit.point.y > 5) { // No houses on hills
-								Destroy (house);
-								return;
-						}
-				}		
-							
-				house.transform.position = hitPoint;//new Vector3 (-10.0f * nosHouses, 0f, 0f);
-				house.layer = 0;
-				houses.Add (house);
-				sourceId++;
-				nosHouses++;
-				houseCreated = true;
-				Debug.Log ("Inside buildHouse=" + nosHouses.ToString () + " source.name=" + house.transform.GetChild (0).gameObject.name);
+
+						f_buildHouse = false;
+						house.renderer.material.color = new Color (0.8f, 0.8f, 0.8f);
+						house.transform.position = hitPoint;//new Vector3 (-10.0f * nosHouses, 0f, 0f);
+						house.layer = 0;
+						houses.Add (house);
+						sourceId++;
+						nosHouses++;
+						houseCreated = true;
+				}
 		}
 		
 		public void cancelBuild (){

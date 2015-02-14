@@ -94,22 +94,18 @@ public class cursor_handle : MonoBehaviour {
 		Ray ray;
 		Vector3 hand3dpos;
 		bool hand3d = GetComponentInChildren<HandRenderer> ().queryLeftHand3DCoordinates (out hand3dpos);
-		if (hand3d) {
-						ray = new Ray (hand3dpos, Vector3.down);
-//						RaycastHit hit;
-//						if (Physics.Raycast (ray, out hit)) {
-//								sphere.transform.position = new Vector3 (hit.point.x, hit.point.y + 1.0f, hit.point.z);
-//								cursor3d = hit.point;
-//						}
-						ray = camera.ScreenPointToRay (cursor2d);
-				} else {
-						ray = camera.ScreenPointToRay (Input.mousePosition);
-				}
+		if (hand3d)
+				ray = camera.ScreenPointToRay (cursor2d);
+		else
+				ray = camera.ScreenPointToRay (Input.mousePosition);
+		
 		RaycastHit hit;
-		if (Physics.Raycast (ray, out hit)) {
+		int terrainlayermask = 1 << 9;
+		if (Physics.Raycast (ray, out hit, Mathf.Infinity, terrainlayermask)) {
 			sphere.transform.position = new Vector3 (hit.point.x, hit.point.y + 1.0f, hit.point.z);
 			cursor3d = hit.point;
 		}
+
 //		Instantiate (object, mousePo, Quaternion.identity);
 
 		switch (mode) {
@@ -250,10 +246,12 @@ public class cursor_handle : MonoBehaviour {
 		build = build_mode;
 	}
 
-	public void setMode(MODE _mode) {
-		mode = _mode;
-		if(mode == MODE.DEFAULT)
-			Cursor.SetCursor (normal, Vector2.zero, CursorMode.Auto);
+	public bool setMode(MODE _mode) {
+		if (mode == MODE.DEFAULT || _mode == MODE.DEFAULT) {
+				mode = _mode;
+				return true;
+		} else
+				return false;
 	}
 
 	public void OnPress () {
@@ -272,50 +270,32 @@ public class cursor_handle : MonoBehaviour {
 				}
 	}
 	public void soundFire(Trigger trgr){
-		if (!isOnHUD () && !isOnShelf ()) {
-			setMode (MODE.FIREBALL);
+		if (!isOnHUD () && !isOnShelf () && setMode (MODE.FIREBALL) ) {
 			PowerFireball.Trigger (cursor3d);
 			setMode (MODE.DEFAULT);
 		}
 		Debug.Log ("I heard Fire");
 	}
 	public void soundClap(Trigger trgr){
-		setMode (MODE.THUNDER_CLAP);
-		if ( !isOnHUD() && !isOnShelf() ) {
+		if ( !isOnHUD() && !isOnShelf() && setMode (MODE.THUNDER_CLAP) ) {
 			// Trigger Thunder Clap
-			PeopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.THUNDER_CLAP;
-			PeopleManager.GetComponent<LoadVoxelPeople>().pointOfContact = cursor3d;
+			// PeopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.THUNDER_CLAP;
+			// PeopleManager.GetComponent<LoadVoxelPeople>().pointOfContact = cursor3d;
 			PowerThunderClap.Trigger( cursor3d );
 			setMode (MODE.DEFAULT);
 		}
 		Debug.Log ("I heard Clap");
-		setMode (MODE.DEFAULT);
 	}
 	public void soundBolt(Trigger trgr){
-		setMode (MODE.MJOLNIR);
-		if (!isOnHUD () && !isOnShelf ()) {
-			// Trigger Mjolnir at cursor3d			
-//			PeopleManager.GetComponent<LoadVoxelPeople> ().Powermode = LoadVoxelPeople.MODE.MJOLNIR;
-//			PeopleManager.GetComponent<LoadVoxelPeople> ().pointOfContact = cursor3d;
-//			if (currentLevel != null) {
-//				currentLevel.GetComponent<ZombieManager> ().Powermode = ZombieManager.MODE.MJOLNIR;
-//				currentLevel.GetComponent<ZombieManager> ().hit3DLoc = cursor3d;
-//			}
+		if (!isOnHUD () && !isOnShelf () && setMode (MODE.MJOLNIR) ) {
 			PowerMjolnir.Trigger (cursor3d);
+			setMode (MODE.DEFAULT);
 		}
-		setMode (MODE.DEFAULT);
 		Debug.Log ("I heard bolt");
 	}
 	public void soundTornado(Trigger trgr) {
-		if ( !isOnHUD() && !isOnShelf() ) {
-			setMode(MODE.TORNADO);
-			// Trigger Tornado at cursor3d
-//			PeopleManager.GetComponent<LoadVoxelPeople>().Powermode = LoadVoxelPeople.MODE.TORNADO;
-//			PeopleManager.GetComponent<LoadVoxelPeople>().pointOfContact = cursor3d;
-//			if(currentLevel != null){
-//				currentLevel.GetComponent<ZombieManager>().Powermode = ZombieManager.MODE.TORNADO;
-//				currentLevel.GetComponent<ZombieManager>().hit3DLoc = cursor3d;
-//			}
+		if ( !isOnHUD() && !isOnShelf() && setMode(MODE.TORNADO) ) {
+			// setMode(MODE.TORNADO);
 			PowerTornado.Trigger( cursor3d );
 			setMode (MODE.DEFAULT);
 		}
@@ -323,17 +303,27 @@ public class cursor_handle : MonoBehaviour {
 	}
 
 	public void soundBuild(Trigger trgr) {
-		if ( !isOnHUD() && !isOnShelf() ) {
-			setMode(MODE.BUILD);
-		}
+		setMode(MODE.BUILD);
 		Debug.Log ("I heard build");
 	}
 
 	public void soundExitBuild(Trigger trgr) {
-		if ( !isOnHUD() && !isOnShelf() ) {
-			setMode(MODE.DEFAULT);
-		}
+		setMode(MODE.DEFAULT);
 		Debug.Log ("I heard exit build");
+	}
+
+	public void soundHey (Trigger trgr) {
+		if (setMode (MODE.HEY)) {
+			PowerHey.Trigger (cursor3d);
+			setMode (MODE.DEFAULT);
+		}
+	}
+
+	public void soundBoo (Trigger trgr) {
+		if (setMode (MODE.BOO)) {
+			PowerBoo.Trigger (cursor3d);
+			setMode (MODE.DEFAULT);
+		}
 	}
 
 	public void HandDetected (Trigger trgr) {
