@@ -30,7 +30,7 @@ public class LevelController : MonoBehaviour {
 
 	bool lmode = false;
 	bool fmode = false;
-	float ftimer = 2.0f;
+	float ftimer = 3.0f;
 	Vector3 fLoc = new Vector3();
 	int prevHouseNos;
 
@@ -195,7 +195,7 @@ public class LevelController : MonoBehaviour {
 			toggle[0].isOn = false;
 			toggle[0].transform.GetChild(1).GetComponent<Text>().color=Color.red;
 			
-			toggle[1].transform.GetChild(1).GetComponent<Text>().text ="!!Lightening!!";
+			toggle[1].transform.GetChild(1).GetComponent<Text>().text ="!!Lightning!!";
 			toggle[1].transform.GetChild(1).GetComponent<Text>().color=Color.red;
 			toggle[1].gameObject.SetActive(true);
 			toggle[1].isOn = false;
@@ -476,13 +476,12 @@ public class LevelController : MonoBehaviour {
 			}
 			if(ftimer<=0.0f){
 				Debug.Log(fLoc+" ");
-				fLoc.y = 0.1f;
 				GameObject obs = (GameObject)Instantiate (Resources.Load("Damage"), fLoc, Quaternion.identity) as GameObject;
 				obs.transform.Rotate(0,Random.Range(0,360),0);
 				obs.transform.parent = transform;
 				DamageT.Add (obs);
 				fmode = false;
-				ftimer = 2.0f;
+				ftimer = 3.0f;
 			}else{
 				ftimer -= Time.deltaTime;
 			}

@@ -16,7 +16,7 @@ public class FishMovement : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 		resetTimer -= Time.fixedDeltaTime;
 		if (resetTimer <= 0.0f) {
 			dir = WPLoc[Random.Range(0,WPLoc.Length)];
@@ -28,6 +28,7 @@ public class FishMovement : MonoBehaviour {
 				fishes[i].transform.position = Vector3.MoveTowards(fishes[i].transform.position,dir,step);
 				Quaternion RotationWanted = Quaternion.LookRotation(-1.0f*dir);
 				fishes[i].transform.rotation = Quaternion.RotateTowards(fishes[i].transform.rotation, RotationWanted, 5.0f*Time.fixedDeltaTime);
+
 		}
 	}
 }

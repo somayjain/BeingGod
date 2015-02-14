@@ -12,7 +12,7 @@ public class WildManagement : MonoBehaviour {
 
 	public Vector3 hit3DLoc;
 	List<int>fireBallHit = new List<int>();
-	float timeToHit = 2.0f;
+	float timeToHit = 3.0f;
 	bool fireTimer = false;
 	double rayPowRange = 6.0f;
 	
@@ -60,7 +60,7 @@ public class WildManagement : MonoBehaviour {
 			fireTimer=true;
 			if(timeToHit<=0.0f){
 				fireTimer = false;
-				timeToHit = 2.0f;
+				timeToHit = 3.0f;
 			}
 			else{
 				timeToHit-=Time.deltaTime;

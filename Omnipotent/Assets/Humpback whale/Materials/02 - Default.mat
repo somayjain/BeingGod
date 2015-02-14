@@ -27,16 +27,52 @@ Material:
           m_Texture: {fileID: 2800000, guid: b52f805a533e5e844a8a2a4909838b8e, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Illum
+        second:
+          m_Texture: {fileID: 2800000, guid: 0bf0f5c88b94c4e6ea9b34b324d2c37c, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Detail
+        second:
+          m_Texture: {fileID: 2800000, guid: 276d7dcf521b6fa44b1e94ebaf45afb9, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ParallaxMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _LightMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
           name: _Shininess
         second: .078125
+      data:
+        first:
+          name: _EmissionLM
+        second: 0
+      data:
+        first:
+          name: _Parallax
+        second: .0199999996
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: .136587918, g: .119431213, b: .345588207, a: 1}
+        second: {r: .136719793, g: .119092651, b: .345098048, a: 1}
       data:
         first:
           name: _SpecColor
