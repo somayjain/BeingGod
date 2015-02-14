@@ -54,7 +54,7 @@ public class emotion : MonoBehaviour {
 					controlweather.EnableRain ();
 
 				else if (EmotionLabels [epidx] == "JOY" && SentimentLabels [spidx] == "POSITIVE")
-					controlweather.EnableSnow ( );
+					controlweather.EnableSnow ();
 				
 				else
 					controlweather.Deactivate ();

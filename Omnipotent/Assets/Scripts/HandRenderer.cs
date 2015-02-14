@@ -64,7 +64,7 @@ public class HandRenderer : MonoBehaviour {
 	void Start() {
         MaxHands = 2;
 		NumHands = 0;
-        SmoothingFactor = 4;
+        SmoothingFactor = 14;
         myJoints = new GameObject[MaxHands, PXCMHandData.NUMBER_OF_JOINTS];
         myBones = new GameObject[MaxHands, PXCMHandData.NUMBER_OF_JOINTS];
         sumOfJointPositions = new Vector3[MaxHands, PXCMHandData.NUMBER_OF_JOINTS];
@@ -145,7 +145,7 @@ public class HandRenderer : MonoBehaviour {
 		rightPresent = false;
 
 		float factor = 10.0f;
-		float xscale = (Screen.width / 600.0f)/bonescale.x, yscale = (Screen.height/360.0f)/bonescale.y;
+		float xscale = (Screen.width / 640.0f)/bonescale.x, yscale = (Screen.height/480.0f)/bonescale.y;
         handIds = _handIds;
         bodySide = _bodySides;
 		outputData = _outputData;
@@ -154,12 +154,12 @@ public class HandRenderer : MonoBehaviour {
         avgQueue.Enqueue(_myJointData);
 
         foreach (PXCMHandData.JointData[,] temp in avgQueue)
-            for (int i = 0; i < num_hands; i++)
+			for (int i = 0; i < MaxHands; i++)
                 for (int j = 0; j < PXCMHandData.NUMBER_OF_JOINTS; j++)
                     if (temp[i, j] != null && _myJointData[i, j] != null)
                     {
                         myJoints[i, j].SetActive(true);
-                        sumOfJointPositions[i, j] += new Vector3(-1 * temp[i, j].positionWorld.x * xscale, temp[i, j].positionWorld.y * yscale, temp[i, j].positionWorld.z);
+                        sumOfJointPositions[i, j] += new Vector3(-1 * temp[i, j].positionWorld.x * xscale, temp[i, j].positionWorld.y * yscale, temp[i, j].positionWorld.z * 2.0f);
                     }
                     else
                         myJoints[i, j].SetActive(false);

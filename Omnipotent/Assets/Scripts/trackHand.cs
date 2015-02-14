@@ -33,6 +33,8 @@ public class trackHand : MonoBehaviour {
 	        {
 	            PXCMHandData.IHand _handData;
 	            _outputData.QueryHandData(PXCMHandData.AccessOrderType.ACCESS_ORDER_FIXED, i, out _handData);
+				Debug.Log(_handData.IsCalibrated().ToString());
+				if (!_handData.IsCalibrated()) { Debug.Log("Uncalibrated !!"); }
 				//if(_handData!=null){}// Debug.Log(_handData.ToString());
 				//else { Debug.Log ("No data"); continue; }
 	            for (int j = 0; j < PXCMHandData.NUMBER_OF_JOINTS; j++)
