@@ -176,10 +176,10 @@ public class camera_handle : MonoBehaviour {
 		prevRealTime = thisRealTime;
 		thisRealTime = Time.realtimeSinceStartup;
 
-		if (isRotating || isZooming) {
-			transform.GetChild(0).GetComponent<TrackingAction>().enabled = false;
-		} else
-			transform.GetChild(0).GetComponent<TrackingAction>().enabled = true;
+		//if (isRotating || isZooming) {
+			//transform.GetChild(0).GetChild(0).GetComponent<TrackingAction>().enabled = false;
+		//} else
+			//transform.GetChild(0).GetChild(0).GetComponent<TrackingAction>().enabled = true;
 	}
 	
 	public float deltaTime {

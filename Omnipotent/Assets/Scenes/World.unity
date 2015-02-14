@@ -3302,8 +3302,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 179952633}
-  m_LocalRotation: {x: .0683352798, y: .258546323, z: .0183389373, w: -.963404298}
-  m_LocalPosition: {x: -342.466858, y: -7.27230978, z: -131.04451}
+  m_LocalRotation: {x: -.258819044, y: 0, z: 0, w: .965925813}
+  m_LocalPosition: {x: 0, y: -23.8600006, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7431,7 +7431,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 379087272}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
@@ -25431,6 +25431,7 @@ MonoBehaviour:
   fireball_cursor: {fileID: 2800000, guid: 255bf05779ce6e74c99ea2a2bf2d08cb, type: 3}
   tornado_cursor: {fileID: 0}
   sphere: {fileID: 1652544274}
+  PreferredHand: 0
   mode: 0
   PowerThunderClap: {fileID: 270210616}
   PowerMjolnir: {fileID: 1115764493}

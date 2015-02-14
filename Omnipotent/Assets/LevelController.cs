@@ -251,7 +251,7 @@ public class LevelController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
-		currentLevel = 3;
+		currentLevel = 1;
 
 		//init Person manager
 		peopleManager = GameObject.FindGameObjectWithTag ("PeopleManager");
@@ -323,7 +323,7 @@ public class LevelController : MonoBehaviour {
 					nosOfObjectives = ObjectiveNos[currentLevel];
 					levelInit = false;
 					tutTimer = 15.0f;
-					Sprite newTutImage = Resources.Load<Sprite>("intel.svg");
+					Sprite newTutImage = Resources.Load<Sprite>("level1");
 					TutImage.GetComponent<Image>().sprite = newTutImage;
 					TutImage.SetActive(true);
 					displayObjective();
@@ -348,7 +348,7 @@ public class LevelController : MonoBehaviour {
 						nosOfObjectives = ObjectiveNos[currentLevel];
 						levelInit = false;
 						tutTimer = 15.0f;
-						Sprite newTutImage = Resources.Load<Sprite>("intel.svg");
+						Sprite newTutImage = Resources.Load<Sprite>("level2");
 						TutImage.GetComponent<Image>().sprite = newTutImage;
 						TutImage.SetActive(true);
 						displayObjective();
@@ -373,7 +373,7 @@ public class LevelController : MonoBehaviour {
 							nosOfObjectives = ObjectiveNos[currentLevel];
 							levelInit = false;
 							tutTimer = 15.0f;
-							Sprite newTutImage = Resources.Load<Sprite>("intel.svg");
+							Sprite newTutImage = Resources.Load<Sprite>("level3");
 							TutImage.GetComponent<Image>().sprite = newTutImage;
 							TutImage.SetActive(true);
 							displayObjective();
@@ -411,7 +411,7 @@ public class LevelController : MonoBehaviour {
 								nosOfObjectives = ObjectiveNos[currentLevel];
 								levelInit = false;
 								tutTimer = 15.0f;
-								Sprite newTutImage = Resources.Load<Sprite>("intel.svg");
+								Sprite newTutImage = Resources.Load<Sprite>("level4");
 								TutImage.GetComponent<Image>().sprite = newTutImage;
 								TutImage.SetActive(true);
 								displayObjective();
