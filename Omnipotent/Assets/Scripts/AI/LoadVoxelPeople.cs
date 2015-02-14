@@ -171,10 +171,10 @@ public class LoadVoxelPeople : MonoBehaviour {
 			}
 			firemode = true;
 			if(fireTimer<-3.0f){
-				fireTimer = 6.0f;
+				fireTimer = 3.0f;
 				firemode = false;
 			}else{
-				fireTimer -= Time.fixedDeltaTime;
+				fireTimer -= Time.deltaTime;
 			}
 		}
 
@@ -185,7 +185,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 			tornadoTime = 25.0f;
 		}else{
 			if(tornadoOn == true){
-				tornadoTime -= Time.fixedDeltaTime;
+				tornadoTime -= Time.deltaTime;
 				tornadoLoc = GetComponentInParent<LevelController>().TornadoLoc;
 			}
 		}
@@ -210,7 +210,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 					chosenOne = Random.Range(0,people.Count);
 					Debug.Log("HEY ACTIVATED"+chosenOne);
 				}else
-				hoverTextTimer -= Time.fixedDeltaTime;
+				hoverTextTimer -= Time.deltaTime;
 			}
 		}
 
@@ -233,7 +233,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 				interactNPC = true;
 					Debug.Log("BOO ACTIVATED"+NPC);
 				}else
-					interactTimer-=Time.fixedDeltaTime;
+					interactTimer-=Time.deltaTime;
 			}
 		}
 
@@ -242,7 +242,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 			int rand_pos = Random.Range(0,nos_sources);
 			NavAgentMovement person_script = people[i].GetComponent<NavAgentMovement>();
 			//	Debug.Log(person_script.lastTimeUpdate+" ");
-			if(person_script.health <= 0.0f && person_script.deathCause == false){
+			if(person_script.health <= 0.0f && person_script.deathCause == true){
 				Vector3 spawnLoc = people[i].transform.position;
 				Destroy(people[i]);
 				GameObject.FindGameObjectWithTag("ZombieManager").GetComponent<ZombieManager>().addZombie(spawnLoc);
@@ -251,7 +251,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 				i--;
 				continue;
 			}else{
-				if(person_script.health <= 0.0f && person_script.deathCause == true){
+				if(person_script.health <= 0.0f && person_script.deathCause == false){
 					Destroy(people[i]);
 					people.RemoveAt(i);
 					people_nos--;
@@ -263,9 +263,8 @@ public class LoadVoxelPeople : MonoBehaviour {
 			//people[i].transform.GetChild(0);
 
 			Vector3 newLoc = people[i].transform.position;
-			newLoc.y = 0;
 
-			if(fireTimer<=1.0f && fireTimer > -3.0f && (people[i].transform.position - fireLoc).magnitude<=15.0f && people[i].transform.childCount<3){
+			if(fireTimer<=0.0f && fireTimer > -3.0f && (people[i].transform.position - fireLoc).magnitude<=10.0f && people[i].transform.childCount<3){
 				GameObject head_fire = (GameObject)Instantiate (Resources.Load ("human_fire"),Vector3.zero,	Quaternion.identity) as GameObject;
 				head_fire.transform.parent = people[i].transform;
 				head_fire.transform.localPosition = new Vector3(0,0.7f,0);

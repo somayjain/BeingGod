@@ -16,7 +16,7 @@ public class ZombieManager : MonoBehaviour {
 	List<int>fireBallHit = new List<int>();
 	float timeToHit = 2.0f;
 	bool fireTimer = false;
-	double rayPowRange = 3.0f;
+	double rayPowRange = 5.0f;
 
 	List<int>tornadoHit = new List<int>();
 	double tornadoTime = 25.0f;
@@ -141,21 +141,20 @@ public class ZombieManager : MonoBehaviour {
 				haltTimer = 3.0f;
 				haltOn = false;
 			}
-			haltTimer-=Time.fixedDeltaTime;
+			haltTimer-=Time.deltaTime;
 		}
 
 		if (Powermode == MODE.FIREBALL || Powermode == MODE.MJOLNIR) {
 			hit3DLoc = GetComponentInParent<LevelController>().PowerLoc;
-			hit3DLoc.y=0.0f;
 		}
 		if (Powermode == MODE.FIREBALL || fireTimer == true) {
 			fireTimer=true;
 			if(timeToHit<=0.0f){
 				fireTimer = false;
-				timeToHit = 5.0f;
+				timeToHit = 2.0f;
 			}
 			else{
-				timeToHit-=Time.fixedDeltaTime;
+				timeToHit-=Time.deltaTime;
 			}
 		}
 
@@ -168,7 +167,7 @@ public class ZombieManager : MonoBehaviour {
 			tornadoTime = 25.0f;
 		}else{
 			if(tornadoOn == true){
-				tornadoTime -= Time.fixedDeltaTime;
+				tornadoTime -= Time.deltaTime;
 				tornadoLoc = GetComponentInParent<LevelController>().TornadoLoc;
 				//Debug.Log(tornadoTime+" ");
 			}
@@ -212,7 +211,6 @@ public class ZombieManager : MonoBehaviour {
 			}
 
 			if(tornadoOn == true){
-				tornadoLoc.y=0.0f;
 				if(tornadoTime<=0.0f)
 					ZombieList[i].GetComponent<ZombieNavAgent>().haltMovement(false);
 				else{

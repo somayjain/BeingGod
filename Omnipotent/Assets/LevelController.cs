@@ -338,7 +338,7 @@ public class LevelController : MonoBehaviour {
 							resetObjectives();
 						}
 					}else{
-						tutTimer-=Time.fixedDeltaTime;
+						tutTimer-=Time.deltaTime;
 					}
 				}
 			}else{
@@ -363,7 +363,7 @@ public class LevelController : MonoBehaviour {
 								resetObjectives();
 							}
 						}else{
-							tutTimer-=Time.fixedDeltaTime;
+							tutTimer-=Time.deltaTime;
 						}
 					}
 				}else{
@@ -397,7 +397,7 @@ public class LevelController : MonoBehaviour {
 									}
 								}
 							}else{
-								tutTimer-=Time.fixedDeltaTime;
+								tutTimer-=Time.deltaTime;
 								if(tutTimer<=0.0f){
 									Debug.Log(tutTimer+" "+spawnZombs);
 									zombieManager.GetComponent<ZombieManager>().initZombies(spawnZombs);
@@ -420,9 +420,9 @@ public class LevelController : MonoBehaviour {
 									TutImage.SetActive(false);
 									updateObjectives();
 									bool nextLevelStatus = ObjectiveCompleted();
-									survivalTime -= Time.fixedDeltaTime;
-									ZombRate -= Time.fixedDeltaTime;
-									BossRate -= Time.fixedDeltaTime;
+									survivalTime -= Time.deltaTime;
+									ZombRate -= Time.deltaTime;
+									BossRate -= Time.deltaTime;
 									if(survivalTime <= 0.0){
 										if(peopleManager.GetComponent<LoadVoxelPeople>().people.Count == 0){
 											resetObjectives();
@@ -439,12 +439,15 @@ public class LevelController : MonoBehaviour {
 											zombieManager.GetComponent<ZombieManager>().initZombies(1);
 										}
 										if(BossRate<=0.0f){
+											if(BossManager.GetComponent<WildManagement>().enemList.Count<=10){
 											BossRate = 10.0f;
 											BossManager.GetComponent<WildManagement>().SpawnEnemy(1);
+											}else
+												BossRate = 10.0f;
 										}
 									}
 								}else{
-									tutTimer-=Time.fixedDeltaTime;
+									tutTimer-=Time.deltaTime;
 									if(tutTimer<=0.0f){
 										Debug.Log(tutTimer+" "+spawnZombs);
 										zombieManager.GetComponent<ZombieManager>().initZombies(spawnZombs);
@@ -473,6 +476,7 @@ public class LevelController : MonoBehaviour {
 			}
 			if(ftimer<=0.0f){
 				Debug.Log(fLoc+" ");
+				fLoc.y = 0.1f;
 				GameObject obs = (GameObject)Instantiate (Resources.Load("Damage"), fLoc, Quaternion.identity) as GameObject;
 				obs.transform.Rotate(0,Random.Range(0,360),0);
 				obs.transform.parent = transform;
@@ -480,7 +484,7 @@ public class LevelController : MonoBehaviour {
 				fmode = false;
 				ftimer = 2.0f;
 			}else{
-				ftimer -= Time.fixedDeltaTime;
+				ftimer -= Time.deltaTime;
 			}
 		}
 

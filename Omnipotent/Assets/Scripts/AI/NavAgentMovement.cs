@@ -99,7 +99,7 @@ public class NavAgentMovement : MonoBehaviour {
 		//Debug.Log (powerhit + " ");
 
 		if(currentlyScared)
-		scaredRunTimer -= Time.fixedDeltaTime;
+		scaredRunTimer -= Time.deltaTime;
 		if (scaredRunTimer <= 0) {
 			scaredRunTimer = 0.0f;
 						if (currentlyScared == true) {
@@ -116,7 +116,7 @@ public class NavAgentMovement : MonoBehaviour {
 		*/
 
 
-		lastCheck -= Time.fixedDeltaTime;
+		lastCheck -= Time.deltaTime;
 		Ddist = (transform.position-lastPos).magnitude;
 		if (lastCheck <= 0.0f && targetReached == false) {
 			if((transform.position-lastPos).magnitude <= 0.5f){

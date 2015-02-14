@@ -4,17 +4,17 @@ using System.Collections.Generic;
 public class WildManagement : MonoBehaviour {
 
 	public GameObject[] wildSpots;
-	public int MaxActiveObj=5;
+	private int MaxActiveObj=5;
 	List<GameObject>activeObj;
 	string[] enemName = new string[]{"Dino","CaveWorm"};
-	List<GameObject> enemList = new List<GameObject>();	
+	public List<GameObject> enemList = new List<GameObject>();	
 
 
 	public Vector3 hit3DLoc;
 	List<int>fireBallHit = new List<int>();
 	float timeToHit = 2.0f;
 	bool fireTimer = false;
-	double rayPowRange = 3.0f;
+	double rayPowRange = 6.0f;
 	
 	List<int>tornadoHit = new List<int>();
 	double tornadoTime = 25.0f;
@@ -55,16 +55,15 @@ public class WildManagement : MonoBehaviour {
 		
 		if (Powermode == MODE.FIREBALL || Powermode == MODE.MJOLNIR) {
 			hit3DLoc = GetComponentInParent<LevelController>().PowerLoc;
-			hit3DLoc.y=0.0f;
 		}
 		if (Powermode == MODE.FIREBALL || fireTimer == true) {
 			fireTimer=true;
 			if(timeToHit<=0.0f){
 				fireTimer = false;
-				timeToHit = 5.0f;
+				timeToHit = 2.0f;
 			}
 			else{
-				timeToHit-=Time.fixedDeltaTime;
+				timeToHit-=Time.deltaTime;
 			}
 		}
 
@@ -81,12 +80,11 @@ public class WildManagement : MonoBehaviour {
 
 			
 			if(Powermode == MODE.MJOLNIR ){
-				if(hitDistance<=rayPowRange){
+				if(hitDistance<=5.0f){
 					csHandle.PowerMjolnir.AddXP(1,1);
 					Debug.Log(i+" enemy List "+enemList[i].GetComponent<WildMovement>().health);
 					enemList[i].GetComponent<WildMovement>().health -= 8.0f;
 					enemList[i].GetComponent<WildMovement>().hitMode = true;
-
 				}
 			}
 			
@@ -95,7 +93,6 @@ public class WildManagement : MonoBehaviour {
 					if((enemList[i].transform.position-hit3DLoc).magnitude <= 15.0f){
 						csHandle.PowerFireball.AddXP(1,1);
 						enemList[i].GetComponent<WildMovement>().hitMode = true;
-						//Debug.Log("Ball hitting"+ZombieList[i].name);
 						enemList[i].GetComponent<WildMovement>().health -= 8.0f;
 					}
 				}

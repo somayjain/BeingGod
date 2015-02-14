@@ -65,53 +65,58 @@ public class WildMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (attackMode == true) {
-			if(switchTimer<=0.0f){
-				switchTimer = 2.0f;
-		    //Debug.Log("set to Walk");
-			animation.CrossFade(walkAnim);
-			attackMode = false;
-			agent.Resume();
-			}else{
-				switchTimer -= Time.deltaTime;
-			}
-			return;
-		}
+				if (attackMode == true) {
+						if (switchTimer <= 0.0f) {
+								switchTimer = 2.0f;
+								//Debug.Log("set to Walk");
+								animation.CrossFade (walkAnim);
+								attackMode = false;
+								agent.Resume ();
+						} else {
+								switchTimer -= Time.deltaTime;
+						}
+						return;
+				}
 
 
-		if (hitMode == true) {
-			if(hitTimer<=0.0f){
-				hitTimer = 2.0f;
-				//Debug.Log("set to Walk");
-				animation.CrossFade(hitAnim);
-				hitMode = false;
-				agent.Resume();
-			}else{
-				hitTimer -= Time.deltaTime;
-			}
-			return;
-		}
+				if (hitMode == true) {
+						if (hitTimer == 2.0f) {
+								animation.CrossFade (hitAnim);
+								agent.Stop ();
+						}
+						if (hitTimer <= 0.0f) {
+								hitTimer = 2.0f;
+								//Debug.Log("set to Walk");
+								animation.CrossFade (walkAnim);
+								hitMode = false;
+								agent.Resume ();
+						} else {
+								hitTimer -= Time.deltaTime;
+						}
+						return;
+				}
 
-		if (deadMode == true || health <= 0.0f) {
-			deadMode = true;
-			if(deadTimer<=0.0f){
-				//deadTimer = 2.0f;
-				//Debug.Log("set to Walk");
-				animation.CrossFade(deadAnim);
-				//deadMode = false;
-				//agent.Resume();
-			}else{
-				deadTimer -= Time.deltaTime;
+				if (deadMode == true || health <= 0.0f) {
+						deadMode = true;
+						if (deadTimer == 2.0f) {
+								animation.CrossFade (deadAnim);
+								agent.Stop ();
+						}
+			if(hitTimer <= 0.0){
+				Debug.Log ("Time to die");
 			}
-			return;
-		}
+				 else {
+						deadTimer -= Time.deltaTime;
+				}
+				return;
+			}
 		/*
 		if (agent.pathStatus == NavMeshPathStatus.PathComplete || agent.pathStatus == NavMeshPathStatus.PathInvalid) {
 			agentReached = true;
 			return;
 		} */
 
-		lastCheck -= Time.fixedDeltaTime;
+		lastCheck -= Time.deltaTime;
 		if (lastCheck <= 0.0f && agentReached == false) {
 			if((transform.position-lastPos).magnitude <= 0.5f){
 				/*if(!agent.pathPending){

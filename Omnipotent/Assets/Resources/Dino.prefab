@@ -1306,9 +1306,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentDestination: {x: 150, y: 0, z: -50}
   agent: {fileID: 0}
-  health: 50
+  health: 20
   attackMode: 0
+  hitMode: 0
+  deadMode: 0
   switchTimer: 5
+  hitTimer: 2
+  deadTimer: 2
   agentReached: 0
 --- !u!135 &13516780
 SphereCollider:
