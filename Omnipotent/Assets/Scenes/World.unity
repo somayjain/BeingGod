@@ -190,7 +190,7 @@ MonoBehaviour:
   ActionOwner: {fileID: 5982403}
   FriendlyName: Face Lost
   Enabled: 1
-  FoldoutOpen: 1
+  FoldoutOpen: 0
   AssociatedAction: {fileID: 0}
   RiseForEveryLostFace: 1
   NumberOfFaces: 1
@@ -359,7 +359,7 @@ MonoBehaviour:
   ActionOwner: {fileID: 5982398}
   FriendlyName: Face Detected
   Enabled: 1
-  FoldoutOpen: 1
+  FoldoutOpen: 0
   AssociatedAction: {fileID: 0}
   RiseForEveryDetectedFace: 1
   NumberOfFaces: 1
@@ -414,7 +414,7 @@ MonoBehaviour:
   ActionOwner: {fileID: 5982403}
   FriendlyName: Face Detected
   Enabled: 1
-  FoldoutOpen: 1
+  FoldoutOpen: 0
   AssociatedAction: {fileID: 0}
   RiseForEveryDetectedFace: 1
   NumberOfFaces: 1
@@ -2831,7 +2831,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 179952633}
-  m_LocalRotation: {x: -.258819073, y: 0, z: 0, w: .965925813}
+  m_LocalRotation: {x: -.258819044, y: 0, z: 0, w: .965925813}
   m_LocalPosition: {x: 0, y: -23.8600006, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -7580,9 +7580,6 @@ GameObject:
   - 4: {fileID: 428361099}
   - 114: {fileID: 428361100}
   - 54: {fileID: 428361101}
-  - 114: {fileID: 428361104}
-  - 114: {fileID: 428361103}
-  - 114: {fileID: 428361102}
   m_Layer: 0
   m_Name: Face of God
   m_TagString: Untagged
@@ -7641,62 +7638,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &428361102
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 428361098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bb47ff5857ab8e4f88121a6b662e695, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ActionOwner: {fileID: 428361104}
-  FriendlyName: Hand Detected
-  Enabled: 1
-  FoldoutOpen: 1
-  AssociatedAction: {fileID: 0}
-  WhichHand: 2
-  HandIndex: 0
-  ContinuousTracking: 0
---- !u!114 &428361103
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 428361098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e33140781a3e92d40add2490c4ce1fb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ActionOwner: {fileID: 428361104}
-  ErrorDetected: 0
-  FriendlyName: Event Source
-  Rules:
-  - {fileID: 428361102}
-  TriggerAttributeName: EventTriggerAtt
-  FoldoutOpen: 1
-  AssociatedAction: {fileID: 0}
-  Source: 
-  Success: 0
---- !u!114 &428361104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 428361098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d8ca451fae141046aaac1dc626433f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SupportedTriggers:
-  - {fileID: 428361103}
-  CustomTag: 
-  CustomActionId: 1
-  FunctionName: DummyFunction
 --- !u!1 &431677264
 GameObject:
   m_ObjectHideFlags: 0
@@ -15771,8 +15712,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1045941934}
-  m_LocalRotation: {x: -.258819073, y: 0, z: 0, w: .965925813}
-  m_LocalPosition: {x: 0, y: -23.8600006, z: -10}
+  m_LocalRotation: {x: .0683352798, y: .258546323, z: .0183389373, w: -.963404298}
+  m_LocalPosition: {x: -317.319946, y: -24.062439, z: -172.072235}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
