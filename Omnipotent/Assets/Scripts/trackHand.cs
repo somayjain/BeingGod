@@ -52,16 +52,11 @@ public class trackHand : MonoBehaviour {
 				{					
 					if(bodySides[i] == PXCMHandData.BodySideType.BODY_SIDE_LEFT)
 					{
-						Debug.Log("Left Uncalibrated !!");
 						isleftCalibrated = false;
-						handRenderer.myGestureTextLeft.GetComponent<Text> ().text = "Hand Not Calibrated";
 					}
 					else if(bodySides[i] == PXCMHandData.BodySideType.BODY_SIDE_RIGHT)
 					{
-						Debug.Log("Right Uncalibrated !!"); 
 						isrightCalibrated = false;
-						handRenderer.myGestureTextRight.GetComponent<Text> ().text = "Hand Not Calibrated";
-						
 					}
 				}
 				else

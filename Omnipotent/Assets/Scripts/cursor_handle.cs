@@ -357,7 +357,7 @@ public class cursor_handle : MonoBehaviour {
 	}
 
 	public void soundKiss(Trigger trgr){
-		Debug.Log ("Kiss");
+		//Debug.Log ("Kiss");
 		Kiss.GetComponent<ParticleEmitter>().emit = true;
 		kissTimer = 4.99f;
 	}
