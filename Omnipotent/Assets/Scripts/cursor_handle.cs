@@ -78,6 +78,7 @@ public class cursor_handle : MonoBehaviour {
 	public Power_GMBC PowerGMBC;
 
 	public GameObject Kiss;
+	public GameObject TutImage;
 
 	private  float kissTimer = 5.0f;
 
@@ -350,6 +351,10 @@ public class cursor_handle : MonoBehaviour {
 		Debug.Log ("Kiss");
 		Kiss.GetComponent<ParticleEmitter>().emit = true;
 		kissTimer = 4.99f;
+	}
+
+	public void soundDone(Trigger trgr){
+		TutImage.SetActive(false);
 	}
 
 	public void HandDetected (Trigger trgr) {

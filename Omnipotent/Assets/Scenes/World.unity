@@ -25058,6 +25058,9 @@ GameObject:
   - 114: {fileID: 1721188175}
   - 114: {fileID: 1721188174}
   - 114: {fileID: 1721188170}
+  - 114: {fileID: 1721188173}
+  - 114: {fileID: 1721188172}
+  - 114: {fileID: 1721188171}
   m_Layer: 5
   m_Name: Hand of God
   m_TagString: Hand
@@ -25098,6 +25101,7 @@ MonoBehaviour:
   PowerBoo: {fileID: 154301431}
   PowerGMBC: {fileID: 50733226}
   Kiss: {fileID: 312329128}
+  TutImage: {fileID: 379087272}
   PeopleManager: {fileID: 0}
   currentLevel: {fileID: 0}
 --- !u!4 &1721188147
@@ -25578,6 +25582,63 @@ MonoBehaviour:
   FacialExpression: 5
   FireOverIntensity: 70
   FaceIndex: 0
+--- !u!114 &1721188171
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1721188145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26ac117756a94d14cba411c44238f89e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 1721188173}
+  FriendlyName: Speech Detected
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  UpdateCommands: 0
+  SpeechCommands:
+  - Word: Done
+    Confidence: 50
+--- !u!114 &1721188172
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1721188145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33140781a3e92d40add2490c4ce1fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 1721188173}
+  ErrorDetected: 0
+  FriendlyName: Event Source
+  Rules:
+  - {fileID: 1721188171}
+  TriggerAttributeName: EventTriggerAtt
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  Source: 
+  Success: 0
+--- !u!114 &1721188173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1721188145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8ca451fae141046aaac1dc626433f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SupportedTriggers:
+  - {fileID: 1721188172}
+  CustomTag: 
+  CustomActionId: 9
+  FunctionName: soundDone
 --- !u!114 &1721188174
 MonoBehaviour:
   m_ObjectHideFlags: 2
