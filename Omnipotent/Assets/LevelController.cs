@@ -23,6 +23,7 @@ public class LevelController : MonoBehaviour {
 	public GameObject buildingManager;
 	public GameObject peopleManager;
 	public GameObject BossManager;
+	public Text numPeopleText;
 	public bool zombieStatus ;
 	public int humanStatus ;
 	public int houseStatus ;
@@ -487,6 +488,7 @@ public class LevelController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		numPeopleText.text = peopleManager.GetComponent<LoadVoxelPeople>().people.Count.ToString();
 		Debug.Log(fLoc+" Fire "+Powermode.ToString()+" ");
 		if (Powermode == MODE.FIREBALL || fmode == true) {
 			Debug.Log(fLoc+" Fire ");

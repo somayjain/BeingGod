@@ -14,7 +14,7 @@ public class ZombieManager : MonoBehaviour {
 
 	public Vector3 hit3DLoc;
 	List<int>fireBallHit = new List<int>();
-	float timeToHit = 2.0f;
+	float timeToHit = 2.5f;
 	bool fireTimer = false;
 	double rayPowRange = 5.0f;
 
@@ -151,7 +151,7 @@ public class ZombieManager : MonoBehaviour {
 			fireTimer=true;
 			if(timeToHit<=0.0f){
 				fireTimer = false;
-				timeToHit = 2.0f;
+				timeToHit = 2.5f;
 			}
 			else{
 				timeToHit-=Time.deltaTime;

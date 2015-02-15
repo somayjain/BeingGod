@@ -47,8 +47,9 @@ public class XP_handle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		XpText.text = (Faith+Fear).ToString()+" / "+XP_Limit.ToString()+" XP";
-		if (Faith_min_ratio + Fear_min_ratio >= 1.0f || XP_Limit == 0.0f) {
+		XpText.text = (Faith+Fear).ToString() + " / " +  XP_Limit.ToString() + " XP";
+
+		if (Faith_ratio + Fear_ratio >= 1.0f || XP_Limit == 0) {
 			LevelUpReached = true;
 			return;
 			// Level Up
@@ -209,6 +210,12 @@ public class XP_handle : MonoBehaviour {
 			cursor.PowerThunderClap.Enable();
 			cursor.PowerThunderClap.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Thunderclap");
 			cursor.PowerThunderClap.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
+
+			cursor.PowerReach.Enable();
+			cursor.PowerReach.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Reach");
+			cursor.PowerReach.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
+
+
 			break;
 
 		case 3:
@@ -246,7 +253,7 @@ public class XP_handle : MonoBehaviour {
 
 		if (Faith_pool > 0) {
 			Faith = Faith_pool;
-			Faith_ratio = Faith / XP_Limit;
+			Faith_ratio = Faith / (float) XP_Limit;
 			Faith_min_ratio = 0.0f;
 			faith_time = 0.5f;
 			faith_updated = true;
@@ -264,7 +271,7 @@ public class XP_handle : MonoBehaviour {
 		
 		if (Fear_pool > 0) {
 			Fear = Fear_pool;
-			Fear_ratio = Fear / XP_Limit;
+			Fear_ratio = Fear / (float) XP_Limit;
 			Fear_min_ratio = 0.0f;
 			fear_time = 0.5f;
 			fear_updated = true;
