@@ -188,7 +188,7 @@ public class XP_handle : MonoBehaviour {
 		case 1:
 			XP_Limit = 0;
 			//cursor.PowerFireball.Enable();
-			cursor.PowerReach.Enable();
+			// cursor.PowerReach.Enable();
 			break;
 
 		case 2:
@@ -231,7 +231,7 @@ public class XP_handle : MonoBehaviour {
 			XP_Limit = 500;
 
 			cursor.PowerReach.Enable();
-//			cursor.PowerReach.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Reach");
+			cursor.PowerReach.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Reach");
 			cursor.PowerReach.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
 			break;
 
