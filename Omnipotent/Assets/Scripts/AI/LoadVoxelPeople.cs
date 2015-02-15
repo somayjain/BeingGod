@@ -170,8 +170,8 @@ public class LoadVoxelPeople : MonoBehaviour {
 				fireLoc.y=0;
 			}
 			firemode = true;
-			if(fireTimer<-3.0f){
-				fireTimer = 3.0f;
+			if(fireTimer<-1.0f){
+				fireTimer = 6.0f;
 				firemode = false;
 			}else{
 				fireTimer -= Time.deltaTime;
@@ -264,14 +264,14 @@ public class LoadVoxelPeople : MonoBehaviour {
 
 			Vector3 newLoc = people[i].transform.position;
 
-			if(fireTimer<=3.0f && fireTimer > -3.0f && (people[i].transform.position - fireLoc).magnitude<=10.0f && people[i].transform.childCount<3){
+			if(fireTimer<=3.0f && fireTimer > -1.0f && (people[i].transform.position - fireLoc).magnitude<=10.0f && people[i].transform.childCount<3){
 				GameObject head_fire = (GameObject)Instantiate (Resources.Load ("human_fire"),Vector3.zero,	Quaternion.identity) as GameObject;
 				head_fire.transform.parent = people[i].transform;
 				head_fire.transform.localPosition = new Vector3(0,0.7f,0);
 				person_script.toggleScaredRun(true);
 				//Debug.Log(people[i].name+" on fire");
 			}
-		    if(fireTimer<=-3.0f && (people[i].transform.childCount>2)){
+		    if(fireTimer<=-1.0f && (people[i].transform.childCount>2)){
 
 				csHandle.PowerFireball.AddXP(1,-1);
 

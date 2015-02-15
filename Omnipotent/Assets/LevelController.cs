@@ -67,8 +67,8 @@ public class LevelController : MonoBehaviour {
 	float time2Spawn = 10.0f;
 
 	float survivalTime = 100.0f;
-	float BossRate = 10.0f;
-	float ZombRate = 4.0f;
+	float BossRate = 20.0f;
+	float ZombRate = 10.0f;
 
 	void initMinReqs(int level){
 		//int nosZombies = level * Random.Range (5,zombies2Kill);
@@ -268,7 +268,7 @@ public class LevelController : MonoBehaviour {
 		buildingManager = GameObject.FindGameObjectWithTag ("Building");
 		prevHouseNos = 0;
 	}
-
+	/*
 	public void setLevel(int level){
 		currentLevel = level;
 	}
@@ -281,7 +281,7 @@ public class LevelController : MonoBehaviour {
 						//peopleManager.GetComponent<LoadVoxelPeople> ().initPerson (nosPeople);
 						initMinReqs (currentLevel);
 				}
-	}
+	}*/
 
 
 	void setCurrentPower(){
@@ -424,7 +424,9 @@ public class LevelController : MonoBehaviour {
 									survivalTime -= Time.deltaTime;
 									ZombRate -= Time.deltaTime;
 									BossRate -= Time.deltaTime;
+									//Debug.Log("People Dead Reset");
 									if(peopleManager.GetComponent<LoadVoxelPeople>().people.Count == 0){
+										Debug.Log("People Dead Reset");
 										levelInit = true;
 										resetObjectives();
 										survivalTime = 100.0f;
@@ -440,15 +442,15 @@ public class LevelController : MonoBehaviour {
 											BossRate = 40.0f;
 										}else{
 										if(ZombRate<=0.0f){
-											ZombRate = 4.0f;
+											ZombRate = 10.0f;
 											zombieManager.GetComponent<ZombieManager>().initZombies(1);
 										}
 										if(BossRate<=0.0f){
 											if(BossManager.GetComponent<WildManagement>().enemList.Count<=5){
-											BossRate = 10.0f;
+											BossRate = 20.0f;
 											BossManager.GetComponent<WildManagement>().SpawnEnemy(1);
 											}else
-												BossRate = 10.0f;
+												BossRate = 20.0f;
 										}
 									}
 								}else{
@@ -489,9 +491,9 @@ public class LevelController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		numPeopleText.text = peopleManager.GetComponent<LoadVoxelPeople>().people.Count.ToString();
-		Debug.Log(fLoc+" Fire "+Powermode.ToString()+" ");
+		//Debug.Log(fLoc+" Fire "+Powermode.ToString()+" ");
 		if (Powermode == MODE.FIREBALL || fmode == true) {
-			Debug.Log(fLoc+" Fire ");
+			//Debug.Log(fLoc+" Fire ");
 			if(fmode == false){
 				fLoc = PowerLoc;
 				fmode = true;
