@@ -92,20 +92,21 @@ public class camera_handle : MonoBehaviour {
 						//rotatemode 	= (hr.getLeftHandGesture () == "v_sign" && hr.getRightHandGesture () == "v_sign");
 						zoommode = (hr.getNumHandsDetected () == 2 && ((hr.getLeftHandGesture () == "v_sign" && hr.getRightHandGesture () == "v_sign")));// || (hr.getLeftHandGesture () == "v_sign" && hr.getRightHandGesture () != null )) );
 						// hr.getLeftHandGesture () == "v_sign" && hr.getRightHandGesture () == "v_sign");
-						if (!rotatemode)
-								Debug.Log (hr.leftPresent + " <-> " + hr.rightPresent + " == " + hr.getLeftHandGesture () + " <-> " + hr.getRightHandGesture ());
+
+						//if (!rotatemode)
+						//		Debug.Log (hr.leftPresent + " <-> " + hr.rightPresent + " == " + hr.getLeftHandGesture () + " <-> " + hr.getRightHandGesture ());
 
 						handmode = panmode || rotatemode || zoommode;
 						//handmode = true;
 
 						if (handmode) {
-								Debug.Log ("Pan: " + isPanning.ToString () + ", Rot: " + isRotating.ToString () + ", " + panmode.ToString () + ", " + rotatemode.ToString ());
+								//Debug.Log ("Pan: " + isPanning.ToString () + ", Rot: " + isRotating.ToString () + ", " + panmode.ToString () + ", " + rotatemode.ToString ());
 								if (!isPanning && rotatemode) {
 										//		Debug.Log (hr.leftPresent +" <-> " +hr.rightPresent+" == "+hr.getLeftHandGesture () + " <-> " + hr.getRightHandGesture ());
 
 										isRotating = true;
 								} else if (!isRotating && !isZooming && panmode) {
-										Debug.Log (hr.leftPresent + " <-> " + hr.rightPresent + " == " + hr.getLeftHandGesture () + " <-> " + hr.getRightHandGesture ());
+										//Debug.Log (hr.leftPresent + " <-> " + hr.rightPresent + " == " + hr.getLeftHandGesture () + " <-> " + hr.getRightHandGesture ());
 
 										if (!isPanning) {
 												bool lho = hr.queryLeftHand3DCoordinates (out lefthandorigin);
@@ -133,7 +134,7 @@ public class camera_handle : MonoBehaviour {
 										isRotating = false;
 										isZooming = false;
 								}
-								Debug.Log ("ispanning " + isPanning + " isR " + isRotating);
+								//Debug.Log ("ispanning " + isPanning + " isR " + isRotating);
 
 						} else {
 
@@ -182,7 +183,7 @@ public class camera_handle : MonoBehaviour {
 		RaycastHit hit;		
 		if(Physics.Raycast (ray, out hit, 10.0f)) {
 			zoomIn = hit.point.y + 5.0f;
-			Debug.Log("HIT");
+			//Debug.Log("HIT");
 		}
 
 		Vector3 cameraPosition = transform.position;
@@ -193,6 +194,8 @@ public class camera_handle : MonoBehaviour {
 		prevRealTime = thisRealTime;
 		thisRealTime = Time.realtimeSinceStartup;
 
+
+		/*
 		if (isRotating || isZooming || twoHands) {
 						transform.GetChild (0).GetComponent<TrackingAction> ().Constraints.Rotation.X = true;
 						transform.GetChild (0).GetComponent<TrackingAction> ().Constraints.Rotation.Y = true;
@@ -200,7 +203,7 @@ public class camera_handle : MonoBehaviour {
 						transform.GetChild (0).GetComponent<TrackingAction> ().Constraints.Rotation.X = false;
 						transform.GetChild (0).GetComponent<TrackingAction> ().Constraints.Rotation.Y = false;
 				}
-
+		*/
 		// Check the mode and display on the GUI
 		if(isRotating || isZooming)
 		{
@@ -261,7 +264,7 @@ public class camera_handle : MonoBehaviour {
 
 		if (cursor.mode == cursor_handle.MODE.BUILD) {
 			// If hand2d near screen edge pan
-			Debug.Log ("Cursor pos: "+cursor.cursor2d.ToString());
+			//Debug.Log ("Cursor pos: "+cursor.cursor2d.ToString());
 			if (cursor.cursor2d.x < Screen.width/3.0f)
 					PanLeft ();
 			else if (cursor.cursor2d.x > Screen.width*2.0f/3.0f)
@@ -289,7 +292,7 @@ public class camera_handle : MonoBehaviour {
 					if (hdetected) {
 						Vector3 move = ( (righthandorigin.x-hc.x) * handPanSpeed.x * Vector3.ProjectOnPlane(Camera.main.transform.right, Vector3.up) ) + 
 							( (hc.z-righthandorigin.z) * handPanSpeed.y * Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up)) ;
-						Debug.Log ("Move " + move.ToString() + " = " + hc.ToString() + " + " + righthandorigin.ToString());
+						//Debug.Log ("Move " + move.ToString() + " = " + hc.ToString() + " + " + righthandorigin.ToString());
 						rigidbody.drag = panDrag;
 						rigidbody.AddForce(move, ForceMode.Acceleration);
 					}
@@ -298,7 +301,7 @@ public class camera_handle : MonoBehaviour {
 				//if (hdetected) {
 					Vector3 move = ( (lefthandorigin.x-hc.x) * handPanSpeed.x * Vector3.ProjectOnPlane(Camera.main.transform.right, Vector3.up) ) + 
 						( (hc.z-lefthandorigin.z) * handPanSpeed.y * Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up)) ;
-					Debug.Log ("Move " + move.ToString());
+					//Debug.Log ("Move " + move.ToString());
 					rigidbody.drag = panDrag;
 					rigidbody.AddForce(move, ForceMode.Acceleration);
 				}// else
@@ -310,20 +313,20 @@ public class camera_handle : MonoBehaviour {
 					RaycastHit hit;
 					
 					if(Physics.Raycast(ray, out hit)) {
-						Debug.DrawLine(ray.origin, hit.point);
+						//Debug.DrawLine(ray.origin, hit.point);
 						
 						Vector3 lhc, rhc;
 						bool lhdetected, rhdetected;
 						lhdetected = hr.queryLeftHand3DCoordinates(out lhc);
 						rhdetected = hr.queryRightHand3DCoordinates(out rhc);
-						Debug.Log(lhdetected.ToString() + " " + rhdetected.ToString());
+						//Debug.Log(lhdetected.ToString() + " " + rhdetected.ToString());
 						if (lhdetected && rhdetected) {
 							Vector3 move = (rhc - lhc);
 							//						Debug.Log("Rot: " + move.ToString());
 							rigidbody.transform.RotateAround(hit.point, Vector3.up, move.z*handTurnSpeed);
 						}// else
 						//	isRotating = false;
-						Debug.Log("Rota is " + isRotating.ToString());
+						//Debug.Log("Rota is " + isRotating.ToString());
 					}
 				}
 				if (isZooming)
@@ -339,7 +342,7 @@ public class camera_handle : MonoBehaviour {
 							return;
 
 						Vector3 move = delta * handZoomSpeed * Camera.main.transform.forward;
-						Debug.Log (move.ToString());
+						//Debug.Log (move.ToString());
 						//if (delta > 1) transform.position = transform.position + Vector3.up;
 						rigidbody.drag = zoomDrag;
 						rigidbody.AddForce(move , ForceMode.Force);

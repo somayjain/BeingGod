@@ -21,7 +21,7 @@ public class FishMovement : MonoBehaviour {
 		if (resetTimer <= 0.0f) {
 			dir = WPLoc[Random.Range(0,WPLoc.Length)];
 			resetTimer = 20.0f;
-			Debug.Log("resetting dir");
+			//Debug.Log("resetting dir");
 		}
 		float step = fSpeed * Time.fixedDeltaTime;
 		for (int i=0; i<fishes.Length; i++) {
