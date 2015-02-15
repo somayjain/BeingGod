@@ -61,6 +61,7 @@ public class cursor_handle : MonoBehaviour {
 		HEY,
 		BOO,
 		HOG,
+		REACH,
 		PAN,
 		ZOOM,
 		ROTATE
@@ -76,6 +77,7 @@ public class cursor_handle : MonoBehaviour {
 	public Power_Hey PowerHey;
 	public Power_Boo PowerBoo;
 	public Power_GMBC PowerGMBC;
+	public Power_Reach PowerReach;
 
 	public GameObject Kiss;
 	public GameObject TutImage;
@@ -347,6 +349,13 @@ public class cursor_handle : MonoBehaviour {
 			setMode (MODE.DEFAULT);
 		}
 	}
+
+	public void soundReach (Trigger trgr) {
+		if (setMode (MODE.REACH)) {
+			PowerReach.Trigger (cursor3d);
+		}
+	}
+
 	public void soundKiss(Trigger trgr){
 		Debug.Log ("Kiss");
 		Kiss.GetComponent<ParticleEmitter>().emit = true;

@@ -188,10 +188,12 @@ public class XP_handle : MonoBehaviour {
 		case 1:
 			XP_Limit = 0;
 			//cursor.PowerFireball.Enable();
-			//cursor.PowerHoG.Enable();
+			cursor.PowerReach.Enable();
 			break;
+
 		case 2:
 			XP_Limit = 50;
+
 			cursor.PowerHey.Enable();
 			cursor.PowerHey.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Hey");
 			cursor.PowerHey.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
@@ -203,13 +205,14 @@ public class XP_handle : MonoBehaviour {
 			cursor.PowerGMBC.Enable();
 			cursor.PowerGMBC.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("GMBC");
 			cursor.PowerGMBC.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
-			break;
-		case 3:
-			XP_Limit = 100;
+
 			cursor.PowerThunderClap.Enable();
 			cursor.PowerThunderClap.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Thunderclap");
 			cursor.PowerThunderClap.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
-			//cursor.PowerThunderClap.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprite/Thunderclap");
+			break;
+
+		case 3:
+			XP_Limit = 100;
 
 			cursor.PowerMjolnir.Enable();
 			cursor.PowerMjolnir.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Lightning");
@@ -226,9 +229,15 @@ public class XP_handle : MonoBehaviour {
 
 		case 4:
 			XP_Limit = 500;
+
+			cursor.PowerReach.Enable();
+//			cursor.PowerReach.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Reach");
+			cursor.PowerReach.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
 			break;
+
 		case 5:
 			XP_Limit = 1000;
+
 			cursor.PowerHoG.Enable();
 			cursor.PowerHoG.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("HoG");
 			cursor.PowerHoG.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);

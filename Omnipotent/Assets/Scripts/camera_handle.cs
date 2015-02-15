@@ -66,10 +66,13 @@ public class camera_handle : MonoBehaviour {
 		if (cursor.isOnHUD () && !isPanning && !isRotating && !isZooming)
 			return;
 
+		bool twoHands = false;
+
 		if (cursor.mode != cursor_handle.MODE.BUILD) {
 						// == Getting Input ==
 						HandRenderer hr = cursor.GetComponentInChildren<HandRenderer> ();
 						bool panmode = false, rotatemode = false, zoommode = false;
+						twoHands = (hr.getNumHandsDetected() == 2);
 						// panmode 	= (hr.getLeftHandGesture () == "fist" && hr.getRightHandGesture () == null) || (hr.getLeftHandGesture () == null && hr.getRightHandGesture () == "fist");
 						panmode = (hr.getNumHandsDetected () == 1 && (hr.getLeftHandGesture () == "fist" || hr.getRightHandGesture () == "fist"));
 						rotatemode = (hr.getNumHandsDetected () == 2 && ((hr.getLeftHandGesture () == "v_sign" && hr.getRightHandGesture () == "v_sign")));// || (hr.getLeftHandGesture () == "v_sign" && hr.getRightHandGesture () != null )) );
@@ -177,7 +180,7 @@ public class camera_handle : MonoBehaviour {
 		prevRealTime = thisRealTime;
 		thisRealTime = Time.realtimeSinceStartup;
 
-		if (isRotating || isZooming) {
+		if (isRotating || isZooming || twoHands) {
 						transform.GetChild (0).GetComponent<TrackingAction> ().Constraints.Rotation.X = true;
 						transform.GetChild (0).GetComponent<TrackingAction> ().Constraints.Rotation.Y = true;
 				} else {
