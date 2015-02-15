@@ -196,7 +196,7 @@ public class LevelController : MonoBehaviour {
 			toggle[0].isOn = false;
 			toggle[0].transform.GetChild(1).GetComponent<Text>().color=Color.red;
 			
-			toggle[1].transform.GetChild(1).GetComponent<Text>().text ="Trigget Lightning";
+			toggle[1].transform.GetChild(1).GetComponent<Text>().text ="Trigger Lightning";
 			toggle[1].transform.GetChild(1).GetComponent<Text>().color=Color.red;
 			toggle[1].gameObject.SetActive(true);
 			toggle[1].isOn = false;
@@ -435,6 +435,7 @@ public class LevelController : MonoBehaviour {
 										}
 										return;
 									}
+									Debug.Log(survivalTime+"Survival Time");
 									if(survivalTime <= 0.0){
 											currentLevel++;
 											ZombRate = 20.0f;
