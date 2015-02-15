@@ -252,7 +252,7 @@ public class LevelController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
-		currentLevel = 1;
+		currentLevel = 3;
 		//init Person manager
 		peopleManager = GameObject.FindGameObjectWithTag ("PeopleManager");
 		//int nosPeople = currentLevel * Random.Range (10,humans2create);
