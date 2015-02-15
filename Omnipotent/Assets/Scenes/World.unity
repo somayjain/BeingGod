@@ -4831,7 +4831,7 @@ MonoBehaviour:
   Cooldown: 5
   CastTime: 5
   PowerType: 1
-  XP_per_NPC: 10
+  XP_per_NPC: 1
   ThunderClap: {fileID: 297417000}
 --- !u!114 &270210617
 MonoBehaviour:
@@ -18393,7 +18393,7 @@ MonoBehaviour:
   AssociatedAction: {fileID: 0}
   WhichHand: 2
   HandIndex: 0
-  ContinuousTracking: 0
+  ContinuousTracking: 1
 --- !u!114 &1286810201
 MonoBehaviour:
   m_ObjectHideFlags: 2

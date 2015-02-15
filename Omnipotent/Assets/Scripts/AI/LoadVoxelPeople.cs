@@ -345,7 +345,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 			case MODE.THUNDER_CLAP:
 				person_script.toggleScaredRun(true);
 				person_script.currentlyScared = true;
-				//csHandle.PowerThunderClap.AddXP(1,-1);
+				csHandle.PowerThunderClap.AddXP(1,-1);
 				Debug.Log("Thunder Clap at "+pointOfContact+" ");
 				break;
 			}
