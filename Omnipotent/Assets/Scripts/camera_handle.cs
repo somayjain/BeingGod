@@ -165,7 +165,8 @@ public class camera_handle : MonoBehaviour {
 		float zoomIn = 5.0f;
 		RaycastHit hit;		
 		if(Physics.Raycast (ray, out hit, 10.0f)) {
-			zoomIn = hit.point.y + 3.0f;
+			zoomIn = hit.point.y + 5.0f;
+			Debug.Log("HIT");
 		}
 
 		Vector3 cameraPosition = transform.position;
@@ -176,10 +177,13 @@ public class camera_handle : MonoBehaviour {
 		prevRealTime = thisRealTime;
 		thisRealTime = Time.realtimeSinceStartup;
 
-		//if (isRotating || isZooming) {
-			//transform.GetChild(0).GetChild(0).GetComponent<TrackingAction>().enabled = false;
-		//} else
-			//transform.GetChild(0).GetChild(0).GetComponent<TrackingAction>().enabled = true;
+		if (isRotating || isZooming) {
+						transform.GetChild (0).GetComponent<TrackingAction> ().Constraints.Rotation.X = true;
+						transform.GetChild (0).GetComponent<TrackingAction> ().Constraints.Rotation.Y = true;
+				} else {
+						transform.GetChild (0).GetComponent<TrackingAction> ().Constraints.Rotation.X = false;
+						transform.GetChild (0).GetComponent<TrackingAction> ().Constraints.Rotation.Y = false;
+				}
 	}
 	
 	public float deltaTime {
@@ -343,5 +347,8 @@ public class camera_handle : MonoBehaviour {
 				rigidbody.AddForce(move, ForceMode.Acceleration);
 			}
 		}
+	}
+
+	public void DummyFunction () {
 	}
 }
