@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class camera_handle : MonoBehaviour {
 
@@ -26,6 +27,8 @@ public class camera_handle : MonoBehaviour {
 	public float turnDrag = 5.0f;			// RigidBody Drag when rotating camera
 	public float panDrag = 3.5f;			// RigidBody Drag when panning camera
 	public float zoomDrag = 3.3f;			// RigidBody Drag when zooming camera
+
+	public GameObject modeGUILabel;
 	
 	private Vector3 mouseOrigin;			// Position of cursor when mouse dragging starts
 	private bool isPanning;				// Is the camera being panned?
@@ -187,6 +190,29 @@ public class camera_handle : MonoBehaviour {
 						transform.GetChild (0).GetComponent<TrackingAction> ().Constraints.Rotation.X = false;
 						transform.GetChild (0).GetComponent<TrackingAction> ().Constraints.Rotation.Y = false;
 				}
+
+		// Check the mode and display on the GUI
+		if(isRotating || isZooming)
+		{
+			modeGUILabel.GetComponent<Text>().text = "Rotate/Zoom Mode";
+		}
+		else if(isPanning)
+		{
+			modeGUILabel.GetComponent<Text>().text = "Pan Mode";
+		}
+		else if(cursor.mode == cursor_handle.MODE.DEFAULT)
+		{
+			// idle
+			modeGUILabel.GetComponent<Text>().text = "Idle";
+		}
+		else if(cursor.mode == cursor_handle.MODE.BUILD)
+		{
+			modeGUILabel.GetComponent<Text>().text = "Build Mode";
+		}
+		else if(cursor.mode == cursor_handle.MODE.REACH)
+		{
+			modeGUILabel.GetComponent<Text>().text = "Reach Mode";
+		}
 	}
 	
 	public float deltaTime {
