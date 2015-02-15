@@ -42,7 +42,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 	float tornadoRange = 18.0f;
 
 	//Fire
-	float fireTimer = 3.0f;
+	float fireTimer = 6.0f;
 	bool firemode = false;
 	Vector3 fireLoc = new Vector3();
 	float hoverTextTimer = 5.0f;
@@ -264,7 +264,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 
 			Vector3 newLoc = people[i].transform.position;
 
-			if(fireTimer<=0.0f && fireTimer > -3.0f && (people[i].transform.position - fireLoc).magnitude<=10.0f && people[i].transform.childCount<3){
+			if(fireTimer<=3.0f && fireTimer > -3.0f && (people[i].transform.position - fireLoc).magnitude<=10.0f && people[i].transform.childCount<3){
 				GameObject head_fire = (GameObject)Instantiate (Resources.Load ("human_fire"),Vector3.zero,	Quaternion.identity) as GameObject;
 				head_fire.transform.parent = people[i].transform;
 				head_fire.transform.localPosition = new Vector3(0,0.7f,0);
