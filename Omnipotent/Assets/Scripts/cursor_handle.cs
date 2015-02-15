@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using RSUnityToolkit;
+using UnityEngine.UI;
 
 public class cursor_handle : MonoBehaviour {
 
@@ -83,6 +84,8 @@ public class cursor_handle : MonoBehaviour {
 	public GameObject TutImage;
 
 	private  float kissTimer = 5.0f;
+	public GameObject helpImg;
+	private float helpTimer = 10.0f;
 
 	public GameObject PeopleManager;
 	public GameObject currentLevel;
@@ -93,7 +96,14 @@ public class cursor_handle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		if (helpTimer < 10.0f) {
+			helpTimer -= Time.deltaTime;
+			if(helpTimer <= 0.0f){
+				Debug.Log("disabling Help");
+				helpImg.SetActive(false);
+				helpTimer = 10.0f;
+			}
+		}
 
 		if (kissTimer != 5.0f) {
 			kissTimer-=Time.deltaTime;
@@ -301,7 +311,7 @@ public class cursor_handle : MonoBehaviour {
 			PowerFireball.Trigger (cursor3d);
 			setMode (MODE.DEFAULT);
 		}
-		Debug.Log ("I heard Fire");
+		//Debug.Log ("I heard Fire");
 	}
 	public void soundClap(Trigger trgr){
 		if ( !isOnHUD() && !isOnShelf() && setMode (MODE.THUNDER_CLAP) ) {
@@ -315,7 +325,7 @@ public class cursor_handle : MonoBehaviour {
 			PowerMjolnir.Trigger (cursor3d);
 			setMode (MODE.DEFAULT);
 		}
-		Debug.Log ("I heard bolt");
+		//Debug.Log ("I heard bolt");
 	}
 	public void soundTornado(Trigger trgr) {
 		if ( !isOnHUD() && !isOnShelf() && setMode(MODE.TORNADO) ) {
@@ -357,9 +367,16 @@ public class cursor_handle : MonoBehaviour {
 	}
 
 	public void soundKiss(Trigger trgr){
-		Debug.Log ("Kiss");
+		//Debug.Log (demo.Word+"this is");
 		Kiss.GetComponent<ParticleEmitter>().emit = true;
-		kissTimer = 4.99f;
+	}
+
+	public void OnHelp(Trigger trgr){
+		Debug.Log ("Need Help");
+		helpTimer = 9.99f;
+		Sprite newTutImage = Resources.Load<Sprite>("help_menu");
+		helpImg.GetComponent<Image>().sprite = newTutImage;
+		helpImg.SetActive(true);
 	}
 
 	public void soundDone(Trigger trgr){

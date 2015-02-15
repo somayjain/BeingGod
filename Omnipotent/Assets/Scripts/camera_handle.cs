@@ -4,7 +4,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-
+using RSUnityToolkit;
 public class camera_handle : MonoBehaviour {
 
 	//
@@ -38,17 +38,27 @@ public class camera_handle : MonoBehaviour {
 	private bool handmode = false;
 	private Vector3 lefthandorigin, righthandorigin;
 
+	private Vector3 restCords;
+
 	// Use this for initialization
 	void Start () {
 		isPanning = false;
 		isRotating = false;
 		isZooming = false;
+
+		restCords = transform.position;
+
 	}
 
 	//
 	// AWAKE
 	//
-	
+
+	public void OnReset (Trigger trgr) {
+		Debug.Log ("reset");
+		transform.position = restCords;
+	}
+
 	void Awake()
 	{
 		// Setup camera physics properties

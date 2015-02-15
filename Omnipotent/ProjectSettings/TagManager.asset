@@ -28,6 +28,7 @@ TagManager:
   - TutImage
   - Dino
   - Spidey
+  - LevelManage
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
