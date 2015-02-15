@@ -38,12 +38,12 @@ public class trackHand : MonoBehaviour {
 
 				//Debug.Log(_handData.IsCalibrated().ToString());
 
-				//if(_handData!=null){}// Debug.Log(_handData.ToString());
+				//if(_handData!=null){
 
 				//else { Debug.Log ("No data"); continue; }
 	            
 				for (int j = 0; j < PXCMHandData.NUMBER_OF_JOINTS; j++)
-	                _handData.QueryTrackedJoint((PXCMHandData.JointType)j, out joints[i, j]);
+					_handData.QueryTrackedJoint((PXCMHandData.JointType)j, out joints[i, j]);
 
 	            handIds[i] = _handData.QueryUniqueId();
 	            bodySides[i] = _handData.QueryBodySide();

@@ -103,7 +103,7 @@ public class WildMovement : MonoBehaviour {
 								agent.Stop ();
 						}
 			if(hitTimer <= 0.0){
-				Debug.Log ("Time to die");
+				//Debug.Log ("Time to die");
 			}
 				 else {
 						deadTimer -= Time.deltaTime;

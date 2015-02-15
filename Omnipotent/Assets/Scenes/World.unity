@@ -2399,7 +2399,7 @@ RectTransform:
   m_Father: {fileID: 1284468228}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: .5, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: .5, y: .5}
@@ -2853,7 +2853,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 179952633}
   m_LocalRotation: {x: -.258819073, y: 0, z: 0, w: .965925813}
-  m_LocalPosition: {x: -62.7000008, y: -73.8600006, z: -448.200012}
+  m_LocalPosition: {x: -62.7000008, y: -43.8600006, z: -448.200012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8902,7 +8902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &561226345
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15647,8 +15647,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1045941934}
-  m_LocalRotation: {x: -.258819073, y: 0, z: 0, w: .965925813}
-  m_LocalPosition: {x: -62.7000008, y: -43.8600006, z: -448.200012}
+  m_LocalRotation: {x: .201169744, y: .0490503386, z: .0100866482, w: -.978275597}
+  m_LocalPosition: {x: 65.1062698, y: -84.3037415, z: -127.55497}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -19414,7 +19414,7 @@ RectTransform:
   m_RootOrder: 5
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -75, y: 60}
+  m_AnchoredPosition: {x: -64, y: 48}
   m_SizeDelta: {x: 100, y: 75}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &1330552946
@@ -23481,8 +23481,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 378860462}
   m_RootOrder: 0
-  m_AnchorMin: {x: .5, y: 0}
-  m_AnchorMax: {x: .5, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: .5, y: .5}
@@ -25289,6 +25289,10 @@ GameObject:
   - 114: {fileID: 1721188181}
   - 114: {fileID: 1721188180}
   - 114: {fileID: 1721188179}
+  - 114: {fileID: 1721188182}
+  - 114: {fileID: 1721188188}
+  - 114: {fileID: 1721188187}
+  - 114: {fileID: 1721188186}
   m_Layer: 5
   m_Name: Hand of God
   m_TagString: Hand
@@ -25317,9 +25321,9 @@ MonoBehaviour:
   mjolnir_cursor: {fileID: 0}
   fireball_cursor: {fileID: 2800000, guid: 255bf05779ce6e74c99ea2a2bf2d08cb, type: 3}
   tornado_cursor: {fileID: 0}
-  sphere: {fileID: 1652544274}
   PreferredHand: 0
   mode: 0
+  PowerBuild: {fileID: 1440859814}
   PowerThunderClap: {fileID: 270210616}
   PowerMjolnir: {fileID: 1115764493}
   PowerFireball: {fileID: 106707115}
@@ -25859,7 +25863,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1721188145}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d8ca451fae141046aaac1dc626433f6, type: 3}
   m_Name: 
@@ -26020,6 +26024,21 @@ MonoBehaviour:
   CustomTag: 
   CustomActionId: 12
   FunctionName: soundKiss
+--- !u!114 &1721188182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1721188145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8ca451fae141046aaac1dc626433f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SupportedTriggers: []
+  CustomTag: 
+  CustomActionId: 13
+  FunctionName: OnTrigger
 --- !u!114 &1721188183
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -26077,6 +26096,63 @@ MonoBehaviour:
   CustomTag: 
   CustomActionId: 11
   FunctionName: OnHelp
+--- !u!114 &1721188186
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1721188145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26ac117756a94d14cba411c44238f89e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 1721188188}
+  FriendlyName: Speech Detected
+  Enabled: 1
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  UpdateCommands: 0
+  SpeechCommands:
+  - Word: monument
+    Confidence: 50
+--- !u!114 &1721188187
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1721188145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33140781a3e92d40add2490c4ce1fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionOwner: {fileID: 1721188188}
+  ErrorDetected: 0
+  FriendlyName: Event Source
+  Rules:
+  - {fileID: 1721188186}
+  TriggerAttributeName: EventTriggerAtt
+  FoldoutOpen: 1
+  AssociatedAction: {fileID: 0}
+  Source: 
+  Success: 0
+--- !u!114 &1721188188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1721188145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8ca451fae141046aaac1dc626433f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SupportedTriggers:
+  - {fileID: 1721188187}
+  CustomTag: 
+  CustomActionId: 14
+  FunctionName: soundHog
 --- !u!1 &1721204459
 GameObject:
   m_ObjectHideFlags: 0
@@ -30711,8 +30787,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 47, y: 42}
-  m_SizeDelta: {x: 65, y: 65}
+  m_AnchoredPosition: {x: 62.2999992, y: 49.9000015}
+  m_SizeDelta: {x: 85, y: 75}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2038019262
 MonoBehaviour:
@@ -31478,7 +31554,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 12
+    m_FontSize: 15
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10

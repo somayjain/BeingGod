@@ -49,7 +49,7 @@ public class XP_handle : MonoBehaviour {
 	void Update () {
 		XpText.text = (Faith+Fear).ToString() + " / " +  XP_Limit.ToString() + " XP";
 
-		if (Faith_ratio + Fear_ratio >= 1.0f || XP_Limit == 0) {
+		if (Faith_min_ratio + Fear_min_ratio >= 1.0f || XP_Limit == 0) {
 			LevelUpReached = true;
 			return;
 			// Level Up
@@ -179,15 +179,24 @@ public class XP_handle : MonoBehaviour {
 		}
 	}
 
+	public void resetModes () {
+		cursor.setMode (cursor_handle.MODE.DEFAULT);
+		cursor.PowerBuild.StopBuildMode ();
+		cursor.camera.transform.parent.GetComponent<camera_handle>().resetNavigation ();
+	}
+
 	public void LevelUp ( int level ) {
 //		if (!LevelUpReached) {
 //			Debug.Log ("What are you doing ? I dont even have enuf XP for level " + level.ToString ());
 //			Debug.Log ("My Faith: " + Faith.ToString () + " and Fear: " + Fear.ToString ());
 //			return;
 //		}
+		resetModes ();
+
 		switch (level) {
 		case 1:
 			XP_Limit = 0;
+
 			//cursor.PowerFireball.Enable();
 			// cursor.PowerReach.Enable();
 			break;

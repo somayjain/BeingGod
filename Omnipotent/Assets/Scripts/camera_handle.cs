@@ -55,8 +55,9 @@ public class camera_handle : MonoBehaviour {
 	//
 
 	public void OnReset (Trigger trgr) {
-		Debug.Log ("reset");
+		//Debug.Log ("reset");
 		transform.position = restCords;
+
 	}
 
 	void Awake()
@@ -69,6 +70,12 @@ public class camera_handle : MonoBehaviour {
 	
 	private float prevRealTime;
 	private float thisRealTime;
+
+	public void resetNavigation () {
+		isPanning = false;
+		isRotating = false;
+		isZooming = false;
+	}
 	
 	//
 	// UPDATE: For input
@@ -195,7 +202,7 @@ public class camera_handle : MonoBehaviour {
 		thisRealTime = Time.realtimeSinceStartup;
 
 
-		/*
+
 		if (isRotating || isZooming || twoHands) {
 						transform.GetChild (0).GetComponent<TrackingAction> ().Constraints.Rotation.X = true;
 						transform.GetChild (0).GetComponent<TrackingAction> ().Constraints.Rotation.Y = true;
@@ -203,7 +210,7 @@ public class camera_handle : MonoBehaviour {
 						transform.GetChild (0).GetComponent<TrackingAction> ().Constraints.Rotation.X = false;
 						transform.GetChild (0).GetComponent<TrackingAction> ().Constraints.Rotation.Y = false;
 				}
-		*/
+
 		// Check the mode and display on the GUI
 		if(isRotating || isZooming)
 		{

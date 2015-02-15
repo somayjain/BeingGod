@@ -25,7 +25,7 @@ public class cursor_handle : MonoBehaviour {
 	};
 
 	[Header("")]
-	public GameObject sphere;
+	// public GameObject sphere;
 	public HAND_SIDES PreferredHand = HAND_SIDES.Left;
 
 	private bool onShelf = false;
@@ -70,6 +70,7 @@ public class cursor_handle : MonoBehaviour {
 	public MODE mode = MODE.DEFAULT;
 
 	[Header("Powers")]
+	public Power_Build PowerBuild;
 	public Power_ThunderClap PowerThunderClap;
 	public Power_Mjolnir PowerMjolnir;
 	public Power_Fireball PowerFireball;
@@ -127,19 +128,23 @@ public class cursor_handle : MonoBehaviour {
 				}
 
 		if (!hand2d) {
-				cursor.SetActive (false);
+		//		cursor.SetActive (false);
 				cursor2d = Input.mousePosition;
 				ray = camera.ScreenPointToRay (Input.mousePosition);
+				Screen.lockCursor = false;
+				Screen.showCursor = true;
 		} else {
-				cursor.SetActive (true);
-				cursor.GetComponent<RectTransform> ().position = cursor2d;
+		//		cursor.SetActive (true);
+		//		cursor.GetComponent<RectTransform> ().position = cursor2d;
 				ray = camera.ScreenPointToRay (cursor2d);
+				Screen.lockCursor = true;
+				Screen.showCursor = false;
 		}
 
 		RaycastHit hit;
 		int terrainlayermask = 1 << 9;
 		if (Physics.Raycast (ray, out hit, Mathf.Infinity, terrainlayermask)) {
-			sphere.transform.position = new Vector3 (hit.point.x, hit.point.y + 1.0f, hit.point.z);
+			//sphere.transform.position = new Vector3 (hit.point.x, hit.point.y + 1.0f, hit.point.z);
 			cursor3d = hit.point;
 		}
 
@@ -381,6 +386,10 @@ public class cursor_handle : MonoBehaviour {
 
 	public void soundDone(Trigger trgr){
 		TutImage.SetActive(false);
+	}
+
+	public void soundHog (Trigger trgr) {
+		Debug.Log ("hand of god");
 	}
 
 	public void HandDetected (Trigger trgr) {

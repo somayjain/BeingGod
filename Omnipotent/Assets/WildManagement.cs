@@ -74,7 +74,7 @@ public class WildManagement : MonoBehaviour {
 
 			if(enemList[i].GetComponent<WildMovement>().agentReached == true){
 				enemList[i].GetComponent<WildMovement>().resetPath(wildSpots[Random.Range(0,wildSpots.Length)].transform.position);
-				Debug.Log("resetting BOSS");
+				//Debug.Log("resetting BOSS");
 			}
 
 
@@ -82,7 +82,7 @@ public class WildManagement : MonoBehaviour {
 			if(Powermode == MODE.MJOLNIR ){
 				if(hitDistance<=5.0f){
 					csHandle.PowerMjolnir.AddXP(1,1);
-					Debug.Log(i+" enemy List "+enemList[i].GetComponent<WildMovement>().health);
+					//Debug.Log(i+" enemy List "+enemList[i].GetComponent<WildMovement>().health);
 					enemList[i].GetComponent<WildMovement>().health -= 8.0f;
 					enemList[i].GetComponent<WildMovement>().hitMode = true;
 				}

@@ -66,7 +66,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 			Vector3 pos = gob.transform.position;
 //			sources.Add(gob.transform.position);
 			sources.Add(pos);
-			Debug.Log(sources[index]+" House at "+index+" "+gob.transform.position);
+			//Debug.Log(sources[index]+" House at "+index+" "+gob.transform.position);
 			index++;
 		}
 	}
@@ -208,7 +208,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 				if(chosenMode == false){
 					chosenMode = true;
 					chosenOne = Random.Range(0,people.Count);
-					Debug.Log("HEY ACTIVATED"+chosenOne);
+					//Debug.Log("HEY ACTIVATED"+chosenOne);
 				}else
 				hoverTextTimer -= Time.deltaTime;
 			}
@@ -231,7 +231,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 				if(interactNPC == false){
 				NPC = Random.Range(0,people.Count);
 				interactNPC = true;
-					Debug.Log("BOO ACTIVATED"+NPC);
+					//Debug.Log("BOO ACTIVATED"+NPC);
 				}else
 					interactTimer-=Time.deltaTime;
 			}
@@ -327,7 +327,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 			if(chosenMode == true){
 				if(chosenOne == i){
 					if(hoverTextTimer == 5.0f){
-					Debug.Log ("CHOSEN!!"+i);
+					//Debug.Log ("CHOSEN!!"+i);
 					csHandle.PowerHey.AddXP(1,1);
 					people[i].transform.GetChild(0).gameObject.SetActive(true);
 					people[i].GetComponentInChildren<Text>().text = HeyString[Random.Range(0,HeyString.Count)];
@@ -346,7 +346,7 @@ public class LoadVoxelPeople : MonoBehaviour {
 				person_script.toggleScaredRun(true);
 				person_script.currentlyScared = true;
 				csHandle.PowerThunderClap.AddXP(1,-1);
-				Debug.Log("Thunder Clap at "+pointOfContact+" ");
+				//Debug.Log("Thunder Clap at "+pointOfContact+" ");
 				break;
 			}
 
