@@ -18370,7 +18370,7 @@ MonoBehaviour:
   myGestureTextLeft: {fileID: 245425259}
   myGestureTextRight: {fileID: 1163027974}
   handofGod: {fileID: 1721188145}
-  bonescale: {x: .400000006, y: .400000006, z: .400000006}
+  bonescale: {x: .600000024, y: .600000024, z: .600000024}
   leftPresent: 0
   rightPresent: 0
   AveragedFrameCount: 5

@@ -210,6 +210,7 @@ public class HandRenderer : MonoBehaviour {
 		if (avgQueue.Count >= SmoothingFactor)
             avgQueue.Dequeue();
 
+		/*
 		if (!leftPresent) {
 				myGestureTextLeft.GetComponent<Text> ().text = "";
 				lefthandgesture = "";
@@ -218,6 +219,7 @@ public class HandRenderer : MonoBehaviour {
 				myGestureTextRight.GetComponent<Text> ().text = "";
 				lefthandgesture = "";
 		}
+		*/
 	}
 	
 	//Update Bones
@@ -272,6 +274,12 @@ public class HandRenderer : MonoBehaviour {
 				}
 				break;
 			}
+	}
+
+	public void DisplayAlerts(PXCMHandData.AlertData alertData)
+	{
+		Debug.Log ("Alert is : " + alertData.label);
+		
 	}
 	
 	public void DisplayGest()
