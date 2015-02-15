@@ -97,19 +97,19 @@ public class LevelController : MonoBehaviour {
 				objectiveComplete[0] = true;
 				toggle[0].isOn = true;
 				toggle[0].transform.GetChild(1).GetComponent<Text>().color=Color.green;
-				Debug.Log("changed weather");
+				//Debug.Log("changed weather");
 			}
 			if(Powermode == MODE.HEY){
 				objectiveComplete[1] = true;
 				toggle[1].isOn = true;
 				toggle[1].transform.GetChild(1).GetComponent<Text>().color=Color.green;
-				Debug.Log("changed Hey");
+				//Debug.Log("changed Hey");
 			}
 			if(Powermode == MODE.BOO){
 				objectiveComplete[2] = true;
 				toggle[2].isOn = true;
 				toggle[2].transform.GetChild(1).GetComponent<Text>().color=Color.green;
-				Debug.Log("changed Boo");
+				//Debug.Log("changed Boo");
 			}
 			if(xp_handler.LevelUpReached){
 				objectiveComplete[3] = true;
@@ -124,32 +124,32 @@ public class LevelController : MonoBehaviour {
 				objectiveComplete[0] = true;
 				toggle[0].isOn = true;
 				toggle[0].transform.GetChild(1).GetComponent<Text>().color=Color.green;
-				Debug.Log("changed zombies");
+				//Debug.Log("changed zombies");
 			}
 
 			if(Powermode == MODE.MJOLNIR){
 				objectiveComplete[1] = true;
 				toggle[1].isOn = true;
 				toggle[1].transform.GetChild(1).GetComponent<Text>().color=Color.green;
-				Debug.Log("changed lightening");
+				//Debug.Log("changed lightening");
 			}
 			if(Powermode == MODE.TORNADO){
 				objectiveComplete[2] = true;
 				toggle[2].isOn = true;
 				toggle[2].transform.GetChild(1).GetComponent<Text>().color=Color.green;
-				Debug.Log("changed Tornado");
+				//Debug.Log("changed Tornado");
 			}
 			if(Powermode == MODE.FIREBALL){
 				objectiveComplete[3] = true;
 				toggle[3].isOn = true;
 				toggle[3].transform.GetChild(1).GetComponent<Text>().color=Color.green;
-				Debug.Log("changed Fireball");
+				//Debug.Log("changed Fireball");
 			}
 			if(xp_handler.LevelUpReached){
 				objectiveComplete[4] = true;
 				toggle[4].isOn = true;
 				toggle[4].transform.GetChild(1).GetComponent<Text>().color=Color.green;
-				Debug.Log("changed XP");
+				//Debug.Log("changed XP");
 			}
 		}
 		if (currentLevel == 4) {
@@ -175,12 +175,12 @@ public class LevelController : MonoBehaviour {
 			toggle[0].isOn = false;
 			toggle[0].transform.GetChild(1).GetComponent<Text>().color=Color.red;
 
-			toggle[1].transform.GetChild(1).GetComponent<Text>().text = "!!Hey You!!";
+			toggle[1].transform.GetChild(1).GetComponent<Text>().text = "Call Somebody";
 			toggle[1].transform.GetChild(1).GetComponent<Text>().color=Color.red;
 			toggle[1].gameObject.SetActive(true);
 			toggle[1].isOn = false;
 
-			toggle[2].transform.GetChild(1).GetComponent<Text>().text = "!!BOO!!";
+			toggle[2].transform.GetChild(1).GetComponent<Text>().text = "Scare a Human";
 			toggle[2].gameObject.SetActive(true);
 			toggle[2].isOn = false;
 			toggle[2].transform.GetChild(1).GetComponent<Text>().color=Color.red;
@@ -196,17 +196,17 @@ public class LevelController : MonoBehaviour {
 			toggle[0].isOn = false;
 			toggle[0].transform.GetChild(1).GetComponent<Text>().color=Color.red;
 			
-			toggle[1].transform.GetChild(1).GetComponent<Text>().text ="!!Lightning!!";
+			toggle[1].transform.GetChild(1).GetComponent<Text>().text ="Trigget Lightning";
 			toggle[1].transform.GetChild(1).GetComponent<Text>().color=Color.red;
 			toggle[1].gameObject.SetActive(true);
 			toggle[1].isOn = false;
 			
-			toggle[2].transform.GetChild(1).GetComponent<Text>().text = "!!Tornado!!";
+			toggle[2].transform.GetChild(1).GetComponent<Text>().text = "Use Tornado";
 			toggle[2].gameObject.SetActive(true);
 			toggle[2].isOn = false;
 			toggle[2].transform.GetChild(1).GetComponent<Text>().color=Color.red;
 			
-			toggle[3].transform.GetChild(1).GetComponent<Text>().text = "!!Fireball!!";
+			toggle[3].transform.GetChild(1).GetComponent<Text>().text = "Throw a Fireball";
 			toggle[3].gameObject.SetActive(true);
 			toggle[3].isOn = false;
 			toggle[3].transform.GetChild(1).GetComponent<Text>().color=Color.red;

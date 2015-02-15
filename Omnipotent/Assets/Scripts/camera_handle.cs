@@ -92,7 +92,7 @@ public class camera_handle : MonoBehaviour {
 						// == Getting Input ==
 						HandRenderer hr = cursor.GetComponentInChildren<HandRenderer> ();
 						bool panmode = false, rotatemode = false, zoommode = false;
-						twoHands = (hr.getNumHandsDetected() == 2);
+						twoHands = (hr.getNumHandsDetected () == 2);
 						// panmode 	= (hr.getLeftHandGesture () == "fist" && hr.getRightHandGesture () == null) || (hr.getLeftHandGesture () == null && hr.getRightHandGesture () == "fist");
 						panmode = (hr.getNumHandsDetected () == 1 && (hr.getLeftHandGesture () == "fist" || hr.getRightHandGesture () == "fist"));
 						rotatemode = (hr.getNumHandsDetected () == 2 && ((hr.getLeftHandGesture () == "v_sign" && hr.getRightHandGesture () == "v_sign")));// || (hr.getLeftHandGesture () == "v_sign" && hr.getRightHandGesture () != null )) );
