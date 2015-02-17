@@ -192,6 +192,7 @@ public class XP_handle : MonoBehaviour {
 //			return;
 //		}
 		resetModes ();
+		//Debug.Log (level+"current Level");
 
 		switch (level) {
 		case 1:
@@ -219,11 +220,6 @@ public class XP_handle : MonoBehaviour {
 			cursor.PowerThunderClap.Enable();
 			cursor.PowerThunderClap.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Thunderclap");
 			cursor.PowerThunderClap.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
-
-			//cursor.PowerReach.Enable();
-		//	cursor.PowerReach.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Reach");
-			//cursor.PowerReach.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
-
 
 			break;
 
@@ -262,9 +258,38 @@ public class XP_handle : MonoBehaviour {
 		case 4:
 			XP_Limit = 500;
 
+			cursor.PowerHey.Enable();
+			cursor.PowerHey.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Hey");
+			cursor.PowerHey.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
+			
+			cursor.PowerBoo.Enable();
+			cursor.PowerBoo.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Boo");
+			cursor.PowerBoo.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
+			
+			cursor.PowerGMBC.Enable();
+			cursor.PowerGMBC.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("GMBC");
+			cursor.PowerGMBC.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
+			
+			cursor.PowerThunderClap.Enable();
+			cursor.PowerThunderClap.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Thunderclap");
+			cursor.PowerThunderClap.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
+			
+			cursor.PowerMjolnir.Enable();
+			cursor.PowerMjolnir.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Lightning");
+			cursor.PowerMjolnir.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
+			
+			cursor.PowerFireball.Enable();
+			cursor.PowerFireball.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Fireball");
+			cursor.PowerFireball.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
+			
+			cursor.PowerTornado.Enable();
+			cursor.PowerTornado.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Tornado");
+			cursor.PowerTornado.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
+			
 			cursor.PowerReach.Enable();
 			cursor.PowerReach.transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Reach");
 			cursor.PowerReach.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(45f,45f);
+			
 			break;
 
 		case 5:

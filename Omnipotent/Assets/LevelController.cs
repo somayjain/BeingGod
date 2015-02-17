@@ -252,7 +252,7 @@ public class LevelController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
-		currentLevel = 3;
+		currentLevel = 1;
 		//init Person manager
 		peopleManager = GameObject.FindGameObjectWithTag ("PeopleManager");
 		//int nosPeople = currentLevel * Random.Range (10,humans2create);
@@ -406,7 +406,9 @@ public class LevelController : MonoBehaviour {
 						}
 					}else{
 						if(currentLevel == 4){
+
 							if(levelInit == true){
+								Debug.Log("levelInit: "+levelInit);
 								xp_handler.LevelUp(currentLevel);
 								nosOfObjectives = ObjectiveNos[currentLevel];
 								levelInit = false;
@@ -440,6 +442,7 @@ public class LevelController : MonoBehaviour {
 											currentLevel++;
 											ZombRate = 20.0f;
 											BossRate = 40.0f;
+										levelInit = true;
 										}else{
 										if(ZombRate<=0.0f){
 											ZombRate = 10.0f;
@@ -447,10 +450,10 @@ public class LevelController : MonoBehaviour {
 										}
 										if(BossRate<=0.0f){
 											if(BossManager.GetComponent<WildManagement>().enemList.Count<=5){
-											BossRate = 20.0f;
+											BossRate = 30.0f;
 											BossManager.GetComponent<WildManagement>().SpawnEnemy(1);
 											}else
-												BossRate = 20.0f;
+												BossRate = 30.0f;
 										}
 									}
 								}else{
@@ -464,6 +467,10 @@ public class LevelController : MonoBehaviour {
 							}
 						}else{
 							if(currentLevel == 5){
+								if(levelInit){
+								xp_handler.LevelUp(currentLevel);
+									levelInit = false;
+								}
 								BossRate-=Time.deltaTime;
 								ZombRate-=Time.deltaTime;
 								if(ZombRate<=0.0f){
@@ -472,10 +479,10 @@ public class LevelController : MonoBehaviour {
 								}
 								if(BossRate<=0.0f){
 									if(BossManager.GetComponent<WildManagement>().enemList.Count<=5){
-										BossRate = 40.0f;
+										BossRate = 30.0f;
 										BossManager.GetComponent<WildManagement>().SpawnEnemy(1);
 									}else
-										BossRate = 40.0f;
+										BossRate = 30.0f;
 								}
 							}
 						}

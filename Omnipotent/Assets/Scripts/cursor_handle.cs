@@ -389,9 +389,12 @@ public class cursor_handle : MonoBehaviour {
 	}
 
 	public void soundHog (Trigger trgr) {
-		Debug.Log ("hand of god");
+		if ( setMode (MODE.HOG) ) {
+			PowerHoG.Trigger( cursor3d );
+			setMode (MODE.DEFAULT);
+		}
 	}
-
+	
 	public void HandDetected (Trigger trgr) {
 
 	}

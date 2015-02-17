@@ -23,7 +23,7 @@ public class WildMovement : MonoBehaviour {
 	string hitAnim;
 
 	Vector3 lastPos = new Vector3();
-	float lastCheck = 1.0f;
+	float lastCheck = 3.00f;
 
 	// Use this for initialization
 	void Start () {
@@ -118,7 +118,7 @@ public class WildMovement : MonoBehaviour {
 
 		lastCheck -= Time.deltaTime;
 		if (lastCheck <= 0.0f && agentReached == false) {
-			if((transform.position-lastPos).magnitude <= 0.5f){
+			if((transform.position-lastPos).magnitude <= 0.75f){
 				/*if(!agent.pathPending){
 					Vector3 newTarget = new Vector3(transform.position.x+3.0f,transform.position.y, transform.position.z+2.0f);
 					agent.SetDestination(newTarget);
@@ -126,12 +126,12 @@ public class WildMovement : MonoBehaviour {
 				
 				//if(agent.path.status == NavMeshPathStatus.PathPartial
 				float randDelta = Random.Range(-10,10);
-				float randD = randDelta/8.0f;
+				float randD = randDelta/6.0f;
 				agent.Warp(new Vector3(transform.position.x-randD,transform.position.y,transform.position.z-randD));
 				//Debug.Log(transform.name+" stuck "+transform.position+" "+lastPos);
 				agentReached = true;
 			}
-			lastCheck = 1.0f;
+			lastCheck = 3.00f;
 			lastPos = transform.position;
 		}
 
